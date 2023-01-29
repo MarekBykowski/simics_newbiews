@@ -1,0 +1,10 @@
+bp-manager	/home/marek/simics/simics-6.0.146/linux64/lib/bp-manager.so
+tcf-agent	/home/marek/simics/simics-6.0.146/linux64/lib/tcf-agent.py3.so
+system-panel-interface	/home/marek/simics/simics-6.0.146/linux64/lib/system-panel-interface.py3.so
+old-breakpoint-manager	/home/marek/simics/simics-6.0.146/linux64/lib/old-breakpoint-manager.so
+plugin_device	/home/marek/simics-projects/my-simics-project-3/simple-devices/linux64/lib/plugin_device.so
+bp-manager	/home/marek/simics/simics-6.0.146/linux64/lib/bp-manager.so
+tcf-agent	/home/marek/simics/simics-6.0.146/linux64/lib/tcf-agent.py3.so
+system-panel-interface	/home/marek/simics/simics-6.0.146/linux64/lib/system-panel-interface.py3.so
+old-breakpoint-manager	/home/marek/simics/simics-6.0.146/linux64/lib/old-breakpoint-manager.so
+plugin_device	/home/marek/simics-projects/my-simics-project-3/simple-devices/linux64/lib/plugin_device.so

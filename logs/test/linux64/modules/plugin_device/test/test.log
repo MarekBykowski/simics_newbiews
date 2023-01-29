@@ -1,0 +1,54 @@
+Entering directory `/home/marek/simics-projects/my-simics-project-3/simple-devices/modules/plugin_device/test'
+=BEGIN s-info-status
+Intel Simics 6 (build 6174 linux64) © 2023 Intel Corporation
+
+*** Python script 's-info-status.py' failed: Python error in PyEval_Evalcode():
+Traceback (most recent call last):
+  File "s-info-status.py", line 8, in <module>
+    info_status.check_for_info_status(['plugin_device'])
+  File "/home/marek/simics/simics-6.0.146/test/common/info_status.py", line 100, in check_for_info_status
+    simics.SIM_load_module(module)
+simics.SimExc_General: Traceback (most recent call last):
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 9069, in __simics_import_module_commands
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 9045, in import_raw_module_commands
+  File "/home/marek/simics/simics-6.0.146/linux64/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/marek/simics-projects/my-simics-project-3/simple-devices/linux64/lib/python-py3/simmod/plugin_device/module_load.py", line 13, in <module>
+    cli.new_info_command(class_name, get_info)
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 8947, in new_info_command
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 4334, in new_command
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 3321, in new_command
+cli_impl.CliCmdDefError: cli.new_command(): Attempt to define command plugin_device.info, but class plugin_device does not exist
+*** Unexpected error message, quitting. Clear sim->fail_on_warnings to change this behaviour.
+*** failed (exit-status 2) ***
+=END s-info-status 0.2 s
+=BEGIN s-plugin_device
+Intel Simics 6 (build 6174 linux64) © 2023 Intel Corporation
+
+*** Error loading module plugin_device: Traceback (most recent call last):
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 9069, in __simics_import_module_commands
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 9045, in import_raw_module_commands
+  File "/home/marek/simics/simics-6.0.146/linux64/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/marek/simics-projects/my-simics-project-3/simple-devices/linux64/lib/python-py3/simmod/plugin_device/module_load.py", line 13, in <module>
+    cli.new_info_command(class_name, get_info)
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 8947, in new_info_command
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 4334, in new_command
+  File "/disk2/mp/builds/mono-57291/core/linux64/lib/python-py3/cli_impl.py", line 3321, in new_command
+cli_impl.CliCmdDefError: cli.new_command(): Attempt to define command plugin_device.info, but class plugin_device does not exist
+*** Unexpected error message, quitting. Clear sim->fail_on_warnings to change this behaviour.
+*** failed (exit-status 2) ***
+=END s-plugin_device 0.2 s
+Leaving directory `/home/marek/simics-projects/my-simics-project-3/simple-devices/modules/plugin_device/test'
