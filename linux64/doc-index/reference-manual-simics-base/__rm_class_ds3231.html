@@ -1,0 +1,65 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>DS3231</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_ds12887-c.html" class="previous">DS12887-c</a>
+<a href="__rm_class_ds323x.html" class="next">DS323x</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_DS3231">DS3231</a></h1>
+<p>
+
+<a name="DS3231"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_DS323x">DS323x</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">DS1213 I2C Real-Time Clock.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, i2c_device, i2c_slave_v2, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.regs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, io_memory, register_view)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:addr_ptr"><b><i>addr_ptr</i></b></dt><p><a name="__rm_attribute_DS3231_addr_ptr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Address pointer. Points the internal addressaffected on next data access.</dd></dl><p></p><dl><dt id="dt:address"><b><i>address</i></b></dt><p><a name="__rm_attribute_DS3231_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Address on the i2c bus.</dd></dl><p></p><dl><dt id="dt:address_mode"><b><i>address_mode</i></b></dt><p><a name="__rm_attribute_DS3231_address_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Address mode. Internal state that decides if the RTC should treat data as address or value</dd></dl><p></p><dl><dt id="dt:address_range"><b><i>address_range</i></b></dt><p><a name="__rm_attribute_DS3231_address_range"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Specifies the accessible address range. For DS3231, 0x13 is the recommended value. For DS3232, 0x100 is recommended. The default is 0x12 (making the model behave as a DS3231).</dd></dl><p></p><dl><dt id="dt:base_rtc_time"><b><i>base_rtc_time</i></b></dt><p><a name="__rm_attribute_DS3231_base_rtc_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The real-time clock time when the oscillator was enabled, in seconds since 1970-01-01 00:00:00.</dd></dl><p></p><dl><dt id="dt:base_time"><b><i>base_time</i></b></dt><p><a name="__rm_attribute_DS3231_base_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The simulated time when the oscillator was enabled, in seconds since the start of the simulation.</dd></dl><p></p><dl><dt id="dt:current_rtc_time"><b><i>current_rtc_time</i></b></dt><p><a name="__rm_attribute_DS3231_current_rtc_time"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+The real-time clock time, in seconds since 1970-01-01 00:00:00.</dd></dl><p></p><dl><dt id="dt:enabled"><b><i>enabled</i></b></dt><p><a name="__rm_attribute_DS3231_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+tells if the real-time clock is enabled or not</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_ds12887-c.html" class="previous">DS12887-c</a>
+<a href="__rm_class_ds323x.html" class="next">DS323x</a>
+</div>

@@ -1,0 +1,100 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>etg</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_empty_software_tracker_comp.html" class="previous">empty_software_tracker_comp</a>
+<a href="__rm_class_eth-cable-link.html" class="next">eth-cable-link</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_etg">etg</a></h1>
+<p>
+
+<a name="etg"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_etg">etg</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The ethernet-traffic-generator (etg) device emulates a network adapter and generates traffic.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ethernet_cable, ethernet_common, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">packet_size (uint64_state) : Packet size<br>pps (uint64_state) : Packet rate<br>start (signal) : Start/stop traffic generator</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:count"><b><i>count</i></b></dt><p><a name="__rm_attribute_etg_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code> or <code>nil</code>.
+The number of packets left to send until traffic generation stops. A nil value means an unlimited number of packets.</dd></dl><p></p><dl><dt id="dt:countdown_target"><b><i>countdown_target</i></b></dt><p><a name="__rm_attribute_etg_countdown_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Packets left to send (countdown), signal target.</dd></dl><p></p><dl><dt id="dt:crc_errors"><b><i>crc_errors</i></b></dt><p><a name="__rm_attribute_etg_crc_errors"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of CRC errors seen.</dd></dl><p></p><dl><dt id="dt:crc_errors_target"><b><i>crc_errors_target</i></b></dt><p><a name="__rm_attribute_etg_crc_errors_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The number of CRC errors seen, signal target.</dd></dl><p></p><dl><dt id="dt:dst_ip"><b><i>dst_ip</i></b></dt><p><a name="__rm_attribute_etg_dst_ip"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+IP address to send packets to.</dd></dl><p></p><dl><dt id="dt:enabled"><b><i>enabled</i></b></dt><p><a name="__rm_attribute_etg_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to 1 to enable traffic generation.</dd></dl><p></p><dl><dt id="dt:gateway"><b><i>gateway</i></b></dt><p><a name="__rm_attribute_etg_gateway"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+IP address of gateway.</dd></dl><p></p><dl><dt id="dt:ip"><b><i>ip</i></b></dt><p><a name="__rm_attribute_etg_ip"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+IP address assigned to the device.</dd></dl><p></p><dl><dt id="dt:ip_id"><b><i>ip_id</i></b></dt><p><a name="__rm_attribute_etg_ip_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal state.</dd></dl><p></p><dl><dt id="dt:led_enabled_target"><b><i>led_enabled_target</i></b></dt><p><a name="__rm_attribute_etg_led_enabled_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Enabled status LED, signal target.</dd></dl><p></p><dl><dt id="dt:link"><b><i>link</i></b></dt><p><a name="__rm_attribute_etg_link"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The network link that this service node Ethernet device is attached to.</dd></dl><p></p><dl><dt id="dt:link_state"><b><i>link_state</i></b></dt><p><a name="__rm_attribute_etg_link_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The network link that this service node Ethernet device is attached to (for checkpointing).</dd></dl><p></p><dl><dt id="dt:mac_address"><b><i>mac_address</i></b></dt><p><a name="__rm_attribute_etg_mac_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Ethernet (MAC) address of the network interface.</dd></dl><p></p><dl><dt id="dt:model_crc"><b><i>model_crc</i></b></dt><p><a name="__rm_attribute_etg_model_crc"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If set to true, the device will calculate and include an Ethernet CRC on all transmitted frames, and check the CRC on received frames.</dd></dl><p></p><dl><dt id="dt:neighbors"><b><i>neighbors</i></b></dt><p><a name="__rm_attribute_etg_neighbors"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code>.
+Internal state.</dd></dl><p></p><dl><dt id="dt:netmask"><b><i>netmask</i></b></dt><p><a name="__rm_attribute_etg_netmask"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code> or <code>string</code>.
+Netmask defining the subnet for the device.</dd></dl><p></p><dl><dt id="dt:packet_size"><b><i>packet_size</i></b></dt><p><a name="__rm_attribute_etg_packet_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The size of data packets to send.</dd></dl><p></p><dl><dt id="dt:port"><b><i>port</i></b></dt><p><a name="__rm_attribute_etg_port"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The port to send packets to and receive packets on.</dd></dl><p></p><dl><dt id="dt:pps"><b><i>pps</i></b></dt><p><a name="__rm_attribute_etg_pps"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of packets per second to send.</dd></dl><p></p><dl><dt id="dt:probe"><b><i>probe</i></b></dt><p><a name="__rm_attribute_etg_probe"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Probe the connection with ICMP ECHO before generating traffic. This might help fill ARP caches in routers on the way to reduce the risk of dropping the first real packet.</dd></dl><p></p><dl><dt id="dt:receive_stats"><b><i>receive_stats</i></b></dt><p><a name="__rm_attribute_etg_receive_stats"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal state.</dd></dl><p></p><dl><dt id="dt:rx_bytes"><b><i>rx_bytes</i></b></dt><p><a name="__rm_attribute_etg_rx_bytes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal state.</dd></dl><p></p><dl><dt id="dt:rx_packets"><b><i>rx_packets</i></b></dt><p><a name="__rm_attribute_etg_rx_packets"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal state.</dd></dl><p></p><dl><dt id="dt:start_count"><b><i>start_count</i></b></dt><p><a name="__rm_attribute_etg_start_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of packets to send after starting traffic generator, intended to be used by start signal.Zero value means an unlimited number of packets.</dd></dl><p></p><dl><dt id="dt:state"><b><i>state</i></b></dt><p><a name="__rm_attribute_etg_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current state of traffic generator.</dd></dl><p></p><dl><dt id="dt:total_rx_packets"><b><i>total_rx_packets</i></b></dt><p><a name="__rm_attribute_etg_total_rx_packets"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of UDP packets received on the test port.</dd></dl><p></p><dl><dt id="dt:total_tx_packets"><b><i>total_tx_packets</i></b></dt><p><a name="__rm_attribute_etg_total_tx_packets"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of UDP packets transmitted on the test port.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_etg_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_etg_gt_.packet-rate">packet-rate</a></b></td><td class="jdocu_noborder">set or display the packets per second rate</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_etg_gt_.packet-size">packet-size</a></b></td><td class="jdocu_noborder">set or display the packet size</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_etg_gt_.start">start</a></b></td><td class="jdocu_noborder">start generating traffic</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_etg_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_etg_gt_.stop">stop</a></b></td><td class="jdocu_noborder">stop generating traffic</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_empty_software_tracker_comp.html" class="previous">empty_software_tracker_comp</a>
+<a href="__rm_class_eth-cable-link.html" class="next">eth-cable-link</a>
+</div>

@@ -1,0 +1,71 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i2c-link-impl</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i2c-link-endpoint.html" class="previous">i2c-link-endpoint</a>
+<a href="__rm_class_i2c_link.html" class="next">i2c_link</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i2c-link-impl">i2c-link-impl</a></h1>
+<p>
+
+<a name="i2c-link-impl"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_i2c-link-v2">i2c-link-v2</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">I2C link v2
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, link, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:effective_latency"><b><i>effective_latency</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_effective_latency"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>float</code>.
+The effective latency for this link.</dd></dl><p></p><dl><dt id="dt:endpoints"><b><i>endpoints</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_endpoints"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[o*]</code>.
+The connected devices.</dd></dl><p></p><dl><dt id="dt:global_id"><b><i>global_id</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_global_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+The global identifier for a link. Used in distributed simulation to identify links that are connected together. The global ID cannot be changed once the link has been created.</dd></dl><p></p><dl><dt id="dt:goal_latency"><b><i>goal_latency</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_goal_latency"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The desired latency for this link.</dd></dl><p></p><dl><dt id="dt:immediate_delivery"><b><i>immediate_delivery</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_immediate_delivery"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Immediate delivery instead of using the specified latency; implies nondeterminism.</dd></dl><p></p><dl><dt id="dt:outside_cell"><b><i>outside_cell</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_outside_cell"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Always True; link objects do not belong to a particular cell</dd></dl><p></p><dl><dt id="dt:stats"><b><i>stats</i></b></dt><p><a name="__rm_attribute_i2c-link-impl_stats"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[iiii]</code>.
+Statistics in an internal format</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i2c-link-impl_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i2c-link-impl_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i2c-link-endpoint.html" class="previous">i2c-link-endpoint</a>
+<a href="__rm_class_i2c_link.html" class="next">i2c_link</a>
+</div>

@@ -1,0 +1,48 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>3 Instruction Execution Timing</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="events.html" class="previous">2 Events</a>
+<a href="simics-in-order.html" class="next">Simics in-order</a>
+</div>
+<div class=path>
+<a href="index.html">Understanding Simics Timing</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Instruction-Execution-Timing">3 Instruction Execution Timing</a></h1>
+<p>
+
+</p><p>
+
+
+
+
+
+</p><p>
+</p><ul class="subsections"><li><a href="simics-in-order.html">Simics in-order</a></li><li><a href="stalling.html">Stalling</a></li><li><a href="choosing-an-execution-mode.html">Choosing an Execution Mode</a></li><li><a href="changing-the-step-rate.html">Changing the Step Rate</a></li><li><a href="suspending-time-or-execution.html">Suspending Time or Execution</a></li></ul><div class=chain>
+<a href="events.html" class="previous">2 Events</a>
+<a href="simics-in-order.html" class="next">Simics in-order</a>
+</div>

@@ -1,0 +1,3122 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2 Tutorials</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="introduction.html" class="previous">1 Introduction</a>
+<a href="next-steps.html" class="next">3 Next Steps</a>
+</div>
+<div class=path>
+<a href="index.html">Getting Started</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Tutorials">2 Tutorials</a></h1>
+<p>
+
+<a name="tutorials"></a>
+</p><p>
+These tutorials use an example system to illustrate how to perform
+common tasks with <a name="Simics">Simics</a>. The example system
+is the <i>QSP-x86</i>, which is a simple x86 based
+system running Clear Linux installation.
+</p><p>
+To follow this tutorial, your Simics installation must include
+<em>QSP-x86</em> and <em>QSP-Clear-Linux</em> add-on
+packages. If these add-ons are not yet installed,
+the <em>Installation Guide</em> provides instructions on how to
+install them.
+</p><p>
+</p><h2 class="jdocu"><a name="running-simics-cli">2.1 Running Simics</a></h2>
+<p>
+
+</p><p>
+This section describes how to:
+</p><ul>
+  <li>start Simics</li>
+  <li>create a target machine using Simics command prompt</li>
+  <li>run and stop a target machine via Simics command prompt</li>
+  <li>exit Simics from Simics command prompt</li>
+</ul>
+<p>
+We assume that Simics has already been installed and a Simics project
+directory has already been created. The screenshots below were taken
+on Windows but the Linux version of Simics behaves similarly. For
+brevity, we may refer to Simics project directory as a project
+directory.
+</p><p>
+First, let’s get to command prompt. On Windows, this can be done by
+pressing Win+R keys (i.e., pressing R key while holding Windows key
+pressed) and entering “cmd” in the popped-up window. For Linux, please
+refer to the documentation of your Linux distribution about the
+instructions how to get access to command prompt.
+</p><p>
+Once command prompt window is available, navigate to a previously
+created directory containing Simics project:
+</p><p>
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-1.png">
+</div>
+<p>
+To start Simics and to get its command prompt just run
+the <code>simics.bat</code> batch file (on Linux,
+the <code>simics</code> shell script is to be used instead by entering
+the <code>./simics</code> command):
+</p><p>
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-2.png">
+</div>
+<p>
+
+Let’s create a target machine inside Simics. We will do it by using:
+</p><ul>
+  <li>Simics command files available is the <code>targets</code>
+  directory inside a Simics project directory</li>
+  <li>the <b>run-command-file</b> Simics command</li>
+</ul>
+<p>
+Simics command files, usually having the <code>.simics</code> file
+extension, are often used to automate and script operations in
+Simics. Particularly, Simics scripts are often used to automate the
+creation of target machines inside Simics.
+</p><p>
+Simics comes with a few Simics scripts for creation of target
+machines. The scripts are available in the <code>targets</code>
+directory inside a Simics project directory.
+</p><p>
+The usual way to run Simics script in Simics is to use the
+<b>run-command-file</b> Simics command and provide it with the
+path to the Simics script as an argument, like in this example:
+<b>run-command-file targets/qsp-x86/firststeps.simics</b>. In the
+example, the <code>targets/qsp-x86/firststeps.simics</code> part is a
+relative path to a Simics script located in the <code>targets</code>
+directory inside the Simics project directory.
+</p><p>
+To create a target machine in Simics we will use the
+<code>targets/qsp-x86/firststeps.simics</code> Simics script from the
+previous example. It will create a simple x86 target machine. To
+create the target machine, just run the script with the
+<b>run-command-line</b> Simics command:
+</p><p>
+
+</p><pre class="jdocu_small"> 
+  simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics</b>
+  
+  
+</pre><p></p><div style="text-align: center">
+<img alt="" src="running-simics-cli-3.png">
+</div>
+<p>
+On the screenshot, we can see a few informational messages regarding
+the target network setup.
+</p><p>
+A few new windows have popped up after a target machine has been
+created. The most important are:
+</p><ul>
+  <li>a text terminal window connected to a serial port of the target
+    machine</li>
+  <li>a graphical display window connected to a graphical device of
+    the target machine</li>
+</ul>
+<p>
+A text terminal window connected to a serial port of the target
+machine:
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-4.png">
+</div>
+<p>
+A graphical display window connected to a graphical device of the
+target machine:
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-5.png">
+</div>
+<p>
+One of the ways to start the newly created target machine is to use
+the <b>run</b> Simics command. Simics target machines have no
+power buttons. Instead, the machines are configured to start
+immediately once simulation is started with the <b>run</b> Simics
+command:
+</p><pre class="jdocu_small"> 
+simics&gt; <b>run</b>
+running&gt; 
+</pre><p>
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-6.png">
+</div>
+<p>
+Sometimes, there may be messages printed to Simics command line window:
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-7.png">
+</div>
+<p>
+These messages are coming from device models which, as messages
+report, may not simulate certain features. Simics models often use a
+pragmatic approach and don’t simulate features which are not relevant
+for simulated machines, for example, thermal control. So, the messages are
+usually harmless.
+</p><p>
+As simulation progresses, the target machine will boot Linux operating
+system (this can take up to several minutes):
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-8.png">
+</div>
+<p>
+The login to the system is done automatically. After the login one can
+interact with the operating system running on the target machine by
+running commands at the text console window. Here is a sample session
+when <b>pwd</b> and <b>uname -a</b> Linux commands were
+executed on the simulated machine after the login:
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-9.png">
+</div>
+<p>
+One can stop simulation, thus pausing a target machine, by running
+the <b>stop</b> command on Simics command prompt:
+</p><pre class="jdocu_small">running&gt; <b>stop</b>
+simics&gt;
+</pre><p>
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-10.png">
+</div>
+<p>
+The target machine is paused now. But it can be resumed by entering
+the <b>run</b> Simics command again:
+</p><pre class="jdocu_small">running&gt; <b>stop</b>
+simics&gt; <b>run</b>
+running&gt;
+</pre><p>
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-11.png">
+</div>
+<p>
+To quit Simics just enter the <b>quit</b> command:
+</p><pre class="jdocu_small">running&gt; <b>quit</b>
+</pre><p>
+</p><div style="text-align: center">
+<img alt="" src="running-simics-cli-12.png">
+</div>
+<p>
+To sum up, in this section we created a x86 target machine, started it
+and interacted with the operating system running on the target
+machine. We learned how to start and stop simulation as well as exit
+the simulator.
+</p><p>
+
+</p><h2 class="jdocu"><a name="Simics-command-line-interface">2.2 Simics command line interface</a></h2>
+<p>
+
+</p><p>
+This section focuses on some practical information related to the use
+of Simics command line interface (CLI). Particularly, the following
+information is presented:
+</p><ul>
+  <li>how to use command line completion, also known as tab completion</li>
+  <li>how to use Simics <b>help</b> command</li>
+  <li>where to find more information about Simics command line interface</li>
+</ul>
+<p>
+We assume that a user knows how to start Simics and how to get access
+to Simics CLI.
+</p><p>
+This section doesn’t cover all commands available through Simics
+CLI. But, just to give an idea how powerful Simics CLI is, here are
+some actions which can be done via Simics CLI:
+</p><ul>
+  <li>creation of target machines</li>
+  <li>starting and stopping simulation and, thus, target machines</li>
+  <li>inspection of the state of target machines</li>
+  <li>setting breakpoints and tracepoints</li>
+  <li>saving and rolling back to checkpoints</li>
+</ul>
+<p>
+</p><h3 class="jdocu"><a name="Simics-command-line-completion">2.2.1 Simics command line completion</a></h3>
+<p>
+
+</p><p>
+This section describes command line completion provided by Simics
+command line interface (CLI).
+</p><p>
+To simplify the use of Simics CLI, Simics CLI implements command line
+completion, also known as tab completion. Simics command line can
+complete commands, arguments, file names, and some other
+entities. Let’s see how command line completion works for the
+<b>run-command-file</b> Simics command:
+
+
+</p><ol>
+  <li>start Simics and get access to Simics CLI</li>
+  <li>type <b>run-comm</b> text on Simics CLI</li>
+  <li>press the tab key (&lt;TAB&gt;)</li>
+</ol>
+<p>
+Simics command line completion functionality will complete the command
+name producing the following:
+
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file _</b>
+</pre><p>
+where <b>_</b> denotes the position of a text cursor.
+</p><p>
+To get further with command line completion, press the tab key
+twice. Simics command line completion system will print the list of
+parameters and flags which can be passed to the <b>run-command-file</b>
+command:
+
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file &lt;TAB&gt;&lt;TAB&gt;</b>
+
+-local  -main-branch  file =
+</pre><p>
+</p><p>
+Please note that we had to press the tab key twice. It is because the
+command completion system could not unambiguously complete the command
+after the tab key was pressed once. After the tab key is pressed
+again, the command completion system shows all possible completions.
+</p><p>
+Let’s proceed with our example and enter into the command line letter “f” followed by pressing the tab key:
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file f&lt;TAB&gt;</b>
+</pre><p>
+</p><p>
+After the tab key was pressed, the result may look like this:
+
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file file = _</b>
+</pre><p>
+</p><p>
+We would like to run Simics command file
+<code>targets/qsp-x86/firststeps.simics</code>. Simics command line
+completion can help with this. Please enter additionally “t” into
+the command line:
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file file = t_</b>
+</pre><p>
+</p><p>
+Now press tab. The command line completion system will produce
+something like this:
+
+
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file file = targets\_</b>
+</pre><p>
+</p><p>
+It may be a good time to play with command line completion by pressing
+the tab key and entering single letters until you have the full
+command entered:
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file file = targets\qsp-x86\firststeps.simics</b>
+</pre><p>
+</p><p>
+On Linux, the command line completion system will use “/” as a
+directory separator. There, the result will look like this:
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file file = targets/qsp-x86/firststeps.simics</b>
+</pre><p>
+</p><p>
+Pressing the enter key now will run the command creating a new target machine.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Simics-help-command">2.2.2 Simics help command</a></h3>
+<p>
+
+</p><p>
+Simics documentation can be accessed via the <b>help</b> Simics
+CLI command. The <b>help</b> command provides access to the
+documentation for:
+</p><ul>
+  <li>commands</li>
+  <li>scripts</li>
+  <li>objects</li>
+  <li>classes</li>
+  <li>modules</li>
+  <li>attributes</li>
+  <li>Simics API functions</li>
+</ul>
+<p>
+To try the command, enter the following command to see the
+documentation for the run-command-file command:
+</p><pre class="jdocu_small">simics&gt; <b>help run-command-file</b>
+</pre><p>
+</p><p>
+To get the documentation for any Simics command just run the <b>help</b>
+command specifying the command you are interested in:
+</p><pre class="jdocu_small">simics&gt; <b>help &lt;command-of-interest&gt;</b>
+</pre><p>
+</p><p>
+More information about Simics <b>help</b> command can be obtained
+by reading the documentation for the help command itself:
+</p><pre class="jdocu_small">simics&gt; <b>help help</b>
+</pre><p>
+</p><p>
+The <b>help-search</b> command allows to search the documentation
+for a particular string. Here is a sample usage of
+the <b>help-search</b> command:
+</p><pre class="jdocu_small">simics&gt; <b>help-search python</b>
+</pre><p>
+</p><p>
+
+</p><h3 class="jdocu"><a name="Further-details-about-Simics-command-line-interface">2.2.3 Further details about Simics command line interface</a></h3>
+<p>
+
+</p><p>
+More information about Simics command line interface can be found in
+<em>Simics User’s Guide</em>, section “The Command Line Interface”.
+</p><p>
+
+</p><p>
+
+</p><h2 class="jdocu"><a name="Using-Simics-scripts">2.3 Using Simics scripts</a></h2>
+<p>
+
+</p><p>
+This section describes how to:
+</p><ul>
+  <li>pass arguments to Simics scripts</li>
+  <li>discover which parameters are accepted by Simics scripts</li>
+</ul>
+<p>
+We assume that a user knows how to start Simics and how to get access
+to Simics CLI.
+</p><p>
+Simics scripts can accept parameters. In section
+<a class="reference" href="#running-simics-cli">2.1</a> we created a target machine in
+Simics by executing the
+<code>targets/qsp-x86/firststeps.simics</code> script with Simics
+<b>run-command-file</b> command. This Simics script is written in
+a way that it can accept certain parameters.
+</p><p>
+There are a few ways to discover which parameters, if any, are
+accepted by the script:
+</p><ul>
+  <li>via command line completion</li>
+  <li>via help system</li>
+</ul>
+  <p>
+To discover available parameters via command line completion, press
+the tab key twice after entering the <b>run-command-file
+targets\qsp-x86\firststeps.simics</b> string on the Simics CLI:
+
+
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file targets\qsp-x86\firststeps.simics &lt;TAB&gt;&lt;TAB&gt;</b>
+</pre><p>
+</p><p>
+As a result, Simics command line completion should show available
+parameters for the script:
+</p><p>
+
+
+</p><div style="text-align: center">
+<img alt="" src="using-simics-scripts-1.png">
+</div>
+<p>
+Simics <b>help</b> command also allows to find out which
+parameters are accepted by a Simics script as well as to see
+documentation for the parameters. To discover available parameters for the
+<code>targets\qsp-x86\firststeps.simics</code> script just run this command:
+
+</p><pre class="jdocu_small">simics&gt; <b>help targets\qsp-x86\firststeps.simics</b>
+</pre><p>
+</p><p>
+As a result, script description will be printed together with a long
+list of accepted parameters. Here is the beginning of the output:
+</p><div style="text-align: center">
+<img alt="" src="using-simics-scripts-2.png">
+</div>
+<p>
+Let’s create a target machine with 4 cores per physical processor by
+setting the num_cores parameter to 4. To do that please run the
+following command:
+
+
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file targets\qsp-x86\firststeps.simics num_cores = 4</b>
+</pre><p>
+</p><p>
+Now, start simulation be entering the <b>run</b> command:
+
+</p><pre class="jdocu_small">simics&gt; <b>run</b>
+</pre><p>
+</p><div style="text-align: center">
+<img alt="" src="using-simics-scripts-3.png">
+</div>
+<p>
+To check that the target machine indeed has 4 cores now, let’s check
+the number of processing units available on the target system. This
+can be done with the <b>nproc</b> command executed on the target
+system once Linux has booted:
+
+
+
+
+</p><p>
+
+</p><div style="text-align: center">
+<img alt="" src="using-simics-scripts-4.png">
+</div>
+<p>
+
+</p><h2 class="jdocu"><a name="Checkpoints-snapshots">2.4 Checkpoints (snapshots)</a></h2>
+<p>
+
+</p><p>
+Simics allows to save on disk the state of simulation and, thus, the
+state of all target machines for later use. We call a saved state a
+checkpoint. Other simulators may refer to a saved state as a snapshot.
+</p><p>
+In this section:
+</p><ul>
+  <li>how to create a checkpoint</li>
+  <li>how to restore simulation state from a checkpoint</li>
+  <li>links to further information about checkpoints</li>
+</ul>
+<p>
+We assume that a user knows how to start Simics and how to get access
+to Simics CLI.
+</p><p>
+Creating a checkpoint:
+</p><ol>
+  
+  <li>start simulator and create a target machine from Simics CLI by
+  executing the <code>targets/qsp-x86/firststeps.simics</code> script
+  with Simics <b>run-command-file</b> command:
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics</b>
+</pre><p>
+  </p></li>
+
+  <li>run the machine until Linux is booted:
+  
+  
+<pre class="jdocu_small">simics&gt; <b>run</b>
+</pre><p>
+  </p><div style="text-align: center">
+    <img alt="" src="checkpoints-1.png">
+  </div>
+  </li>
+
+  <li>stop simulation:
+<pre class="jdocu_small">running&gt; <b>stop</b>
+simics&gt;
+</pre><p>
+  </p></li>
+
+  <li>create a checkpoint by running
+    the <b>write-configuration</b> Simics command and specifying a
+    destination where to store a checkpoint:
+  
+<pre class="jdocu_small">simics&gt; <b>write-configuration target-booted.ckpt</b>
+</pre><p>
+  </p></li>
+
+  <li>quit Simics:
+<pre class="jdocu_small">simics&gt; <b>quit</b>
+</pre><p>
+  </p></li>
+</ol>
+<p>
+The <code>target-booted.ckpt</code> directory created on step 5 above
+contains saved simulation state.
+</p><p>
+Restoring from a checkpoint:
+</p><ol>
+  
+  <li>start Simics</li>
+  <li>on the Simics CLI enter the <b>read-configuration
+      target-booted.ckpt</b> command:
+<pre class="jdocu_small">simics&gt; <b>read-configuration target-booted.ckpt</b>
+</pre><p>
+  </p></li>
+  <li>simulation state from the <code>target-booted.ckpt</code>
+    checkpoint is restored now. We can see a text terminal window of the
+    target machine with Linux prompt. We can resume simulation with the
+    <b>run</b> command:
+<pre class="jdocu_small">simics&gt; <b>run</b>
+running&gt;
+</pre><p>
+    </p><p>
+    
+    
+    
+  </p></li>
+</ol>
+<p>
+Useful information about checkpoints can be found in the documentation
+of the <b>write-configuration</b> and <b>read-configuration</b>
+commands (the documentation can be obtained from Simics command-line
+interface by running the <b>help</b> command like this:
+<b>help write-configuration</b>).
+</p><p>
+
+</p><h2 class="jdocu"><a name="Bookmarks-in-memory-snapshots">2.5 Bookmarks (in-memory snapshots)</a></h2>
+<p>
+
+</p><p>
+In addition to checkpoints, Simics can save the state of simulation in
+memory. We refer to such saved states as bookmarks or, sometimes, as
+time bookmarks. Bookmarks are not preserved after one quits the
+simulator. Once bookmarks have been created it is possible to jump
+between them.
+</p><p>
+In this section:
+</p><ul>
+  <li>how to create bookmarks</li>
+  <li>how to jump between bookmarks</li>
+</ul>
+<p>
+We assume that a user knows how to start Simics and how to get access
+to Simics CLI.
+</p><p>
+Creation and use of bookmarks:
+</p><ol>
+  
+  <li>create a target machine from Simics CLI by executing the
+  <code>targets/qsp-x86/firststeps.simics</code> script with Simics
+  <b>run-command-file</b> command:
+<p>
+  </p><pre class="jdocu_small">    simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics</b>
+  </pre><p>
+  </p></li>
+
+  <li>start the created target machine:
+  <pre class="jdocu_small">    simics&gt; <b>run</b>
+    running&gt;
+  </pre><p>
+  </p></li>
+
+  <li>wait until Linux has booted. When Linux has booted, a text
+  terminal window connected to a serial port of the target machine
+  will look like this:
+  
+  
+  <div style="text-align: center">
+    <img alt="" src="bookmarks-1.png">
+  </div>
+  </li>
+
+  <li>stop simulation:
+  <pre class="jdocu_small">    running&gt; <b>stop</b>
+    simics&gt;
+  </pre><p>
+  </p></li>
+
+  <li>create a bookmark by running the <b>set-bookmark</b> Simics
+  command and specifying a name for the bookmark (a bookmark can be
+  created even when the simulation runs, but, in this case, we stopped
+  it first):
+<p>
+  </p><pre class="jdocu_small">    simics&gt; <b>set-bookmark booted</b>
+  </pre><p>
+</p><p>
+  where "booted" is a name we picked for a bookmark.
+  </p></li>
+
+  <li>resume simulation:
+  <pre class="jdocu_small">    simics&gt; <b>run</b>
+    running&gt;
+  </pre><p>
+  </p></li>
+
+  <li>do some changes to the target machine. As an example of such
+  changes, the screenshot below shows how to identify where the uname
+  utility is located, delete it and check that it cannot be found
+  after it has been deleted:
+<p>
+  
+  
+  
+  
+  
+  
+</p><p>
+  
+  
+</p><p>
+  
+  
+  
+  
+  
+</p><p>
+  
+  
+  
+  
+  
+</p><p>
+  </p><div style="text-align: center">
+    <img alt="" src="bookmarks-2.png">
+  </div>
+  </li>
+
+  <li>stop simulation:
+  <pre class="jdocu_small">    running&gt; <b>stop</b>
+    simics&gt;
+  </pre><p>
+  </p></li>
+
+  <li>restore simulation state to the one which was saved on step 4:
+  <pre class="jdocu_small">    simics&gt; <b>skip-to booted</b>
+  </pre><p>
+  where <b>skip-to</b> is a command to restore simulation state from
+  a bookmark, and "booted" is the name which we gave to the bookmark created
+  on the step 4.
+  </p></li>
+  
+  <li>the text terminal of the simulated machine looks now like it did
+  before we deleted uname utility on step 6:
+  <div style="text-align: center">
+    <img alt="" src="bookmarks-1.png">
+  </div>
+  </li>
+</ol>
+<p>
+What will happen now if we will run the simulation after we restored
+the state from the bookmark? By default, the simulator will just
+replay all user input, i.e. repeat all changes done to the simulated
+machine on the step 7 above. Let’s check this (the instructions below
+are to be done in the same simulation session where the previous steps
+have been executed):
+  </p><p>
+  
+  
+  
+  
+</p><p>
+  
+</p><p>
+  
+  
+  
+  
+</p><p>
+  
+  
+  
+  
+</p><ol>
+  <li>resume simulation by executing the <b>run</b> command on Simics
+  CLI and observe on the text terminal windows of the target machine
+  how Simics replays the changes which were done on the step 7 above</li>
+
+  <li>stop simulation by executing the <b>stop</b> command on
+  Simics CLI</li>
+</ol>
+<p>
+How can one prevent Simics from replaying user input and do something
+different on the target machine after the simulation state has been
+restored from a bookmark? This can be done by executing the
+<b>clear-recorder</b> command via Simics CLI immediately after the
+state of the simulation has been restored from a bookmark. Let’s check
+this (the instructions below are to be done in the same simulation
+session where the previous steps have been executed):
+</p><p>
+</p><ol>
+  <li>restore simulation state to the one which was saved on step 4:
+  <pre class="jdocu_small">    simics&gt; <b>skip-to booted</b>
+  </pre><p>
+  </p></li>
+
+  <li>clear recorded input:
+  <pre class="jdocu_small">    simics&gt; <b>clear-recorder</b>
+  </pre><p>
+  </p></li>
+
+  <li>resume simulation with the <b>run</b> command:
+  <p>
+  
+  
+</p><p>
+  </p><pre class="jdocu_small">    simics&gt; <b>run</b>
+    running&gt;
+  </pre><p>
+  </p></li>
+
+  <li>note on the text terminal windows of the target machine that no
+  changes happen now</li>
+</ol>
+<p>
+Why is the default behavior for Simics is to replay the user input?
+This is because Simics struggles hard to provide repeatability which
+is very useful when debugging the software running on the target
+machine.
+</p><p>
+
+</p><h2 class="jdocu"><a name="Virtual-disks">2.6 Virtual disks</a></h2>
+<p>
+
+</p><p>
+This section gives some information about virtual storage devices in
+Simics. Particularly, a few strategies are described for
+preserving changes done during a simulation session to virtual hard
+disks and using these changes in other simulation sessions.
+</p><p>
+Target machines created in Simics usually have emulated storage
+devices attached. A typical example of such storage device is a virtual
+hard disk.
+</p><p>
+The software running on the target machines reads data from and writes
+data to virtual hard disks. The actual data is stored in dedicated
+files on the host system. Such files are usually called image files,
+disk image files, or, simply, images.
+</p><p>
+Simics supports a few image files formats:
+</p><ul>
+  <li>files in Simics own format called craff
+    (for Compressed Random-Access File Format)</li>
+  <li>raw image files</li>
+  <li>VHDX images files</li>
+</ul>
+<p>
+Normally, Simics opens disk image files in a read-only mode. All
+changes the guest software does to virtual disk's contents are
+accumulated in memory or in temporary files and are not written
+directly to disk image files. This means that any changes written
+to virtual hard disks during a simulation session are lost once a user
+quits Simics. There are a few benefits in using disk image files in a
+read-only mode:
+</p><ul>
+  <li>repeatability of simulation sessions: if a simulation session
+  with a target machine is started again and again then the results
+  during each run will be the same. This is very useful during
+  debugging.</li>
+  <li>possibility to run simultaneously many simulation sessions using
+  the same disk image file. This is useful when running a batch of
+  test jobs validating target software or device models.</li>
+  <li>protection against accidental wiping out of the disk contents</li>
+</ul>
+<p>
+The main drawback, though, is that one needs to take additional steps
+to preserve changes done to virtual hard disks during a simulation
+session. Below we describe a few strategies how to preserve changes
+done to virtual hard disks during a simulation session and use them in
+other simulation sessions.
+</p><p>
+</p><h3 class="jdocu"><a name="Saving-virtual-disks-state-with-save-persistent-state-command">2.6.1 Saving virtual disks’ state with save-persistent-state command</a></h3>
+<p>
+
+</p><p>
+The changes done by target software to the contents of virtual hard
+disks can be saved for later use with
+the <b>save-persistent-state</b> command. Here is a sample session
+demonstrating the usage of the command:
+</p><ol>
+  
+  <li>start simulator and create a target machine from Simics CLI by
+  executing the <code>targets/qsp-x86/firststeps.simics</code> script
+  with Simics <b>run-command-file</b> command:
+  <pre class="jdocu_small">    simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics</b>
+  </pre><p>
+  </p></li>
+  
+  <li>run the machine until Linux is booted:
+  
+  
+  <pre class="jdocu_small">    simics&gt; <b>run</b>
+  </pre><p>
+  </p><div style="text-align: center">
+    <img alt="" src="virtual-disks-1.png">
+  </div>
+  </li>
+
+  <li>create a file on the target system or do some other modification
+  to the file system. As an example, the screenshot below shows how to
+  create the <code>test.txt</code> file on the target system by
+  running the
+  <b>echo "Hello, world!" &gt; test.txt</b> command:
+    
+  <div style="text-align: center">
+    <img alt="" src="virtual-disks-2.png">
+  </div>
+  </li>
+
+  <li>now, when a file was created, shutdown a target machine by
+  running the <b>sudo shutdown now</b> command
+  on the target machine. This is needed to ensure that a target operating system
+  writes the file on the disk instead of, e.g., caching it in RAM of
+  the simulated machine:
+  
+  <div style="text-align: center">
+    <img alt="" src="virtual-disks-3.png">
+  </div>
+  </li>
+
+  <li>stop simulation by executing the <b>stop</b> command via Simics
+  command-line interface. This step is needed because even though the
+  target machine entered shutdown state, Simics still continues to advance
+  virtual time:
+  <pre class="jdocu_small">    running&gt; <b>stop</b>
+    simics&gt;
+  </pre><p>
+  </p></li>
+  
+  <li>save changes done to all virtual disks found in the target
+  machine by running the <b>save-persistent-state</b> Simics
+  command and specifying a destination where on the host system to
+  keep the changes:
+  <pre class="jdocu_small">    
+    simics&gt; <b>save-persistent-state test_file_created.ckpt</b>
+  </pre><p>
+  </p></li>
+
+  <li>quit Simics:
+  <pre class="jdocu_small">    simics&gt; <b>quit</b>
+  </pre><p>
+  </p></li>
+</ol>
+<p>
+The <code>test_file_created.ckpt</code> directory created on step 6
+above contains all modifications done to all virtual hard disks of the
+target machine. The modifications are stored in so-called differencing
+images which are often referred to as diff files in Simics
+documentation. These images only hold the differences to another
+images. A differencing image is useless by itself; it must always be
+used together with another image.
+</p><p>
+
+Let’s run a simulation now to see how the state saved previously can
+be used. Here is a sample simulation session:
+</p><p>
+</p><ol>
+  
+  <li>start simulator and create a target machine from Simics CLI by
+  executing the <code>targets/qsp-x86/firststeps.simics</code> script
+  with Simics <b>run-command-file</b> command:
+  <pre class="jdocu_small">    simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics</b>
+  </pre><p>
+  </p></li>
+  
+  <li>use the <b>load-persistent-state</b> command to load any
+  state saved previously. We need to do this step at the very
+  beginning, before the simulation was started, since otherwise the
+  software running on the target will be presented with original
+  state, not the updated one:
+  <pre class="jdocu_small">    simics&gt; <b>load-persistent-state test_file_created.ckpt</b>
+  </pre><p>
+  </p></li>
+
+  <li>run the machine until Linux is booted:
+  
+  
+  <pre class="jdocu_small">    simics&gt; <b>run</b>
+  </pre><p>
+  </p><div style="text-align: center">
+    <img alt="" src="virtual-disks-4.png">
+  </div>
+  </li>
+
+
+  <li>check that the <code>test.txt</code> file created during the
+  previous session is present:
+  <p>
+  
+  
+  
+  
+  
+</p><p>
+  
+  
+  
+  
+  
+  </p><div style="text-align: center">
+    <img alt="" src="virtual-disks-5.png">
+  </div>
+  </li>
+</ol>
+<p>
+Since the contents of Simics disk images is saved incrementally by
+default, care should be taken when deleting the state saved previously
+with the <b>save-persistent-state</b> command: such saved state
+may be referred to by the state saved later.
+</p><p>
+To sum up, the typical usage scenario for
+the <b>save-persistent-state</b>
+and <b>load-persistent-state</b> commands is:
+</p><ol>
+  <li>create a target machine with the run-command-file command</li>
+
+  <li>use the <b>load-persistent-state</b> command to load, if you
+  already have it, the state saved previously with
+  the <b>save-persistent-state</b> command</li>
+
+  <li>start simulation to boot the machine</li>
+  
+  <li>do any modifications to the target machine</li>
+
+  <li>shutdown the target machine</li>
+
+  <li>stop simulation</li>
+
+  <li>save the state of virtual disks with the <b>save-persistent-state</b> command</li>
+</ol>
+<p>
+Please note that even though the saved states are saved incrementally
+and thus depend on each other one needs to run
+the <b>load-persistent-state</b> command only once with the state
+one wants to load.
+</p><p>
+Useful information about the <b>save-persistent-state</b>
+and <b>load-persistent-state</b> commands can be found in their
+documentation. The documentation can be obtained from Simics
+command-line interface by running the <b>help</b> command like
+this: <b>help save-persistent-state</b>.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Saving-a-complete-disk-image">2.6.2 Saving a complete disk image</a></h3>
+<p>
+
+</p><p>
+The approach described above may result in multiple saved incremental
+states which are hard to manage. Simics allows to dump the contents of
+a whole virtual disk to a new disk image file. This file can be later
+used as a new disk image for the target machine.
+</p><p>
+There are several ways to dump a new disk image from a virtual disk
+in Simics. We will use the <b>save-persistent-state</b> command and its
+<code>-independent-state</code> flag.
+</p><p>
+Sample session:
+</p><ol>
+  
+  <li>start simulator and create a target machine from Simics CLI by
+  executing the <code>targets/qsp-x86/firststeps.simics</code> script
+  with Simics <b>run-command-file</b> command:
+  <pre class="jdocu_small">    simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics</b>
+  </pre><p>
+  </p></li>
+
+  <li>(optional) if there is any state saved previously with
+  the <b>save-persistent-state</b> command you want to load, load
+  it with the <b>load-persistent-state</b> command. In this
+  session we load the <code>test_file_created.ckpt</code> state saved
+  in the previous section:
+  <pre class="jdocu_small">    simics&gt; <b>load-persistent-state test_file_created.ckpt</b>
+  </pre><p>
+  </p></li>
+
+  <li>run the machine until Linux is booted:
+  
+  
+  <pre class="jdocu_small">    simics&gt; <b>run</b>
+  </pre><p>
+  </p></li>
+
+
+  <li>create a file on the target system or do some other modification
+  to the file system. Since we loaded
+  the <code>test_file_created.ckpt</code> state at step 2 above there
+  is already a <code>test.txt</code> on the target machine. As an
+  example, let’s create one more file (<code>test2.txt</code>):
+  
+  
+  
+  
+  
+<p>
+  
+  
+</p><p>
+  
+  
+  
+  
+  
+  
+  </p><div style="text-align: center">
+    <img alt="" src="virtual-disks-6.png">
+  </div>
+  </li>
+
+  <li>now, when we are done with all changes we wanted to do, shutdown
+  a target machine by running
+  the <b>sudo shutdown now</b> command on
+  the target machine. This is needed to ensure that target operating
+  system writes the file on the disk instead of, e.g., caching it in
+  RAM of the simulated machine:
+  
+  <div style="text-align: center">
+    <img alt="" src="virtual-disks-7.png">
+  </div>
+  </li>
+
+  <li>stop simulation by executing the <b>stop</b> command via
+  Simics command-line interface. This step is needed because even
+  though the target machine entered shutdown state, Simics still
+  continues to advance virtual time:
+  <pre class="jdocu_small">    running&gt; <b>stop</b>
+    simics&gt;
+  </pre><p>
+  </p></li>
+
+  <li>save disks by running the <b>save-persistent-state</b>
+  Simics command with the <code>-independent-state</code> flag and
+  specifying a destination where on the host system to keep the
+  files. This operation may take some time as disk images are quite
+  large:
+  <pre class="jdocu_small">    
+    simics&gt; <b>save-persistent-state -independent-state my_independent_state.ickpt</b>
+  </pre><p>
+  </p></li>
+
+  <li>quit Simics:
+  <pre class="jdocu_small">    simics&gt; <b>quit</b>
+  </pre><p>
+  </p></li>
+</ol>
+<p>
+The <code>my_independent_state.ickpt</code> directory created on step
+7 above contains, among other things, disk images of all hard disks of
+the target machine. The <code>-independent-state</code> flag used with the
+command ensures that the disk image are not differencing images (or,
+in other words, diff files) but the complete images which contain the
+contents of the whole disk.
+</p><p>
+By inspecting the contents of
+the <code>my_independent_state.ickpt</code> directory we can find
+there the <code>board.disk0.hd_image.craff</code> file. This file is
+the disk image containing the data from the <b>board.disk0</b>
+virtual disk object. The next section shows how one can start a target
+machine with this disk image.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Using-own-disk-image">2.6.3 Using own disk image</a></h3>
+<p>
+
+</p><p>
+Simics scripts creating target machines often accept parameters which
+can be used to specify a disk image for the target machine to
+use. The <code>targets/qsp-x86/firststeps.simics</code> script accepts
+the <i>disk0_image</i> and <i>disk1_image</i>
+parameters which can be used to specify disk images to use for the
+both disks created in the target machine. The description of the
+parameters can be obtained with the <b>help</b> Simics
+command: <b>help targets/qsp-x86/firststeps.simics</b>. Here is an
+extract from the command output:
+</p><p>
+  </p><pre class="jdocu_small">    simics&gt; <b>help targets/qsp-x86/firststeps.simics</b>
+    …
+    Disks:
+    disk0_image  -  existing file or NIL
+    Disk image file for the machine_name.disk0 virtual disk. Files
+    in craff (Simics own file format), VHDX, and raw formats are supported.
+    default value: NIL
+    …
+    disk1_image  -  existing file or NIL
+    Disk image file for the machine_name.disk1 virtual disk. Files
+    in craff (Simics own file format), VHDX, and raw formats are supported.
+    default value: NIL
+  </pre><p>
+</p><p>
+
+Let’s run the <code>targets/qsp-x86/firststeps.simics</code> script using
+the <code>my_independent_state.ickpt/board.disk0.hd_image.craff</code>
+image created in the previous section:
+</p><p>
+</p><ol>
+  
+  <li>start simulator and create a target machine from Simics CLI:
+  <pre class="jdocu_small">    simics&gt; <b>run-command-file targets/qsp-x86/firststeps.simics disk0_image =<img alt="Line break" src="nextline.png">
+my_independent_state.ickpt/board.disk0.hd_image.craff</b>
+  </pre><p>
+  </p></li>
+
+  <li>run the machine until Linux is booted:
+  
+  
+  <pre class="jdocu_small">    simics&gt; <b>run</b>
+  </pre><p>
+  </p></li>
+
+  <li>check that both files are present:
+  
+  
+  
+  
+  
+  
+  <div style="text-align: center">
+    <img alt="" src="virtual-disks-8.png">
+  </div>
+  </li>
+</ol>
+<p>
+
+</p><p>
+
+</p><h2 class="jdocu"><a name="Getting-data-into-the-simulated-system">2.7 Getting data into the simulated system</a></h2>
+<p>
+
+</p><p>
+There are several situations when it is necessary and/or useful to let
+the simulated target machine interact with the host system, or even
+other systems accessible to the host via networking. Probably the most
+common situation is the need to transfer files between the target and
+the host.
+</p><p>
+This section will describe a few ways of transferring data between the simulation and the real world:
+</p><ol>
+  <li>Data transfer using the preferred method, the <em><a name="Simics--Agent">Simics
+  Agent</a></em>.</li>
+  <li>Data transfer by attaching simulated disks, using disk images.</li>
+  <li>Data transfer using the simulated network and
+the <em><a name="service-node">service node</a></em>.</li>
+  <li>Data transfer when connecting the simulated network to a real
+  network.</li>
+</ol> 
+<p>
+</p><h3 class="jdocu"><a name="Transferring-data-using-the-Simics-Agent">2.7.1 Transferring data using the Simics Agent</a></h3>
+<p>
+
+  </p><p>
+File transfer can be done in several ways. The preferred method is to
+use the <em><a name="Simics-Agent">Simics Agent</a></em>, which is piece of software
+that must be present on the target machine. The Clear Linux
+distribution for the <code>QSP-x86</code> machine has the agent
+pre-installed. If the agent is not present, it must be transferred
+to the target machine using one of the methods described later. The
+Simics Agent is preferred since it is the fastest and least intrusive
+method.
+</p><p>
+The <b>Simics Agent manager</b> is a single global manager in Simics, used to
+manage all connections to all agents on all targets. When a connection
+is set up to a specific agent on a target, a <b>Simics Agent handle</b> is
+created. The handle is used to do actual operations. There can be
+multiple handles in use at once, connected to different agents.
+</p><p>
+
+
+
+
+
+
+</p><p>
+
+</p><p>
+Here is an example of using the Simics Agent for transferring files,
+when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target.
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+</p><ul><li>Start the Simics Agent manager. Here we also give it an
+explicit name. </li></ul>
+<pre class="jdocu_small">simics&gt; <b>$m = (start-agent-manager name = mgr0)</b></pre><p>
+</p><p>
+</p><ul><li>Boot the target machine, log in as simics, and start the
+simics-agent from the target console prompt (the ClearLinux target has
+in fact done so already as part of its boot, but we start another one
+for this example). </li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>simics-agent qsp &amp;</b>
+  qsp connected (1b90f02e10d5a84c)</pre><p>
+
+
+</p><p>
+</p><ul><li>Now we can connect the agent manager to the simics-agent on the target. A connection between the agent manager and a specific agent is represented by
+an agent handle. All commands are performed by the user using the agent handle.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$m.connect-to-agent name = agent0 identifier = qsp </b>
+agent0 connected to qsp0 (0x1b90f02e10d5a84c)</pre><p>
+</p><p>
+The <code>agent0</code> object is the new agent handle.
+</p><p>
+</p><ul><li>Using the handle, we can transfer a file from the host to the target.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>agent0.upload from = "%simics%/targets/qsp-x86/firststeps.simics" to = /tmp</b>
+agent0:job 1 (upload firststeps.simics)
+simics&gt; <b>agent0.run-until-job 1</b>
+agent0:job 1 (upload firststeps.simics) finished</pre><p>
+</p><p>
+
+
+</p><p>
+</p><ul><li>Similarly, we can use the agent handle to transfer a file from the target to the host.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>agent0.download -overwrite from = "/tmp/firststeps.simics" to = /tmp</b>
+agent0:job 2 (download firststeps.simics)
+simics&gt; <b>agent0.run-until-job 2</b>
+agent0:job 2 (download firststeps.simics) finished
+</pre><p>
+</p><p>
+Note that the agent operations are necessarily asynchronous, which is
+why we must wait for them to finish. However, there is no need to wait
+after each command; several commands can be queued up before a wait is
+issued.
+</p><p>
+The Simics Agent can also perform other operations, such as
+</p><ul>
+  <li>List files on the target, see <b>agent0.ls</b></li>
+  <li>Print target file contents, see <b>agent0.print-file</b></li>
+  <li>Run arbitrary target (shell) commands, see <b>agent0.run</b></li>
+  <li>Retrieve output of the commands, see <b>agent0.get-captured-output</b></li>
+</ul>
+<p>
+
+</p><h3 class="jdocu"><a name="Transferring-files-using-disk-images">2.7.2 Transferring files using disk images</a></h3>
+<p>
+
+</p><p>
+There are other methods for transferring data in and out of the
+simulation. If the Simics Agent is not already present on the target
+machine, one of them must be used first to copy the agent software.
+</p><p>
+</p><ul>
+  <li><b>USB</b> - from a USB disk image, a virtual USB disk can be
+  created and connected to the target machine.</li>
+  <li><b>SATA</b> - from a disk image, typically in CRAFF format, a virtual hard disk can be created and connected to the target machine.</li>
+</ul>
+<p>
+
+
+
+
+
+
+
+</p><p>
+
+</p><p>
+Here is an example of transferring the Simics Agent to the target
+using USB, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine.
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+</p><ul><li>Boot the target machine, log in as simics.</li></ul>
+<p>
+</p><ul><li>Create and connect a virtual USB disk using the Simics Agent disk images provided with Simics.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$usb_img = "%simics%/targets/common/images/simics_agent_binaries.img"</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>$usb_disk = (new-usb-disk-comp file = $usb_img name = usb_disk)</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>$usb_disk.connect-to $system</b>
+Connecting usb_disk.usb_host to board.mb.sb.usb_port[10]
+</pre><p>
+</p><p>
+
+</p><p>
+
+</p><p>
+</p><ul><li>The new USB disk has been created and detected by the target machine operating system. Now we can mount it, copy and run the agent.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>sudo mount /dev/sdc1 /media</b></pre><p>
+
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>find /media -name simics_agent_x86_linux64</b></pre><p>
+/media/simics_agent_x86_linux64
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>cp /media/simics_agent_x86_linux64 .</b></pre><p>
+
+
+
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>./simics_agent_x86_linux64 qsp &amp;</b></pre><p>
+
+</p><p>
+</p><ul><li>With the agent now running on the target machine, we can now proceed
+as in the earlier section if we want to transfer other files.</li></ul>
+<p>
+<br>
+</p><p>
+
+
+
+
+
+
+
+</p><p>
+Here is another example of transferring the Simics Agent to the target
+using a second hard disk, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine. This machine is already set up to allow easy addition of an
+extra disk, using the <code>disk1_image</code> parameter.
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics
+       disk1_image=targets/common/images/simics_agent_binaries.img</pre><p>
+</p><p>
+</p><ul><li>Boot the target machine, log in as simics.</li></ul>
+
+<p>
+</p><ul><li>Mount the second hard disk.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>sudo mount /dev/sdb1 /media</b></pre><p>
+
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>find /media -name simics_agent_x86_linux64</b></pre><p>
+/media/simics_agent_x86_linux64
+</p><ul><li>Copy and run the Simics Agent.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>cp /media/simics_agent_x86_linux64 .</b></pre><p>
+
+
+
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>./simics_agent_x86_linux64 qsp &amp;</b></pre><p>
+
+</p><p>
+</p><ul><li>With the agent now running on the target machine, we can now proceed
+as in the earlier section if we want to transfer other files.</li></ul>
+<p>
+
+</p><h3 class="jdocu"><a name="Network-simulation-and-the-service-node">2.7.3 Network simulation and the service node</a></h3>
+<p>
+
+</p><p>
+Simics is a full system simulator, which can also simulate a network
+of machines. It includes a feature called the <em><a name="servicenode">service
+node</a></em> which acts like a separate machine on the simulated
+network, with its own IP address. The service node can expose common
+useful network services, such as DHCP, DNS, NTP as well as an FTP server that
+facilitates connecting to the host system and transfer files.
+</p><p>
+The Clear Linux distribution for the <code>QSP-x86</code> machine uses the
+service node DHCP and DNS servers during boot, to set up its network
+services.
+</p><p>
+
+
+
+
+
+
+
+</p><p>
+
+</p><p>
+Here is an example of transferring the Simics Agent to the target
+machine over FTP, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine.
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+</p><ul><li>Boot the target machine, log in as simics.</li></ul>
+<p>
+</p><ul><li>Notice that the service node and the target machine is set up
+in the service node DNS. The IP and MAC addresses are internal to the
+simulated network.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$service_node.sn.list-host-info</b>
+┌───────────┬───────────────────┬─────────────────┐
+│    IP     │    name.domain    │       MAC       │
+├───────────┼───────────────────┼─────────────────┤
+│10.10.0.1  │simics0.network.sim│20:20:20:20:20:00│
+│10.10.0.100│board.network.sim  │00:17:a0:00:00:00│
+└───────────┴───────────────────┴─────────────────┘</pre><p>
+</p><p>
+</p><ul><li>From the target console, we can also verify that the DNS is working by querying the service node IP.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>host simics0</b>
+simics0.network.sim has address 10.10.0.1</pre><p>
+</p><p>
+</p><ul><li>Now we can set up the service node FTP server by specifying its root directory on the host.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$img_dir = "%simics%/targets/common/images"</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>$service_node.set-ftp-directory dir = $img_dir</b></pre><p>
+</p><p>
+</p><ul><li>Now we can run an FTP client on the target to copy the agent, and then run it.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>lftpget ftp://simics0/simics_agent_binaries.zip</b></pre><p>
+
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>unzip -q simics_agent_binaries.zip</b></pre><p>
+
+</p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>./simics_agent_x86_linux64 qsp &amp;</b></pre><p>
+
+</p><p>
+</p><ul><li>With the agent now running on the target machine, we can now proceed
+as in the earlier section if we want to transfer other files.</li></ul>
+<p>
+
+</p><h3 class="jdocu"><a name="Connecting-to-real-networks">2.7.4 Connecting to real networks</a></h3>
+<p>
+
+</p><p>
+Simics can let the target machine connect to any network
+that the host system has access to. This can be achieved in several
+ways, where NAPT is the simplest option. Simics then acts similarly
+like a regular home router, performing network address translation
+between the simulated network and the network that the host is
+connected to. The service node DNS server can also act as a proxy for
+real DNS.
+</p><p>
+The Clear Linux distribution for the <code>QSP-x86</code> machine is set
+up to allow such usage.
+</p><p>
+
+
+
+
+
+
+
+
+
+</p><p>
+
+</p><p>
+Here is an example of transferring data from the host to the target using regular networking, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine. 
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+</p><ul><li>Boot the target machine, log in as simics.</li></ul>
+<p>
+</p><ul><li>Enable real time mode, to avoid network timeouts. This makes
+sure that Simics will not run the simulation faster than real
+time.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>enable-real-time-mode</b>
+Real-time mode enabled.</pre><p>
+</p><p>
+</p><ul><li>Set up a simple HTTP server on the host. This
+command can naturally also be executed in any host shell, but here we
+use the <b>shell</b> command from within Simics.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$python = (lookup-file "%simics%/bin/mini-python")</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>$imgs = (lookup-file "%simics%/targets/common/images")</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>shell -bg ($python + " -m http.server --directory " + $imgs)</b></pre><p>
+</p><p>
+</p><ul><li>For easier access of the host system from the target, we add the host IP address to the service node DNS.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$service_node.sn.add-host name = "host0" ip = (sim-&gt;host_ipv4)</b></pre><p>
+</p><p>
+</p><ul><li>Now we can fetch data from the host using curl in the target console.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>curl -s http://host0:8000/simics_agent_binaries.zip</b></pre><p>
+</p><p>
+</p><ul><li>On the target machine, we can verify that the file has been
+transferred.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>ls simics_agent_binaries.zip</b>
+simics_agent_binaries.zip
+</pre><p>
+</p><p>
+
+</p><p>
+In this example we only connected to the host itself, but in fact the
+same technique can be used to connect to any other system that the
+host can access. Also note that the HTTP server we open on the host
+will be accessible by any web browser.
+</p><p>
+<br>
+</p><p>
+
+
+
+
+
+
+
+
+
+</p><p>
+
+</p><p>
+Using port forwarding, the target can also be accessed from the host,
+and potentially from any system that can access the host, so this
+should be used with care. Here is an example of transferring a file
+to the target from the host over ssh, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine. This assumes that the host has ssh installed.
+</p><p>
+</p><ul><li>Install ssh on your host, if not already present. </li></ul>
+<p>
+</p><ul><li>Start Simics with the mentioned target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+</p><ul><li>Inspect the service node DNS to find the IP address of the target machine.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$service_node.sn.list-host-info</b>
+┌───────────┬───────────────────┬─────────────────┐
+│    IP     │    name.domain    │       MAC       │
+├───────────┼───────────────────┼─────────────────┤
+│10.10.0.1  │simics0.network.sim│20:20:20:20:20:00│
+│10.10.0.100│board.network.sim  │00:17:a0:00:00:00│
+└───────────┴───────────────────┴─────────────────┘</pre><p>
+</p><p>
+
+</p><ul><li>Set up port forwarding to the target. By default, this opens a
+few ports on the host corresponding to FTP, SSH, Telnet and HTTP, and
+connects them to the target. Other ports can also be opened by
+specifying parameters to the command.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>connect-real-network target-ip = 10.10.0.100</b>
+NAPT already enabled.
+Host TCP port 4021 -&gt; 10.10.0.100:21
+Host TCP port 4022 -&gt; 10.10.0.100:22
+Host TCP port 4023 -&gt; 10.10.0.100:23
+Host TCP port 4080 -&gt; 10.10.0.100:80
+Warning: This can expose the target system on the host local network.</pre><p>
+</p><p>
+</p><ul><li>Boot the target machine, log in as simics.</li></ul>
+<p>
+</p><ul><li>Enable real time mode, to avoid network timeouts.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>enable-real-time-mode</b>
+Real-time mode enabled.</pre><p>
+</p><p>
+</p><ul><li>Now we can transfer the Simics Agent to the target machine
+over ssh. Note that we connect to the host itself and make use of the
+port forwarding.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>$fn = (lookup-file "%simics%/targets/common/images/simics_agent_binaries.zip")</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>shell -bg "scp -P 4022 " + $fn + " simics@localhost:agent.zip"</b></pre><p>
+</p><p>
+</p><ul><li>On the target machine, we can verify that the file has been
+transferred.</li></ul>
+<pre class="jdocu_small">simics@cl-qsp ~ $ <b>ls agent.zip</b>
+agent.zip
+</pre><p>
+</p><p>
+In this example we only copied a file, but using port forwarding, we
+can connect to other network service available on the target, such as
+web servers.
+</p><p>
+
+
+</p><h2 class="jdocu"><a name="Hardware-inspection">2.8 Hardware inspection</a></h2>
+<p>
+
+</p><p>
+One of the important reasons to use a simulator such as Simics is the
+ability to inspect hardware in a non-intrusive way. This section will
+describe various Simics features that facilitates hardware inspection.
+</p><p>
+</p><ol>
+  <li>Inspection of registers in processors and devices.</li>
+  <li>Controlling the logging system to obtain information on what is happening in the hardware.</li>
+  <li>Using tracing to see what the simulation is doing.</li>
+  <li>Using the instrumentation framework to obtain statistics about instructions, exceptions and caches.</li>
+</ol>
+<p>
+</p><h3 class="jdocu"><a name="Processor-and-device-inspection">2.8.1 Processor and device inspection</a></h3>
+<p>
+  
+</p><p>
+  Here are some examples of how to inspect processors and devices,
+  when running
+  the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+  machine.
+</p><p>
+  
+  
+  
+  
+</p><p>
+  </p><ul><li>Start Simics using the mentioned target. </li></ul>
+  <pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+  </p><ul><li>To inspect the target machine, use the <b>list-objects</b> command.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>list-objects</b>
+┌───────────────────┬─────────────────┐
+│  Component Class  │     Object      │
+├───────────────────┼─────────────────┤
+│&lt;chassis_qsp_x86&gt;  │board            │
+│&lt;ethernet_switch&gt;  │ethernet_switch0 │
+│&lt;service_node_comp&gt;│service_node_cmp0│
+└───────────────────┴─────────────────┘
+┌─────────────────┬───────────────────┐
+│      Class      │      Object       │
+├─────────────────┼───────────────────┤
+│&lt;bp-manager&gt;     │bp                 │
+│&lt;breakpoints-old&gt;│breakpoints        │
+│&lt;sync_domain&gt;    │default_sync_domain│
+│&lt;script-params&gt;  │params             │
+│&lt;preferences&gt;    │prefs              │
+│&lt;sim&gt;            │sim                │
+└─────────────────┴───────────────────┘</pre><p>
+</p><p>
+  </p><ul><li>Here we see that we have a few special objects, like the
+  breakpoint manager and the <code>sim</code> object, we have the
+  network related objects, and at the top we have the actual
+  machine. We can look at the objects inside it:</li></ul>
+<pre class="jdocu_small">simics&gt; <b>list-objects namespace = board</b>
+┌───────────────────────┬─────────────────┐
+│    Component Class    │     Object      │
+├───────────────────────┼─────────────────┤
+│&lt;sata_cdrom_comp&gt;      │board.cdrom      │
+│&lt;gfx_console_comp&gt;     │board.console    │
+│&lt;sata_disk_comp&gt;       │board.disk0      │
+│&lt;sata_disk_comp&gt;       │board.disk1      │
+│&lt;motherboard_x58_ich10&gt;│board.mb         │
+│&lt;txt_console_comp&gt;     │board.serconsole │
+│&lt;txt_console_comp&gt;     │board.serconsole1│
+│&lt;usb_tablet_component&gt; │board.tablet     │
+└───────────────────────┴─────────────────┘
+┌──────────────┬──────────────────┐
+│    Class     │      Object      │
+├──────────────┼──────────────────┤
+│&lt;cell&gt;        │board.cell        │
+│&lt;context&gt;     │board.cell_context│
+│&lt;recorder&gt;    │board.cell_rec0   │
+│&lt;os_awareness&gt;│board.software    │
+└──────────────┴──────────────────┘</pre><p>
+</p><p>
+  </p><ul><li>To list all processors, use the <b>list-processors</b>
+      command. This command can show information about the state of
+      each processor core, to help diagnose the current state of the
+      system. There are multiple switches available, use help or
+      tab-completion to see the available
+      options. The <code>-disassemble</code> option is particularly
+      interesting, as it often indicates processor modes like wait
+      states.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>list-processors -disassemble</b>
+┌────────────────────────┬─┬─────────┬────────┬────────────────────────────────────────┐
+│        CPU Name        │ │CPU Class│  Freq  │              Disassembly               │
+├────────────────────────┼─┼─────────┼────────┼────────────────────────────────────────┤
+│board.mb.cpu0.core[0][0]│*│x86QSP1  │2.00 GHz│cs:0x000000000000fff0 p:0x0fffffff0  nop│
+└────────────────────────┴─┴─────────┴────────┴────────────────────────────────────────┘</pre><p>
+</p><p>
+  </p><ul><li>To see the objects associated with the processor, we can again use the <b>list-objects</b> command. The <code>-tree</code> option displays the objects in a hierarchical fashion.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>list-objects namespace = board.mb.cpu0 -tree</b>
+┐
+├ apic[0] ┐
+│         └ [0] 
+├ core[0] ┐
+│         └ [0] ┐
+│               └ vtime ┐
+│                       ├ cycles 
+│                       └ ps 
+├ mem[0] ┐
+│        └ [0] 
+├ socket 
+└ tlb[0] ┐
+         └ [0] </pre><p>
+</p><p>
+</p><ul><li>We can inspect the registers and current execution mode of a processor can using the <b>print-processor-registers</b> command.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>board.mb.cpu0.core[0][0].print-processor-registers</b>
+16-bit legacy real mode
+rax = 0x0000000000000000             r8  = 0x0000000000000000
+rcx = 0x0000000000000000             r9  = 0x0000000000000000
+rdx = 0x00000000000106a1             r10 = 0x0000000000000000
+rbx = 0x0000000000000000             r11 = 0x0000000000000000
+rsp = 0x0000000000000000             r12 = 0x0000000000000000
+rbp = 0x0000000000000000             r13 = 0x0000000000000000
+rsi = 0x0000000000000000             r14 = 0x0000000000000000
+rdi = 0x0000000000000000             r15 = 0x0000000000000000
+
+rip = 0x000000000000fff0
+
+eflags = 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 = 0x00000002
+         I V V A V R - N I I O D I T S Z - A - P - C
+         D I I C M F   T O O F F F F F F   F   F   F
+           P F           P P                        
+                         L L                        
+</pre><p>
+</p><p>
+</p><ul><li>Individual registers are also typically accessible. Here we also use the <b>output-radix</b> command that specifies the base when numbers are displayed.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>output-radix 16</b>
+simics&gt; <b>%rdx</b>
+  
+0x106a1</pre><p>
+</p><p>
+</p><ul><li>We can also inspect devices, thas the abilityheir register banks, and individual registers. Information about their
+registers can be displayed using the <b>print-device-regs</b>
+command. For example, we can look at the DMI device. First, we locate it in
+the system.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>list-classes -l substr = dmi</b>
+The following classes have been registered:
+┌───────────────────┬──────────────────────────────────────────────────┐
+│       Class       │                Short description                 │
+├───────────────────┼──────────────────────────────────────────────────┤
+│osa_admin_emulator │deprecated OS awareness administrator             │
+│x58-dmi            │Intel® X58 DMI unit                               │
+│x58-dmi.HRESET     │                                                  │
+│x58-dmi.io_regs    │                                                  │
+│x58-dmi.msg        │legacy PCI INTx message to pci_interrupt converter│
+│x58-dmi.pcie_config│                                                  │
+└───────────────────┴──────────────────────────────────────────────────┘</pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>list-objects class = x58-dmi -all</b>
+┌─────────┬──────────────────┐
+│  Class  │      Object      │
+├─────────┼──────────────────┤
+│&lt;x58-dmi&gt;│board.mb.nb.bridge│
+└─────────┴──────────────────┘</pre><p>
+</p><p>
+</p><ul><li>Now we can inspect the banks and device registers.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>print-device-regs bank = board.mb.nb.bridge</b>
+Bank: io_regs
+Offset  Name            Size  Value | Offset  Name         Size  Value
+------------------------------------+---------------------------------
+ 0xcf8  config_address     4    0x0 |  0xcfc  config_data     4    0x0
+
+Bank: pcie_config
+Offset  Name                 Size    Value
+------------------------------------------
+   0x0  vendor_id               2   0x8086
+   0x2  device_id               2   0x3400
+   0x4  command                 2      0x0
+   0x6  status                  2     0x10
+   0x8  revision_id             1     0x13
+   0x9  class_code              3  0x80000
+   0xc  cache_line_size         1      0x0
+   0xd  latency_timer           1      0x0
+   0xe  header_type             1      0x0
+   0xf  bist                    1      0x0
+  0x2c  subsystem_vendor_id     2   0x8086
+  0x2e  subsystem_id            2      0x0
+  0x34  capabilities_ptr        1      0x0
+  0x3c  interrupt_line          1      0x0
+  0x3d  interrupt_pin           1      0x0</pre><p><br>
+</p><p>
+</p><ul><li>We can specify a pattern to only display certain registers.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>print-device-regs bank = board.mb.nb.bridge pattern = vendor_id</b>
+Bank: pcie_config
+Offset  Name       Size   Value
+-------------------------------
+   0x0  vendor_id     2  0x8086</pre><p>
+</p><p>
+</p><ul><li>To obtain more information about a particular register, we can use the <b>print-device-reg-info</b> command.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>print-device-reg-info register = board.mb.nb.bridge.bank.pcie_config.vendor_id</b>
+Vendor ID [board.mb.nb.bridge.bank.pcie_config:vendor_id]
+
+                Bits : 16
+              Offset : 0x0
+               Value : 32902 (0x8086)
+
+Bit Fields:
+    vendor_id[15..0] : 1000000010000110
+</pre><p>
+    </p><p>
+When retrieving a register value for
+inspection or use in further code, it is better to use one of the
+commands designed for that purpose:
+</p><p>
+</p><ul>
+<li><b>get-device-reg</b></li>
+<li><b>get-device-offset</b></li>
+<li><b>read-device-reg</b></li>
+<li><b>read-device-offset</b></li>
+<li><b>set-device-reg</b></li>
+<li><b>set-device-offset</b></li>
+<li><b>write-device-reg</b></li>
+<li><b>write-device-offset</b></li>
+</ul> 
+<p>
+The command names have the following meanings:
+</p><ul>
+  <li>Operation type:
+    <ul>
+      <li><b>get</b> = do inquiry reads and should not have
+      side-effects on the state of the register</li>
+      <li><b>set</b> = do inquiry writes, change the register contents
+        but do not trigger side effects</li>
+      <li><b>read</b> and <b>write</b> = do normal memory operations that have side effects</li>
+    </ul>
+  </li>
+  <li>Target specification:
+    <ul>
+      <li><b>reg</b> = specify the register by name (<b>name.of.device.bank.registername</b>).</li>
+      <li><b>offset</b> = specify <b>name.of.device.bank</b>, and <b>offset</b>, and <b>size</b>.</li>
+    </ul>
+  </li>
+</ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>get-device-reg board.mb.nb.bridge.bank.pcie_config.device_id</b>
+0x3400
+</pre><p>
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>get-device-offset board.mb.nb.bridge.bank.pcie_config offset = 2 size = 2</b>
+0x3400 (LE)
+</pre><p>
+</p><p>
+To sum up, we have shown a few simple ways in which the hardware can
+be inspected. One important point is that the inspection is
+non-intrusive, any software running on the target machine cannot
+notice anything of our inspection.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Logging">2.8.2 Logging</a></h3>
+<p>
+  
+</p><p>
+  
+  
+  
+  
+</p><p>
+  Simics hardware models generally output log messages for various
+  kinds of events. The Simics log system offers a very powerful system
+  for configuring which log messages to see - from which objects, at
+  which level. The result is often large volumes of output. That
+  output can be configured and sent to files for later inspection, as
+  well as used in scripts to stop Simics or take other actions when a
+  log message appears. 
+</p><p>
+  Here we will show some logging examples when running the
+  </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+  machine.
+</p><p>
+  </p><ul><li>Start Simics with this target. </li></ul>
+  <pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+</p><p>
+  </p><ul><li>The starting point is the large set of options available to
+  the <b>log-setup</b> command. To check the current settings,
+  just issue <b>log-setup</b> alone:</li></ul>
+<pre class="jdocu_small">simics&gt; <b>log-setup</b>
+Time stamp      : disabled
+Picoseconds     : disabled
+Real time       : disabled
+Log to console  : enabled
+Include group   : disabled
+Include level   : disabled
+Log file        : (disabled)</pre><p>
+</p><p>
+</p><ul><li>All objects in Simics, and all log messages, have a log level. The
+default log level is 1, which is supposed to show important
+information. Log level 2 to 4 add progressively more information. To
+configure and inspect the log level of an object, use
+the <b>log-level</b> object command. This will show or configure
+the log level for the object.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>log-level board.mb.nb.bridge 2</b>
+[board.mb.nb.bridge] Changing log level: 1 -&gt; 2</pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>log-level board.mb.nb.bridge</b>
+Current log levels:
+
+Lvl  Object                              | Lvl  Object
+-----------------------------------------+------------------------------------
+  2  board.mb.nb.bridge                  |   2  board.mb.nb.bridge.port
+  2  board.mb.nb.bridge.bank             |   2  board.mb.nb.bridge.port.HRESET
+  2  board.mb.nb.bridge.bank.io_regs     |   2  board.mb.nb.bridge.port.msg
+  2  board.mb.nb.bridge.bank.pcie_config |      
+</pre><p>
+</p><p>
+</p><ul><li>The log messages that are displayed are those which have a level less
+than or equal to the ones configured on the object.
+<p>
+Each log message also has a log type, and similarly like log levels, we can configure which log types to display on each object:</p></li></ul>
+<pre class="jdocu_small">simics&gt; <b>log-type board.mb.nb.bridge info</b>
+board.mb.nb.bridge:
+ enabled log types: "info"
+ disabled log types: "error" "spec-viol" "unimpl" "critical"
+board.mb.nb.bridge.bank:
+ enabled log types: "info"
+ disabled log types: "error" "spec-viol" "unimpl" "critical"
+board.mb.nb.bridge.bank.io_regs:
+ enabled log types: "info"
+ disabled log types: "error" "spec-viol" "unimpl" "critical"
+board.mb.nb.bridge.bank.pcie_config:
+ enabled log types: "info"
+ disabled log types: "error" "spec-viol" "unimpl" "critical"
+board.mb.nb.bridge.port:
+ enabled log types: "info"
+ disabled log types: "error" "spec-viol" "unimpl" "critical"
+board.mb.nb.bridge.port.HRESET:
+ enabled log types: "info"
+ disabled log types: "error" "spec-viol" "unimpl" "critical"</pre><p>
+</p><p>
+</p><ul><li>When we run the simulation, log messages will appear based on our filtering.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>run 1000</b>
+[board.mb.nb.bridge.bank.io_regs info] PCIe write 0xe0000001 to ff:0.1 offset 0x50, 4 bytes
+</pre><p>
+
+</p><p>
+</p><ul><li>It is also possible to set breakpoints on log messages. These can similarly be filtered on object, log type etc.
+<p>
+To see when in virtual time a log message is printed,
+use <b>log-setup -time-stamp</b>. This will print the processor
+that provided the virtual time for the message, its current
+instruction pointer or program counter (address of the instruction
+active when the log was printed), and its current cycle count. To turn
+it off, use <code>-no-time-stamp</code>. The <code>-pico-seconds</code>
+and <code>-real-time</code> are similar, but prints picosecond
+resolution timestamps and real time, respectively.
+</p></li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>log-setup -time-stamp</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>bp.log.break object = board.mb.nb.bridge.bank.io_regs type = info</b>
+Breakpoint 2: Break on 'info' log messages from board.mb.nb.bridge.bank.io_regs hierarchy
+</pre><p>
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>run</b>
+[board.mb.nb.bridge.bank.io_regs info] {board.mb.cpu0.core[0][0] 0xfffecbf7 136713}
+PCI read 0x0 from bus 0, device 31, function 0, register 68 (0x44, 1 bytes), PCIE address = 0xf8044
+[board.mb.nb.bridge.bank.io_regs] Breakpoint 1: board.mb.nb.bridge.bank.io_regs log message of type info
+</pre><p>
+
+</p><p>
+To send all log outputs to a file, use <b>log-setup
+logfile=&lt;filename&gt;</b>. To overwrite an existing file, the
+<code>-overwrite</code> flag must be given. To stop output, use the command <b>log-setup -no-log-file</b>.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Tracing">2.8.3 Tracing</a></h3>
+<p>
+  
+</p><p>
+  
+  
+  </p><p>
+Tracing is a way to observe what is going on during the
+simulation. Simics has a <em><a name="Breakpoint-Manager">Breakpoint Manager</a></em> that
+includes functionality for tracing various types of events. This means
+that messages (in fact, Simics log messages) are printed when an event
+of the specified occurs. Such a sequence of messages is what is here
+is known as a <b>trace</b>.
+</p><p>
+  Here we will show some tracing examples when running the
+  </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+  machine.
+</p><p>
+  </p><ul><li>Start Simics with this target. </li></ul>
+  <pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+  </p><p>
+  </p><ul><li>First, we can try tracing control register updates. By default, it
+  traces updates on the primary processor (in this case there is only
+  one).</li></ul>
+  <p>
+</p><pre class="jdocu_small">simics&gt; <b>bp.control_register.trace -all</b>
+[board.mb.cpu0.core[0][0] info] VMP not engaged. Reason: hap installed on CR0 read.
+2</pre><p>
+</p><p>
+</p><ul><li>We run the simulation and observe the trace output where we can see
+that registers are read and written.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>run 1000</b>
+[bp.control_register trace] [trace:2] board.mb.cpu0.core[0][0] cr0 &lt;- 0x40000023
+[bp.control_register trace] [trace:2] board.mb.cpu0.core[0][0] cr4 &lt;- 0x640
+[bp.control_register trace] [trace:2] board.mb.cpu0.core[0][0] read of cr4
+[bp.control_register trace] [trace:2] board.mb.cpu0.core[0][0] cr4 &lt;- 0x640
+</pre><p>
+</p><p>
+</p><ul><li>The trace output are log messages and can be controlled with the
+<b>log-setup</b> command. For example, each message can
+be prepended with a time-stamp, indicating the processor,
+program counter and the cycle count at the point where the event occurred.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>log-setup -time-stamp</b></pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>c 17450</b>
+[bp.control_register trace] {board.mb.cpu0.core[0][0] 0xfffec638 398442} [trace:2] 
+board.mb.cpu0.core[0][0] read of IA32_APIC_BASE</pre><p>
+
+</p><p>
+</p><ul><li>Here is another example where we trace memory accesses. First, we
+remove the previous trace.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>bp.delete -all</b></pre><p>
+</p><p>
+</p><ul><li>Now we turn on tracing of all memory read accesses to a specific
+region. Again, by default this will accesses on the primary processor
+and hence these are virtual addresses.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>bp.memory.trace address = 0 length = 100000 -r</b></pre><p>
+</p><p>
+</p><ul><li>We run the simulation again and notice a memory access.</li></ul>
+<p>
+</p><pre class="jdocu_small">simics&gt; <b>run 365_016_915 cycles</b>
+[bp.memory trace] {board.mb.cpu0.core[0][0] 0x836872 365415364} [trace:3]
+board.cell_context 'r' access to v:0x10 len=4
+</pre><p>
+
+</p><p>
+Several other types of events can also be traced, such as target
+console string output and hits at specific source code lines.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Instrumentation">2.8.4 Instrumentation</a></h3>
+<p>
+  
+</p><p>
+  
+  
+  
+  
+</p><p>
+  The Simics instrumentation framework has powerful ways to inspect
+  the simulation. It is built on four core concepts:
+</p><p>
+  </p><ul>
+    <li><b>Providers</b>. Instrumentation providers provide
+    information about what is happening in the model and are usually
+    things like processors and devices. Any part of the simulated
+    system can provide access for instrumentation tools. Each model
+    can implement instrumentation in their own way, and Simics
+    modelers can add instrumentation to any model that they build.</li>
+
+    <li><b>Tools</b>. Instrumentation tools take the data from the
+    providers and turn it into useful information. Tools are provided
+    as part of Simics and can also be created by a user.</li>
+      
+    <li><b>Connections</b>. Connections connect providers to tools
+    and can be individually enabled and disabled to control when data
+    is sent from a provider to a tool.</li>
+      
+    <li><b>Filters</b>. Filters control the collection of data (by
+    enabling and disabling connections) and are used to restrict data
+    collection based on model state like the currently running
+    process, the current processor mode, and similar.</li>
+  </ul>
+<p>
+  At the Simics command line, it is the tools and filters that are
+  manipulated. To see a list of available tools:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>list-instrumentation-tools substr = bank</b>
+┌──────────────────────┬──────────────────┬──────────────────────────────┐
+│ Tool create command  │    Tool class    │         Description          │
+├──────────────────────┼──────────────────┼──────────────────────────────┤
+│new-bank-coverage-tool│bank_coverage_tool│register bank coverage tool   │
+│new-bank-patch-tool   │bank_patch_tool   │device access miss repair tool│
+└──────────────────────┴──────────────────┴──────────────────────────────┘</pre><p>
+</p><p>
+  Here is an example of using instrumentation to compare user and
+supervisor mode instruction occurrences, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine.
+</p><p>
+  </p><ul><li>Start Simics with this target. </li></ul>
+  <pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+    </p><p>
+  </p><ul><li>Boot the target machine.</li></ul>
+<p>
+  </p><ul><li>Create two histogram tools and connect them to all processors.</li></ul>
+  <pre class="jdocu_small">simics&gt; <b>new-instruction-histogram name = user_instr -connect-all</b>
+[board.mb.cpu0.core[0][0] info] VMP not engaged. Reason: instrumentation enabled.
+Created user_instr (connected to 1 processor)</pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>new-instruction-histogram name = kernel_instr -connect-all</b>
+Created kernel_instr (connected to 1 processor)</pre><p>
+</p><p>
+</p><ul><li>Create filters and add them to the tools.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>new-cpu-mode-filter name = usermode mode = user</b>
+Created filter usermode with mode user</pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>new-cpu-mode-filter name = kernelmode mode = supervisor</b>
+Created filter kernelmode with mode supervisor</pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>user_instr.add-filter filter = usermode</b>
+Added filter to 1 connections</pre><p>
+</p><pre class="jdocu_small">simics&gt; <b>kernel_instr.add-filter filter = kernelmode</b>
+Added filter to 1 connections</pre><p>
+</p><p>
+</p><ul><li>Run the simulation to collect data from the providers.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>run 4 s</b></pre><p>
+</p><p>
+</p><ul><li>Display the resulting histograms.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>user_instr.histogram max = 15</b>
+┌─────────┬────────┬────────┬───────┬───────────┐
+│  Row #  │mnemonic│ Count  │Count% │Accumulated│
+│         │        │        │       │  Count%   │
+├─────────┼────────┼────────┼───────┼───────────┤
+│        1│mov     │12137948│ 28.98%│     28.98%│
+│        2│cmp     │ 3030796│  7.24%│     36.22%│
+│        3│je      │ 2846035│  6.80%│     43.01%│
+│        4│test    │ 2661377│  6.35%│     49.37%│
+│        5│push    │ 2068299│  4.94%│     54.30%│
+│        6│pop     │ 2022557│  4.83%│     59.13%│
+│        7│jne     │ 1810666│  4.32%│     63.46%│
+│        8│add     │ 1596786│  3.81%│     67.27%│
+│        9│xor     │ 1540722│  3.68%│     70.95%│
+│       10│lea     │ 1492439│  3.56%│     74.51%│
+│       11│jmp     │ 1056509│  2.52%│     77.03%│
+│       12│sub     │  914262│  2.18%│     79.22%│
+│       13│ret     │  874834│  2.09%│     81.30%│
+│       14│call    │  874753│  2.09%│     83.39%│
+│       15│movzx   │  858974│  2.05%│     85.44%│
+├─────────┼────────┼────────┼───────┼───────────┤
+│# 15/149 │        │        │       │           │
+│Sum (all)│        │41883708│100.00%│           │
+│Sum shown│        │35786957│ 85.44%│           │
+└─────────┴────────┴────────┴───────┴───────────┘</pre><p>
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>kernel_instr.histogram max = 15</b>
+┌─────────┬────────┬────────┬───────┬───────────┐
+│  Row #  │mnemonic│ Count  │Count% │Accumulated│
+│         │        │        │       │  Count%   │
+├─────────┼────────┼────────┼───────┼───────────┤
+│        1│mov     │ 8427494│ 37.31%│     37.31%│
+│        2│je      │ 1372749│  6.08%│     43.39%│
+│        3│push    │ 1362419│  6.03%│     49.42%│
+│        4│test    │ 1326411│  5.87%│     55.29%│
+│        5│pop     │ 1315206│  5.82%│     61.12%│
+│        6│cmp     │ 1227033│  5.43%│     66.55%│
+│        7│xor     │  910401│  4.03%│     70.58%│
+│        8│jne     │  868442│  3.84%│     74.42%│
+│        9│add     │  723691│  3.20%│     77.63%│
+│       10│lea     │  695604│  3.08%│     80.71%│
+│       11│call    │  616243│  2.73%│     83.44%│
+│       12│ret     │  597695│  2.65%│     86.08%│
+│       13│and     │  534859│  2.37%│     88.45%│
+│       14│sub     │  358369│  1.59%│     90.04%│
+│       15│jmp     │  268310│  1.19%│     91.23%│
+├─────────┼────────┼────────┼───────┼───────────┤
+│# 15/108 │        │        │       │           │
+│Sum (all)│        │22586736│100.00%│           │
+│Sum shown│        │20604926│ 91.23%│           │
+└─────────┴────────┴────────┴───────┴───────────┘</pre><p>
+</p><p>
+  <br>
+  </p><p>
+  
+  
+  
+  
+  
+  
+</p><p>
+  Here is another example of using instrumentation to show exception
+occurrences, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine.
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+  </p><p>
+</p><ul><li>Create the histogram tool and connect it to all processors.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>new-exception-histogram name = exc_hist -connect-all</b>
+[board.mb.cpu0.core[0][0] info] VMP not engaged. Reason: instrumentation enabled.
+Created exc_hist (connected to 1 processor)</pre><p>
+</p><p>
+</p><ul><li>Run the simulation to collect data from the providers.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>run 60 s</b></pre><p>
+</p><p>
+</p><ul><li>Display the resulting histogram.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>exc_hist.histogram</b>
+┌─────┬────────────────────────────┬─────┬───────┬───────────┐
+│Row #│         Exception          │Count│Count% │Accumulated│
+│     │                            │     │       │  Count%   │
+├─────┼────────────────────────────┼─────┼───────┼───────────┤
+│    1│Page_Fault_Exception        │ 7956│ 44.22%│     44.22%│
+│    2│Interrupt_64                │ 5312│ 29.52%│     73.74%│
+│    3│Interrupt_34                │ 2720│ 15.12%│     88.86%│
+│    4│Interrupt_35                │ 1535│  8.53%│     97.39%│
+│    5│Interrupt_236               │  314│  1.75%│     99.14%│
+│    6│Interrupt_48                │  112│  0.62%│     99.76%│
+│    7│General_Protection_Exception│   21│  0.12%│     99.88%│
+│    8│Interrupt_37                │   16│  0.09%│     99.97%│
+│    9│NMI                         │    4│  0.02%│     99.99%│
+│   10│Interrupt_40                │    1│  0.01%│     99.99%│
+│   11│Interrupt_39                │    1│  0.01%│    100.00%│
+├─────┼────────────────────────────┼─────┼───────┼───────────┤
+│Sum  │                            │17992│100.00%│           │
+└─────┴────────────────────────────┴─────┴───────┴───────────┘</pre><p>
+</p><p>
+  Source code for instrumentation tools are in
+  </p><pre class="jdocu_small">    src/extensions/instruction-histogram
+    src/extensions/exception-histogram
+    src/extensions/cpu-mode-filter
+  </pre><p>
+  in the Simics-Base package.  
+
+</p><h3 class="jdocu"><a name="Connecting-a-cache-model">2.8.5 Connecting a cache model</a></h3>
+<p>
+  
+</p><p>
+  
+  
+  
+  
+</p><p>
+  Let us now show a simple example of how to use simple cache model in
+Simics. By default, Simics does not model any cache system. It uses
+its own memory system to achieve high speed simulation and modeling a
+hardware cache model would only slow it down. However, via the
+instrumentation framework, the flow of memory operations coming from
+the processor can be captured, and this allows modelling caches.
+  </p><p>
+  Here is an example of using instrumentation to connect a simple
+cache model, when running
+the </p><pre class="jdocu_small">%simics%/targets/qsp-x86/firststeps.simics</pre><p> target
+machine.
+</p><p>
+</p><ul><li>Start Simics with this target. </li></ul>
+<pre class="jdocu_small">$ bin/simics targets/qsp-x86/firststeps.simics</pre><p>
+  </p><p>
+</p><ul><li>Create the cache tool and connect it to all processors.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>new-simple-cache-tool name = cachetool -connect-all</b>
+[board.mb.cpu0.core[0][0] info] VMP not engaged. Reason: instrumentation enabled.
+Created cachetool (connected to 1 provider)</pre><p>
+</p><p>
+</p><ul><li>Create caches on the processors.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>(cachetool.add-l1d-cache name = l1d line-size = 64 sets = 64 ways = 12<img alt="Line break" src="nextline.png">
+ -ip-read-prefetcher prefetch-additional = 1)</b>
+Created cache board.mb.cpu0.cache[0].l1d</pre><p>
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>(cachetool.add-l1i-cache name = l1i line-size = 64 sets = 64 ways = 8)</b>
+Created cache board.mb.cpu0.cache[0].l1i</pre><p>
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>(cachetool.add-l2-cache name = l2 line-size = 64 sets = 1024 ways = 20<img alt="Line break" src="nextline.png">
+ -prefetch-adjacent prefetch-additional = 4)</b>
+Created cache board.mb.cpu0.cache[0].l2</pre><p>
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>(cachetool.add-l3-cache name = l3 line-size = 64 sets = 8192 ways = 12)</b>
+Created cache board.mb.cpu0.l3</pre><p>
+  </p><p>
+</p><ul><li>Run the simulation.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>run 55 s</b></pre><p>
+</p><p>
+</p><ul><li>Display one of the cache statistics.</li></ul>
+<pre class="jdocu_small">simics&gt; <b>board.mb.cpu0.cache[0].l1d.print-statistics</b>
+┌─────┬───────────────────────────────────┬─────────┬─────┐
+│Row #│              Counter              │  Value  │  %  │
+├─────┼───────────────────────────────────┼─────────┼─────┤
+│    1│read accesses                      │699427620│     │
+│    2│read misses                        │  2905903│ 0.42│
+│    3│write accesses                     │432645847│     │
+│    4│write misses                       │  7196304│ 1.66│
+│    5│prefetch accesses                  │  6509721│     │
+│    6│prefetch misses                    │  4468886│68.65│
+│    7│prefetched lines used              │  2828455│43.45│
+│    8│evicted lines (total)              │ 14570325│     │
+│    9│evicted modified lines             │  7651899│52.52│
+│   10│entire cache flushes (invd, wbinvd)│        8│     │
+│   11│uncachable read accesses           │110513271│     │
+│   12│uncachable write accesses          │ 70608384│     │
+└─────┴───────────────────────────────────┴─────────┴─────┘</pre><p>
+</p><p>
+  
+  
+  
+  
+  
+  
+</p><p>
+</p><ul><li>As a comparison, if we do the same exercise when running
+the <pre class="jdocu_small">%simics%/targets/qsp-x86/qsp-client-core.simics</pre><p> target
+system, which has a more modern processor with 4 cores, we get the following statistics:</p></li></ul>
+<p>
+   
+  
+  
+  
+  
+  
+  </p><pre class="jdocu_small">simics&gt; <b>board.mb.cpu0.cache[0].l1d.print-statistics</b>
+    ┌─────┬───────────────────────────────────┬─────────┬─────┐
+│Row #│              Counter              │  Value  │  %  │
+├─────┼───────────────────────────────────┼─────────┼─────┤
+│    1│read accesses                      │651920234│     │
+│    2│read misses                        │  2659454│ 0.41│
+│    3│write accesses                     │432965032│     │
+│    4│write misses                       │  8850450│ 2.04│
+│    5│prefetch accesses                  │  5561939│     │
+│    6│prefetch misses                    │  3800816│68.34│
+│    7│prefetched lines used              │  2176319│39.13│
+│    8│prefetch instructions              │     1741│     │
+│    9│evicted lines (total)              │ 15309952│     │
+│   10│evicted modified lines             │  9257461│60.47│
+│   11│entire cache flushes (invd, wbinvd)│        8│     │
+│   12│uncachable read accesses           │ 56577895│     │
+│   13│uncachable write accesses          │ 39917361│     │
+└─────┴───────────────────────────────────┴─────────┴─────┘</pre><p>
+</p><p>
+  Source code for cache model is in
+  </p><pre class="jdocu_small">    src/extensions/simple-cache-tool
+  </pre><p>
+  in the Simics-Base package.
+
+
+</p><h2 class="jdocu"><a name="target-software-debugging">2.9 Debugging Target Software</a></h2>
+<p>
+
+</p><p>
+  Simics comes with a built-in command line debugger for debugging the target
+  software. This section describes how to get started with the Simics debugger.
+  We start of with and example of debugging a Linux kernel module, then go
+  through
+  </p><ul>
+    <li>how to set up and enable the debugger,</li>
+    <li>how to select debug contexts,</li>
+    <li>what debugger commands are available, and</li>
+    <li>how to break on a source line or function.</li>
+  </ul>
+<p>
+  To follow the examples in this section it is recommended to start Simics with
+  the following script:
+</p><p>
+  <code>%simics%/targets/qsp-x86/qsp-clear-linux-pcie-demo.simics</code>
+</p><p>
+  </p><h3 class="jdocu"><a name="sw-debug-example">2.9.1 Example of debugging a kernel module</a></h3>
+<p>
+  
+</p><p>
+  This example demonstrates how to debug a custom built kernel module. We use
+  the <code>simics-pcie-demo-driver</code> module, which is included in
+  the <code>QSP-x86</code> package. The example comes with both a kernel module
+  binary and source code for that.
+</p><p>
+  To locate the installation directory with the example files, run the
+  following command in Simics:
+  
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>lookup-file "%simics%/targets/qsp-x86/target-source/simics-pcie-demo-driver"</b></pre><p>
+</p><p>
+  In this example we use the Linux tracker. This tool, which is part of the OS
+  Awareness feature, allows keeping track of Linux tasks and processes. The
+  tracker can provide symbol mappings of kernel modules to the debugger, which
+  is the feature we will use in this example.
+</p><p>
+  </p><h4 class="jdocu"><a name="sw-debug-tracker-config">2.9.1.1 Configuring the Linux tracker</a></h4>
+<p>
+  
+</p><p>
+  This section describes the steps needed to configure the Linux tracker for
+  kernel module debugging.
+</p><p>
+  
+  
+  
+  
+  
+  
+</p><p>
+  
+  
+  
+  
+</p><p>
+  Create a target machine and start simulation:
+  </p><pre class="jdocu_small">    simics&gt; <b>run-command-file targets/qsp-x86/qsp-clear-linux-pcie-demo.simics</b>
+    simics&gt; <b>run</b>
+    running&gt;
+  </pre><p>
+</p><p>
+  Let the simulation run until Linux has booted, and the kernel module has been
+  inserted. The simulation is stopped automatically by the script at this
+  point.
+</p><p>
+  Once the system has booted, we can configure the Linux tracker using symbol
+  information for the current kernel. The tracker accepts symbols in two
+  formats.
+  </p><ul>
+    <li>Either the kernel image as an ELF binary with debug information,
+      usually named <code>vmlinux</code>, or</li>
+    <li>plain text symbols such as <code>/proc/kallsyms</code> from the target
+      system or <code>System.map</code> from the kernel compilation.</li>
+  </ul>
+<p>
+  In this example we will extract <code>kallsyms</code> from the target system
+  and use that as symbols.
+</p><p>
+  
+  
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>matic0.download /proc/kallsyms cl-kallsyms</b>
+matic0:job 5 (download kallsyms)
+
+simics&gt; <b>matic0.run-until-job</b>
+matic0:job 5 (download kallsyms) finished
+
+<span class="jdocu_smaller">simics&gt; <b>machine.software.tracker.detect-parameters symbol-file = cl-kallsyms<img alt="Line break" src="nextline.png">
+ -load param-file = cl.params kernel-modules = TRUE</b>
+[machine.software.tracker.tracker_obj info] Detecting settings using 2 processor(s)
+[machine.software.tracker.tracker_obj info] Successfully detected parameters
+Saved autodetected parameters to cl.params</span>
+
+simics&gt; <b>machine.software.enable-tracker</b>
+OSA control enabled.</pre><p>
+</p><p>
+  The next time we use the Linux tracker with the same kernel we can re-use the
+  same parameters again, by loading the detected parameters using
+  the <b>load-parameters</b> command followed by <b>enable-tracker</b>.
+</p><p>
+  In order for kernel module debugging to work, a path where to find kernel
+  modules on local disk must be set:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>machine.software.tracker.set-kernel-modules-path<img alt="Line break" src="nextline.png">
+ path = "%simics%/targets/qsp-x86/target-source/simics-pcie-demo-driver"</b></pre><p>
+</p><p>
+  The kernel module binaries on local disk must match ones running in the
+  target kernel.
+
+  </p><h4 class="jdocu"><a name="sw-debug-path-maps">2.9.1.2 Adding path maps</a></h4>
+<p>
+</p><p>
+  
+</p><p>
+  The kernel module was built under <code>/root/swbuild</code>, but the source
+  files on local host are located under
+  <code>targets/qsp-x86/target-source</code>. To allow the debugger to find the
+  source files, set the following path map:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>add-pathmap-entry /root/swbuild/<img alt="Line break" src="nextline.png">
+ "%simics%/targets/qsp-x86/target-source/"</b></pre><p>
+
+  </p><h4 class="jdocu"><a name="Debugging">2.9.1.3 Debugging</a></h4>
+<p>
+</p><p>
+  
+</p><p>
+  Enable the debugger:
+  </p><pre class="jdocu_small">simics&gt; <b>enable-debugger</b>
+Debugger enabled.</pre><p>
+</p><p>
+  Set a breakpoint on a function in the module. This will trigger once the
+  drivers file device gets some input.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>bp.source_location.break chari_write -once</b>
+Breakpoint 6: 0x6 (planted)</pre><p>
+</p><p>
+  Start the simulation:
+  </p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>run</b></pre><p>
+</p><p>
+  Then output a string to the file device by writing to it from the Linux
+  shell, using the serial console:
+</p><p>
+  </p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>sudo bash -c 'echo 01 &gt; /dev/simics_pcie_demo_driver'</b></pre><p>
+  
+</p><p>
+  The simulation should stop with the following output:
+</p><p>
+  </p><pre class="jdocu_small">[tcf] Breakpoint 6 on execution in context machine.mb.cpu0.core[0][0]</pre><p>
+</p><p>
+  At this point the current stack frame can be checked using
+  the <b>frame</b> command. We can see that the simulation stopped at
+  <b><i>chari_write</i></b> and that the <i>buffer</i> contains <code>"01"</code>
+  as written to the device.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>frame</b><span class="jdocu_smaller">
+#0 0xffffffffc019459c in chari_write(filep=(struct file *) 0xffff8881f01f8300, buffer=(const char *) 0x21664d0 "01\n", len=3, offset=(loff_t *) 0xffffc90001383ef0) at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:365</span>
+
+simics&gt; <b>list</b><span class="jdocu_smaller">
+     363  
+     364  #ifdef DRIVER_VERBOSE
+-&gt;   365       pr_info(KBUILD_MODNAME
+     366  	        ": chari_write called, with %d characters of input!\n", (int)len);
+     367  #endif</span></pre><p>
+</p><p>
+  Set a breakpoint on <em>line 370</em> and advance the simulation to that
+  point:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>bp.source_line.break<img alt="Line break" src="nextline.png">
+ filename = "simics-pcie-demo-driver.c" line-number = 370 -once</b>
+Breakpoint 7: 0x7 (planted)
+
+simics&gt; <b>run</b><span class="jdocu_smaller">
+[tcf] Breakpoint 7 on execution in context machine.mb.cpu0.core[0][0]
+chari_write(filep, buffer=(const char *) 0x21664d0 "01\n", len=3, offset)<img alt="Line break" src="nextline.png">
+ at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:370
+370	    while(charsleft &gt;= 2) {</span></pre><p>
+</p><p>
+  Stepping in the code is done with the <b>step-into</b>,
+  <b>step-over</b> and <b>step-out</b> commands.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>step-into</b><span class="jdocu_smaller">
+chari_write(filep, buffer=(const char *) 0x21664d0 "01\n", len=3, offset)<img alt="Line break" src="nextline.png">
+ at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:372
+372	        switch(buffer[0]) {</span></pre><p>
+</p><p>
+  Note that when step is completed the stack frame and current line will be
+  displayed. As the input was <code>"01"</code> the first switch statement should
+  end up at <code>'0'</code> and the second at <code>'1'</code>.
+</p><p>
+  
+  </p><pre class="jdocu_small">simics&gt; <b>step-into</b>
+373                 case '0': led_no=0; break;
+simics&gt; <b>step-into</b>
+386             switch(buffer[1]) {
+simics&gt; <b>step-into</b>
+388                 case '1': brightness=1; break;
+simics&gt; <b>step-into</b>
+396             hw_update_led_state(led_no,brightness);
+simics&gt; <b>step-into</b>
+hw_update_led_state(led_no=0, brightness=1)
+ at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:146
+    146             if( (led_no&lt;0) || (led_no&gt;5)) {</pre><p>
+
+  The program enters another stack frame. Run <b>stack-trace</b> to see the
+  current stack trace:
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>stack-trace maxdepth = 2</b><span class="jdocu_smaller">
+#0 0xffffffffc01941a0 in hw_update_led_state(led_no=0, brightness=1)<img alt="Line break" src="nextline.png">
+ at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:146
+#1 0xffffffffc019465d in chari_write(filep, buffer=(const char *) 0x21664d0 "01\n", len=3, offset)<img alt="Line break" src="nextline.png">
+ at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:396</span></pre><p>
+</p><p>
+  Inspect symbols in the current frame with the <b>sym-value</b>
+  and <b>sym-type</b> commands:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>sym-value brightness</b>
+1
+simics&gt; <b>sym-type brightness</b>
+int</pre><p>
+</p><p>
+  Change symbol values using the <b>sym-write</b> command:
+  </p><pre class="jdocu_small">simics&gt; <b>sym-write brightness 0</b>
+brightness = 0</pre><p>
+</p><p>
+  Step out to return to the outer function, <b><i>chari_write</i></b>:
+  </p><pre class="jdocu_small">simics&gt; <b>step-out</b>
+chari_write(filep, buffer=(const char *) 0xfab4d0 "01\n", len=3, offset)<img alt="Line break" src="nextline.png">
+ at /root/swbuild/simics-pcie-demo-driver/simics-pcie-demo-driver.c:400
+400	        buffer    += 2;</pre><p>
+
+
+</p><p>
+  Now step to the end of <b><i>chari_write</i></b>. The while loop should complete
+  after the first iteration.
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>step-into</b>
+370	    while(charsleft &gt;= 2) {
+simics&gt; <b>step-into</b>
+403	    return len;</pre><p>
+
+  We check the return value <i>len</i>, before returning, and see that the
+  function claims that 3 bytes have been consumed.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>sym-value len</b>
+3</pre><p>
+</p><p>
+  </p><div class="note">
+<b>Note:</b>
+The kernel module used in this example is compiled with some
+  optimizations, meaning that some variables are optimized out and some code
+  paths can appear strange when stepping.</div>
+
+  <h3 class="jdocu"><a name="sw-debug-setup">2.9.2 Setting up and enabling the debugger</a></h3>
+<p>
+  
+  
+  
+</p><p>
+  The first step in order to use the debugger is to enable it:
+  </p><pre class="jdocu_small">simics&gt; <b>enable-debugger</b></pre><p>
+</p><p>
+  Then symbol files, with debug information, for the target software need to be
+  added in order for debugging to work.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>add-symbol-file &lt;binary to debug&gt;</b></pre><p>
+  </p><p>
+  add-symbol-file "%simics%/targets/qsp-x86/images/debug_example"
+</p><p>
+  </p><div class="note">
+<b>Note:</b>
+OS Awareness trackers can provide symbol files to the debugger instead
+    of having to add them using the command.</div>In case the source files are not present in the same location as they were
+  compiled, a path map is needed for the debugger to locate the source:
+<p>
+  </p><pre class="jdocu_small">simics&gt; <b>add-pathmap-entry &lt;compilation path&gt; &lt;local disk path&gt;</b></pre><p>
+  </p><p>
+  add-pathmap-entry /tmp .
+</p><p>
+  When the debugger is enabled and the simulations stops the current stack
+  frame will be displayed, under the condition that there is a valid symbol
+  file added for the current debug context and address.
+
+  </p><h3 class="jdocu"><a name="sw-debug-contexts">2.9.3 Debug Contexts</a></h3>
+<p>
+</p><p>
+  
+</p><p>
+  A <em>debug context</em> represents something that can be debugged, such as:
+  </p><ul>
+    <li>a hardware concept, like a processor,</li>
+    <li>a process, or</li>
+    <li>a thread or similar operating system concept.</li>
+  </ul>
+<p>
+  The <b>debug-context</b> command can be used to see current debug context
+  or specify a different one.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>debug-context</b>
+dbg0 (the x86QSP1 machine.mb.cpu0.core[0][0])
+
+simics&gt; <b>debug-context object = "machine.mb.cpu0.core[1][0]"</b>
+dbg1 (the x86QSP1 machine.mb.cpu0.core[1][0])</pre><p>
+</p><p>
+  To see available debug context, use the <b>list-debug-contexts</b>
+  command, which optionally can take <i>context-query</i> as argument.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>list-debug-contexts</b>
+Fully Qualified Name        | Fully Qualified Name
+----------------------------+---------------------------
+/machine                    | /machine/mb.cpu0.mem[0][0]
+/machine/mb.cpu0.core[0][0] | /machine/mb.cpu0.mem[1][0]
+/machine/mb.cpu0.core[1][0] | </pre><p>
+</p><p>
+  Th <i>context-query</i> argument can be used to match a subset of
+  contexts. To list contexts directly under root:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>list-debug-contexts context-query="/*"</b>
+Fully Qualified Name
+--------------------
+/machine</pre><p>
+</p><p>
+  To match specific processor:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>list-debug-contexts context-query="/machine/'mb.cpu0.core[1][0]'"</b>
+Fully Qualified Name
+---------------------------
+/machine/mb.cpu0.core[1][0]</pre><p>
+</p><p>
+  A <em>context query</em> is a method to specify a subset of debug contexts,
+  by specifying context properties and what values to match. The default
+  property is <em>name</em>.
+</p><p>
+  The forward slashes in the context names are separators. A query consists of
+  a sequence of parts separated by forward slashes. Two wildcards
+  exist, <em>*</em> and <em>**</em>, where one asterisk is used to match any
+  context and two asterisks matches any sequence of contexts.
+</p><p>
+  Many debugger related commands, such as <b>add-symbol-file</b>
+  and <b>add-pathmap-entry</b>, take <i>context-query</i> as an
+  argument to limit what contexts it applies to. Leaving the argument out,
+  means matching all possible debug contexts.
+</p><p>
+  As example, for a symbol file to only apply for a specific processor then
+  <b>add-symbol-file</b> should be called with the <i>context-query</i>
+  argument to match the processor name.
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>add-symbol-file context-query="/machine/'mb.cpu0.core[1][0]'"<img alt="Line break" src="nextline.png">
+ &lt;symbol file&gt;</b></pre><p>
+  </p><p>
+  
+</p><p>
+  </p><div class="note">
+<b>Note:</b>
+Extra quotation is added around the processor name. This is needed when
+    the context name contains special characters, such as dots and
+    brackets.</div>
+  <h3 class="jdocu"><a name="Debugger-commands">2.9.4 Debugger commands</a></h3>
+<p>
+  
+</p><p>
+  Simics has several debugger commands for investigating the current state,
+  most of them start with the <b>sym-</b> prefix. Here follows some
+  examples of debugger commands:
+  </p><dl><dt id="dt:sym-value"><b>sym-value</b></dt><dd>Evaluate an expression in the current stack frame, such as getting the
+      value of a variable.</dd><dt id="dt:sym-source"><b>sym-source</b></dt><dd>Get the source file and line for an address or a function.</dd><dt id="dt:sym-function"><b>sym-function</b></dt><dd>Get the function for an address.</dd><dt id="dt:sym-address"><b>sym-address</b></dt><dd>Get the address of a line or symbol.</dd><dt id="dt:stack-trace"><b>stack-trace</b></dt><dd>Display the current stack trace with addresses, functions and source
+      lines.</dd><dt id="dt:frame"><b>frame</b></dt><dd>Select or display the current stack frame.</dd><dt id="dt:up-down"><b>up, down</b></dt><dd>Moves the current stack frame up or down one or more levels.</dd><dt id="dt:list"><b>list</b></dt><dd>Lists source code, defaults to showing source at current location.</dd></dl><p>Simics provides help for all of its commands. It is a good idea to use the
+  <b>help</b> command with the commands to get details and options for the
+  commands.
+
+  </p><h3 class="jdocu"><a name="Breaking-on-a-source-line-or-function">2.9.5 Breaking on a source line or function</a></h3>
+<p>
+  
+</p><p>
+  It is possible to stop the simulation when a specific source line or function
+  is hit. To set a breakpoint on a source line use the following command:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>bp.source_line.break filename = foo.c line-number = 10</b></pre><p>
+</p><p>
+  And in a similar way for a function:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>bp.source_location.break foo</b></pre><p>
+</p><p>
+  After setting such breakpoints, the simulation will stop once the source
+  line <code>foo.c:10</code> or the function <b><i>foo</i></b> is hit.
+</p><p>
+
+  </p><h3 class="jdocu"><a name="Debugging-Summary">2.9.6 Debugging Summary</a></h3>
+<p>
+  
+</p><p>
+  This concludes this tutorial, in which we have learnt how to use the Simics
+  command line debugger to
+  </p><ul>
+    <li>break on a function or source line,</li>
+    <li>step in source code,</li>
+    <li>show stack traces,</li>
+    <li>and investigate and update variables.</li>
+  </ul>
+
+<p>
+
+</p><h2 class="jdocu"><a name="Code-Coverage-of-Target-Software">2.10 Code Coverage of Target Software</a></h2>
+<p>
+  
+</p><p>
+  Simics provides a tool for code coverage using binaries with debug
+  information.
+</p><p>
+  This section will describe how to get started with Simics code coverage
+  feature. It will start with an example of code coverage for a kernel module,
+  then provide info about
+  </p><ul>
+    <li>how to set up code coverage,</li>
+    <li>collecting coverage,</li>
+    <li>generating reports, and</li>
+    <li>combining code coverage from multiple runs.</li>
+  </ul>
+<p>
+  </p><h3 class="jdocu"><a name="Code-Coverage-Example">2.10.1 Code Coverage Example</a></h3>
+<p>
+  
+</p><p>
+  </p><h4 class="jdocu"><a name="Setup">2.10.1.1 Setup</a></h4>
+<p>
+</p><p>
+  
+</p><p>
+  This section reuses the setup from <a class="reference" href="#sw-debug-example">2.9.1</a> to
+  demonstrate code coverage of a kernel module. The tracker parameters
+  file, <code>cl.params</code>, from that example is needed to run this
+  example.
+</p><p>
+  
+  </p><p>
+  
+  
+  
+  
+  
+  
+  Start Simics with the same script as before:
+</p><p>
+  <code>%simics%/targets/qsp-x86/qsp-clear-linux-pcie-demo.simics</code>
+  
+</p><p>
+  Then run the following commands from the previous example:
+  </p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>machine.software.load-parameters cl.params</b>
+
+simics&gt; <b>machine.software.enable-tracker</b>
+OSA control enabled.
+
+simics&gt; <b>machine.software.tracker.set-kernel-modules-path<img alt="Line break" src="nextline.png">
+ path = "%simics%/targets/qsp-x86/target-source/simics-pcie-demo-driver"</b>
+
+simics&gt; <b>add-pathmap-entry "/root/swbuild"<img alt="Line break" src="nextline.png">
+ "%simics%/targets/qsp-x86/target-source"</b></pre><p>
+
+  </p><h4 class="jdocu"><a name="cc-example-collecting">2.10.1.2 Collecting Code Coverage</a></h4>
+<p>
+</p><p>
+  
+</p><p>
+  Before starting the simulation, start collecting coverage for all Linux
+  tracker Kernel nodes:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>collect-coverage context-query="/**/Kernel/**"<img alt="Line break" src="nextline.png">
+ name="kernel_module" -running</b>
+coverage_kernelmodule_0 is collecting coverage for /**/Kernel/**</pre><p>
+</p><p>
+  Start the simulation and run until the system is booted and the simulation
+  stops. Note that the simulation is slower when the Linux tracker and code
+  coverage is used.
+  </p><p>
+  
+  
+  
+  </p><pre class="jdocu_small">simics&gt; <b>run</b>
+  ...
+  Autologin as "simics" was done on "machine.mb.sb.com[0] - serial console".
+  Setting new inspection object: machine.mb.cpu0.core[1][0]
+simics&gt; </pre><p>
+</p><p>
+  This script automatically runs <b>insmod</b> when the Linux shell is
+  reached and then stops the simulation.
+</p><p>
+  The output from the serial console should be:
+  </p><pre class="jdocu_small">simics@cl-qsp ~ $ sudo insmod simics-pcie-demo-driver.ko
+simics@cl-qsp ~ $ </pre><p>
+</p><p>
+  At this point the driver should be loaded. Output a HTML report for collected
+  coverage up to this point of time:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>coverage_kernelmodule_0.html-report kernel-module-loaded-html<img alt="Line break" src="nextline.png">
+ report-name = "Kernel module loaded"</b>
+Saving HTML report to: kernel-module-loaded-html
+Report contains 29 errors</pre><p>
+</p><p>
+  </p><div class="note">
+<b>Note:</b>
+The errors are because of missing binaries for other kernel modules
+    that the tracker has found. More detailed information about errors can be
+    found in the HTML report.</div>Before we examine the report we will input a string to the drivers character
+  device to see how that changes coverage.
+<p>
+  Start the simulation:
+</p><pre class="jdocu_small">simics&gt; <b>run</b></pre><p>
+</p><p>
+  Enter the following in the serial console and wait for the shell to return to
+  prompt:
+  </p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>sudo bash -c 'echo 21 &gt; /dev/simics_pcie_demo_driver'</b>
+simics@cl-qsp ~ $ </pre><p>
+  
+  Stop the simulation again:
+  </p><pre class="jdocu_small">running&gt; <b>stop</b></pre><p>
+</p><p>
+  Then output another HTML report, using the same code coverage object:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>coverage_kernelmodule_0.html-report kernel-module-after-input-html<img alt="Line break" src="nextline.png">
+ report-name="Kernel module after input"</b>
+Saving HTML report to: kernel-module-after-input-html
+Report contains 29 errors</pre><p>
+</p><p>
+  Before closing Simics we will also save a raw report for use in a later
+  example:
+  </p><pre class="jdocu_small">simics&gt; <b>coverage_kernelmodule_0.save kernel-module-after-input.raw</b></pre><p>
+</p><p>
+  Now it is time to examine the two reports. We open the reports
+  <code>kernel-module-loaded-html/index.html</code>
+  and <code>kernel-module-after-input-html/index.html</code> using a web
+  browser.
+</p><p>
+  We should see the following output in the first report:
+  </p><div style="text-align: center">
+    <img alt="" src="cc-loaded-src-summary.png">
+  </div>
+<p>
+  In the second report we can see that the lines covered increased
+  by <em>one</em> line, when the string <code>"21"</code> was written to the
+  device.
+</p><p>
+  </p><div style="text-align: center">
+    <img alt="" src="cc-after-input-src-summary.png">
+  </div>
+<p>
+  The report shows the number of lines executed and the amount executable, for
+  the whole binary and per source directory. The most interesting directory
+  is <code>simics-pcie-demo-driver</code>. This contains the source of the
+  driver. We can follow the link to see the source files under that directory.
+</p><p>
+   </p><div style="text-align: center">
+    <img alt="" src="cc-loaded-src-dir.png">
+  </div>
+<p>
+   We can follow the links per source file to get detailed information about
+   coverage for a certain source file. That source file pages has the following
+   color codings.
+   </p><ul>
+     <li>Green - Executed line</li>
+     <li>Red - Executable line, but not executed</li>
+     <li>White - Non-executable line, such as comment or line that is optimized
+       out.</li>
+   </ul>
+<p>
+   The left column shows the line number of the source file.
+</p><p>
+   In the first report we see for example that <b><i>hw_update_led_state</i></b>,
+   on line <em>136</em>, executed and that the <i>led_no</i> values are
+   inside the expected range. We can see that the assignment
+   of <i>led_offsets</i> was optimized out. For the lines with
+   the <b><i>pr_err</i></b> function call we see that only the first line is
+   marked as executable. That is commonly how multi-line function calls will be
+   displayed as only the first line is considered executable.
+</p><p>
+   </p><div style="text-align: center">
+     <img alt="" src="cc-hw-update-led-state.png">
+   </div>
+<p>
+   We can compare the two saved HTML reports to find what extra line was run
+   when we wrote the string <code>"21"</code> to the device driver. The difference
+   is in the <b><i>chari_write</i></b> function.
+</p><p>
+   </p><div style="text-align: center">
+     <img alt="" src="cc-loaded-switch-1.png">
+<p>
+     <em>chari_write first switch statement, <b>before</b> writing 21 to
+       device.</em>
+   </p></div>
+<p>
+   </p><div style="text-align: center">
+     <img alt="" src="cc-loaded-switch-2.png">
+<p>
+     <em>chari_write second switch statement, <b>before</b> writing 21 to
+       device.</em>
+   </p></div>
+<p>
+   </p><div style="text-align: center">
+     <img alt="" src="cc-after-input-switch-1.png">
+<p>
+     <em>chari_write first switch statement, <b>after</b> writing 21 to
+       device.</em>
+   </p></div>
+<p>
+   We see that the the case <em>2</em> has run in the first switch statement.
+   This matches the first character of the input. All other lines in the
+   report are unchanged after the input.
+</p><p>
+   </p><div class="note">
+<b>Note:</b>
+The driver had already received an input <code>"01"</code> in the first
+     report. The script we use is written to test the driver by inputting that
+     value to the device.</div><div class="note">
+<b>Note:</b>
+There are a lot of <em>unknown addresses</em> under a tab in the HTML
+     report. These correspond to instructions that run where there is no
+     mapping added. In this example every executed address that is not part of
+     a kernel module, such as boot loader and main kernel code, will be
+     unknown.</div>
+
+  <h3 class="jdocu"><a name="Setting-up-code-coverage">2.10.2 Setting up code coverage</a></h3>
+<p>
+  
+</p><p>
+  In order for code coverage to work symbol files have to be added in the same
+  way as for debugging, see <a class="reference" href="#sw-debug-setup">2.9.2</a>. Either use
+  the <b>add-symbol-file</b> command or configure a tracker to add symbol
+  files for use with code coverage. In the example above the Linux tracker
+  was configured to add symbol files for kernel modules.
+</p><p>
+
+  </p><h3 class="jdocu"><a name="Collecting-coverage">2.10.3 Collecting coverage</a></h3>
+<p>
+  
+  
+  </p><p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </p><p>
+  
+  To start collecting code coverage use the following command:
+</p><p>
+  </p><pre class="jdocu_small">simics&gt; <b>collect-coverage context-query=&lt;query&gt; name=mycov</b></pre><p>
+  
+  </p><p>
+  
+  
+</p><p>
+  This will return a code coverage object which is used for outputting
+  reports. Once collection is started, run the simulation for the
+  desired time to collect code coverage for. Then output a report
+  output. For information about the <i>context-query</i> argument see
+  <a class="reference" href="#sw-debug-contexts">2.9.3</a>.
+</p><p>
+
+  </p><h3 class="jdocu"><a name="Outputting-reports">2.10.4 Outputting reports</a></h3>
+<p>
+  
+</p><p>
+  The code coverage object returned from collect-coverage has a few commands
+  for outputting reports in different formats.
+</p><p>
+  </p><ul>
+    <li><b>&lt;code_coverage&gt;.html-report</b>
+      <pre class="jdocu_small">simics&gt; <b>coverage_mycov_0.html-report &lt;output dir&gt;</b></pre><p>
+</p><p>
+      Outputs a HTML report with index under <code>&lt;output
+      dir&gt;/index.html</code>. The main page contains source code coverage in
+      total and for each directory that contains source files. Coverage of each
+      source file is output with executable and executed lines, under the
+      circumstance that the source files can be found on the host.
+</p><p>
+      There is also a <em>Disassembly</em> page that displays each symbol file
+      and its instruction level coverage. Instruction coverage is also
+      displayed per function in the module. We not go into details about
+      the <em>Disassembly</em> page in this tutorial.
+    </p></li>
+
+    <li><b>&lt;code_coverage&gt;.lcov-output</b>
+      <pre class="jdocu_small">simics&gt; <b>coverage_mycov_0.lcov-output &lt;output dir&gt;</b></pre><p>
+</p><p>
+      Outputs the report in <em>LCOV</em> tracefile format, one per module, in
+      the specified directory. The output is compatible with the format that is
+      output by the <b>lcov</b> tool for <em>GNU GCOV</em> code
+      coverage. For example HTML reports can then be generated using
+      the <b>genhtml</b> tool.
+    </p></li>
+
+    <li><b>&lt;code_coverage&gt;.save</b>
+      <pre class="jdocu_small">simics&gt; <b>coverage_mycov_0.save &lt;raw report&gt;</b></pre><p> 
+</p><p>
+      Outputs the report in a raw format. This can later be loaded using
+      the <b>load-coverage</b> command or used for combining reports with
+      the <b>&lt;code_coverage&gt;.add-report</b> command. We will not go
+      into details about the raw format here.
+    </p></li>
+  </ul>
+
+  <h3 class="jdocu"><a name="Combining-Code-Coverage-Reports">2.10.5 Combining Code Coverage Reports</a></h3>
+<p>
+  
+  
+  </p><p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </p><p>
+  
+  
+</p><p>
+  Simics code coverage allows combining two or more raw reports into one
+  report. This allows running the same binaries, but with different code paths,
+  to get a full picture of the combined coverage. For example combining code
+  coverage of many tests in a suite.
+</p><p>
+  We will continue the earlier example (<a class="reference" href="#cc-example-collecting">2.10.1.2</a>),
+  were we saved a raw report named <code>kernel-module-after-input</code>.
+</p><p>
+  Restart Simics and repeat the same steps as in
+  <a class="reference" href="#cc-example-collecting">2.10.1.2</a>, with the exception that the string that
+  is passed to the device this time should be <code>"a0"</code>.
+</p><p>
+  Run the simulation until the system is booted, the kernel module is inserted
+  and the simulation stops. Then start the simulation again:
+  </p><pre class="jdocu_small">simics&gt; <b>run</b></pre><p>
+</p><p>
+  Enter the following in the serial console:
+  </p><pre class="jdocu_small">simics@cl-qsp ~ $ <b>sudo bash -c 'echo a0 &gt; /dev/simics_pcie_demo_driver'\n</b>
+simics@cl-qsp ~ $ </pre><p>
+  
+</p><p>
+  Once the Linux shell reaches prompt, stop the simulation:
+  </p><pre class="jdocu_small">running&gt; <b>stop</b></pre><p>
+</p><p>
+  Then add the previous report using the <b>add-report</b> command:
+  </p><pre class="jdocu_small">simics&gt; <b>coverage_kernelmodule_0.add-report kernel-module-after-input.raw</b>
+Adding report from input file: kernel-module-after-input.raw</pre><p>
+</p><p>
+  Before outputting the combined report to HTML we should combine mappings that
+  match the same symbol file, but are loaded at different addresses. Unless
+  the simulation target is fully deterministic, it is likely that the kernel
+  modules are loaded at a different addresses the second run.
+  </p><pre class="jdocu_small">simics&gt; <b>coverage_kernelmodule_0.stop</b>
+
+simics&gt; <b>coverage_kernelmodule_0.combine-mappings</b>
+26 mappings were removed</pre><p>
+  </p><p>
+
+  Output a new HTML report with the combined coverage.
+  </p><pre class="jdocu_small">simics&gt; <b>coverage_kernelmodule_0.html-report kernel-module-combined-html<img alt="Line break" src="nextline.png">
+ report-name="Kernel module combined"</b>
+Saving HTML report to: kernel-module-combined-html</pre><p>
+</p><p>
+  Check the summary in the report to see that coverage has increased by <em>two
+  lines</em> from when only <code>"21"</code> had been input.
+  </p><div style="text-align: center">
+    <img alt="" src="cc-combined-src-summary.png">
+  </div>
+<p>
+  Check the source code coverage of the <b><i>write_chari</i></b> function to see
+  that the the two switch statements have one more executed line each.
+</p><p>
+  </p><div style="text-align: center">
+    <img alt="" src="cc-combined-switch-1.png"><br>
+    <em>chari_write first switch statement, <b>after</b> combining reports.</em>
+  </div>
+<p>
+  </p><div style="text-align: center">
+    <img alt="" src="cc-combined-switch-2.png"><br>
+    <em>chari_write second switch statement, <b>after</b> combining
+      reports.</em>
+  </div>
+<p>
+  To increase coverage we can repeat the example with varied inputs.
+</p><p>
+  We can choose to start collecting coverage after the system had been booted
+  to get faster boot time, as driver initialization should be the same between
+  runs. A third option is to start Simics with a checkpoint with the booted
+  system and driver loaded, then start collecting at that point.
+
+  </p><h3 class="jdocu"><a name="Code-Coverage-Summary">2.10.6 Code Coverage Summary</a></h3>
+<p>
+  
+</p><p>
+  That concludes the code coverage tutorial, where we have learnt how to
+  </p><ul>
+    <li>use the Linux tracker to provide symbol files to code coverage,</li>
+    <li>start collecting coverage,</li>
+    <li>output code coverage reports in different formats,</li>
+    <li>interpret the HTML report, and</li>
+    <li>combine reports from multiple runs.</li>
+  </ul>
+
+
+<div class=chain>
+<a href="introduction.html" class="previous">1 Introduction</a>
+<a href="next-steps.html" class="next">3 Next Steps</a>
+</div>

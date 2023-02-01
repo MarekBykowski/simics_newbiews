@@ -1,0 +1,87 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>state-assertion</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sr_ticks_connection.html" class="previous">sr_ticks_connection</a>
+<a href="__rm_class_static_link_connector.html" class="next">static_link_connector</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_state-assertion">state-assertion</a></h1>
+<p>
+
+<a name="state-assertion"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_state-assertion">state-assertion</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <i>state-assertion</i> extension provides the possibility to record the state of various devices at regular interval, to be able to compare it to a later run. <br> When creating trace assertion information, the general scheme is the following:<br>- use state-assertion-create-file to open the file where the data will be saved. This will also create a state-assertion object.<br>- use &lt;state-assertion&gt;.add to specify the objects to assert as well as the amount of steps between each assertion.<br>- use &lt;state-assertion&gt;.start to begin the assertion. From now on, continuing the simulation will record information into the file.<br>- use &lt;state-assertion&gt;.stop to empty the buffers and close the file.<br>When using state-assertion information to compare against the current run, you should:<br>- use state-assertion-open-file to open the file containing the state information you want to use.<br>- use &lt;state-assertion&gt;.start when you want to begin the comparison. The comparison is stopped automatically when no data is available. If states differ, the simulation is stopped and the differences are displayed.<br>It is also possible to connect directly two Simics instead of using a file, with the functions state-assertion-receive and state-assertion-connect. The recording/comparison is then executed directly.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, snoop_memory, timing_model</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:add"><b><i>add</i></b></dt><p><a name="__rm_attribute_state-assertion_add"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[oiiso|n]</code>.
+This is a pseudo-attribute that should not be used directly. It adds an object to the state assertion queue.</dd></dl><p></p><dl><dt id="dt:addmemlis"><b><i>addmemlis</i></b></dt><p><a name="__rm_attribute_state-assertion_addmemlis"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[s]</code>.
+This is a pseudo-attribute that should not be used directly. It adds a memory listener in the state-assertion queue.</dd></dl><p></p><dl><dt id="dt:create"><b><i>create</i></b></dt><p><a name="__rm_attribute_state-assertion_create"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[sisiii]</code>.
+This is a pseudo-attribute that should not be used directly. It creates a state assertion file for recording.</dd></dl><p></p><dl><dt id="dt:fforward"><b><i>fforward</i></b></dt><p><a name="__rm_attribute_state-assertion_fforward"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[si]</code>.
+This is a pseudo-attribute that should not be used directly. It fast-forwards the assertion process.</dd></dl><p></p><dl><dt id="dt:flush"><b><i>flush</i></b></dt><p><a name="__rm_attribute_state-assertion_flush"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+Set attribute to flush buffered output (value should be 1).</dd></dl><p></p><dl><dt id="dt:info"><b><i>info</i></b></dt><p><a name="__rm_attribute_state-assertion_info"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+This is a pseudo-attribute that should not be used directly. It provides information on the objects asserted.</dd></dl><p></p><dl><dt id="dt:lsize"><b><i>lsize</i></b></dt><p><a name="__rm_attribute_state-assertion_lsize"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+This is a fake line size for the memory hierarchy system.</dd></dl><p></p><dl><dt id="dt:manual_handler"><b><i>manual_handler</i></b></dt><p><a name="__rm_attribute_state-assertion_manual_handler"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>object</code>.
+When this attribute is set, state-assertion reacts as if an event had occur for a specific object.</dd></dl><p></p><dl><dt id="dt:object_remap"><b><i>object_remap</i></b></dt><p><a name="__rm_attribute_state-assertion_object_remap"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>[[so]*]</code>.
+This attribute controls remapping of objects. Each sublist contains one string with the name of an object in the trace we are asserting against and the other element is the corresponding object in the current configuration.</dd></dl><p></p><dl><dt id="dt:open"><b><i>open</i></b></dt><p><a name="__rm_attribute_state-assertion_open"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[siii]</code>.
+This is a pseudo-attribute that should not be used directly. It creates a state assertion file for recording.</dd></dl><p></p><dl><dt id="dt:start"><b><i>start</i></b></dt><p><a name="__rm_attribute_state-assertion_start"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+This is a pseudo-attribute that should not be used directly. It starts the state assertion.</dd></dl><p></p><dl><dt id="dt:status"><b><i>status</i></b></dt><p><a name="__rm_attribute_state-assertion_status"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+This is a pseudo-attribute that should not be used directly. It provides runtime information on the assertion process.</dd></dl><p></p><dl><dt id="dt:stop"><b><i>stop</i></b></dt><p><a name="__rm_attribute_state-assertion_stop"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+This is a pseudo-attribute that should not be used directly. It stops the assertion process.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.add">add</a></b></td><td class="jdocu_noborder">add an object to be asserted</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.add-mem-lis">add-mem-lis</a></b></td><td class="jdocu_noborder">add a memory listener on the specified memory space</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.fforward">fforward</a></b></td><td class="jdocu_noborder">fast-forward a state assertion file when comparing</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.info">info</a></b></td><td class="jdocu_noborder">provide information about the state assertion</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.start">start</a></b></td><td class="jdocu_noborder">start trace asserting/comparing</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.status">status</a></b></td><td class="jdocu_noborder">provide the status of the current state assertion</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_state-assertion_gt_.stop">stop</a></b></td><td class="jdocu_noborder">stop trace asserting/comparing and close the file</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sr_ticks_connection.html" class="previous">sr_ticks_connection</a>
+<a href="__rm_class_static_link_connector.html" class="next">static_link_connector</a>
+</div>

@@ -1,0 +1,4 @@
+project: /home/xxbykowm/simics/my-simics-project-1
+simics-root: /home/xxbykowm/simics/simics-6.0.157
+simics-model-builder: /home/xxbykowm/simics/simics-6.0.157
+mingw: None

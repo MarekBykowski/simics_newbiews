@@ -1,0 +1,101 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i82077</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i8042.html" class="previous">i8042</a>
+<a href="__rm_class_i8237x2.html" class="next">i8237x2</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i82077">i82077</a></h1>
+<p>
+
+<a name="i82077"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_82077">82077</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The 82077 device implements the functionality of the Intel® 82077 floppy controller together with up to four disk drives. There can usually be two floppy controllers in a PC system, the first and the secondary. While a controller can have four drives connected to it, most BIOSes only support two drives.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:cmd"><b><i>cmd</i></b></dt><p><a name="__rm_attribute_i82077_cmd"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{17}]</code>.
+(<i>b0</i>, ..., <i>b16</i>). Current command.</dd></dl><p></p><dl><dt id="dt:cmd_id"><b><i>cmd_id</i></b></dt><p><a name="__rm_attribute_i82077_cmd_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Currently executing command.</dd></dl><p></p><dl><dt id="dt:cmd_len"><b><i>cmd_len</i></b></dt><p><a name="__rm_attribute_i82077_cmd_len"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Actual length of current command.</dd></dl><p></p><dl><dt id="dt:command_busy"><b><i>command_busy</i></b></dt><p><a name="__rm_attribute_i82077_command_busy"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Command busy (main status bit 4).</dd></dl><p></p><dl><dt id="dt:cur_cmd_len"><b><i>cur_cmd_len</i></b></dt><p><a name="__rm_attribute_i82077_cur_cmd_len"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of command bytes received.</dd></dl><p></p><dl><dt id="dt:cur_res_pos"><b><i>cur_res_pos</i></b></dt><p><a name="__rm_attribute_i82077_cur_res_pos"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current result read position.</dd></dl><p></p><dl><dt id="dt:direction_cpu"><b><i>direction_cpu</i></b></dt><p><a name="__rm_attribute_i82077_direction_cpu"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Data transfer direction (main status bit 6).</dd></dl><p></p><dl><dt id="dt:dma_channel"><b><i>dma_channel</i></b></dt><p><a name="__rm_attribute_i82077_dma_channel"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+DMA channel.</dd></dl><p></p><dl><dt id="dt:dma_dev"><b><i>dma_dev</i></b></dt><p><a name="__rm_attribute_i82077_dma_dev"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+DMA device, implementing the legacy_dma interface.</dd></dl><p></p><dl><dt id="dt:dma_enabled"><b><i>dma_enabled</i></b></dt><p><a name="__rm_attribute_i82077_dma_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+DMA enable flag.</dd></dl><p></p><dl><dt id="dt:drive_select"><b><i>drive_select</i></b></dt><p><a name="__rm_attribute_i82077_drive_select"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Currently selected drive.</dd></dl><p></p><dl><dt id="dt:drives"><b><i>drives</i></b></dt><p><a name="__rm_attribute_i82077_drives"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o]</code>, <code>[oo]</code>, <code>[ooo]</code>, <code>[oooo]</code>, or <code>nil</code>.
+((<i>drive</i>)*). List of up to four floppy drives.</dd></dl><p></p><dl><dt id="dt:enabled"><b><i>enabled</i></b></dt><p><a name="__rm_attribute_i82077_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Controller enable flag.</dd></dl><p></p><dl><dt id="dt:fifo_enabled"><b><i>fifo_enabled</i></b></dt><p><a name="__rm_attribute_i82077_fifo_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+FIFO enable flag.</dd></dl><p></p><dl><dt id="dt:fifo_threshold"><b><i>fifo_threshold</i></b></dt><p><a name="__rm_attribute_i82077_fifo_threshold"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+FIFO threshold.</dd></dl><p></p><dl><dt id="dt:head_load"><b><i>head_load</i></b></dt><p><a name="__rm_attribute_i82077_head_load"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Head load time.</dd></dl><p></p><dl><dt id="dt:head_unload"><b><i>head_unload</i></b></dt><p><a name="__rm_attribute_i82077_head_unload"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Head unload time.</dd></dl><p></p><dl><dt id="dt:implied_seek"><b><i>implied_seek</i></b></dt><p><a name="__rm_attribute_i82077_implied_seek"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Implied seek enable flag.</dd></dl><p></p><dl><dt id="dt:interrupt_pin"><b><i>interrupt_pin</i></b></dt><p><a name="__rm_attribute_i82077_interrupt_pin"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt request status.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_i82077_irq_dev"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Interrupt device, implementing the simple_interrupt interface.</dd></dl><p></p><dl><dt id="dt:irq_level"><b><i>irq_level</i></b></dt><p><a name="__rm_attribute_i82077_irq_level"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt level.</dd></dl><p></p><dl><dt id="dt:poll_change"><b><i>poll_change</i></b></dt><p><a name="__rm_attribute_i82077_poll_change"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Polling change detected.</dd></dl><p></p><dl><dt id="dt:poll_enabled"><b><i>poll_enabled</i></b></dt><p><a name="__rm_attribute_i82077_poll_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Polling mode enable flag.</dd></dl><p></p><dl><dt id="dt:precomp"><b><i>precomp</i></b></dt><p><a name="__rm_attribute_i82077_precomp"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Precompensation.</dd></dl><p></p><dl><dt id="dt:receive_ready"><b><i>receive_ready</i></b></dt><p><a name="__rm_attribute_i82077_receive_ready"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Controller is ready to receive data (main status bit 7).</dd></dl><p></p><dl><dt id="dt:res"><b><i>res</i></b></dt><p><a name="__rm_attribute_i82077_res"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{15}]</code>.
+(<i>b0</i>, ..., <i>b14</i>). Result bytes.</dd></dl><p></p><dl><dt id="dt:res_len"><b><i>res_len</i></b></dt><p><a name="__rm_attribute_i82077_res_len"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of result bytes.</dd></dl><p></p><dl><dt id="dt:st0"><b><i>st0</i></b></dt><p><a name="__rm_attribute_i82077_st0"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status register 0.</dd></dl><p></p><dl><dt id="dt:st1"><b><i>st1</i></b></dt><p><a name="__rm_attribute_i82077_st1"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status register 1.</dd></dl><p></p><dl><dt id="dt:st2"><b><i>st2</i></b></dt><p><a name="__rm_attribute_i82077_st2"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status register 2.</dd></dl><p></p><dl><dt id="dt:state"><b><i>state</i></b></dt><p><a name="__rm_attribute_i82077_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Floppy command state. Idle=0, Command=1, Execute=2, Result=3.</dd></dl><p></p><dl><dt id="dt:step_rate"><b><i>step_rate</i></b></dt><p><a name="__rm_attribute_i82077_step_rate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Step rate interval.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i82077_gt_.eject-floppy">eject-floppy</a></b></td><td class="jdocu_noborder">eject floppy</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i82077_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i82077_gt_.insert-floppy">insert-floppy</a></b></td><td class="jdocu_noborder">insert floppy in drive</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i82077_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i8042.html" class="previous">i8042</a>
+<a href="__rm_class_i8237x2.html" class="next">i8237x2</a>
+</div>

@@ -1,0 +1,96 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>apic</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_am79c973.html" class="previous">AM79C973</a>
+<a href="__rm_class_apic-bus.html" class="next">apic-bus</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_apic">apic</a></h1>
+<p>
+
+<a name="apic"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_apic">apic</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>APIC</b> class implements the functionality of the local (on-chip) APIC that is part of the Intel® Architecture and was first implemented in the Pentium® processor. Each APIC instance is connected to an I/O-APIC through the APIC bus (multiple I/O-APIC systems are not supported). Reference: <i>Intel Architecture Software Developer's Manual Volume 3</i>.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">apic_bus_to_apic, apic_cpu, apic_timer, conf_object, int_register, interrupt_cpu, io_memory, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:apic_bus"><b><i>apic_bus</i></b></dt><p><a name="__rm_attribute_apic_apic_bus"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Bus implementing the apic-bus interface.</dd></dl><p></p><dl><dt id="dt:apic_id"><b><i>apic_id</i></b></dt><p><a name="__rm_attribute_apic_apic_id"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+APIC ID.</dd></dl><p></p><dl><dt id="dt:apic_type"><b><i>apic_type</i></b></dt><p><a name="__rm_attribute_apic_apic_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+APIC Type ("P6", "P4" or "X2")</dd></dl><p></p><dl><dt id="dt:apicbase_msr"><b><i>apicbase_msr</i></b></dt><p><a name="__rm_attribute_apic_apicbase_msr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code> or <code>nil</code>.
+APICBASE MSR. Should be Nil if and only if the bound CPU does not implement the X86_MSR interface.</dd></dl><p></p><dl><dt id="dt:arbitration_id"><b><i>arbitration_id</i></b></dt><p><a name="__rm_attribute_apic_arbitration_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Arbitration ID.</dd></dl><p></p><dl><dt id="dt:count_in_progress"><b><i>count_in_progress</i></b></dt><p><a name="__rm_attribute_apic_count_in_progress"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Count is in progress.</dd></dl><p></p><dl><dt id="dt:count_initial"><b><i>count_initial</i></b></dt><p><a name="__rm_attribute_apic_count_initial"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Initial count when timer was started.</dd></dl><p></p><dl><dt id="dt:count_start"><b><i>count_start</i></b></dt><p><a name="__rm_attribute_apic_count_start"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local CPU time when count was started.</dd></dl><p></p><dl><dt id="dt:cpu"><b><i>cpu</i></b></dt><p><a name="__rm_attribute_apic_cpu"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Target processor implementing the X86 and PROCESSOR_INFO_V2 interfaces. The APIC will assume ownership of the APICBASE MSR if the processor implements the X86_MSR interface. If the processor does not implement the X86_MSR interface, then the APIC needs to be mapped and potentially moved by some other logic.</dd></dl><p></p><dl><dt id="dt:cpu_bus_divisor"><b><i>cpu_bus_divisor</i></b></dt><p><a name="__rm_attribute_apic_cpu_bus_divisor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Divisor between CPU frequency and bus frequency used by the APIC timer.</dd></dl><p></p><dl><dt id="dt:destination_format"><b><i>destination_format</i></b></dt><p><a name="__rm_attribute_apic_destination_format"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Destination format register.</dd></dl><p></p><dl><dt id="dt:divisor_ln_2"><b><i>divisor_ln_2</i></b></dt><p><a name="__rm_attribute_apic_divisor_ln_2"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Log2 of timer divisor. Note that this is not the format used in the divide configuration register.</dd></dl><p></p><dl><dt id="dt:error_status"><b><i>error_status</i></b></dt><p><a name="__rm_attribute_apic_error_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Error status.</dd></dl><p></p><dl><dt id="dt:ext_int_obj"><b><i>ext_int_obj</i></b></dt><p><a name="__rm_attribute_apic_ext_int_obj"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Object pending with delivery mode ExtINT.</dd></dl><p></p><dl><dt id="dt:initial_count"><b><i>initial_count</i></b></dt><p><a name="__rm_attribute_apic_initial_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Initial count register for timer.</dd></dl><p></p><dl><dt id="dt:interrupt_command"><b><i>interrupt_command</i></b></dt><p><a name="__rm_attribute_apic_interrupt_command"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt command register (all 64 bits).</dd></dl><p></p><dl><dt id="dt:interrupt_posted"><b><i>interrupt_posted</i></b></dt><p><a name="__rm_attribute_apic_interrupt_posted"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt signal raised.</dd></dl><p></p><dl><dt id="dt:logical_destination"><b><i>logical_destination</i></b></dt><p><a name="__rm_attribute_apic_logical_destination"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Logical destination register.</dd></dl><p></p><dl><dt id="dt:lvt_error"><b><i>lvt_error</i></b></dt><p><a name="__rm_attribute_apic_lvt_error"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local vector table, error.</dd></dl><p></p><dl><dt id="dt:lvt_lint0"><b><i>lvt_lint0</i></b></dt><p><a name="__rm_attribute_apic_lvt_lint0"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local vector table, local interrupt 0.</dd></dl><p></p><dl><dt id="dt:lvt_lint1"><b><i>lvt_lint1</i></b></dt><p><a name="__rm_attribute_apic_lvt_lint1"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local vector table, local interrupt 1.</dd></dl><p></p><dl><dt id="dt:lvt_performance_counter"><b><i>lvt_performance_counter</i></b></dt><p><a name="__rm_attribute_apic_lvt_performance_counter"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local vector table, performance counter.</dd></dl><p></p><dl><dt id="dt:lvt_thermal_sensor"><b><i>lvt_thermal_sensor</i></b></dt><p><a name="__rm_attribute_apic_lvt_thermal_sensor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local vector table, thermal sensor.</dd></dl><p></p><dl><dt id="dt:lvt_timer"><b><i>lvt_timer</i></b></dt><p><a name="__rm_attribute_apic_lvt_timer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Local vector table, timer.</dd></dl><p></p><dl><dt id="dt:physical_broadcast_address"><b><i>physical_broadcast_address</i></b></dt><p><a name="__rm_attribute_apic_physical_broadcast_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current broadcast address for interprocessor interrupts and interrupts from the I/O-APIC. Default value is FFh (0Fh for Pentium® (classic) family or P6 family processors); FFFFFFFFh in x2APIC mode</dd></dl><p></p><dl><dt id="dt:priority"><b><i>priority</i></b></dt><p><a name="__rm_attribute_apic_priority"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[[ii]{2}]{16}]</code>.
+(((<i>state</i>, <i>vector</i>){2}){16}). Interrupt slots.</dd></dl><p></p><dl><dt id="dt:remote_read"><b><i>remote_read</i></b></dt><p><a name="__rm_attribute_apic_remote_read"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Remote read.</dd></dl><p></p><dl><dt id="dt:spurious_interrupt_vector"><b><i>spurious_interrupt_vector</i></b></dt><p><a name="__rm_attribute_apic_spurious_interrupt_vector"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Spurious interrupt vector register.</dd></dl><p></p><dl><dt id="dt:status"><b><i>status</i></b></dt><p><a name="__rm_attribute_apic_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i{3}]{256}]</code>.
+((<i>tm0</i>, <i>ir0</i>, <i>is0</i>), ..., (<i>tm255</i>, <i>ir255</i>, <i>is255</i>)). Status registers.</dd></dl><p></p><dl><dt id="dt:task_priority"><b><i>task_priority</i></b></dt><p><a name="__rm_attribute_apic_task_priority"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Task priority register.</dd></dl><p></p><dl><dt id="dt:version"><b><i>version</i></b></dt><p><a name="__rm_attribute_apic_version"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+APIC Version.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_apic_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_apic_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_am79c973.html" class="previous">AM79C973</a>
+<a href="__rm_class_apic-bus.html" class="next">apic-bus</a>
+</div>

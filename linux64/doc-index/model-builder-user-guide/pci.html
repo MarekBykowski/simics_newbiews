@@ -1,0 +1,1105 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>19 Modeling PCI Devices</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="dma.html" class="previous">18 Modeling Direct Memory Access (DMA)</a>
+<a href="modeling-i2c-devices.html" class="next">20 Modeling I2C Devices</a>
+</div>
+<div class=path>
+<a href="index.html">Model Builder User's Guide</a>&nbsp;/&nbsp;
+<a href="part-common-hardware-components.html">III Modeling Common Hardware Components</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="pci">19 Modeling PCI Devices</a></h1>
+<p>
+
+</p><p>
+</p><h2 class="jdocu"><a name="pci-write-introduction">19.1 Introduction</a></h2>
+<p>
+
+</p><p>
+Simics provides support for writing PCI devices in DML.
+</p><p>
+</p><ul>
+
+<li>Before writing a PCI device model, it is important to know how PCI is
+modeled in Simics. For example; access to the configuration, memory and I/O
+space are directed to individual memory spaces, as described in the next
+section.
+</li>
+
+<li>DML <em>templates</em> are provided to make it easy to generate a PCI
+device and re-use existing code, handling configuration register access,
+generating PCI interrupts, performing DMA access, etc. Section <a class="reference" href="#pci-write-dml">19.3</a> describe these templates in more detail. One example of a DML PCI
+device is the DEC21140A model described in section
+<a class="reference" href="example-models.html#examples-DEC21140A-dml">10.3</a>.</li>
+
+</ul>
+<p>
+
+</p><h2 class="jdocu"><a name="PCI-Support-in-Simics">19.2 PCI Support in Simics</a></h2>
+<p>
+
+</p><p>
+</p><h3 class="jdocu"><a name="Introduction">19.2.1 Introduction</a></h3>
+<p>
+
+</p><p>
+Simics models a PCI bus using several different objects:
+</p><p>
+</p><ul>
+
+<li>A <b>pci-bus</b> object that models the bus to which PCI devices
+are connected. The devices are connected to virtual slots, all assigned a
+separate device number.</li>
+
+<li>Three <b>memory-space</b> objects that model the three different
+address spaces of PCI: Memory, I/O and Configuration.</li>
+
+<li>An object acting as a bridge, linking the PCI bus to the rest of the
+system. This can be a host-to-PCI bridge (like a northbridge chipset) or a
+PCI-to-PCI bridge (linking the PCI bus to a parent PCI bus).</li>
+
+<li>Up to 256 PCI device objects connected to the PCI bus object. Note that in
+Simics, each function of a multi-function PCI device must either be represented
+as a separate device object instance or the device must implement
+the <code>pci_multi_function_device</code> interface.</li>
+
+<li>Optionally, a separate interrupt controller can be connected to the
+bus. Please note that interrupt signals will still be sent to the bridge unless
+disabled.</li>
+
+</ul>
+<p>
+The next section will examine the configuration of
+the <i>Firststeps</i> machine shortly after linux boot with the
+sample_pci_card connected as shown in section <a class="reference" href="device-modeling-overview.html#component-loading">4.5.2</a>. Please note that the configuration has been stripped of all
+unrelated attributes.
+</p><p>
+</p><pre class="jdocu_small">OBJECT board.mb.nb.bridge TYPE x58_dmi {
+        pci_bus: board.mb.nb.pci_bus
+        pci_config_class_code: 0x80000
+        pci_config_device_id: 0x3400
+        pci_config_vendor_id: 0x8086
+}
+OBJECT board.mb.nb.pci_bus TYPE pcie-bus {
+        conf_space: board.mb.nb.pci_conf
+        memory_space: board.mb.nb.pci_mem
+        io_space: board.mb.nb.pci_io
+        bridge: board.mb.nb.bridge
+        interrupt: (board.mb.sb.lpc)
+        bus_number: 0
+        sub_bus_number: 255
+        send_interrupt_to_bridge: 0
+        upstream_target: board.mb.nb.remap_dispatcher
+        pci_devices: ((0,0,board.mb.nb.bridge,1),(30,0,board.mb.sb.bridge,1))
+}
+OBJECT board.mb.sb.bridge TYPE ich10_bridge {
+        pci_bus: board.mb.nb.pci_bus
+        pci_config_class_code: 0x60401
+        pci_config_device_id: 0x244e
+        pci_config_primary_bus_number: 0
+        pci_config_secondary_bus_number: 7
+        pci_config_subordinate_bus_number: 7
+        pci_config_vendor_id: 0x8086
+        secondary_bus: board.mb.sb.ext_pci_bus
+        upstream_target: board.mb.nb.pci_bus
+}
+OBJECT board.mb.sb.ext_conf TYPE memory-space {
+        map: ((0x70000,sample_cmp0.sample_dev,255,0,256,NIL,0,8,0))
+}
+OBJECT board.mb.sb.ext_io TYPE memory-space {
+        map: ()
+}
+OBJECT board.mb.sb.ext_mem TYPE memory-space {
+        map: ((0xfe000000,sample_cmp0.sample_dev,1,0,256,NIL,0,8,0))
+}
+OBJECT board.mb.sb.ext_pci_bus TYPE pci-bus {
+        conf_space: board.mb.sb.ext_conf
+        memory_space: board.mb.sb.ext_mem
+        io_space: board.mb.sb.ext_io
+        bridge: board.mb.sb.bridge
+        interrupt: ()
+        bus_number: 7
+        sub_bus_number: 255
+        send_interrupt_to_bridge: 1
+        upstream_target: board.mb.sb.bridge
+        pci_devices: ((0,0,sample_cmp0.sample_dev,1))
+}
+OBJECT sample_cmp0 TYPE sample_pci_card {
+        integer_attribute: 13
+}
+OBJECT sample_cmp0.sample_dev TYPE sample_pci_device {
+        pci_bus: board.mb.sb.ext_pci_bus
+        pci_config_class_code: 0
+        pci_config_device_id: 0xac10
+        pci_config_vendor_id: 0x104c
+        reg_version: 0x4711
+}
+</pre><p>
+</p><p>
+</p><ul>
+
+<li>The <b>board.mb.sb.ext_pci_bus</b> object represents the PCI bus. The
+<i>pci_devices</i> attribute shows that a single PCI device is connected:
+<b>sample_cmp0.sample_dev</b> is the familiar sample_pci_device from
+section <a class="reference" href="device-modeling-overview.html#pci-device-modeling">4.3</a> inserted as function 0 in slot
+0. The bus is connected to a bridge, <b>board.mb.sb.bridge</b> (details below).</li>
+
+<li>The three memory-spaces are <b>board.mb.sb.ext_conf</b> for
+configuration, <b>board.mb.sb.ext_io</b> for I/O
+and <b>board.mb.sb.ext_mem</b> for memory. Note that these
+memory-spaces are intended to be automatically updated. The configuration
+memory-space will be updated by the pci-bus as devices are connected to the PCI
+slots. The other two spaces will be updated when software enables different
+base address registers in the PCI devices, or writes to configuration registers
+in the bridge. In most cases, these spaces need never be manipulated
+manually. As the bus has a device connected, the configuration space has a
+mapping to that device at the address specified by the algorithm described in
+section <a class="reference" href="#pci-support-config-space">19.2.2</a>. There is currently no IO space 
+mappings in this configuration.</li>
+
+<li>The <b>board.mb.sb.bridge</b> object is a PCI-to-PCI bridge of
+type ich10_bridge. It is in turn connected to a PCI bus, 
+<b>board.mb.nb.pci_bus</b>, connected to the host-to-PCI
+bridge.</li>
+
+<li>The <b>board.mb.nb.bridge</b> creates a bridge between
+processor and the PCI devices.</li>
+
+<li>The <b>sample_cmp0.sample_dev</b> PCI device is a single function
+  device connected to the PCI bus in slot 0.</li>
+
+<li>The <b>sample_cmp0</b> is the component wrapping the sample PCI device,
+  providing a connector that allows the device to be easily inserted into the
+  system using the <b>connect</b> command.</li>
+</ul>
+<p>
+Use CLI commands to inspect the system. The <b>info</b> command
+reports all devices that are connected to the bus:
+</p><p>
+</p><pre class="jdocu_small">simics&gt;  <b>board.mb.sb.ext_pci_bus.info</b>
+Information about board.mb.sb.ext_pci_bus [class pci-bus]
+=========================================================
+
+        Bridge device : board.mb.sb.bridge
+       PCI Bus Number : 0x7
+
+         Config space : board.mb.sb.ext_conf
+             IO space : board.mb.sb.ext_io
+         Memory space : board.mb.sb.ext_mem
+
+Connected devices:
+    Slot 0 function 0 : sample_cmp0.sample_dev
+</pre><p>
+</p><p>
+The configuration memory-space has been automatically configured to include the
+configuration registers defined by the devices connected on the bus. The exact
+addresses where the configuration registers are mapped are determined using the
+PCI configuration address described in the next section.
+</p><p>
+</p><pre class="jdocu_small">simics&gt;  <b>board.mb.sb.ext_conf.map</b>
+   Base  Object                   Fn  Offset  Length
+----------------------------------------------------
+0x70000  sample_cmp0.sample_dev  255     0x0   0x100
+    width 8 bytes
+</pre><p>
+</p><p>
+The PCI I/O space is empty since no base address registers have
+been configured yet. The bridge, however, has been configured to forward access
+in the PCI memory space on the secondary bus to the PCI memory space on its
+primary bus. This can be used by the PCI device to access the host through DMA.
+</p><p>
+</p><pre class="jdocu_small">simics&gt;  <b>board.mb.sb.ext_mem.map</b>
+      Base  Object                  Fn  Offset  Length
+------------------------------------------------------
+0xfe000000  sample_cmp0.sample_dev   1     0x0   0x100
+    width 8 bytes
+</pre><p>
+</p><p>
+
+</p><h3 class="jdocu"><a name="pci-support-config-space">19.2.2 Configuration Space</a></h3>
+<p>
+
+</p><p>
+The PCI configuration accesses are implemented with a generic Simics
+memory-space object. The space is populated by the <b>pci-bus</b>
+object based on the list provided by the <i>pci_devices</i> attribute. It
+does not need to be configured manually.
+</p><p>
+</p><div class="figure" id="pciconftype1">
+
+<div style="text-align: center">
+    <img alt="" src="pciconftype1.png">
+    <div class="caption">Figure 7. PCI Type 1 Configuration Address in Simics</div>
+</div>
+</div>
+
+<p>
+The configuration space in Simics uses the Type 1 addressing layout (see figure
+<a class="reference" href="#pciconftype1">7</a>), but with the lower bits used for byte
+addressing. No <code>IDSEL</code> signals are used. This is done to simplify the
+implementation, and does not impose any restriction of the PCI model. For PCIe addressing, see figure <a class="reference" href="#pcieconftype1">8</a>.
+</p><p>
+In the previous example, the configuration space was configured with a single
+device as follows:
+</p><p>
+</p><pre class="jdocu_small">   Base  Object                   Fn  Offset  Length
+----------------------------------------------------
+0x70000  sample_cmp0.sample_dev  255     0x0   0x100
+    width 8 bytes
+</pre><p>
+</p><p>
+The addresses are computed as explained by figure <a class="reference" href="#pciconftype1">7</a>,
+which gives an address of 0x70000 for <b>sample_cmp0.sample_dev</b> (bus 7,
+device or slot 0, function 0).
+</p><p>
+In many systems, typically 32-bit ones, the configuration space is not visible
+in the global memory-space of the processor. Instead the bridge has a register
+pair that is used to access the configuration space: one register for the
+address and one for data.
+</p><p>
+PCI-to-PCI bridges will automatically add mappings to the configuration space
+of the primary bus for all subordinate buses. This is done at run-time, since
+both the secondary and subordinate bus is configured by the simulated software.
+</p><p>
+</p><h4 class="jdocu"><a name="Access-to-unmapped-memory">19.2.2.1 Access to unmapped memory</a></h4>
+<p>
+
+</p><p>
+The default Simics behavior when a device is accessed and there is nothing
+mapped at the given offset, i.e. there is no register defined or the access is
+too large or not properly aligned, is to stop the simulation with an error. But
+because of the common case where SW probes PCI devices by reading non-existing
+or reserved registers, the configuration bank of a Simics PCI device handles
+all accesses according to the PCI specification: <em>"Read accesses to reserved or
+unimplemented registers must be completed normally and a data value of 0
+returned."</em>.
+</p><p>
+The implication of this is that <code>miss_access()</code> is never invoked. To
+restore the default behavior, set the <code>pci_miss_pattern</code>
+parameter to <code>false</code>.
+</p><p>
+Please note that this only applies to PCI configuration bank access. Access to
+the configuration space where there is nothing mapped will still generate a
+<code>Sim_PE_IO_Not_Taken</code> exception and it is the responsibility of the
+bridge to interpret this as a Master Abort error and return a value of all ones
+for read access. Please see the PCI Local Bus v3.0 specification section 6.1
+and <a class="reference" href="#pci-support-master-abort">19.2.8.1</a> for more details.
+</p><p>
+
+</p><p>
+
+</p><h3 class="jdocu"><a name="pci-support-memory-and-io">19.2.3 Memory and I/O Spaces</a></h3>
+<p>
+
+</p><p>
+The PCI memory and I/O spaces are implemented as generic Simics
+memory-spaces, where the spaces controlled by the base address
+registers of the PCI devices will be mapped. 
+</p><p>
+Software would issue to map the space controlled by the base address register 0
+of the <b>sample_cmp0.sample_dev</b> object above:
+</p><p>
+The address space controlled by the BAR0 register will now be mapped at
+address <code>0xfe000000</code> in the PCI memory.
+</p><p>
+</p><pre class="jdocu_small"># Print the PCI memory mappings
+simics&gt;  <b>board.mb.sb.ext_mem.map</b>
+      Base  Object                  Fn  Offset  Length
+------------------------------------------------------
+0xfe000000  sample_cmp0.sample_dev   1     0x0   0x100
+    width 8 bytes
+</pre><p>
+</p><p>
+PCI bridges in Simics typically create space-to-space mappings when adding a
+PCI memory space to the global memory-space in a system. This approach
+ensures that memory
+transactions go directly between memory-spaces without having to pass the
+bridge object. There are, however, cases when the bridge is needed, for example
+for accesses where nothing is mapped. In these cases, the bridge is associated
+with the mapping (see section on memory mapping types), and the bridge will be
+called for non-mapped accesses.
+</p><p>
+The bridge mapping is also used to prevent memory mappings loops. A bridge
+typically does not forward upstream a transaction that it sent downstream
+previously. But in Simics the memory-spaces are connected directly to each
+other, and there is no bridge doing the forwarding. Since the bridge creates
+the mappings as "bridge mappings", Simics will make sure that the transaction
+is not forwarded using the same bridge twice in a row. Circular mappings are not
+a problem in a correctly configured system, but can occur for memory accesses
+to a non-existing device.
+</p><p>
+In the same way as with the configuration space, a PCI-to-PCI bridge will
+create mappings in the memory and I/O spaces for upstream and downstream
+accesses. These mappings are created at run-time, since they are dynamic and
+set up by the simulated software.
+</p><p>
+
+</p><h3 class="jdocu"><a name="PCI-Interrupts">19.2.4 PCI Interrupts</a></h3>
+<p>
+
+</p><p>
+There are four interrupt pins defined for PCI (A, B C and D). A PCI device uses
+the <b>pci-bus</b> object to raise and lower the interrupt signal for a
+specific interrupt pin, and the Simics PCI library provides methods for doing
+this. The <b>pci-bus</b> object then passes the interrupt to the
+devices listed in the <i>interrupt</i> attribute and also to the bridge
+unless configured not to. Once the interrupt has reached the bridge or
+interrupt device it is translated into a system architecture specific interrupt.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Expansion-ROM">19.2.5 Expansion ROM</a></h3>
+<p>
+
+</p><p>
+Support for expansion ROM is provided by
+the <code>pci_common</code>, <code>pci_device</code>
+and <code>pcie_device</code> templates. To add an expansion ROM image,
+a <b>rom</b> object should be created that contains the ROM memory
+image. This <b>rom</b> object is then connected to
+the <code>expansion_rom</code> <em>connect</em> attribute of the PCI device. The
+Expansion ROM base address registers are updated automatically. See
+<a href="#pci-write-dml-bar-rom">Expansion ROM</a> for more details.
+</p><p>
+
+</p><h3 class="jdocu"><a name="PCI-Express">19.2.6 PCI Express</a></h3>
+<p>
+
+</p><p>
+</p><h4 class="jdocu"><a name="General-Information">19.2.6.1 General Information</a></h4>
+<p>
+
+</p><p>
+At the level of abstraction used by the Simics PCI model, the difference
+between a PCI bus and a PCI Express link is very small. The major difference is
+the extension of the configuration registers to 4096 bytes per device instead
+of 256. This is taken into account if a PCI Express system is created using the
+<b>pcie-bus</b> class instead of the <b>pci-bus</b>
+class. The PCIe bus will check if the device claims to be PCIe compatible
+(whether it implements the <code>pci_express</code> interface or not) but it
+is allowed to connect PCI devices for backwards compatibility. This is one of the
+benefits of using Simics, as this would be impossible in the real world. This
+allows working PCI devices (like a network card) to be used in a PCI Express
+based system without alterations.
+</p><p>
+</p><div class="figure" id="pcieconftype1">
+
+<div style="text-align: center">
+    <img alt="" src="pcieconftype1.png">
+    <div class="caption">Figure 8. PCI Express Type 1 Configuration Address in Simics</div>
+</div>
+</div>
+
+<p>
+Addressing the configuration space for PCIe in Simics is done with the layout shown in figure <a class="reference" href="#pcieconftype1">8</a>.
+</p><p>
+
+</p><h4 class="jdocu"><a name="Message">19.2.6.2 Message</a></h4>
+<p>
+
+</p><p>
+Simics support PCI Express Messages via the <code>pci_express</code>
+interface. Please note that message routing is currently not supported. See
+interface documentation in <em>API Reference Manual</em> for more details and
+a list of all currently supported messages.
+
+</p><h4 class="jdocu"><a name="Legacy-Interrupts">19.2.6.3 Legacy Interrupts</a></h4>
+<p>
+
+</p><p>
+PCI Express INTx emulation, a.k.a. legacy interrupts, is supported in Simics
+using messages but please note that not all models have implemented support for
+them as using MSI/MSI-X is more common.
+
+</p><h4 class="jdocu"><a name="Single-Root-IO-Virtualization">19.2.6.4 Single Root I/O Virtualization</a></h4>
+<p>
+
+</p><p>
+PCI Express SR-IOV is supported in Simics. The templates provided
+by <code>pci/pcie-sriov.dml</code> in the new PCI library defines all registers
+according to spec and implements the required functionality for allowing the
+virtual functions to be mapped and unmapped dynamically.
+
+
+</p><h3 class="jdocu"><a name="Compact-PCI">19.2.7 Compact PCI</a></h3>
+<p>
+
+</p><p>
+Support for cPCI can be provided by using the <b>CompactPciBusUpConnector</b> and
+<b>CompactPciBusDownConnector</b> connectors. A sample cPCI backplane
+component can be found in the <b>sample-cpci-comp</b> module together
+with some test scripts that shows how to connect devices and bridges to the
+backplane. Conceptually, there is nothing different with cPCI compared to PCI
+on a device model level. The difference is that normal PCI devices and bridges
+must add the <b>CompactPciBusUpConnector</b> connector to their
+component code. PCI devices can optionally use the <b>cpci_adapter</b>
+adapter component instead. It is then up to the SW stacks of each SBC to
+configure the bridges and devices accordingly in order to communicate with each
+other over the backplane PCI bus without conflicts.
+
+</p><h3 class="jdocu"><a name="Other-PCI-Features">19.2.8 Other PCI Features</a></h3>
+<p>
+
+</p><p>
+</p><h4 class="jdocu"><a name="pci-support-master-abort">19.2.8.1 Master Abort</a></h4>
+<p>
+
+</p><p>
+Accesses that pass a host-to-PCI bridge, or a PCI-to-PCI bridge, but have a
+non-mapped address as target will call the master abort handling in the
+bridge. This is implemented in Simics using the bridge mapping, where the most
+recent bridge will be called signaling that the access was not claimed by any
+device. The bridge can then perform the appropriate master abort semantics, and
+return a <code>Sim_PE_No_Exception</code> pseudo exception.  If a PCI device issues
+a transaction on the local bus that is not claimed by any device, the
+memory-space access will return the pseudo exception
+<code>Sim_PE_IO_Not_Taken</code> directly to the device. This is the same exception
+that the bridge will get in case of a bridge mapping. It is important to use
+bridge mappings for PCI memory-spaces, since the processor should not get the
+<code>Sim_PE_IO_Not_Taken</code> exception on accesses, but instead get informed by
+the bridge about the error.  
+</p><p>
+
+</p><h4 class="jdocu"><a name="Target-Abort">19.2.8.2 Target Abort</a></h4>
+<p>
+
+</p><p>
+A PCI device can signal a target abort by returning
+the <code>Sim_PE_IO_Error</code> pseudo exception on accesses. The device should
+also be prepared to receive this error when doing memory accesses itself on the
+PCI bus. PCI bridges implemented in Simics may receive
+the <code>Sim_PE_IO_Error</code> exception from the
+<code>pci_bridge</code> interface if the access was done through a bridge
+mapping, for example a CPU-initiated access to a PCI device below the bridge.
+
+</p><h4 class="jdocu"><a name="Message-Signaled-Interrupts">19.2.8.3 Message Signaled Interrupts</a></h4>
+<p>
+
+</p><p>
+There is no generic support in Simics for Message Signaled Interrupts (MSI).
+This is something that can be implemented on a per device (or bridge)
+basis. Simics PCI library does however provide some templates that defines all
+the registers according to the specification, but functionality must then be
+added for each model. Please see <code>pci/pci-capabilities.dml</code> in
+dml-lib module for details.
+</p><p>
+
+</p><h4 class="jdocu"><a name="Message-Signaled-Interrupts-Extended">19.2.8.4 Message Signaled Interrupts Extended</a></h4>
+<p>
+
+</p><p>
+Simics provided full support for Message Signaled Interrupts eXtended
+(MSI-X). The templates provided by <code>pci/pci-capabilities.dml</code> in the
+new PCI library defines all registers according to spec and implements utility
+methods for sending the interrupts to the host.
+</p><p>
+
+
+
+</p><h4 class="jdocu"><a name="Special-Cycles">19.2.8.5 Special Cycles</a></h4>
+<p>
+
+</p><p>
+Support for PCI <i>Special Cycles</i> has been deprecated.
+</p><p>
+
+</p><h4 class="jdocu"><a name="System-Error-SERR">19.2.8.6 System Error (SERR#)</a></h4>
+<p>
+
+</p><p>
+System Error is used in PCI to signal unrecoverable errors. A PCI device can
+assert the SERR# line on the PCI bus upon errors, and the host-to-PCI bridge
+informs the Operating System of the error. System Error is supported by the
+PCI system in Simics, but not all modeled bridges and devices implement it.
+</p><p>
+
+</p><h4 class="jdocu"><a name="Parity-Error-PERR">19.2.8.7 Parity Error (PERR#)</a></h4>
+<p>
+
+</p><p>
+Simics currently does not support PCI <i>Parity Error</i> signaling. Please contact
+your Simics provider if you need this modeled.
+</p><p>
+
+</p><h4 class="jdocu"><a name="Interrupt-Acknowledge">19.2.8.8 Interrupt Acknowledge</a></h4>
+<p>
+
+</p><p>
+Support for <i>Interrupt Acknowledge</i> has been deprecated.
+</p><p>
+
+</p><h4 class="jdocu"><a name="VGA-Palette-Snooping">19.2.8.9 VGA Palette Snooping</a></h4>
+<p>
+
+</p><p>
+Simics currently does not support VGA Palette Snooping. Please contact
+your Simics provider if you need this modeled.
+</p><p>
+
+</p><p>
+
+</p><p>
+
+</p><h2 class="jdocu"><a name="pci-write-dml">19.3 Writing a PCI Device in DML</a></h2>
+<p>
+
+</p><p>
+</p><h3 class="jdocu"><a name="Overview">19.3.1 Overview</a></h3>
+<p>
+
+</p><p>
+Creating a minimal PCI device is very easy; just import the file
+<code>pci/common.dml</code> and use one of the <code>pci_device</code>
+or <code>pcie_device</code> templates. This will define the following:
+</p><p>
+</p><ul>
+
+<li>A PCI configuration register bank called <code>pci_config</code>, populated
+with the registers defined by the PCI specification.</li>
+
+<li>A <code>pci_bus</code> <em>connect</em> object to let the PCI device be
+connected to a PCI bus, equivalent with plugging the card into a PCI
+slot.</li>
+
+<li>An attribute, <i>config_registers</i>, making it possible to
+implement the <b>print-pci-config-regs</b> command as described in
+<a class="reference" href="#pci-write-dml-print-pci-config-regs-command">19.3.6</a>.</li>
+
+<li>An (optional) <code>expansion_rom</code> <em>connect</em> object and an
+attribute for its size to allow expansion ROM to be mapped by the expansion
+ROM base address register at offset 0x30.</li>
+
+<li>Several methods to handle DMA and (legacy) interrupts.</li>
+
+<li>A default implementation of the <code>pci_device</code> interface,
+which is required by all PCI devices.</li>
+
+<li>Several generic templates for common PCI features and capabilities; making
+it easy to add these to the device with minimal effort.</li>
+
+</ul>
+<p>
+Models in need of SR-IOV support should also
+import <code>pci/pcie-sriov.dml</code>. Please
+see <b>sample-pcie-sriov-device</b> module for a sample PCIe device
+with SR-IOV support.
+</p><p>
+</p><div class="note">
+<b>Note:</b>
+Before building the device, the Makefile must be updated to declare the
+dependency on the PCI library module; by adding "dml-lib" to
+the <code>EXTRA_MODULE_VPATH</code> variable.</div>In this section, a model of a DEC21140A network card will be used as
+an example. The source code of the model is available in the
+<code></code><em>[simics]</em><code>/src/devices/DEC21140A-dml/</code> directory and section
+<a class="reference" href="example-models.html#examples-DEC21140A-dml">10.3</a> contains a more complete description. The
+following code will create a minimal DEC21140A:
+<p>
+</p><pre class="jdocu_small">dml 1.2;
+
+device DEC21140A_dml;
+
+import "pci/common.dml";
+
+is pci_device;
+</pre><p>
+</p><p>
+This is all that is required to create a working, although not very useful, PCI
+device. The following sections of this chapter will go into the details of
+the <code>pci_device</code> template.
+</p><p>
+
+</p><h3 class="jdocu"><a name="Configuration-Bank">19.3.2 Configuration Bank</a></h3>
+<p>
+
+</p><p>
+The <code>pci_config</code> bank defines the configuration registers for a type 0
+PCI header, as required by a normal PCI device according to the
+specification. The registers are defined in little-endian.
+</p><p>
+Some of the registers defined by <code>pci_config</code> have a default
+value. Others need to be customized before the device can be used.
+</p><p>
+In the <b>DEC21140A-dml</b> device, <code>pci_config</code> is extended
+to give some of these registers a new value:
+</p><p>
+</p><pre class="jdocu_small">bank pci_config {
+    <i>[…]</i>
+    register vendor_id { parameter hard_reset_value = 0x1011; }
+    register device_id { parameter hard_reset_value = 0x0009; }
+    register status {
+        field fbb { parameter hard_reset_value = 1; }
+        field ds { parameter hard_reset_value = 1; }
+    }
+    <i>[…]</i>
+    register revision_id { parameter hard_reset_value = 0x21; }
+    register class_code { parameter hard_reset_value = 0x020000; }
+    <i>[…]</i>
+    register subsystem_vendor_id { parameter hard_reset_value = 0x0E11; }
+    register subsystem_id { parameter hard_reset_value = 0xB0BB; }
+    <i>[…]</i>
+    register interrupt_pin { parameter hard_reset_value = 0x1; }
+    <i>[…]</i>
+}
+</pre><p>
+</p><p>
+Base address registers, BARs, are not defined by default as their size may vary
+between 32- or 64-bit and their type can be I/O or Memory. The Simics DML PCI
+library provides a set of templates for implementing all variants. Refer to
+section <a class="reference" href="#pci-write-dml-bar">19.3.3</a> for more information.
+</p><p>
+The <code>pci_config</code> bank provides a number of useful methods:
+</p><p>
+</p><dl><dt id="dt:pci_raise_interrupt-and-pci_lower_interrupt-"><b><code>pci_raise_interrupt()</code> and <code>pci_lower_interrupt()</code></b></dt><dd>Raise or lower the interrupt pin defined by the value of
+the <i>interrupt_pin</i> register. A call to one of these methods has no
+effect if the interrupt is already in the desired state.</dd><dt id="dt:pci_system_error-"><b><code>pci_system_error()</code></b></dt><dd>Send a SERR# signal to the PCI
+bus.</dd><dt id="dt:update_all_mappings-"><b><code>update_all_mappings()</code></b></dt><dd>Map and unmap all windows in PCI
+I/O and Memory space according to the active BARs. This method is described in
+more detail in section <a href="#pci-write-dml-bar-param-fun">Templates, Parameters and Methods</a>.</dd></dl><p>The <code>pci_config</code> bank also provides default implementations of methods
+invoked by PCI events. There is currently only one such method as the others
+have been deprecated:
+</p><p>
+</p><dl><dt id="dt:bus_reset-"><b><code>bus_reset()</code></b></dt><dd>Called when the bus is reset. The default
+method performs a soft-reset on the device and removes all BAR
+mappings. Override this method if the actions at reset cannot be modeled using
+the <b><i>soft_reset()</i></b> method(s).</dd></dl><p>The parameter <code>busmaster</code> can be overridden in the
+<code>pci_config</code> bank to prevent the device from doing DMA accesses. Please
+remember that according to the specification, the system must first enable bus
+master support by writing to bit2 of the PCI device's control register at
+offset 0x4. Failure to do so will cause the DMA transaction to fail with
+a <code>Sim_PE_IO_Not_Taken</code> pseudo exception and a log message.
+</p><p>
+
+</p><h3 class="jdocu"><a name="pci-write-dml-bar">19.3.3 Base Address Registers</a></h3>
+<p>
+
+</p><p>
+</p><h4 class="jdocu"><a class="not-numbered" name="General-Information2">General Information</a></h4>
+<p>
+
+</p><p>
+The base address registers (BARs) are not defined by <code>pci_config</code>,
+because they need to be customized by the user for each model. By default, each
+BAR will map a bank from the PCI device itself in either the PCI Memory or I/O
+space, depending on the type of BAR implemented. Each BAR has an
+associated <em>function number</em>, controlled by the <code>map_func</code>
+parameter, that will be used to identify the mapping. The corresponding bank
+must define the <code>function</code> parameter to the same value.
+</p><p>
+In order for the banks to get automatically mapped and unmapped when I/O and
+Memory access is enabled/disabled, after SW writes to the device's control
+register, the active BARs must be listed in
+the <code>base_address_registers</code> parameter. Please note that it does
+not matter if the non-active BARs are listed, as they will be ignored. All
+registers must be defined though, as they will be probed by SW. Use
+<code>no_base_address_32</code> or <code>no_base_address_64</code> to define a
+non-active BAR.
+</p><p>
+In the following example, the device defines one I/O BAR, two Memory
+BARs and two non-active BARs:
+</p><p>
+
+</p><pre class="jdocu_small">bank pci_config {
+    <i>[…]</i>
+    parameter base_address_registers = ["base_address_0",
+                                        "base_address_1",
+                                        "base_address_2"];
+
+    register base_address_0 @ 0x10 is (io_base_address) {
+        parameter size_bits = 7;
+        parameter map_func = 2;
+    }
+    register base_address_1 @ 0x14 is (memory_base_address_32) {
+        parameter size_bits = 12;
+        parameter map_func = 2;
+    }
+    register base_address_2 @ 0x18 is (memory_base_address_32) {
+        parameter size_bits = 14;
+        parameter map_func = 6;
+    }
+    // Other base address registers are not used
+    register base_address_3 @ 0x1C is (no_base_address_32);
+    register base_address_45 @ 0x20 is (no_base_address_64);
+    <i>[…]</i>
+}
+</pre><p>
+</p><p>
+
+</p><p>
+The BAR <i>base_address_0</i> defines a mapping from PCI I/O space to a bank
+with function number 2 as indicated by the <code>map_func</code>
+parameter. The <code>size_bits</code> parameter determines how many address
+bits will be used in the BAR, and thus how big the mapping
+is. A <code>size_bits</code> of 7 means that bits 31-7 will be used,
+thus the mapping will be 128 bytes long (2<sup>7</sup>).
+</p><p>
+The BAR <i>base_address_1</i> defines a mapping from PCI Memory space to
+the same bank as was used for I/O, since the <code>map_func</code> is also
+2. Hence the PCI device will not be able to tell the difference between an I/O
+space access using the mapping configured by BAR0 and a Memory space access
+using the mapping configured by BAR1, for the address range that overlaps. The
+Memory space mapping will be larger though, 4096 bytes in total.
+</p><p>
+The BAR <i>base_address_2</i> defines a mapping from PCI Memory space. The
+mapping will use function number 6 this time and the size of the mapping will
+be 16384 bytes.
+</p><p>
+Again, please note that unused BARs must be implemented and that there are
+dedicated templates for this. As with Memory space BARs, the non-active BARs
+can be either 32-bit or 64-bit wide. I/O BARs are always 32-bit so the 
+classification is implicit.
+</p><p>
+In DML, the function number associated with the mapping is used to determine
+which register bank to access (each register bank has to have
+a <code>function</code> number). The default implementation of
+the <code>io_memory</code> interface provided by
+the <code>io_memory.dml</code> file, matches the function number against the
+function parameter of all banks in the device. This makes it very easy to map a
+given register bank via the PCI BAR mechanism. If the following code is added
+to the example:
+</p><p>
+
+</p><pre class="jdocu_small">bank first_bank {
+    parameter function = 2;
+    <i>[…]</i>
+}
+
+bank second_bank {
+    parameter function = 6;
+    <i>[…]</i>
+}
+</pre><p>
+</p><p>
+
+</p><p>
+The bank <code>first_bank</code> will be mapped by BAR0 in I/O space and BAR1 in
+memory-space. The bank <code>second_bank</code> will be accessible via the mapping
+defined by BAR2. No additional code is necessary for the device to
+automatically receive accesses to the corresponding register bank, Simics and
+the DML PCI library will take care of the rest.
+</p><p>
+
+</p><h4 class="jdocu"><a class="not-numbered" name="pci-write-dml-bar-param-fun">Templates, Parameters and Methods</a></h4>
+<p>
+
+</p><p>
+The following templates are provided to define base address registers:
+</p><dl><dt id="dt:memory_base_address_32"><b><code>memory_base_address_32</code></b></dt><dd>Defines a 32-bit memory base
+address register.</dd><dt id="dt:memory_base_address_64"><b><code>memory_base_address_64</code></b></dt><dd>Defines a 64-bit memory base
+address register.</dd><dt id="dt:io_base_address"><b><code>io_base_address</code></b></dt><dd>Defines a 32-bit I/O base address
+register.</dd><dt id="dt:no_base_address_32"><b><code>no_base_address_32</code></b></dt><dd>Defines a 32-bit non-active base
+address register.</dd><dt id="dt:no_base_address_64"><b><code>no_base_address_64</code></b></dt><dd>Defines an 64-bit non-active base
+address register.</dd></dl><p>The following parameters should be used to customize a base address register:
+</p><p>
+</p><dl><dt id="dt:map_func"><b><code>map_func</code></b></dt><dd>Function number associated with the
+mapping. The default value is undefined and must be set to a valid function or
+end up raising an error when BAR is enabled.</dd><dt id="dt:size_bits"><b><code>size_bits</code></b></dt><dd>Least significant bit for the base
+address, indicating the size of the mapping. Defaults to 2 for IO BARs and 4
+for Memory BARs</dd></dl><p>A base address register is composed of the following fields:
+</p><p>
+</p><dl><dt id="dt:s"><b><i>s</i></b></dt><dd>Bit 0; space type. The reset value is derived from
+the type of the mapping (0 for memory and 1 for I/O). However, it can be
+redefined by setting the parameter <code>override_map_bit</code> to either 0
+or 1.</dd><dt id="dt:type"><b><i>type</i></b></dt><dd>Bits 2-1; memory space mapping type (for memory
+space only). Defaults to 0, indicating anywhere in 32-bit space. If set to 0b10,
+it indicates anywhere in 64-bit space.</dd><dt id="dt:p"><b><i>p</i></b></dt><dd>Bit 3; defines whether the mapping is prefetchable or
+not (for memory space only). Defaults to 0.</dd><dt id="dt:base"><b><i>base</i></b></dt><dd>Bits 31-<code>size_bits</code>, or
+63-<code>size_bits</code> in case of 64-bit BAR; contains the base
+address.</dd></dl><p>Note that the first three fields have no functional meaning in Simics, i.e.,
+changing <i>s</i> will not change in which space the mapping is added. The
+only field with side effects is the <i>base</i> field. When <i>base</i>
+is written to, the window controlled by the BAR will be remapped using the new
+base address. But this only happens if access to I/O space or Memory space has
+been enabled in the device's control register. Otherwise the mapping is
+postponed until access is enabled again. See section <a class="reference" href="#pci-support-memory-and-io">19.2.3</a> for an example of how this is done.
+</p><p>
+A base register address also provides default implementation of the following
+methods. These methods can be re-implemented in the model if there is a need
+to do things differently:
+</p><p>
+</p><dl><dt id="dt:update_mapping-"><b><code>update_mapping()</code></b></dt><dd>Triggers an unmapping and remapping of the space controlled by the
+BAR. This is a useful method if the <i>base</i> field is changed by some
+other means than a memory transaction. The default implementation will
+call <code>pci_mapping_enabled()</code> and combine the result with either Memory
+access enabled or I/O access enabled depending on the BAR type. If the BAR
+is enabled, the mapping will be (re)enabled. Otherwise it will stay
+unmapped.</dd><dt id="dt:pci_mapping_enabled-bool-enabled-"><b><code>pci_mapping_enabled() -&gt; (bool enabled)</code></b></dt><dd>This method is called to check whether a mapping is enabled or not. Returns
+true by default. It can be implemented to check, for example, another register
+before enabling the mapping. Note that the <code>io</code> and <code>mem</code> bits in
+the <i>command</i> register of <code>pci_config</code> bank are taken into
+account <em>regardless</em> of the value returned
+by <b><i>pci_mapping_enabled()</i></b>, as mentioned above.</dd><dt id="dt:pci_mapping_object-conf_object_t-obj-"><b><code>pci_mapping_object() -&gt; (conf_object_t *obj)</code></b></dt><dd>This method is called to obtain the <em>object</em> that should be mapped
+by the BAR. Returns the PCI object itself by default, but can be customized to
+return any object. Note that this method is called both when removing and when
+adding the mapping to the corresponding PCI space, so it is required to
+return <em>the same object</em> or else the automatic mapping mechanism will
+not work properly.</dd><dt id="dt:pci_mapping_target-conf_object_t-target-"><b><code>pci_mapping_target() -&gt; (conf_object_t *target)</code></b></dt><dd>This method is called to obtain the <em>target</em> that should be mapped
+by the BAR. By default, no target is used. This method allows a PCI device to
+create a translator or bridge mapping for another object. The method is only
+called when adding the mapping, not when removing it.</dd><dt id="dt:pci_mapping_customize-map_info_t-info-"><b><code>pci_mapping_customize(map_info_t *info)</code></b></dt><dd>This method is called after the <code>map_info_t</code> information for
+the mapping has been filled in but before the mapping is done. It can be used to
+customize the <code>map_info_t</code> structure (changing the base address, the
+size, the priority, etc.). Please note that the function number associated with
+the mapping cannot be changed, as this would break the automatic mapping
+mechanism. Invalid function values will be ignored, and a warning message will be
+logged.</dd><dt id="dt:pci_mapping_base-map_base-"><b><code>pci_mapping_base() -&gt; (map_base)</code></b></dt><dd>This method is called to obtain the base address for the mapping. The
+default implementation makes sure the address is naturally aligned with the
+size of the mapping.</dd><dt id="dt:pci_mapping_length-map_length-"><b><code>pci_mapping_length() -&gt; (map_length)</code></b></dt><dd>This method is called to obtain the size of the mapping. It uses
+the <code>pci_bar_size_bits()</code> method to do so.</dd><dt id="dt:pci_bar_size_bits-int-bits-"><b><code>pci_bar_size_bits() -&gt; (int bits)</code></b></dt><dd>This method is called when reading the BAR value and when creating the
+mapping. Returns <code>size_bits</code> by default. By overriding this method it is
+possible to create a dynamically re-sizable BAR.</dd></dl><p>The <code>pci_config</code> bank also provides the
+<b><i>update_all_mappings()</i></b> method that calls
+<b><i>update_mapping()</i></b> method on all active base address registers
+(listed in the <code>base_address_registers</code> parameter).
+</p><p>
+
+</p><h4 class="jdocu"><a class="not-numbered" name="pci-write-dml-bar-rom">Expansion ROM</a></h4>
+<p>
+
+</p><p>
+The <i>expansion_rom_base</i> register is a predefined base address
+register that will map the ROM object provided by
+the <i>expansion_rom</i> <em>connect</em> attribute. The size of this BAR
+is defined by the <i>expansion_rom_size</i> attribute. This BAR is active
+if both attributes are set and non-active otherwise. Address decoding can be
+enabled by SW according to the specification, and no mapping will take place
+when decoding is disabled. This is similar to how normal BARs for I/O and
+Memory space work.
+</p><p>
+
+</p><p>
+
+</p><h3 class="jdocu"><a name="Methods">19.3.4 Methods</a></h3>
+<p>
+
+</p><p>
+A number of methods are provided by the PCI library that will be helpful when
+writing PCI devices:
+</p><p>
+</p><dl><dt id="dt:pci_data_from_memory-and-pci_value_from_memory-"><b><b><i>pci_data_from_memory()</i></b> and
+<b><i>pci_value_from_memory()</i></b></b></dt><dd><pre class="jdocu_small">pci_data_from_memory(addr_space_t space, void *buffer,
+                     uint64 address, uint64 size)
+    -&gt; (exception_type_t ex)
+
+pci_value_from_memory(addr_space_t space, uint64 address,
+                      uint8 size) 
+    -&gt; (uint64 value, exception_type_t ex)</pre><p>
+</p><p>
+Perform a DMA read, from host memory to device.</p></dd><dt id="dt:pci_data_to_memory-and-pci_value_to_memory-"><b><b><i>pci_data_to_memory()</i></b> and <b><i>pci_value_to_memory()</i></b></b></dt><dd><pre class="jdocu_small">pci_data_to_memory(addr_space_t space, void *buffer, 
+                   uint64 address, uint64 size)
+    -&gt; (exception_type_t ex)
+
+pci_value_to_memory(addr_space_t space, uint64 value,
+                    uint64 address, uint8 size)
+    -&gt; (exception_type_t ex)</pre><p>
+</p><p>
+Perform a DMA write, from device to host memory.</p></dd><dt id="dt:pci_raise_interrupt_pin-and-pci_lower_interrupt_pin-"><b><b><i>pci_raise_interrupt_pin()</i></b> and <b><i>pci_lower_interrupt_pin()</i></b></b></dt><dd><pre class="jdocu_small">pci_raise_interrupt_pin(int pin)
+
+pci_lower_interrupt_pin(int pin)</pre><p>
+</p><p>
+Helper methods for legacy interrupts. These are invoked by
+the <b><i>pci_raise_interrupt()</i></b> and <b><i>pci_lower_interrupt()</i></b>
+methods implemented by the <code>pci_config</code> bank. A model can call these
+methods directly if there is a need to raise a different pin than the one
+configured in the config bank. Calling <b><i>pci_raise_interrupt()</i></b>
+or <b><i>pci_lower_interrupt()</i></b> is preferred.</p></dd></dl><p>For example, the DEC21140A model reads its descriptors with the following
+method:
+</p><p>
+</p><pre class="jdocu_small">// Read a descriptor from memory at address 'addr' to fill in 'desc'
+method read_descriptor(descriptor_t *desc, uint32 addr) 
+    -&gt; (exception_type_t ex)
+{
+    log info, 4, 0: "Fetching a descriptor at address 0x%x", addr;
+    call $pci_data_from_memory(Sim_Addr_Space_Memory, 
+                               cast(desc, void *), addr,
+                               sizeof(descriptor_t))
+        -&gt; (ex);
+    <i>[…]</i>
+}
+</pre><p>
+</p><p>
+
+</p><h3 class="jdocu"><a name="PCI-and-PCIe-Capabilities">19.3.5 PCI and PCIe Capabilities</a></h3>
+<p>
+
+</p><p>
+The Simics DML PCI library contains templates for a number of standard PCI and
+PCIe capabilities. These templates only provide the declaration of each
+capability, they do not provide the functionality which must be implemented in
+the device code. Registers in the capability declaration behave as expected
+(<code>read_only</code>, <code>read_write</code>,
+<code>write_1_clears</code>, etc.) but all other effects should
+be customized.
+</p><p>
+Some templates provide generic functionality and not just pure
+declarations. Most notably the SR-IOV and MSI-X related templates. These
+templates only rely on the model to set a few extra parameters.
+</p><p>
+All PCI capability templates provides at least two parameters that should be
+overridden: an offset parameter that defines where the capability begins in the
+configuration registers space, and a next pointer parameter that defines where
+the next capability will be. Capabilities are defined as a linked list in the
+PCI specification.
+</p><p>
+A device with the Power Management capability defined by the PCI standard could
+be implemented this way:
+</p><p>
+
+</p><pre class="jdocu_small">bank pci_config {
+    <i>[…]</i>
+    // Power Management
+    parameter pm_offset = 0x50;
+    parameter pm_next_ptr = 0x58;
+    is defining_pci_pm_capability;
+
+    // Customize the Power Management capability
+    register pm_capabilities {
+        field v    { parameter hard_reset_value = 0x2; }
+        field dsi  { parameter hard_reset_value = 0x1; }
+        field pmes { parameter hard_reset_value = 0x19; }
+    }
+    <i>[…]</i>
+}
+</pre><p>
+</p><p>
+
+</p><p>
+Notice how the register and field offsets have been defined by the template,
+but the configuration is done by the model.
+</p><p>
+The DML PCI library contains all known capabilities listed in the PCI, PCI
+Express, Power Management, PCI-to-PCI bridge and SR-IOV specifications. Some of
+the more common capabilities have been provided in multiple versions to make it
+possible to model old hardware as well as new. Please see the source code in
+section <a class="reference" href="#pci-write-dml-source">19.3.7</a> for details on available templates,
+their names and what they provide.
+</p><p>
+
+</p><h3 class="jdocu"><a name="pci-write-dml-print-pci-config-regs-command">19.3.6 Commands</a></h3>
+<p>
+
+</p><p>
+All PCI device models should have a <b><a name="print-pci-config-regs">print-pci-config-regs</a></b>
+command, showing the PCI configuration register values in an easy to read
+format.
+</p><p>
+To simplify the creation of this command, there is a helper function in the
+pci_common Python module. Instead of calling
+<b><i><a name="new_command">new_command</a></i></b>, call
+<b><i><a name="new_pci_config_regs_command">new_pci_config_regs_command</a></i></b>. It is assumed that the
+model implements an attribute called <i>config_registers</i>, which is
+true if the model has used
+either <code>pci_device</code>, <code>pcie_device</code> or
+the <code>pci_common</code> template.
+</p><p>
+The pci_common module also provides default <b><i>info()</i></b>
+and <b><i>status()</i></b> methods that can be used to register
+the <b>info</b> and <b>status</b> commands.
+</p><p>
+</p><h4 class="jdocu"><a name="Example-of-">19.3.6.1 Example of </a></h4>
+<p>
+
+</p><pre class="jdocu_small">import cli
+import pci_common
+
+cli.new_info_command("sample_pci_device", pci_common.get_pci_info)
+cli.new_status_command("sample_pci_device", pci_common.get_pci_status)
+pci_common.new_pci_config_regs_command('sample-pci-device')
+</pre><p>
+
+</p><h4 class="jdocu"><a name="Output">19.3.6.2 Output</a></h4>
+<p>
+
+The common registers are listed for easy reference:
+</p><pre class="jdocu_small">simics&gt;  <b>sample_cmp0.sample_dev.print-pci-config-regs</b>
+PCI configuration registers for sample_cmp0.sample_dev [class sample_pci_device]
+================================================================================
+
+Generic Registers:
+              Vendor ID :     0x104c
+              Device ID :     0xac10
+                Command :     0x0000
+                 Status :     0x0000
+            Revision ID :       0x00
+             Class Code :   0x000000
+        Cache Line Size :       0x00
+          Latency Timer :       0x00
+            Header Type :       0x00
+                   BIST :       0x00
+         Base Address 0 : 0x00000000
+         Base Address 1 : 0x00000000
+         Base Address 2 : 0x00000000
+         Base Address 3 : 0x00000000
+         Base Address 4 : 0x00000000
+         Base Address 5 : 0x00000000
+        Cardbus CIS Ptr : 0x00000000
+    Subsystem Vendor ID :     0x0000
+    Subsystem Device ID :     0x0000
+     Expansion ROM Base : 0x00000000
+       Capabilities Ptr :       0x00
+         Interrupt Line :       0x00
+          Interrupt Pin :       0x00
+                Min Gnt :       0x00
+                Max Lat :       0x00
+simics&gt;  <b>sample_cmp0.sample_dev.info</b>
+Information about sample_cmp0.sample_dev [class sample_pci_device]
+==================================================================
+
+    PCI bus : board.mb.sb.ext_pci_bus
+
+simics&gt;  <b>sample_cmp0.sample_dev.status</b>
+Status of sample_cmp0.sample_dev [class sample_pci_device]
+==========================================================
+No status available
+</pre><p>
+
+
+</p><h3 class="jdocu"><a name="pci-write-dml-source">19.3.7 Source Code</a></h3>
+<p>
+
+</p><p>
+For more detailed information, the source code of the Simics DML PCI library is
+available in the installation of Simics Base, where Model Builder resources are
+located, in the directory
+<code></code><em>[simics]</em><code>/src/devices/dml-lib/1.2/pci/</code> for DML
+<code>1.2</code> or <code></code><em>[simics]</em><code>/src/devices/dml-lib/1.4/pci/</code>
+for DML <code>1.4</code>, in the
+files <code>common.dml</code>, <code>pci-capabilities.dml</code>,
+<code>pcie-capabilities.dml</code>
+and <code>pcie-sriov.dml</code>. The old DML PCI library used in Simics 4.6 can
+be found in the
+directory <code></code><em>[simics]</em><code>/</code><em>host</em><code>/bin/dml-old/1.2/</code>, in the
+files <code>pci-device.dml</code>, <code>pci-common.dml</code>
+and <code>pcie-device.dml</code>. The old DML PCI library can be selected by
+setting SIMICS_API to 4.6 in the module's Makefile.
+
+</p><p>
+
+</p><p>
+</p><div class=chain>
+<a href="dma.html" class="previous">18 Modeling Direct Memory Access (DMA)</a>
+<a href="modeling-i2c-devices.html" class="next">20 Modeling I2C Devices</a>
+</div>

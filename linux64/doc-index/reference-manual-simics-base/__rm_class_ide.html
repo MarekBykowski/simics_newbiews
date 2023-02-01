@@ -1,0 +1,81 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>ide</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_id-splitter.html" class="previous">id-splitter</a>
+<a href="__rm_class_ide-cdrom.html" class="next">ide-cdrom</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_ide">ide</a></h1>
+<p>
+
+<a name="ide"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_ide">ide</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The IDE class implements the functionality of an IDE controller and its interaction with the DMA controller. Transfer timing (command start -&gt; interrupt) for DMA is properly modelled.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ide_dma, ide_dma_v2, io_memory, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>port.DMA_DACK</b> (signal)<br><b>port.DMA_DDONE</b> (signal)</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bus_master_dma"><b><i>bus_master_dma</i></b></dt><p><a name="__rm_attribute_ide_bus_master_dma"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+DMA controller implementing bus-master-ide.</dd></dl><p></p><dl><dt id="dt:control"><b><i>control</i></b></dt><p><a name="__rm_attribute_ide_control"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Control register (shared between master/slave).</dd></dl><p></p><dl><dt id="dt:dma_dack_level"><b><i>dma_dack_level</i></b></dt><p><a name="__rm_attribute_ide_dma_dack_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+DMA controller implementing signal interface. Upon a DMA request, the DREQ signal will be held high.</dd></dl><p></p><dl><dt id="dt:dma_dreq_target"><b><i>dma_dreq_target</i></b></dt><p><a name="__rm_attribute_ide_dma_dreq_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+DMA controller implementing signal interface. Upon a DMA request, the DREQ signal will be held high.</dd></dl><p></p><dl><dt id="dt:dma_ready"><b><i>dma_ready</i></b></dt><p><a name="__rm_attribute_ide_dma_ready"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Non-zero if the DMA controller is ready for transfer.</dd></dl><p></p><dl><dt id="dt:interrupt_delay"><b><i>interrupt_delay</i></b></dt><p><a name="__rm_attribute_ide_interrupt_delay"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Time in seconds between state changes.</dd></dl><p></p><dl><dt id="dt:interrupt_pin"><b><i>interrupt_pin</i></b></dt><p><a name="__rm_attribute_ide_interrupt_pin"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt request status.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_ide_irq_dev"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Interrupt target implementing the signal interface. It also supports simple_interrupt interface, this will be deprecated in the future.</dd></dl><p></p><dl><dt id="dt:irq_level"><b><i>irq_level</i></b></dt><p><a name="__rm_attribute_ide_irq_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt level. If the <i>irq_dev</i> attribute is set with an object that implements the simple_interrupt interface, this attribute controls the interrupt level.</dd></dl><p></p><dl><dt id="dt:lba_mode"><b><i>lba_mode</i></b></dt><p><a name="__rm_attribute_ide_lba_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Currently selected addressing mode (bit 6 in the drive/head register).</dd></dl><p></p><dl><dt id="dt:master"><b><i>master</i></b></dt><p><a name="__rm_attribute_ide_master"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Master device. Must implement the ide-device interface.</dd></dl><p></p><dl><dt id="dt:model_dma_delay"><b><i>model_dma_delay</i></b></dt><p><a name="__rm_attribute_ide_model_dma_delay"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If set, the controller will accurately model DMA transfer bandwidth (infinite bandwidth otherwise).</dd></dl><p></p><dl><dt id="dt:primary"><b><i>primary</i></b></dt><p><a name="__rm_attribute_ide_primary"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to one if this is a primary IDE controller.</dd></dl><p></p><dl><dt id="dt:selected_drive"><b><i>selected_drive</i></b></dt><p><a name="__rm_attribute_ide_selected_drive"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Currently selected drive (bit 4 in the drive/head register).</dd></dl><p></p><dl><dt id="dt:slave"><b><i>slave</i></b></dt><p><a name="__rm_attribute_ide_slave"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Slave device. Must implement the ide-device interface.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ide_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ide_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_id-splitter.html" class="previous">id-splitter</a>
+<a href="__rm_class_ide-cdrom.html" class="next">ide-cdrom</a>
+</div>

@@ -1,0 +1,90 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>generic_spi_flash</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_generic_pcie_switch_port.html" class="previous">generic_pcie_switch_port</a>
+<a href="__rm_class_gfx-console.html" class="next">gfx-console</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_generic_spi_flash">generic_spi_flash</a></h1>
+<p>
+
+<a name="generic_spi_flash"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_generic-spi-flash">generic-spi-flash</a>
+</dd>
+<dt class="jdocu_descitem"><b>Aliases</b></dt><dd class="jdocu_descitem">M25Pxx</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>generic_spi_flash</b> class  implements the M25P05/10/20/40/80/16/32/64/128, N25Q256A/512A/00AA and W25Q80/16/32/64/128 BV/CV serial flash memories, accessed via the SPI Interface. Different flash models using serial interface from different manufactures can be implemented by manually configure JEDEC ID, sector number and sector size attributes.<ul>  <li>Unimplemented features:    <ul>      <li>operation waiting state</li>      <li>Non-8bit align SPI transfer</li>    </ul>  </li>  <li>4-byte address mode is implemented for Micron N25Q family.</li></ul>
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, serial_peripheral_interface_slave</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.fcl</b> (bank_instrumentation_subscribe, instrumentation_order, io_memory, register_view, register_view_read_only)<br><b>port.HRESET</b> (signal)<br><b>port.TOP_SECTOR_LOCK</b> (signal)<br><b>port.WRITE_PROTECT</b> (signal)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:jedec_signature"><b><i>JEDEC_signature</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_JEDEC_signature"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>nil</code>.
+JEDEC standard signature. It should be configured in format like [0x20, 0x20, 0x15] for M25P16. Please refer to the hardware documentation for the correct value.</dd></dl><p></p><dl><dt id="dt:addr4b_enabled"><b><i>addr4b_enabled</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_addr4b_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable 4-byte address mode.</dd></dl><p></p><dl><dt id="dt:dual_parallel_enabled"><b><i>dual_parallel_enabled</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_dual_parallel_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Device represents two instances in dual parallel mode.</dd></dl><p></p><dl><dt id="dt:elec_signature"><b><i>elec_signature</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_elec_signature"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Electronic Signature, has default value 0x13. this is not the same as, or even a subset of, the JEDEC 16-bit Electronic Signature. this is for reason of backward compatibility, only, and should not be used for new designs. It should be configured with value 0x05 for M25P05-A, 0x10 for M25P10-A, 0x11 for M25P20, 0x12 for M25P40, 0x13 for M25P80, 0x14 for M25P16, 0x15 for M25P32. 0x16 for M25P64. For all other devices not listed above, please check the respective hardware documentation.</dd></dl><p></p><dl><dt id="dt:extended_id"><b><i>extended_id</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_extended_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code> or <code>nil</code>.
+Extended device identification. It is only implemented in some flash models. For those models, the two bytes are used to identify different devices. It should be configured like: [0x4d, 0x00] for S25FL032P. Please refer to the hardware documentation for the correct value.</dd></dl><p></p><dl><dt id="dt:fcmd_counter"><b><i>fcmd_counter</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_fcmd_counter"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{256}]</code>.
+Array of the commands statistic counters.</dd></dl><p></p><dl><dt id="dt:fpdi_enabled"><b><i>fpdi_enabled</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_fpdi_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable DUAL INPUT FAST PROGRAM Command. Please refer to the hardware documentation to set True.</dd></dl><p></p><dl><dt id="dt:fpqi_enabled"><b><i>fpqi_enabled</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_fpqi_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable QUAD INPUT FAST PROGRAM Command. Please refer to the hardware documentation to set True.</dd></dl><p></p><dl><dt id="dt:frdo_enabled"><b><i>frdo_enabled</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_frdo_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable DUAL OUTPUT FAST READ Command. Please refer to the hardware documentation to set True.</dd></dl><p></p><dl><dt id="dt:frqo_enabled"><b><i>frqo_enabled</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_frqo_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable QUAD OUTPUT FAST READ Command. Please refer to the hardware documentation to set True.</dd></dl><p></p><dl><dt id="dt:mem_block"><b><i>mem_block</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_mem_block"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+Connects to an <b>image</b> object which holding the data, the <i>size</i> of attached object should be equal to <i>sector_number.val</i> * <i>sector_size.val</i>.
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:pp_buffer"><b><i>pp_buffer</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_pp_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+buffer for holding page program data</dd></dl><p></p><dl><dt id="dt:sector_lock"><b><i>sector_lock</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sector_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+The SPM1 lock registers.</dd></dl><p></p><dl><dt id="dt:sector_number"><b><i>sector_number</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sector_number"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sector number in the whole flash, has default value 16. Please refer to the hardware documentation for the correct value.</dd></dl><p></p><dl><dt id="dt:sector_size"><b><i>sector_size</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sector_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Bytes size for flash sector, has default value 0x10000(64 * 1024). Please refer to the hardware documentation for the correct value. For example, 0x8000 for M25P05-A</dd></dl><p></p><dl><dt id="dt:sfdp_data"><b><i>sfdp_data</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sfdp_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Array for storing headers and data for sfdp tables.</dd></dl><p></p><dl><dt id="dt:sfdp_flash_size"><b><i>sfdp_flash_size</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sfdp_flash_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Size of flash memory which is stored in basic SFDT table.</dd></dl><p></p><dl><dt id="dt:sfdp_tables_num"><b><i>sfdp_tables_num</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sfdp_tables_num"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of SFPD tables.</dd></dl><p></p><dl><dt id="dt:sfdp_tables_revision"><b><i>sfdp_tables_revision</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_sfdp_tables_revision"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ii]{2}]</code>.
+Revision of sfdp table [msb, lsb].</dd></dl><p></p><dl><dt id="dt:spi_master"><b><i>spi_master</i></b></dt><p><a name="__rm_attribute_generic_spi_flash_spi_master"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+SPI master this device connected to.
+<p>
+Required interfaces: <code>serial_peripheral_interface_master</code>.</p></dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic_spi_flash_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic_spi_flash_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_generic_pcie_switch_port.html" class="previous">generic_pcie_switch_port</a>
+<a href="__rm_class_gfx-console.html" class="next">gfx-console</a>
+</div>

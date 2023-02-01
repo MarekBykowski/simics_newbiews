@@ -1,0 +1,122 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>std-service-node</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_std-firewire-sample-device.html" class="previous">std-firewire-sample-device</a>
+<a href="__rm_class_std-super-io.html" class="next">std-super-io</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="components.html">4 Components</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_std-service-node">std-service-node</a></h1>
+<p>
+
+<a name="std-service-node"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_service-node">service-node</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The "std-service-node" component represents a network service node that can be connected to Ethernet links to provide services such as DNS, DHCP/BOOTP, RARP and TFTP. A service node component does not have any connectors by default. Instead, connectors have to be added using the <b>&lt;std-service-node&gt;.add-connector</b> command.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">component, component_connector, conf_object, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:component_queue"><b><i>component_queue</i></b></dt><p><a name="__rm_attribute_std-service-node_component_queue"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>any</code>.
+The overriding queue object for this component.</dd></dl><p></p><dl><dt id="dt:connections"><b><i>connections</i></b></dt><p><a name="__rm_attribute_std-service-node_connections"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[sos]*]</code>.
+This attribute should not be used anymore. Each component has connector objects that contain all connector functionality. List of connections for the component. The format is a list of lists, each containing the name of the connector, the connected component, and the name of the connector on the other component.</dd></dl><p></p><dl><dt id="dt:dynamic_slots"><b><i>dynamic_slots</i></b></dt><p><a name="__rm_attribute_std-service-node_dynamic_slots"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code> or <code>nil</code>.
+Dictionary with dynamic slots.</dd></dl><p></p><dl><dt id="dt:instantiated"><b><i>instantiated</i></b></dt><p><a name="__rm_attribute_std-service-node_instantiated"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if the component has been instantiated.</dd></dl><p></p><dl><dt id="dt:object_list"><b><i>object_list</i></b></dt><p><a name="__rm_attribute_std-service-node_object_list"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code> or <code>nil</code>.
+Dictionary with objects that the component consists of.</dd></dl><p></p><dl><dt id="dt:object_prefix"><b><i>object_prefix</i></b></dt><p><a name="__rm_attribute_std-service-node_object_prefix"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Object prefix string used by the component. The prefix is typically set by the <b>set-component-prefix</b> command before the component is created.</dd></dl><p></p><dl><dt id="dt:pending_cell_object_factories"><b><i>pending_cell_object_factories</i></b></dt><p><a name="__rm_attribute_std-service-node_pending_cell_object_factories"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ss]*]</code>.
+Internal attribute for pending cell objects factories.</dd></dl><p></p><dl><dt id="dt:top_component"><b><i>top_component</i></b></dt><p><a name="__rm_attribute_std-service-node_top_component"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The top level component. Attribute is not valid until the component has been instantiated.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Class-Attributes">Class Attributes</a></h2>
+<p>
+
+</p><dl><dt id="dt:basename"><b><i>basename</i></b></dt><p><a name="__rm_attribute_std-service-node_basename"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+The basename of the component.</dd></dl><p></p><dl><dt id="dt:component_icon"><b><i>component_icon</i></b></dt><p><a name="__rm_attribute_std-service-node_component_icon"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>string</code> or <code>nil</code>.
+Name of a 24x24 pixels large icon in PNG format used to graphically represent the component in a configuration viewer.</dd></dl><p></p><dl><dt id="dt:config_attributes"><b><i>config_attributes</i></b></dt><p><a name="__rm_attribute_std-service-node_config_attributes"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>[[s[a*]]*]</code>.
+Internal bug 12881, list of attributes.</dd></dl><p></p><dl><dt id="dt:connectors"><b><i>connectors</i></b></dt><p><a name="__rm_attribute_std-service-node_connectors"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>dictionary</code>.
+This attribute should not be used anymore. Each component has connector objects that contain all connector functionality. Dictionary of dictionaries with connectors defined by this component class, indexed by name. Each connector contains the name of the connector "type", a "direction" ("up", "down" or "any"), a flag indicating if the connector can be "empty", another flag that is set if the connector is "hotplug" capable, and finally a flag that is TRUE if multiple connections to this connector is allowed.</dd></dl><p></p><dl><dt id="dt:top_level"><b><i>top_level</i></b></dt><p><a name="__rm_attribute_std-service-node_top_level"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>boolean</code> or <code>nil</code>.
+Set to TRUE for top-level components, i.e. the root of a hierarchy.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface component</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.connect">connect</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.connect-to">connect-to</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.delete">delete</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.disconnect">disconnect</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-available-connector">get-available-connector</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-component-object">get-component-object</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-connection">get-connection</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-connector-list">get-connector-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-processor-list">get-processor-list</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.add-connector">add-connector</a></b></td><td class="jdocu_noborder">add a service-node connector</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.add-host">add-host</a></b></td><td class="jdocu_noborder">add host entry</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.arp">arp</a></b></td><td class="jdocu_noborder">inspect and manipulate ARP table</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.change-reference-clock">change-reference-clock</a></b></td><td class="jdocu_noborder">change the reference clock of a service-node component</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.connect-to-link">connect-to-link</a></b></td><td class="jdocu_noborder">connect a service-node component to a link</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.delete-host">delete-host</a></b></td><td class="jdocu_noborder">delete host entry</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.dhcp-add-pool">dhcp-add-pool</a></b></td><td class="jdocu_noborder">add DHCP pool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.dhcp-leases">dhcp-leases</a></b></td><td class="jdocu_noborder">print DHCP leases</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.disable-real-dns">disable-real-dns</a></b></td><td class="jdocu_noborder">disable real DNS</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.disable-service">disable-service</a></b></td><td class="jdocu_noborder">disable network service</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.enable-ftp-alg">enable-ftp-alg</a></b></td><td class="jdocu_noborder">enable FTP ALG</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.enable-real-dns">enable-real-dns</a></b></td><td class="jdocu_noborder">enable real DNS</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.enable-service">enable-service</a></b></td><td class="jdocu_noborder">enable network service</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.get-ip-address-from-pool">get-ip-address-from-pool</a></b></td><td class="jdocu_noborder">pop an IP address from the DHCP pool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.list-host-info">list-host-info</a></b></td><td class="jdocu_noborder">list host info database</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.route">route</a></b></td><td class="jdocu_noborder">show the routing table</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.route-add">route-add</a></b></td><td class="jdocu_noborder">add an entry to the routing table</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.set-ftp-directory">set-ftp-directory</a></b></td><td class="jdocu_noborder">set FTP root directory</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.set-tftp-directory">set-tftp-directory</a></b></td><td class="jdocu_noborder">set TFTP directory</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_std-service-node_gt_.tcpip-info">tcpip-info</a></b></td><td class="jdocu_noborder">show TCP/IP info</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_std-firewire-sample-device.html" class="previous">std-firewire-sample-device</a>
+<a href="__rm_class_std-super-io.html" class="next">std-super-io</a>
+</div>

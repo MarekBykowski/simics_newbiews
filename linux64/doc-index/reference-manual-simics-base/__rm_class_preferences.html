@@ -1,0 +1,91 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>preferences</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_port-space.html" class="previous">port-space</a>
+<a href="__rm_class_probe_alias_probe.html" class="next">probe_alias_probe</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_preferences">preferences</a></h1>
+<p>
+
+<a name="preferences"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>preferences</b> class represents Simics's global simulator preferences that, unlike the settings in the <b>sim</b> object, usually are the same between sessions.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, preference</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:async_command_line"><b><i>async_command_line</i></b></dt><p><a name="__rm_attribute_preferences_async_command_line"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE (default) if command lines in Simics should be asynchronous, meaning that a prompt exists and commands can be entered while the simulation is advancing.</dd></dl><p></p><dl><dt id="dt:autostart_sim"><b><i>autostart_sim</i></b></dt><p><a name="__rm_attribute_preferences_autostart_sim"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if the simulation should automatically start when a new session is started. Default FALSE.</dd></dl><p></p><dl><dt id="dt:checkpoint_chdir"><b><i>checkpoint_chdir</i></b></dt><p><a name="__rm_attribute_preferences_checkpoint_chdir"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Whether Simics should change the current working directory during checkpoint saving and loading. The default is FALSE.</dd></dl><p></p><dl><dt id="dt:cli_table_border_style"><b><i>cli_table_border_style</i></b></dt><p><a name="__rm_attribute_preferences_cli_table_border_style"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The style of the table-borders. Valid styles are: borderless, ascii, thin and thick. Default is thin.</dd></dl><p></p><dl><dt id="dt:cpu_mode"><b><i>cpu_mode</i></b></dt><p><a name="__rm_attribute_preferences_cpu_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Default CPU mode used when loading processor modules. As of Simics 6 only normal is allowed. The value for the current session is in sim-&gt;cpu_mode.</dd></dl><p></p><dl><dt id="dt:default_log_endianness"><b><i>default_log_endianness</i></b></dt><p><a name="__rm_attribute_preferences_default_log_endianness"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Sets the default endianness of logged values when not given by context. Valid values are "little" (the default) and "big".</dd></dl><p></p><dl><dt id="dt:enable_multithreading"><b><i>enable_multithreading</i></b></dt><p><a name="__rm_attribute_preferences_enable_multithreading"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if Multimachine Accelerator should be enabled when Simics is started. Default TRUE.</dd></dl><p></p><dl><dt id="dt:enable_rev_exec"><b><i>enable_rev_exec</i></b></dt><p><a name="__rm_attribute_preferences_enable_rev_exec"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if reverse execution should be enabled when Simics is started. Default FALSE.</dd></dl><p></p><dl><dt id="dt:force_ipv4"><b><i>force_ipv4</i></b></dt><p><a name="__rm_attribute_preferences_force_ipv4"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, network services such as telnet and VNC in the target consoles will use IPv4 only. Default is FALSE.</dd></dl><p></p><dl><dt id="dt:gui_cmd_line_font"><b><i>gui_cmd_line_font</i></b></dt><p><a name="__rm_attribute_preferences_gui_cmd_line_font"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Font used in the command line window.</dd></dl><p></p><dl><dt id="dt:gui_default_project"><b><i>gui_default_project</i></b></dt><p><a name="__rm_attribute_preferences_gui_default_project"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Default Simics project to open when Simics is launched in GUI mode. The value for the current session is in sim-&gt;project.</dd></dl><p></p><dl><dt id="dt:gui_mode"><b><i>gui_mode</i></b></dt><p><a name="__rm_attribute_preferences_gui_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Default GUI mode when starting the command line version of Simics. The value is one of "mixed" and "no-gui". The value for the current session is in sim-&gt;gui_mode.</dd></dl><p></p><dl><dt id="dt:gui_open_cmdline_win"><b><i>gui_open_cmdline_win</i></b></dt><p><a name="__rm_attribute_preferences_gui_open_cmdline_win"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if the command line window always should open when Simics is launched in GUI mode.</dd></dl><p></p><dl><dt id="dt:gui_open_control_win"><b><i>gui_open_control_win</i></b></dt><p><a name="__rm_attribute_preferences_gui_open_control_win"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if the control window should open when Simics is launched in command line mode and windows are allowed.</dd></dl><p></p><dl><dt id="dt:gui_show_deprecated"><b><i>gui_show_deprecated</i></b></dt><p><a name="__rm_attribute_preferences_gui_show_deprecated"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if deprecated functionality in the built-in GUI, such as source level debugging, should be visible.</dd></dl><p></p><dl><dt id="dt:gui_source_code_encoding"><b><i>gui_source_code_encoding</i></b></dt><p><a name="__rm_attribute_preferences_gui_source_code_encoding"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Default encoding used in the source code window.</dd></dl><p></p><dl><dt id="dt:gzip_config"><b><i>gzip_config</i></b></dt><p><a name="__rm_attribute_preferences_gzip_config"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Whether saved checkpoint config files will be compressed with gzip (config.gz). The default is TRUE.</dd></dl><p></p><dl><dt id="dt:history_lines"><b><i>history_lines</i></b></dt><p><a name="__rm_attribute_preferences_history_lines"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of input lines saved in the command history.</dd></dl><p></p><dl><dt id="dt:legacy_cell"><b><i>legacy_cell</i></b></dt><p><a name="__rm_attribute_preferences_legacy_cell"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Allow pre-cell configurations to run.</dd></dl><p></p><dl><dt id="dt:license_file"><b><i>license_file</i></b></dt><p><a name="__rm_attribute_preferences_license_file"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+The path to the default FlexNET license file. See also the license_file attribute in the sim class. The value for the current session is in sim-&gt;license_file. Simics has to be restarted for a new license path to take effect.</dd></dl><p></p><dl><dt id="dt:output_grouping"><b><i>output_grouping</i></b></dt><p><a name="__rm_attribute_preferences_output_grouping"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiii]</code>.
+The default digit grouping for integers in the command line, for binary, octal, decimal and hexadecimal integers.</dd></dl><p></p><dl><dt id="dt:output_radix"><b><i>output_radix</i></b></dt><p><a name="__rm_attribute_preferences_output_radix"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The default output radix for integers in the command line. One of 2, 8, 10 and 16. Default is 10.</dd></dl><p></p><dl><dt id="dt:readline_shortcuts"><b><i>readline_shortcuts</i></b></dt><p><a name="__rm_attribute_preferences_readline_shortcuts"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if GNU Readline style keyboard shortcuts should be used in the command line. If set to FALSE, Windows style shortcuts are used.</dd></dl><p></p><dl><dt id="dt:rle_data_attr"><b><i>rle_data_attr</i></b></dt><p><a name="__rm_attribute_preferences_rle_data_attr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Whether data attribute values will be RLE-compressed in checkpoints. The default is TRUE.</dd></dl><p></p><dl><dt id="dt:startup_simics_path"><b><i>startup_simics_path</i></b></dt><p><a name="__rm_attribute_preferences_startup_simics_path"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+The initial value of the Simics search path. This list of dictionaries are copied to the sim-&gt;simics_path attribute at startup.</dd></dl><p></p><dl><dt id="dt:swap_dir"><b><i>swap_dir</i></b></dt><p><a name="__rm_attribute_preferences_swap_dir"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Directory where to store swap files, to limit Simics memory usage.</dd></dl><p></p><dl><dt id="dt:wireshark_path"><b><i>wireshark_path</i></b></dt><p><a name="__rm_attribute_preferences_wireshark_path"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+The directory were wireshark or ethereal binaries are located. If not set the default environment path will be searched.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_preferences_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_preferences_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_port-space.html" class="previous">port-space</a>
+<a href="__rm_class_probe_alias_probe.html" class="next">probe_alias_probe</a>
+</div>

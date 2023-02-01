@@ -1,0 +1,84 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i8259x2</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i82583v_v2.html" class="previous">i82583V_v2</a>
+<a href="__rm_class_id-splitter.html" class="next">id-splitter</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i8259x2">i8259x2</a></h1>
+<p>
+
+<a name="i8259x2"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_8259x2">8259x2</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The 8259x2 device implements the functionality of two cascaded 8259 interrupt controllers. The 8259x2 supplies 15 interrupt levels that connected devices can use to interrupt the cpu. The interrupt level to use should be set in the interrupting device. Limitations: Most registers in the 8259x2 device change hardware specific parameters. These are do-nothing in the 8259x2. Special Fully Nested Mode is not implemented. Buffered Mode is not implemented. Special Mask Mode is not implemented. Automatic End of Interrupt is not implemented. Rotate commands are not supported. Specific EOI commands are not supported.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, interrupt_cpu, io_memory, log_object, simple_interrupt</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>port.RESET</b> (signal) : Device reset. The stand-alone version of this device does not have a reset pin, but the device as IP in larger ASICs typically do act on reset.<br><b>port.irq_0</b> (signal) : Signal based IRQ interface<br><b>port.irq_10</b> (signal) : Signal based IRQ interface<br><b>port.irq_11</b> (signal) : Signal based IRQ interface<br><b>port.irq_12</b> (signal) : Signal based IRQ interface<br><b>port.irq_13</b> (signal) : Signal based IRQ interface<br><b>port.irq_14</b> (signal) : Signal based IRQ interface<br><b>port.irq_15</b> (signal) : Signal based IRQ interface<br><b>port.irq_1</b> (signal) : Signal based IRQ interface<br><b>port.irq_2</b> (signal) : Signal based IRQ interface<br><b>port.irq_3</b> (signal) : Signal based IRQ interface<br><b>port.irq_4</b> (signal) : Signal based IRQ interface<br><b>port.irq_5</b> (signal) : Signal based IRQ interface<br><b>port.irq_6</b> (signal) : Signal based IRQ interface<br><b>port.irq_7</b> (signal) : Signal based IRQ interface<br><b>port.irq_8</b> (signal) : Signal based IRQ interface<br><b>port.irq_9</b> (signal) : Signal based IRQ interface</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count<br>irq[16][16] (signal) : Signal based IRQ interface</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:aeoi"><b><i>aeoi</i></b></dt><p><a name="__rm_attribute_i8259x2_aeoi"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) auto end of interrupt mode.</dd></dl><p></p><dl><dt id="dt:ic4_set"><b><i>ic4_set</i></b></dt><p><a name="__rm_attribute_i8259x2_ic4_set"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) expect 4 init bytes.</dd></dl><p></p><dl><dt id="dt:init_seq"><b><i>init_seq</i></b></dt><p><a name="__rm_attribute_i8259x2_init_seq"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) sequence in initialization writes.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_i8259x2_irq_dev"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Interrupt device to use, implementing the interrupt_ack interface.</dd></dl><p></p><dl><dt id="dt:irq_mask"><b><i>irq_mask</i></b></dt><p><a name="__rm_attribute_i8259x2_irq_mask"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) interrupt mask.</dd></dl><p></p><dl><dt id="dt:irq_requested"><b><i>irq_requested</i></b></dt><p><a name="__rm_attribute_i8259x2_irq_requested"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt of the cpu is requested.</dd></dl><p></p><dl><dt id="dt:issued"><b><i>issued</i></b></dt><p><a name="__rm_attribute_i8259x2_issued"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) bit set for interrupt sent (and acked) to cpu (ISR).</dd></dl><p></p><dl><dt id="dt:level"><b><i>level</i></b></dt><p><a name="__rm_attribute_i8259x2_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) bit set for level triggered, else edge.</dd></dl><p></p><dl><dt id="dt:line_status"><b><i>line_status</i></b></dt><p><a name="__rm_attribute_i8259x2_line_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) interrupt input line status.</dd></dl><p></p><dl><dt id="dt:low_irq_pri"><b><i>low_irq_pri</i></b></dt><p><a name="__rm_attribute_i8259x2_low_irq_pri"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) interrupt with lowest priority.</dd></dl><p></p><dl><dt id="dt:poll"><b><i>poll</i></b></dt><p><a name="__rm_attribute_i8259x2_poll"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) poll command.</dd></dl><p></p><dl><dt id="dt:queued"><b><i>queued</i></b></dt><p><a name="__rm_attribute_i8259x2_queued"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) bit set for interrupts received from device in level triggered mode. Used to handle re-issuing of level triggered interrupts. This bit is NOT used for the cascade line.</dd></dl><p></p><dl><dt id="dt:read_reg"><b><i>read_reg</i></b></dt><p><a name="__rm_attribute_i8259x2_read_reg"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) IRR or ISR on next read.</dd></dl><p></p><dl><dt id="dt:reissue_pending"><b><i>reissue_pending</i></b></dt><p><a name="__rm_attribute_i8259x2_reissue_pending"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt reissue event posted to CPU.</dd></dl><p></p><dl><dt id="dt:request"><b><i>request</i></b></dt><p><a name="__rm_attribute_i8259x2_request"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) interrupt requested (IRR).</dd></dl><p></p><dl><dt id="dt:sfnm"><b><i>sfnm</i></b></dt><p><a name="__rm_attribute_i8259x2_sfnm"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) special fully nested mode.</dd></dl><p></p><dl><dt id="dt:special_mask"><b><i>special_mask</i></b></dt><p><a name="__rm_attribute_i8259x2_special_mask"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) special mask mode is set (may allow lower irq when ISR set).</dd></dl><p></p><dl><dt id="dt:vba"><b><i>vba</i></b></dt><p><a name="__rm_attribute_i8259x2_vba"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<i>dev1</i>,<i>dev2</i>) Interrupt Vector Base Address.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8259x2_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8259x2_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i82583v_v2.html" class="previous">i82583V_v2</a>
+<a href="__rm_class_id-splitter.html" class="next">id-splitter</a>
+</div>

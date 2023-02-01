@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>Stalling</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="simics-in-order.html" class="previous">Simics in-order</a>
+<a href="choosing-an-execution-mode.html" class="next">Choosing an Execution Mode</a>
+</div>
+<div class=path>
+<a href="index.html">Understanding Simics Timing</a>&nbsp;/&nbsp;
+<a href="instruction-execution-timing.html">3 Instruction Execution Timing</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="Stalling">Stalling</a></h1>
+<p>
+
+</p><p>
+The in-order model can be extended by adding <em><a name="timing-models">timing models</a></em>
+to control the timing of memory operations, typically using the memory
+hierarchy interface described in the
+<em>Model Builder User's Guide</em>.
+When timing models are introduced, steps are no longer atomic
+operations taking no time. A step performing a memory operation (whether an
+instruction fetch or a data transaction) can <a name="stall">stall</a> for a number of
+cycles. Cycle events are performed during the <a name="stalling-period">stalling period</a> as
+time goes forward. Step events are performed just before the step execution, as
+in the default model. Simics executes one step at a time, but with varying
+timing for each step, so the simulation is still performing an in-order
+execution of the instruction flow. The basic step rate can also be changed; see
+the section <b>Changing the Step Rate</b> below.
+</p><p>
+</p><div class=chain>
+<a href="simics-in-order.html" class="previous">Simics in-order</a>
+<a href="choosing-an-execution-mode.html" class="next">Choosing an Execution Mode</a>
+</div>

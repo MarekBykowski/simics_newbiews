@@ -1,0 +1,95 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>probe_system_perfmeter</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_probe_sum_probe.html" class="previous">probe_sum_probe</a>
+<a href="__rm_class_probe_telemetry.html" class="next">probe_telemetry</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_probe_system_perfmeter">probe_system_perfmeter</a></h1>
+<p>
+
+<a name="probe_system_perfmeter"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_probe-monitor">probe-monitor</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Probe based system-perfmeter extending on the probe-monitor, but adds some performance related features
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, table</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">time_probe (probe) : None</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:clock"><b><i>clock</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_clock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Master clock.</dd></dl><p></p><dl><dt id="dt:interval"><b><i>interval</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_interval"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Sampling interval.</dd></dl><p></p><dl><dt id="dt:mode"><b><i>mode</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_mode"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Sampling mode used.</dd></dl><p></p><dl><dt id="dt:notifier_obj"><b><i>notifier_obj</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_notifier_obj"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Object where the notifier is installed.</dd></dl><p></p><dl><dt id="dt:notifier_type"><b><i>notifier_type</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_notifier_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Notifier type.</dd></dl><p></p><dl><dt id="dt:output_file_name"><b><i>output_file_name</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_output_file_name"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Table dump file name.</dd></dl><p></p><dl><dt id="dt:print_no_samples"><b><i>print_no_samples</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_print_no_samples"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Disable sample printing.</dd></dl><p></p><dl><dt id="dt:summary"><b><i>summary</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_summary"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Print a summary when simulation stops.</dd></dl><p></p><dl><dt id="dt:window"><b><i>window</i></b></dt><p><a name="__rm_attribute_probe_system_perfmeter_window"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Open an independent console window.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface table</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_table_gt_.export-table-csv">export-table-csv</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_table_gt_.print-table">print-table</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.add-probe">add-probe</a></b></td><td class="jdocu_noborder">add a probe to the system-perfmeter</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.delete">delete</a></b></td><td class="jdocu_noborder">delete system-perfmeter</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.plot-graph">plot-graph</a></b></td><td class="jdocu_noborder">produce a plot of probes</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.print-history">print-history</a></b></td><td class="jdocu_noborder">print sample history of the probes</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.remove-probe">remove-probe</a></b></td><td class="jdocu_noborder">remove probe from system-perfmeter</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.sampling-settings">sampling-settings</a></b></td><td class="jdocu_noborder">set sampling settings</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.start">start</a></b></td><td class="jdocu_noborder">start the system-perfmeter</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.stop">stop</a></b></td><td class="jdocu_noborder">stop the system-perfmeter</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.summary">summary</a></b></td><td class="jdocu_noborder">show total summary of probes</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_probe_system_perfmeter_gt_.table-settings">table-settings</a></b></td><td class="jdocu_noborder">set the table settings</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_probe_sum_probe.html" class="previous">probe_sum_probe</a>
+<a href="__rm_class_probe_telemetry.html" class="next">probe_telemetry</a>
+</div>

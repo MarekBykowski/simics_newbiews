@@ -1,0 +1,140 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>textcon</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_text_panel_frontend.html" class="previous">text_panel_frontend</a>
+<a href="__rm_class_time-server.html" class="next">time-server</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_textcon">textcon</a></h1>
+<p>
+
+<a name="textcon"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_textcon">textcon</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>textcon</b> class provides a text user interface to a simulated machine. The console is typically connected to a simulated serial device.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">break_strings, break_strings_v2, con_input, conf_object, external_connection_events, host_serial, log_object, recorded, serial_console_frontend, serial_device, telnet_connection, text_console_backend</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>tcp</b> &lt;tcp-server&gt; : Telnet TCP server<br><b>unix_socket</b> &lt;unix-socket-server&gt; : Telnet Unix domain socket server</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:decawm"><b><i>DECAWM</i></b></dt><p><a name="__rm_attribute_textcon_DECAWM"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Auto-wrap mode.</dd></dl><p></p><dl><dt id="dt:backspace_sends_del"><b><i>backspace_sends_del</i></b></dt><p><a name="__rm_attribute_textcon_backspace_sends_del"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the backspace key sends DEL (127), otherwise BS (8). Default is TRUE.</dd></dl><p></p><dl><dt id="dt:break_strings"><b><i>break_strings</i></b></dt><p><a name="__rm_attribute_textcon_break_strings"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[sbbiib]*]</code>.
+List of console break strings (string, active, oneshot, hap ID, unused, regexp)</dd></dl><p></p><dl><dt id="dt:buffer_until_telnet_connection"><b><i>buffer_until_telnet_connection</i></b></dt><p><a name="__rm_attribute_textcon_buffer_until_telnet_connection"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the console will buffer any output until a client connects. If FALSE, such output will be discarded.</dd></dl><p></p><dl><dt id="dt:cmd_line_output"><b><i>cmd_line_output</i></b></dt><p><a name="__rm_attribute_textcon_cmd_line_output"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If set to TRUE, the Simics command line will receive console output, which will also be logged at level 3. Command line and log output will also happen automatically when the console is started in invisible mode, until it is explicitly displayed, or until this flag is set to FALSE.</dd></dl><p></p><dl><dt id="dt:convert_crlf"><b><i>convert_crlf</i></b></dt><p><a name="__rm_attribute_textcon_convert_crlf"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, LF characters received from the attached device are converted to CRLF.</dd></dl><p></p><dl><dt id="dt:cursor_data"><b><i>cursor_data</i></b></dt><p><a name="__rm_attribute_textcon_cursor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iibb]</code>.
+Current cursor data (column, row, pending wrap, relative coordinates).</dd></dl><p></p><dl><dt id="dt:default_colours"><b><i>default_colours</i></b></dt><p><a name="__rm_attribute_textcon_default_colours"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Default text colours (foreground, background) in 0xRRGGBB format.</dd></dl><p></p><dl><dt id="dt:device"><b><i>device</i></b></dt><p><a name="__rm_attribute_textcon_device"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The serial device that the console is attached to, must implement the 'serial_device' interface.</dd></dl><p></p><dl><dt id="dt:esc_state"><b><i>esc_state</i></b></dt><p><a name="__rm_attribute_textcon_esc_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[bbs][bbs][bbs][bbs]]</code>.
+ANSI escape sequence parser state.</dd></dl><p></p><dl><dt id="dt:filter_esc"><b><i>filter_esc</i></b></dt><p><a name="__rm_attribute_textcon_filter_esc"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[bbbb]</code>.
+Determines if ANSI escape sequences sent from the attached device will be filtered out in different circumstances: [for breakpoint matching, for command line, for log output, elsewhere]. The default is [TRUE, TRUE, FALSE, FALSE].</dd></dl><p></p><dl><dt id="dt:input_mode"><b><i>input_mode</i></b></dt><p><a name="__rm_attribute_textcon_input_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+What terminal type to emulate for keyboard inputs. Possible values are <code>"standard"</code> (VT220/XTerm), which is the default, and <code>"microsoft"</code> (Microsoft's "VT100+").</dd></dl><p></p><dl><dt id="dt:log_line"><b><i>log_line</i></b></dt><p><a name="__rm_attribute_textcon_log_line"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The current pending log output line.</dd></dl><p></p><dl><dt id="dt:max_scrollback_size"><b><i>max_scrollback_size</i></b></dt><p><a name="__rm_attribute_textcon_max_scrollback_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Maximum number of scrollback lines. Set to 0 for no maximum. Default is 10000.</dd></dl><p></p><dl><dt id="dt:modes"><b><i>modes</i></b></dt><p><a name="__rm_attribute_textcon_modes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[bbb]</code>.
+Current terminal modes (cursor, keypad, insert).</dd></dl><p></p><dl><dt id="dt:output_file"><b><i>output_file</i></b></dt><p><a name="__rm_attribute_textcon_output_file"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+If set to a non-empty string, output will be directed to and appended to this file. Set to an empty string to stop file output.</dd></dl><p></p><dl><dt id="dt:output_line"><b><i>output_line</i></b></dt><p><a name="__rm_attribute_textcon_output_line"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The current output line of printable characters from the attached device.</dd></dl><p></p><dl><dt id="dt:output_recording"><b><i>output_recording</i></b></dt><p><a name="__rm_attribute_textcon_output_recording"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+When enabled, all characters written to the console will be recorded. The record can be read from the attribute <i>recorded_output</i>.</dd></dl><p></p><dl><dt id="dt:parser_state"><b><i>parser_state</i></b></dt><p><a name="__rm_attribute_textcon_parser_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ib[i*]]</code>.
+VT parser state</dd></dl><p></p><dl><dt id="dt:pending_input"><b><i>pending_input</i></b></dt><p><a name="__rm_attribute_textcon_pending_input"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+Queued input waiting to be sent to the attached device.</dd></dl><p></p><dl><dt id="dt:pty"><b><i>pty</i></b></dt><p><a name="__rm_attribute_textcon_pty"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code> or <code>nil</code>.
+Name of the allocated host serial device, or NIL.</dd></dl><p></p><dl><dt id="dt:recorded_output"><b><i>recorded_output</i></b></dt><p><a name="__rm_attribute_textcon_recorded_output"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The characters that have been recorded when the attribute <i>output_recording</i> is <i>TRUE</i>. Note that the recorded string will NOT be cleared when <i>output_recording</i> is reset.</dd></dl><p></p><dl><dt id="dt:recorder"><b><i>recorder</i></b></dt><p><a name="__rm_attribute_textcon_recorder"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Associated recorder object. Used for recording console input.</dd></dl><p></p><dl><dt id="dt:saved_cursor_data"><b><i>saved_cursor_data</i></b></dt><p><a name="__rm_attribute_textcon_saved_cursor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iibb]</code>.
+Saved cursor data (column, row, pending wrap, relative coordinates).</dd></dl><p></p><dl><dt id="dt:screen_data"><b><i>screen_data</i></b></dt><p><a name="__rm_attribute_textcon_screen_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*][[iii]*][[ib]*]]</code>.
+Console screen contents (characters, attributes, line_info). Characters and attributes lists have length width * height. Attributes list contains (attribute, fg colour, bg colour) for every screen character. line_info is a list with meta data for every line: (line length, line wrap).</dd></dl><p></p><dl><dt id="dt:screen_size"><b><i>screen_size</i></b></dt><p><a name="__rm_attribute_textcon_screen_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Console visible screen size (columns, rows).</dd></dl><p></p><dl><dt id="dt:scrollback_data"><b><i>scrollback_data</i></b></dt><p><a name="__rm_attribute_textcon_scrollback_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ddd[[ib]*]]</code>.
+Console scrollback contents (characters, attributes, colours, line_info). line_info has the same format as for the <i>screen_data</i> attribute. The character data also has the same format but is given as binary for faster checkpointing. The attribute data is a list of text_console_attrib_t.attrib values for each scrollback character, and the colour data is a list of text_console_colour_t values, alternating foreground and background colours (hence the colour data is 4 times long as the character data).</dd></dl><p></p><dl><dt id="dt:scrolling_region"><b><i>scrolling_region</i></b></dt><p><a name="__rm_attribute_textcon_scrolling_region"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Scrolling region line numbers (top, bottom), 0-based.</dd></dl><p></p><dl><dt id="dt:serial_frontends"><b><i>serial_frontends</i></b></dt><p><a name="__rm_attribute_textcon_serial_frontends"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+Serial frontends connected to the console. These must implement the serial_console_frontend interface and will receive all output to the console.</dd></dl><p></p><dl><dt id="dt:tab_stops"><b><i>tab_stops</i></b></dt><p><a name="__rm_attribute_textcon_tab_stops"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Current tab stop positions (1-based).</dd></dl><p></p><dl><dt id="dt:telnet_output_buffer"><b><i>telnet_output_buffer</i></b></dt><p><a name="__rm_attribute_textcon_telnet_output_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Characters transmitted by the simulated serial port, but not yet written out by the console.</dd></dl><p></p><dl><dt id="dt:telnet_raw"><b><i>telnet_raw</i></b></dt><p><a name="__rm_attribute_textcon_telnet_raw"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, will not interpret telnet control codes or otherwise  change the bytes transmitted in either direction.</dd></dl><p></p><dl><dt id="dt:telnet_unix_socket"><b><i>telnet_unix_socket</i></b></dt><p><a name="__rm_attribute_textcon_telnet_unix_socket"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Filename of UNIX socket used by the telnet console server.</dd></dl><p></p><dl><dt id="dt:text_attributes"><b><i>text_attributes</i></b></dt><p><a name="__rm_attribute_textcon_text_attributes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiib]</code>.
+Current text attributes (attribute, fg col, bg col, reverse).</dd></dl><p></p><dl><dt id="dt:visible"><b><i>visible</i></b></dt><p><a name="__rm_attribute_textcon_visible"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code> or <code>nil</code>.
+Show/hide console GUI window. Setting to NIL only has effect before instantiation, in which case it leads to the default visibility behaviour of showing the console window if it is the unique console in the configuration.</dd></dl><p></p><dl><dt id="dt:window_title"><b><i>window_title</i></b></dt><p><a name="__rm_attribute_textcon_window_title"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Console GUI window title.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface break_strings_v2</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-break-console-string">bp-break-console-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-run-until-console-string">bp-run-until-console-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-trace-console-string">bp-trace-console-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-wait-for-console-string">bp-wait-for-console-string</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.break">break</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — set a string to break on</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.capture-start">capture-start</a></b></td><td class="jdocu_noborder">capture output to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.capture-stop">capture-stop</a></b></td><td class="jdocu_noborder">stop output capture to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.disable-cmd-line-output">disable-cmd-line-output</a></b></td><td class="jdocu_noborder">disable output to Simics command line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.enable-cmd-line-output">enable-cmd-line-output</a></b></td><td class="jdocu_noborder">enable output to Simics command line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.hide">hide</a></b></td><td class="jdocu_noborder">hide the console window</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.host-serial-setup">host-serial-setup</a></b></td><td class="jdocu_noborder">setup host serial connection</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.input">input</a></b></td><td class="jdocu_noborder">send input to a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.input-file">input-file</a></b></td><td class="jdocu_noborder">input a file into a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.list-break-strings">list-break-strings</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — list all active string breakpoints</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.record-start">record-start</a></b></td><td class="jdocu_noborder">start recording of output on the console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.record-stop">record-stop</a></b></td><td class="jdocu_noborder">stop recording of output on the console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.save-to-file">save-to-file</a></b></td><td class="jdocu_noborder">save console screen to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.show">show</a></b></td><td class="jdocu_noborder">display the console window</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.telnet-setup">telnet-setup</a></b></td><td class="jdocu_noborder">setup telnet connection</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.telnet-status">telnet-status</a></b></td><td class="jdocu_noborder">return telnet connection data</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.unbreak">unbreak</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — stop breaking on string</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.wait-for-string">wait-for-string</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a string in a script branch</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_textcon_gt_.wait-then-write">wait-then-write</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a string, then write an input string</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_text_panel_frontend.html" class="previous">text_panel_frontend</a>
+<a href="__rm_class_time-server.html" class="next">time-server</a>
+</div>

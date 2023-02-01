@@ -1,0 +1,70 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>tcf-agent</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_systemc_filter.html" class="previous">systemc_filter</a>
+<a href="__rm_class_tcf-context-proxy.html" class="next">tcf-context-proxy</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_tcf-agent">tcf-agent</a></h1>
+<p>
+
+<a name="tcf-agent"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_tcf-agent">tcf-agent</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This class implements the Simics Debugger API. The class can be instantiated at most one time. Do not create this instance manually. Use <b><i>SIM_get_debugger</i></b> instead.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">agent_proxy_finder, conf_object, debug_config, debug_internal, debug_notification, debug_query, debug_setup, debug_step, debug_symbol, debug_symbol_file, frontend_server, log_object, system_panel_frontend, tcf_breakpoints, tcf_channel, tcf_elf, tcf_memorymap, tcf_pathmap, tcf_pe, tcf_serial_tap, tcf_target_identification, tcf_trace</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:panel_state_managers"><b><i>panel_state_managers</i></b></dt><p><a name="__rm_attribute_tcf-agent_panel_state_managers"></a></p><dd><b>Session</b> attribute; <b>read-only</b> access; type: <code>[o*]</code>.
+Connected state managers</dd></dl><p></p><dl><dt id="dt:parameters"><b><i>parameters</i></b></dt><p><a name="__rm_attribute_tcf-agent_parameters"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+Parameter for the TCF agent.</dd></dl><p></p><dl><dt id="dt:properties"><b><i>properties</i></b></dt><p><a name="__rm_attribute_tcf-agent_properties"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>dictionary</code> or <code>nil</code>.
+Properties for the TCF peer.</dd></dl><p></p><dl><dt id="dt:stepping_mc_interval"><b><i>stepping_mc_interval</i></b></dt><p><a name="__rm_attribute_tcf-agent_stepping_mc_interval"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The interval in steps between micro-checkpoints that are planted when doing reverse stepping optimizations. Must be at least 100 steps.</dd></dl><p></p><dl><dt id="dt:stepping_option"><b><i>stepping_option</i></b></dt><p><a name="__rm_attribute_tcf-agent_stepping_option"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Option on how stepping over and stepping out is handled:<ul> <li>0 - Breakpoint on function exit address. Longjmp or C++ exceptions might not work correctly. Fastest and default.</li> <li>1 - Breakpoint on return instructions, handles longjmp and C++ exceptions. Only works on x86-based architectures. Slower.</li> <li>2 - No breakpoints, handles longjmp and C++ exceptions, but can be really slow for long steps.</li></ul></dd></dl><p></p><dl><dt id="dt:system_panels"><b><i>system_panels</i></b></dt><p><a name="__rm_attribute_tcf-agent_system_panels"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+Connected system panels</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-agent_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-agent_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_systemc_filter.html" class="previous">systemc_filter</a>
+<a href="__rm_class_tcf-context-proxy.html" class="next">tcf-context-proxy</a>
+</div>

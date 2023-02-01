@@ -1,0 +1,118 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>onfi_flash</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_ns16550.html" class="previous">NS16550</a>
+<a href="__rm_class_os_awareness.html" class="next">os_awareness</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_onfi_flash">onfi_flash</a></h1>
+<p>
+
+<a name="onfi_flash"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_onfi-flash">onfi-flash</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>onfi_flash</b> class is a generic NAND Flash Memory model that is compliant to ONFI 1.0 standard.
+<p>
+The following commands are supported:
+</p><p>
+Read<br>Change Read Column<br>Block Erase<br>Read Status<br>Read Status Enhanced<br>Page Program<br>Change Write Column<br>Read ID<br>Read Parameter Page<br>Reset
+</p><p>
+Other commands are currently not supported.
+</p><p>
+The <b>data_image</b> and <b>spare_image</b> attributes must points to image objects holding the data and spare area data of the flash of size consistent with the parameter of the device.
+</p><p>
+The following attributes regarding device parameters are required to be properly set before object instantiation (and can not be changed after configuration):
+</p><p>
+<b>bus_width</b>: data bus width of this device, either 8 or 16<br><b>data_bytes_per_page</b>: value multiple of 512<br><b>pages_per_block</b>: value multiple of 2<br><b>blocks</b>: total number of blocks<br><b>id_bytes</b>: the electronic signature of this device returned by <b>Read ID</b><br><b>parameter_page</b>: 256+ bytes of device parameters read by <b>Read Parameter Page</b><br>
+</p><p>
+The following attribute regarding device parameters are optional, if not set before object instantiation it will be calculated from <b>data_bytes_per_page</b>:
+</p><p>
+<b>spare_bytes_per_page</b>: range from 1 to 2208<br>The following attributes can be read for information purpose:
+</p><p>
+<b>total_bytes_per_page</b>: <b>data_bytes_per_page</b> + <b>spare_bytes_per_page</b><br>
+</p><p>
+Further information can be found in the documentation of the individual attributes.
+</p><p>
+<b>Notes</b>
+</p><p>
+Devices with 16-bit bus width will interpret the data in the images as little-endian. For example, if column 0 of page 0 is read, byte 0 in the image will be returned in bit 0 - 7 and byte 1 in bit 8-15. If you use an image in big-endian format you must therefore byte-swap it before loading it.
+</p><p>
+
+</p></dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object, nand_flash</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.regs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, io_memory, register_view)</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:address_latch_enable"><b><i>address_latch_enable</i></b></dt><p><a name="__rm_attribute_onfi_flash_address_latch_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current state of the "address latch enable" pin, true (non-zero) for high and false (zero) for low.</dd></dl><p></p><dl><dt id="dt:blocks"><b><i>blocks</i></b></dt><p><a name="__rm_attribute_onfi_flash_blocks"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of blocks of the device.</dd></dl><p></p><dl><dt id="dt:bus_width"><b><i>bus_width</i></b></dt><p><a name="__rm_attribute_onfi_flash_bus_width"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Data bus width of the device. Must be either 8 or 16.</dd></dl><p></p><dl><dt id="dt:command_latch_enable"><b><i>command_latch_enable</i></b></dt><p><a name="__rm_attribute_onfi_flash_command_latch_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current state of the "command latch enable" pin, true (non-zero) for high and false (zero) for low.</dd></dl><p></p><dl><dt id="dt:data_bytes_per_page"><b><i>data_bytes_per_page</i></b></dt><p><a name="__rm_attribute_onfi_flash_data_bytes_per_page"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of data bytes per page. Must be a multiple of 512.</dd></dl><p></p><dl><dt id="dt:data_image"><b><i>data_image</i></b></dt><p><a name="__rm_attribute_onfi_flash_data_image"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+The image object containing the data part of the device's pages. The image should contain the data contents of the pages concatenated in order.
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:id_bytes"><b><i>id_bytes</i></b></dt><p><a name="__rm_attribute_onfi_flash_id_bytes"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Bytes returned by the "read ID (0x00) " command.</dd></dl><p></p><dl><dt id="dt:pages_per_block"><b><i>pages_per_block</i></b></dt><p><a name="__rm_attribute_onfi_flash_pages_per_block"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of pages per block. Must be a multiple of 2.</dd></dl><p></p><dl><dt id="dt:parameter_page"><b><i>parameter_page</i></b></dt><p><a name="__rm_attribute_onfi_flash_parameter_page"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+bytes returned by the "Read Parameter Page" command.</dd></dl><p></p><dl><dt id="dt:saved_state"><b><i>saved_state</i></b></dt><p><a name="__rm_attribute_onfi_flash_saved_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Saved state.</dd></dl><p></p><dl><dt id="dt:saved_state_counter"><b><i>saved_state_counter</i></b></dt><p><a name="__rm_attribute_onfi_flash_saved_state_counter"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Saved sub-state.</dd></dl><p></p><dl><dt id="dt:spare_bytes_per_page"><b><i>spare_bytes_per_page</i></b></dt><p><a name="__rm_attribute_onfi_flash_spare_bytes_per_page"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of spare bytes per page. Valid from 1 to 2208. If 0 or not set, it will be calculated from data_bytes_per_page</dd></dl><p></p><dl><dt id="dt:spare_image"><b><i>spare_image</i></b></dt><p><a name="__rm_attribute_onfi_flash_spare_image"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+The image object containing the spare parts of the device's pages. The image should contain the spare contents of the pages concatenated in order.
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:state"><b><i>state</i></b></dt><p><a name="__rm_attribute_onfi_flash_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current state.</dd></dl><p></p><dl><dt id="dt:state_column_address"><b><i>state_column_address</i></b></dt><p><a name="__rm_attribute_onfi_flash_state_column_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current column address.</dd></dl><p></p><dl><dt id="dt:state_counter"><b><i>state_counter</i></b></dt><p><a name="__rm_attribute_onfi_flash_state_counter"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current sub-state.</dd></dl><p></p><dl><dt id="dt:state_page_address"><b><i>state_page_address</i></b></dt><p><a name="__rm_attribute_onfi_flash_state_page_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current page address.</dd></dl><p></p><dl><dt id="dt:state_page_buffer"><b><i>state_page_buffer</i></b></dt><p><a name="__rm_attribute_onfi_flash_state_page_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+Current content of the page buffer.</dd></dl><p></p><dl><dt id="dt:status_byte"><b><i>status_byte</i></b></dt><p><a name="__rm_attribute_onfi_flash_status_byte"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status Register</dd></dl><p></p><dl><dt id="dt:sub_feature_parameter"><b><i>sub_feature_parameter</i></b></dt><p><a name="__rm_attribute_onfi_flash_sub_feature_parameter"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{4}]</code>.
+Sub feature parameters</dd></dl><p></p><dl><dt id="dt:total_bytes_per_page"><b><i>total_bytes_per_page</i></b></dt><p><a name="__rm_attribute_onfi_flash_total_bytes_per_page"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of bytes per page (Read Only).</dd></dl><p></p><dl><dt id="dt:write_protect"><b><i>write_protect</i></b></dt><p><a name="__rm_attribute_onfi_flash_write_protect"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current state of the "write protect" pin, true (non-zero) for high (write-protect off) and false (zero) for low (write-protect on).</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_onfi_flash_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_onfi_flash_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_ns16550.html" class="previous">NS16550</a>
+<a href="__rm_class_os_awareness.html" class="next">os_awareness</a>
+</div>

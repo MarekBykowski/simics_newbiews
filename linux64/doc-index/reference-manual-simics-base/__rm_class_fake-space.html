@@ -1,0 +1,60 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>fake-space</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_exception_histogram_connection.html" class="previous">exception_histogram_connection</a>
+<a href="__rm_class_firewire_bus.html" class="next">firewire_bus</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_fake-space">fake-space</a></h1>
+<p>
+
+<a name="fake-space"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Translates all memory-space interface methods that are not exposed to Python, to methods that are. This is intended for module testing.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">breakpoint, conf_object, io_memory, log_object, memory_space</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:target_space"><b><i>target_space</i></b></dt><p><a name="__rm_attribute_fake-space_target_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Memory space to which all interface access will be redirected. Usually implemented in Python or similar.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface breakpoint</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_breakpoint_gt_.bp-break-memory">bp-break-memory</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_breakpoint_gt_.bp-run-until-memory">bp-run-until-memory</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_breakpoint_gt_.bp-trace-memory">bp-trace-memory</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_breakpoint_gt_.bp-wait-for-memory">bp-wait-for-memory</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_breakpoint_gt_.break">break</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_breakpoint_gt_.tbreak">tbreak</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface memory_space</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.debug">debug</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.get">get</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.get-string">get-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.load-binary">load-binary</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.load-file">load-file</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.load-intel-hex">load-intel-hex</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.load-intel-obj">load-intel-obj</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.load-vmem">load-vmem</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.read">read</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.read-string">read-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.save-file">save-file</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.save-intel-32-obj">save-intel-32-obj</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.save-intel-hex">save-intel-hex</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.save-intel-obj">save-intel-obj</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.save-vmem">save-vmem</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.set">set</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.set-string">set-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.write">write</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.write-string">write-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_memory_space_gt_.x">x</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_exception_histogram_connection.html" class="previous">exception_histogram_connection</a>
+<a href="__rm_class_firewire_bus.html" class="next">firewire_bus</a>
+</div>

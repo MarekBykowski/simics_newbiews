@@ -1,0 +1,656 @@
+version 6191
+dir /home/xxbykowm/simics/my-simics-project-1
+dir /home/xxbykowm/simics/my-simics-project-1/linux64/lib
+file 1036160 1675256424 explore-mem-map-device.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1675256418;MOD:explore-mem-map-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:explore-mem-map-device;MODULE_LOAD;THREADSAFE;
+file 903800 1675256429 m-compute.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1675256424;MOD:m-compute;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:m_compute;MODULE_LOAD;THREADSAFE;
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-docea-base-6.0.23/linux64/lib
+file 462504 1669375973 docea-obs-interface.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375970;MOD:docea-obs-interface;ABI:6187;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:docea_obs;PYIFACE:docea_model_obs;PYIFACE:docea_obs2;THREADSAFE;
+file 195000 1669375976 docea-perf-interface.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375974;MOD:docea-perf-interface;ABI:6187;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:docea_perf;PYIFACE:docea_perf2;THREADSAFE;
+file 261816 1669375980 docea-ptm-interface.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375978;MOD:docea-ptm-interface;ABI:6187;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:docea_ptm;PYIFACE:docea_ptm2;THREADSAFE;
+file 264936 1669375985 docea-rw-interfaces.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375982;MOD:docea-rw-interfaces;ABI:6187;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:readable_float;PYIFACE:writable_float;PYIFACE:writable_string;THREADSAFE;
+file 9416 1669375987 isim-hub.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375986;MOD:isim-hub;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:isim_hub;MODULE_LOAD;THREADSAFE;
+file 9416 1669375990 physical-collector.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375989;MOD:physical-collector;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:physical_collector;MODULE_LOAD;THREADSAFE;
+file 17796768 1669375993 physical-connector.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375990;MOD:physical-connector;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:physical_connector;MODULE_LOAD;THREADSAFE;
+file 17737256 1669375995 physical-observer.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375993;MOD:physical-observer;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:physical_observer;MODULE_LOAD;THREADSAFE;
+file 9416 1669375996 physical-tracer.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375995;MOD:physical-tracer;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:physical_tracer;MODULE_LOAD;THREADSAFE;
+file 80176 1669375999 read-float.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375998;MOD:read-float;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:read_float;MODULE_LOAD;THREADSAFE;
+file 109608 1669376002 written-float.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669376000;MOD:written-float;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:written_float;MODULE_LOAD;THREADSAFE;
+file 105296 1669376003 written-string.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669376002;MOD:written-string;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:written_string;MODULE_LOAD;THREADSAFE;
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-oss-sources-6.0.50/linux64/lib
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-qsp-clear-linux-6.0.14/linux64/lib
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-qsp-cpu-6.0.12/linux64/lib
+file 153320 1668293689 cstate-controller.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293687;MOD:cstate-controller;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cstate_controller;MODULE_LOAD;THREADSAFE;
+file 192984 1668293688 tm-snare.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293687;MOD:tm-snare;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:tm-snare;MODULE_LOAD;THREADSAFE;
+file 476248 1668293689 x2apic.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293687;MOD:x2apic;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x2apic;CLS:x2apic-bus;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1668293687 x86-public64-comp.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293687;MOD:x86-public64-comp;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:processor_x86_sandybridge;CLS:processor_x86_skylake;CLS:processor_x86QSP2;CLS:processor_x86_broadwell_xeon;CLS:processor_x86_knights_landing;CLS:processor_x86_knights_mill;CLS:processor_x86_silvermont;CLS:processor_x86_airmont;CLS:processor_x86_haswell;CLS:processor_x86_haswell_xeon;CLS:processor_x86_goldmont;CLS:processor_x86_goldmont_plus;CLS:processor_x86_cooper_lake;CLS:processor_x86_coffee_lake;CLS:processor_x86_skylake_server;CLS:processor_x86_coffee_lake_server;CLS:processor_x86_experimental_fred;CLS:processor_x86_goldencove_server;CLS:processor_x86_tnt;CLS:processor_x86_snc;CLS:processor_x86_snc_client;CLS:processor_x86_snc_smt4;CLS:processor_x86_wlc;CLS:processor_x86ex_cnl;CLS:processor_x86_glc;CLS:processor_x86_alderlake;COMP:processor_x86_sandybridge;COMP:processor_x86_skylake;COMP:processor_x86QSP2;COMP:processor_x86_broadwell_xeon;COMP:processor_x86_knights_landing;COMP:processor_x86_knights_mill;COMP:processor_x86_silvermont;COMP:processor_x86_airmont;COMP:processor_x86_haswell;COMP:processor_x86_haswell_xeon;COMP:processor_x86_goldmont;COMP:processor_x86_goldmont_plus;COMP:processor_x86_cooper_lake;COMP:processor_x86_coffee_lake;COMP:processor_x86_skylake_server;COMP:processor_x86_coffee_lake_server;COMP:processor_x86_experimental_fred;COMP:processor_x86_goldencove_server;COMP:processor_x86_tnt;COMP:processor_x86_snc;COMP:processor_x86_snc_client;COMP:processor_x86_snc_smt4;COMP:processor_x86_wlc;COMP:processor_x86ex_cnl;COMP:processor_x86_glc;COMP:processor_x86_alderlake;MODULE_LOAD;THREADSAFE;
+file 283857056 1668294130 x86-public64.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293741;MOD:x86-public64;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86-skylake;CLS:x86QSP2;CLS:x86-sandybridge;CLS:x86-broadwell-xeon;CLS:x86-knights-landing;CLS:x86-knights-mill;CLS:x86-silvermont;CLS:x86-airmont;CLS:x86-haswell;CLS:x86-haswell-xeon;CLS:x86-goldmont;CLS:x86-goldmont-plus;CLS:x86-cooper-lake;CLS:x86-skylake-server;CLS:x86-coffee-lake;CLS:x86-coffee-lake-server;CLS:x86-experimental-fred;CLS:x86-goldencove-server;CLS:x86-tnt;CLS:x86-tnt-lkf;CLS:x86-snc;CLS:x86-snc-client;CLS:x86-snc-lkf;CLS:x86-snc-smt4;CLS:x86-wlc;CLS:x86ex-cnl;CLS:x86-glc;CLS:x86-glc-adl;CLS:x86-grt-adl;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1668293689 x86ex-comp.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293688;MOD:x86ex-comp;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;THREADSAFE;
+file 193072 1668293688 x86ex_tlb.so
+cap VER:5000;BLD:6189;BLD_NS:simics;BUILDDATE:1668293687;MOD:x86ex_tlb;ABI:6189;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86ex-tlb;MODULE_LOAD;SIMICS_START;THREADSAFE;
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-qsp-isim-6.0.pre4/linux64/lib
+file 9416 1669377111 docea-physical-model.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669351911;MOD:docea-physical-model;ABI:6163;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:docea_physical_model;MODULE_LOAD;THREADSAFE;
+file 9416 1669377137 power-manager.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669351937;MOD:power-manager;ABI:6163;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:power_manager;MODULE_LOAD;THREADSAFE;
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-qsp-x86-6.0.65/linux64/lib
+file 31552744 1670540036 ICH10.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:ICH10;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ich10_lpc;CLS:ich10_sata_f2;CLS:ich10_sata_f5;CLS:ich10_thermal;CLS:ich10_smbus;CLS:ich10_usb_uhci;CLS:ich10_usb_ehci;CLS:ich10_bridge;CLS:ich10_hpe_timer;CLS:ich10_timer;CLS:ich10_rtc;CLS:ich10_spi;CLS:ich10_cf9;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 9501504 1670539978 X58-devices.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:X58-devices;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x58-pcie-port;CLS:x58-remap-unit;CLS:x58-core;CLS:x58-ioxapic;CLS:x58-dmi;CLS:x58-qpi-port;CLS:x58-qpi-arch;MODULE_LOAD;THREADSAFE;
+file 19979072 1670539987 X58-legacy.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:X58-legacy;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x58-dmi-legacy;CLS:x58-core-f0-legacy;CLS:x58-core-f1-legacy;CLS:x58-core-f2-legacy;CLS:x58-core-f3-legacy;CLS:x58-ioxapic-legacy;CLS:x58-qpi-port0-f0-legacy;CLS:x58-qpi-port0-f1-legacy;CLS:x58-qpi-port1-f0-legacy;CLS:x58-qpi-port1-f1-legacy;CLS:x58-pcie-port-legacy;CLS:x58-remap-dispatcher-legacy;CLS:x58-remap-unit0-legacy;CLS:x58-remap-unit1-legacy;CLS:x58-qpi-ncr-f0-legacy;CLS:x58-qpi-sad-f1-legacy;CLS:x58_dmi;CLS:x58_core_f0;CLS:x58_core_f1;CLS:x58_core_f2;CLS:x58_core_f3;CLS:x58_ioxapic;CLS:x58_qpi_port0_f0;CLS:x58_qpi_port0_f1;CLS:x58_qpi_port1_f0;CLS:x58_qpi_port1_f1;CLS:x58_pcie_port;CLS:x58_remap_dispatcher;CLS:x58_remap_unit0;CLS:x58_remap_unit1;CLS:x58_qpi_ncr_f0;CLS:x58_qpi_sad_f1;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 7669712 1670540043 ich10-lan-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539971;MOD:ich10-lan-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ich10_lan_v2;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 170728 1670540008 sample-core-timing.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540006;MOD:sample-core-timing;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_core_timing_tool;CLS:sample_core_timing_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 97946288 1670540417 sc-leds-and-button-pcie-dev.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540378;MOD:sc-leds-and-button-pcie-dev;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sc_leds_and_button_pcie_device;CLS:sc_leds_and_button_pcie_dev_gasket_composite_Pci;CLS:sc_leds_and_button_pcie_dev_gasket_simics2systemc_Signal;CLS:sc_leds_and_button_pcie_dev_gasket_systemc2simics_Signal;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_EthernetCommon;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_Packet;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_I2cSlaveV2;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_IoMemory;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_PciDevice;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_PciExpress;CLS:sc_leds_and_button_pcie_dev_gasket_simics2tlm_SerialDevice;CLS:sc_leds_and_button_pcie_dev_gasket_tlm2simics_EthernetCommon;CLS:sc_leds_and_button_pcie_dev_gasket_tlm2simics_Packet;CLS:sc_leds_and_button_pcie_dev_gasket_tlm2simics_I2cMasterV2;CLS:sc_leds_and_button_pcie_dev_gasket_tlm2simics_MemorySpace;CLS:sc_leds_and_button_pcie_dev_gasket_tlm2simics_PciBus;CLS:sc_leds_and_button_pcie_dev_gasket_tlm2simics_SerialDevice;CLS:sc_leds_and_button_pcie_dev_sc_break_tool;CLS:sc_leds_and_button_pcie_dev_sc_protocol_checker_tool;CLS:sc_leds_and_button_pcie_dev_sc_trace_tool;CLS:sc_leds_and_button_pcie_dev_sc_transaction_tracker_tool;CLS:sc_leds_and_button_pcie_dev_sc_vcd_trace_tool;CLS:sc_leds_and_button_pcie_dev_tool_connection;CLS:sc_leds_and_button_pcie_comp;CLS:leds_and_button_panel;COMP:sc_leds_and_button_pcie_comp;COMP:leds_and_button_panel;MODULE_LOAD;THREADSAFE;
+file 17440 1670540028 x58-ich10-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540027;MOD:x58-ich10-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86_reset_signal_conv;CLS:northbridge_x58;CLS:southbridge_ich10_panel;CLS:southbridge_ich10;CLS:motherboard_x58_ich10;CLS:chassis_x58_ich10;CLS:chassis_qsp_x86;COMP:northbridge_x58;COMP:southbridge_ich10_panel;COMP:southbridge_ich10;COMP:motherboard_x58_ich10;COMP:chassis_x58_ich10;COMP:chassis_qsp_x86;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 61542584 1670540345 x86-intel64.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540179;MOD:x86-intel64;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86-p4-nocona;CLS:x86-core2;CLS:x86-nehalem;CLS:x86-intel64;CLS:x86-p4e-model4;CLS:x86-nehalem-xeon;CLS:x86QSP1;CLS:x86-p4e;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540030 x86-nehalem-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540029;MOD:x86-nehalem-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:processor_core_i7;CLS:processor_core_i7_single;CLS:processor_core_i7_duo;CLS:processor_core_i7_6c_2t;CLS:processor_xeon_5500;CLS:processor_xeon_5530;CLS:processor_core_i7_8c_4t;CLS:processor_x86_intel64;CLS:processor_x86QSP1;COMP:processor_core_i7;COMP:processor_core_i7_single;COMP:processor_core_i7_duo;COMP:processor_core_i7_6c_2t;COMP:processor_xeon_5500;COMP:processor_xeon_5530;COMP:processor_core_i7_8c_4t;COMP:processor_x86_intel64;COMP:processor_x86QSP1;MODULE_LOAD;SIMICS_START;THREADSAFE;
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-training-6.0.pre30/linux64/lib
+file 114088 1667861589 button-i2c.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861582;MOD:button-i2c;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:button_i2c;MODULE_LOAD;THREADSAFE;
+file 142760 1667861599 explore-mem-map-device.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861591;MOD:explore-mem-map-device;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:explore-mem-map-device;MODULE_LOAD;THREADSAFE;
+file 15168 1667861612 led-system-comp.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861610;MOD:led-system-comp;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:led_system_comp;CLS:led_system_panel;COMP:led_system_comp;COMP:led_system_panel;MODULE_LOAD;THREADSAFE;
+file 847704 1667861636 led-system-controller-bb.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861610;MOD:led-system-controller-bb;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:led_system_controller_bb;MODULE_LOAD;THREADSAFE;
+file 15168 1667861611 m-accelerator-comp.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861611;MOD:m-accelerator-comp;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:m_accelerator_comp;COMP:m_accelerator_comp;MODULE_LOAD;THREADSAFE;
+file 33256 1667861614 m-compute-control-interface.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861611;MOD:m-compute-control-interface;ABI:6187;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:m_compute_control;THREADSAFE;
+file 123184 1667861619 m-compute.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861611;MOD:m-compute;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:m_compute;MODULE_LOAD;THREADSAFE;
+file 727528 1667861634 m-control.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861611;MOD:m-control;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:m_control;MODULE_LOAD;THREADSAFE;
+file 118760 1667861618 m-display.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861611;MOD:m-display;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:m_display;MODULE_LOAD;THREADSAFE;
+file 15168 1667861629 python-simple-serial.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861628;MOD:python-simple-serial;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:python_simple_serial;MODULE_LOAD;THREADSAFE;
+file 114024 1667861636 rgb-led-i2c.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861629;MOD:rgb-led-i2c;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:rgb_led_i2c;MODULE_LOAD;THREADSAFE;
+file 16424 1667861638 serial-out-mux.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861637;MOD:serial-out-mux;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:serial-out-mux;MODULE_LOAD;THREADSAFE;
+file 104264 1667861662 toggle-i2c.so
+cap VER:5000;BLD:6187;BLD_NS:simics;BUILDDATE:1667861655;MOD:toggle-i2c;ABI:6187;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:toggle_i2c;MODULE_LOAD;THREADSAFE;
+dir /home/xxbykowm/simics/simics-6.0.157/../simics-viewer-6.0.16/linux64/lib
+dir /home/xxbykowm/simics/simics-6.0.157/linux64/lib
+file 242016 1670539950 8042.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:8042;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i8042;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 142832 1670539950 82077.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:82077;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82077;CLS:floppy-drive;MODULE_LOAD;THREADSAFE;
+file 94720 1670539949 8237x2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:8237x2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i8237x2;MODULE_LOAD;THREADSAFE;
+file 160856 1670539950 8254.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:8254;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i8254;MODULE_LOAD;THREADSAFE;
+file 128320 1670539949 8259x2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:8259x2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i8259x2;MODULE_LOAD;THREADSAFE;
+file 1208472 1670539959 AM79C960.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:AM79C960;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:AM79C960;MODULE_LOAD;THREADSAFE;
+file 2687784 1670539975 AM79C973.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:AM79C973;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:AM79C973;MODULE_LOAD;THREADSAFE;
+file 150456 1670539951 AT24Cxx.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:AT24Cxx;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:AT24Cxx;CLS:AT24C04;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 80456 1670539949 AT24Cxxx.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:AT24Cxxx;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:AT24Cxxx;THREADSAFE;
+file 946336 1670539954 BCM5703C.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:BCM5703C;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:BCM5703C;MODULE_LOAD;THREADSAFE;
+file 953272 1670539954 BCM5704C.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:BCM5704C;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:BCM5704C;MODULE_LOAD;THREADSAFE;
+file 366632 1670539951 CL-PD6729.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:CL-PD6729;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:CL-PD6729;MODULE_LOAD;THREADSAFE;
+file 584712 1670539952 DEC21041.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DEC21041;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DEC21041;MODULE_LOAD;THREADSAFE;
+file 1929312 1670539968 DEC21140A-dml.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DEC21140A-dml;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DEC21140A-dml;MODULE_LOAD;THREADSAFE;
+file 584792 1670539951 DEC21140A.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DEC21140A;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DEC21140A;MODULE_LOAD;THREADSAFE;
+file 590856 1670539952 DEC21143.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DEC21143;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DEC21143;MODULE_LOAD;THREADSAFE;
+file 125136 1670539949 DS12887-c.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DS12887-c;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DS12887-c;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 907640 1670539957 DS12887.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DS12887;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DS12887;MODULE_LOAD;THREADSAFE;
+file 689032 1670539955 DS323x.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:DS323x;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:DS323x;CLS:DS3231;MODULE_LOAD;THREADSAFE;
+file 1198176 1670539958 NS16x50.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:NS16x50;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:NS16550;CLS:NS16450;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 149016 1670539951 PCF8582C.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:PCF8582C;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:PCF8582C;THREADSAFE;
+file 3942200 1670539989 TSB12LV26.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:TSB12LV26;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:TSB12LV26;MODULE_LOAD;THREADSAFE;
+file 693464 1670539952 accel-vga.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:accel-vga;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:accel-vga;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 404032 1670539952 apic.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:apic;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:apic;CLS:apic-bus;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 59976 1670539952 arinc429-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539950;MOD:arinc429-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:arinc429_bus;MODULE_LOAD;THREADSAFE;
+file 17424 1670539952 attr-meter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539951;MOD:attr-meter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:attr-meter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 66632 1670539953 bank-coverage-tool.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539951;MOD:bank-coverage-tool;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:bank_coverage_tool;CLS:bank_coverage_tool_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 52264 1670539952 bank-patch-tool.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539951;MOD:bank-patch-tool;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:bank_patch_tool;CLS:bank_patch_tool_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 44688 1670539953 bitmask-translator.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539951;MOD:bitmask-translator;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:bitmask-translator;MODULE_LOAD;THREADSAFE;
+file 17440 1670539955 blueprints.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539951;MOD:blueprints;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x58-mb;CLS:script-engine;CLS:eth-connector;CLS:eth-link-connector;CLS:usb-device-connector;CLS:usb-host-connector;CLS:uart-device-connector;CLS:uart-remote-connector;CLS:sata-controller-connector;CLS:sata-device-connector;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670539953 bp-manager.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539951;MOD:bp-manager;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:bp-manager;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 155008 1670539955 can-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:can-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:can_device;PYIFACE:can_link;THREADSAFE;
+file 54024 1670539954 can-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:can-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:can_link_impl;CLS:can_endpoint;CLS:can_link;COMP:can_link;MODULE_LOAD;THREADSAFE;
+file 83872 1670539955 cdrom-image.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:cdrom-image;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cdrom_image;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 61904 1670539954 clipboard-gateway.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:clipboard-gateway;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:clipboard-gateway;MODULE_LOAD;THREADSAFE;
+file 145664 1670539955 clock.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539953;MOD:clock;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:clock;CLS:cell_and_clocks_comp;CLS:cell-and-clocks;COMP:cell_and_clocks_comp;COMP:cell-and-clocks;MODULE_LOAD;THREADSAFE;
+file 51832 1670539954 co-engine.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:co-engine;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:co-engine;THREADSAFE;
+file 57088 1670539949 co-execute.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:co-execute;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:co-execute;THREADSAFE;
+file 296864 1670540038 code-coverage.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540034;MOD:code-coverage;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;CLS:code_coverage;CLS:code_coverage_helper;PYIFACE:code_coverage;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670539954 console-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539953;MOD:console-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:txt_console_comp;CLS:gfx_console_comp;COMP:txt_console_comp;COMP:gfx_console_comp;MODULE_LOAD;THREADSAFE;
+file 17440 1670539955 cp3_quad100tx.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539954;MOD:cp3_quad100tx;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cp3_quad100tx;COMP:cp3_quad100tx;MODULE_LOAD;THREADSAFE;
+file 17440 1670539955 cpci-adapter-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539954;MOD:cpci-adapter-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cpci_adapter;COMP:cpci_adapter;MODULE_LOAD;THREADSAFE;
+file 35712 1670539956 cpu-group.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:cpu-group;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cpu-group;MODULE_LOAD;THREADSAFE;
+file 52416 1670539956 cpu-mode-filter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:cpu-mode-filter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cpu_mode_filter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17456 1670540035 cpumode-software-tracker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540034;MOD:cpumode-software-tracker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cpumode_software_mapper;CLS:cpumode_software_tracker;CLS:cpumode_software_tracker_comp;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 5444296 1670540009 crypto-engine.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539966;MOD:crypto-engine;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;CLS:crypto_engine_aes;CLS:crypto_engine_des;CLS:crypto_engine_3des;CLS:crypto_engine_rc4;CLS:crypto_engine_kasumi;CLS:crypto_engine_snow;CLS:crypto_engine_zuc;CLS:crypto_engine_pka;CLS:crypto_engine_md5;CLS:crypto_engine_sha160;CLS:crypto_engine_sha224;CLS:crypto_engine_sha256;CLS:crypto_engine_sha384;CLS:crypto_engine_sha512;CLS:crypto_engine_crc;CLS:crypto_engine_xor;CLS:crypto_engine_sum;CLS:crypto_engine_rsa;CLS:crypto_engine_kdf;CLS:crypto_engine_dh;CLS:crypto_engine_dsa;CLS:crypto_engine_ecdsa;CLS:crypto_engine_sha3_256;CLS:crypto_engine_sha3_512;CLS:crypto_engine_sha3_224;CLS:crypto_engine_sha3_384;CLS:crypto_engine_sha512_224;CLS:crypto_engine_sha512_256;CLS:crypto_engine_openssl;PYIFACE:xts_ext_cipher;PYIFACE:gcm_ext_cipher;PYIFACE:f8_ex;PYIFACE:f9_ex;PYIFACE:zuc;PYIFACE:evp_cipher;PYIFACE:evp_aead;PYIFACE:rsa_v2;PYIFACE:rsa_ex;MODULE_LOAD;THREADSAFE;
+file 145216 1670539958 cstate-v3-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539956;MOD:cstate-v3-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:x86_cstate_notification_v3;PYIFACE:x86_cstate_notification_v4;THREADSAFE;
+file 36344 1670539957 cycle-staller.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:cycle-staller;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cycle_staller;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 37968 1670539956 datagram-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:datagram-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:datagram_link_impl;CLS:datagram_link_endpoint;CLS:datagram_link;COMP:datagram_link;MODULE_LOAD;THREADSAFE;
+file 14303656 1670540195 disassemble-arm.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:disassemble-arm;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:disassemble_arm;THREADSAFE;
+file 5646152 1670540116 disassemble_x86.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540040;MOD:disassemble_x86;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:disassemble_x86;THREADSAFE;
+file 1019280 1670539966 dm9161.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:dm9161;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:dm9161;MODULE_LOAD;THREADSAFE;
+file 17440 1670540035 dml-api-info.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540035;MOD:dml-api-info;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;THREADSAFE;
+file 17440 1670539958 empty-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539957;MOD:empty-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_components;COMP:empty_components;MODULE_LOAD;THREADSAFE;
+file 31192 1670539958 empty-device-c.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539957;MOD:empty-device-c;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_device_c;MODULE_LOAD;THREADSAFE;
+file 1135544 1670539961 empty-device-cc.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539957;MOD:empty-device-cc;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_device_cc;MODULE_LOAD;THREADSAFE;
+file 580080 1670539963 empty-device-dml.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539957;MOD:empty-device-dml;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_device_dml;MODULE_LOAD;THREADSAFE;
+file 17440 1670539958 empty-device-pyobj.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539957;MOD:empty-device-pyobj;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_device_pyobj;MODULE_LOAD;THREADSAFE;
+file 17440 1670539958 empty-device-python.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539957;MOD:empty-device-python;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_device_python;MODULE_LOAD;THREADSAFE;
+file 144384 1670539961 empty-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:empty-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:empty_interface;THREADSAFE;
+file 120400 1670540036 empty-software-tracker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540034;MOD:empty-software-tracker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:empty_software_tracker;CLS:empty_software_mapper;CLS:empty_software_tracker_comp;MODULE_LOAD;THREADSAFE;
+file 533464 1670539962 etg.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:etg;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:etg;MODULE_LOAD;THREADSAFE;
+file 17440 1670539959 eth-injector-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:eth-injector-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:eth_injector_comp;COMP:eth_injector_comp;MODULE_LOAD;THREADSAFE;
+file 17440 1670539959 eth-injector.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:eth-injector;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:eth_injector;MODULE_LOAD;THREADSAFE;
+file 271752 1670539960 eth-links.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:eth-links;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:eth-hub-link;CLS:eth-hub-link-endpoint;CLS:eth-cable-link;CLS:eth-cable-link-endpoint;CLS:eth-switch-link;CLS:eth-switch-link-endpoint;CLS:eth-link-snoop-endpoint;CLS:eth-switch-link-snoop-endpoint;CLS:ethernet_hub;CLS:ethernet_cable;CLS:ethernet_switch;CLS:ethernet_vlan_switch;COMP:ethernet_hub;COMP:ethernet_cable;COMP:ethernet_switch;COMP:ethernet_vlan_switch;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 90208 1670539960 eth-probe.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:eth-probe;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:eth-probe;CLS:eth-probe-port;MODULE_LOAD;THREADSAFE;
+file 91248 1670539960 eth-transceiver.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:eth-transceiver;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:eth-transceiver;MODULE_LOAD;THREADSAFE;
+file 17440 1670539959 event-histogram.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:event-histogram;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:event_histogram;CLS:event_histogram_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 146232 1670539962 event-provider-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:event-provider-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:event_provider;THREADSAFE;
+file 17440 1670539959 examples-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:examples-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:emmett;CLS:mcfly;CLS:deckard;CLS:rachel;CLS:tyrell;CLS:sebastian;CLS:roy_batty;CLS:frankie_carbone;CLS:tyler_durden;CLS:maria_singer;CLS:ripley;CLS:nemo;CLS:nikita;CLS:wall_e;CLS:hal;CLS:marvin;CLS:elliot;CLS:gertie;CLS:brody;CLS:hunt;CLS:ethan;CLS:korben;CLS:zorg;CLS:leeloo;CLS:godzilla;COMP:emmett;COMP:mcfly;COMP:deckard;COMP:rachel;COMP:tyrell;COMP:sebastian;COMP:roy_batty;COMP:frankie_carbone;COMP:tyler_durden;COMP:maria_singer;COMP:ripley;COMP:nemo;COMP:nikita;COMP:wall_e;COMP:hal;COMP:marvin;COMP:elliot;COMP:gertie;COMP:brody;COMP:hunt;COMP:ethan;COMP:korben;COMP:zorg;COMP:leeloo;COMP:godzilla;MODULE_LOAD;THREADSAFE;
+file 55440 1670539960 exception-histogram.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539958;MOD:exception-histogram;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:exception_histogram;CLS:exception_histogram_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 149168 1670539954 external-connection.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:external-connection;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:tcp-server;CLS:unix-socket-server;MODULE_LOAD;THREADSAFE;
+file 192040 1670539962 firewire-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:firewire-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:firewire_bus;CLS:firewire_device_test_wrapper;MODULE_LOAD;THREADSAFE;
+file 17456 1670539959 firewire-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:firewire-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pci-tsb12lv26;CLS:std-firewire-bus;CLS:std-firewire-sample-device;COMP:pci-tsb12lv26;COMP:std-firewire-bus;COMP:std-firewire-sample-device;MODULE_LOAD;THREADSAFE;
+file 85904 1670539960 framebuffer.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:framebuffer;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:framebuffer;THREADSAFE;
+file 102576 1670539961 frequency-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:frequency-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:frequency_bus;MODULE_LOAD;THREADSAFE;
+file 37896 1670539960 frontend-server-console.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:frontend-server-console;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:frontend-server-console;THREADSAFE;
+file 316672 1670539962 ftp-service.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:ftp-service;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ftp-service;CLS:ftp-control;CLS:ftp-data;MODULE_LOAD;THREADSAFE;
+file 55824 1670539961 ftp_alg.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539959;MOD:ftp_alg;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ftp-alg;SIMICS_START;THREADSAFE;
+file 537288 1670539963 g-cache.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:g-cache;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:g-cache;CLS:trans-splitter;CLS:trans-sorter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 592488 1670539964 gdb-remote.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:gdb-remote;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:gdb-remote;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 439296 1670539963 generic-flash-memory.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:generic-flash-memory;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:generic-flash-memory;CLS:new-flash-memory;MODULE_LOAD;THREADSAFE;
+file 144928 1670539963 generic-message-interfaces.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:generic-message-interfaces;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:generic_message_link;PYIFACE:generic_message_device;THREADSAFE;
+file 3459456 1670539970 generic-mmc-card.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:generic-mmc-card;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:generic-mmc-card;MODULE_LOAD;THREADSAFE;
+file 17440 1670539961 generic-pcie-switch-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:generic-pcie-switch-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:generic_pcie_switch;MODULE_LOAD;THREADSAFE;
+file 2530160 1670539988 generic-pcie-switch-port.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:generic-pcie-switch-port;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:generic_pcie_switch_port;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 3506488 1670539988 generic-sdmmc-card.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539960;MOD:generic-sdmmc-card;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:mmc_card;CLS:sd_card;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 903360 1670539971 generic-spi-flash.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539961;MOD:generic-spi-flash;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:generic_spi_flash;CLS:M25Pxx;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 4791984 1670540002 generic_eth_phy.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539961;MOD:generic_eth_phy;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:generic_eth_phy;MODULE_LOAD;THREADSAFE;
+file 17440 1670539962 global-messages.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539961;MOD:global-messages;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;MODULE_LOAD;THREADSAFE;
+file 78808 1670539963 gml-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539962;MOD:gml-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:gml_link_impl;CLS:gml_link_endpoint;CLS:gml_link;COMP:gml_link;MODULE_LOAD;THREADSAFE;
+file 746112 1670539957 graphcon.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:graphcon;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:graphcon;CLS:gfx-frontend-winsome;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 90880 1670539965 hap-meter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539963;MOD:hap-meter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:hap-meter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 62936 1670539965 host-serial-console.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539963;MOD:host-serial-console;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:host-serial-console;CLS:pty-console;THREADSAFE;
+file 184768 1670539965 hostfs.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539963;MOD:hostfs;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:hostfs;MODULE_LOAD;THREADSAFE;
+file 182072 1670539966 hypersim-pattern-matcher.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539963;MOD:hypersim-pattern-matcher;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:hypersim-pattern-matcher;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670539965 i210-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539964;MOD:i210-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i210_comp;COMP:i210_comp;MODULE_LOAD;THREADSAFE;
+file 8332856 1670540044 i210.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539964;MOD:i210;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i210;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 353152 1670539967 i21150.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539964;MOD:i21150;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i21150;MODULE_LOAD;THREADSAFE;
+file 353152 1670539968 i21152.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539965;MOD:i21152;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i21152;MODULE_LOAD;THREADSAFE;
+file 1356904 1670539980 i21154.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539965;MOD:i21154;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i21154;MODULE_LOAD;THREADSAFE;
+file 391376 1670539968 i21554.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539965;MOD:i21554;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i21554-prim;CLS:i21554-scnd;THREADSAFE;
+file 391376 1670539969 i21555.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539966;MOD:i21555;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i21555-prim;CLS:i21555-scnd;THREADSAFE;
+file 192736 1670539969 i2c-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539966;MOD:i2c-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i2c-bus;CLS:i2c_slave_v2_to_bus_adapter;MODULE_LOAD;THREADSAFE;
+file 323312 1670539971 i2c-link-v1.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539966;MOD:i2c-link-v1;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i2c_link_v1;CLS:i2c_link;MODULE_LOAD;THREADSAFE;
+file 197192 1670539969 i2c-link-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539966;MOD:i2c-link-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i2c-link-impl;CLS:i2c-link-endpoint;CLS:i2c_wire;CLS:i2c_link_v2;COMP:i2c_link_v2;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 1015496 1670539975 i3c-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539967;MOD:i3c-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i3c_link_impl;CLS:i3c_link_endpoint;CLS:i3c_cable_impl;CLS:i3c_cable_endpoint;CLS:i3c_bus;CLS:i3c_wire;CLS:i2c_to_i3c_adapter;CLS:i3c_cable;CLS:i3c_link;COMP:i3c_cable;COMP:i3c_link;MODULE_LOAD;THREADSAFE;
+file 644760 1670539972 i82543.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539969;MOD:i82543;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82543;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 647048 1670539972 i82546.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539969;MOD:i82546;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82546;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 2075456 1670539991 i82559.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539969;MOD:i82559;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82559;MODULE_LOAD;THREADSAFE;
+file 17440 1670539970 i82571EB-v2-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539969;MOD:i82571EB-v2-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82571EB_v2_comp;COMP:i82571EB_v2_comp;MODULE_LOAD;THREADSAFE;
+file 7582808 1670540041 i82571EB-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539969;MOD:i82571EB-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82571EB_v2;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670539970 i82574-v2-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539969;MOD:i82574-v2-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82574_v2_comp;COMP:i82574_v2_comp;MODULE_LOAD;THREADSAFE;
+file 8327848 1670540048 i82574-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539970;MOD:i82574-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82574_v2;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670539971 i82576EB-v2-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539970;MOD:i82576EB-v2-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82576EB_v2_comp;COMP:i82576EB_v2_comp;MODULE_LOAD;THREADSAFE;
+file 8421936 1670540050 i82576EB-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539970;MOD:i82576EB-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82576EB_v2;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670539971 i82583V-v2-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539971;MOD:i82583V-v2-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82583V_v2_comp;COMP:i82583V_v2_comp;MODULE_LOAD;THREADSAFE;
+file 7081928 1670540039 i82583V-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539970;MOD:i82583V-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:i82583V_v2;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 34760 1670539972 id-splitter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539971;MOD:id-splitter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:id-splitter;THREADSAFE;
+file 374816 1670539976 ide.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539971;MOD:ide;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ide;CLS:ide-disk;CLS:ide-cdrom;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 240616 1670539976 ieee-802-15-4-interfaces.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539973;MOD:ieee-802-15-4-interfaces;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:ieee_802_15_4_link;PYIFACE:ieee_802_15_4_control;PYIFACE:ieee_802_15_4_receiver;PYIFACE:ieee_802_15_4_probe;THREADSAFE;
+file 168064 1670539974 ieee-802-15-4-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539972;MOD:ieee-802-15-4-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ieee_802_15_4_link_impl;CLS:ieee_802_15_4_link_endpoint;CLS:ieee_802_15_4_link;COMP:ieee_802_15_4_link;MODULE_LOAD;THREADSAFE;
+file 75656 1670539975 ieee-802-15-4-probe.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539972;MOD:ieee-802-15-4-probe;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ieee_802_15_4_probe;MODULE_LOAD;THREADSAFE;
+file 41920 1670539975 instruction-count.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539974;MOD:instruction-count;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:instruction_count;CLS:instruction_count_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 172544 1670539976 instruction-histogram.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539974;MOD:instruction-histogram;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:instruction_histogram;CLS:mnemonic_histogram_connection;CLS:size_histogram_connection;CLS:x86_normalized_histogram_connection;CLS:xed_iform_histogram_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 34024 1670539976 instrumentation-filter-aggregator.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539975;MOD:instrumentation-filter-aggregator;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:instrumentation_filter_aggregator;MODULE_LOAD;THREADSAFE;
+file 107592 1670539976 instrumentation-tracer-tool.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539975;MOD:instrumentation-tracer-tool;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:tracer_tool;CLS:tracer_tool_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 1218440 1670539988 intel-e1000.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539976;MOD:intel-e1000;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:e1000_spi;MODULE_LOAD;THREADSAFE;
+file 67192 1670539979 interrupt-to-signal.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539976;MOD:interrupt-to-signal;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:interrupt_to_signal;MODULE_LOAD;THREADSAFE;
+file 115096 1670539978 io-apic.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539977;MOD:io-apic;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:io-apic;MODULE_LOAD;THREADSAFE;
+file 17440 1670539979 isa-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539978;MOD:isa-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:super_io_comp;CLS:ps2_keyboard_mouse_comp;CLS:pc_floppy_controller_comp;CLS:pc_dual_serial_ports_comp;CLS:pc_quad_serial_ports_comp;CLS:pc_single_parallel_port_comp;CLS:isa_vga_comp;CLS:isa_lance_comp;CLS:sio_w83627hf_comp;COMP:super_io_comp;COMP:ps2_keyboard_mouse_comp;COMP:pc_floppy_controller_comp;COMP:pc_dual_serial_ports_comp;COMP:pc_quad_serial_ports_comp;COMP:pc_single_parallel_port_comp;COMP:isa_vga_comp;COMP:isa_lance_comp;COMP:sio_w83627hf_comp;MODULE_LOAD;THREADSAFE;
+file 17440 1670539980 isa-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539979;MOD:isa-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:std-super-io;CLS:ps2-keyboard-mouse;CLS:pc-dual-serial-ports;CLS:pc-quad-serial-ports;CLS:pc-floppy-controller;CLS:pc-single-parallel-port;CLS:isa-vga;CLS:isa-lance;CLS:sio-w83627hf;COMP:std-super-io;COMP:ps2-keyboard-mouse;COMP:pc-dual-serial-ports;COMP:pc-quad-serial-ports;COMP:pc-floppy-controller;COMP:pc-single-parallel-port;COMP:isa-vga;COMP:isa-lance;COMP:sio-w83627hf;MODULE_LOAD;THREADSAFE;
+file 48720 1670539979 isa.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539978;MOD:isa;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ISA;MODULE_LOAD;THREADSAFE;
+file 3225040 1670539996 linux-tracker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539981;MOD:linux-tracker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:linux_analyzer;CLS:linux_mapper;CLS:linux_tracker;CLS:linux_tracker_comp;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 56144 1670539990 mac-splitter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539988;MOD:mac-splitter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:mac_splitter;THREADSAFE;
+file 475560 1670539995 magic-pipe-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539990;MOD:magic-pipe-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:magic_pipe_reader;PYIFACE:magic_pipe_writer;PYIFACE:magic_pipe_setup;THREADSAFE;
+file 178808 1670539991 magic-pipe.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539988;MOD:magic-pipe;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:magic_pipe;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670539992 matic.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539990;MOD:matic;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:agent_manager;CLS:agent_handle;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 103688 1670539993 mem-traffic-meter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539992;MOD:mem-traffic-meter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:mem-traffic-meter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670539993 memory-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539992;MOD:memory-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simple_memory_module;CLS:ddr_memory_module_comp;CLS:ddr2_memory_module_comp;CLS:ddr3_memory_module_comp;CLS:sdram_memory_module_comp;COMP:simple_memory_module;COMP:ddr_memory_module_comp;COMP:ddr2_memory_module_comp;COMP:ddr3_memory_module_comp;COMP:sdram_memory_module_comp;MODULE_LOAD;THREADSAFE;
+file 17440 1670539993 memory-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539992;MOD:memory-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ddr-memory-module;CLS:ddr2-memory-module;CLS:ddr3-memory-module;CLS:sdram-memory-module;COMP:ddr-memory-module;COMP:ddr2-memory-module;COMP:ddr3-memory-module;COMP:sdram-memory-module;MODULE_LOAD;THREADSAFE;
+file 119848 1670539995 memory-profiler.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539993;MOD:memory-profiler;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:memory_profiler;CLS:memory_profiler_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 80184 1670539994 microwire-eeprom.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539993;MOD:microwire-eeprom;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:microwire-eeprom;THREADSAFE;
+file 86536 1670539995 mii-management-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539993;MOD:mii-management-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:mii-management-bus;MODULE_LOAD;THREADSAFE;
+file 267680 1670539995 mii-transceiver.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539993;MOD:mii-transceiver;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:mii-transceiver;MODULE_LOAD;THREADSAFE;
+file 17440 1670539953 mini_winsome.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:mini_winsome;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;SIMICS_START;THREADSAFE;
+file 17440 1670539996 mmc-card-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539995;MOD:mmc-card-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:micron_mtfc4ggqdi_sdhc_card;CLS:micron_mtfc4ggqdi_emmc_card;CLS:micron_mtfc2ggqdi_emmc_card;CLS:micron_mtfc4gacaeam_emmc_card;CLS:micron_mtfc8gacaeam_emmc_card;CLS:micron_mtfc8gam_emmc_card;CLS:micron_mtfc16gap_emmc_card;CLS:micron_mtfc32gap_emmc_card;CLS:micron_mtfc64gap_emmc_card;CLS:micron_mtfc128gap_emmc_card;CLS:micron_mtfc64ggqdi_sdhc_card;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 127432 1670539997 ms1553-link-v2.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539995;MOD:ms1553-link-v2;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ms1553-link-v2-impl;CLS:ms1553-link-v2-endpoint;CLS:ms1553-link-v2-snoop-endpoint;CLS:ms1553_link_v2;COMP:ms1553_link_v2;MODULE_LOAD;THREADSAFE;
+file 151160 1670539998 ms1553-snoop-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539995;MOD:ms1553-snoop-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:ms1553_snoop;THREADSAFE;
+file 90600 1670539997 mtprof.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539995;MOD:mtprof;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:mtprof;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 814048 1670540001 nfs-server.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539996;MOD:nfs-server;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:nfs_server;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 66336 1670539998 notifier-example.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539996;MOD:notifier-example;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:tcp_server;CLS:connected_device;THREADSAFE;
+file 17440 1670539998 old-breakpoint-manager.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539997;MOD:old-breakpoint-manager;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 403016 1670540001 onfi-flash.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539997;MOD:onfi-flash;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:onfi_flash;MODULE_LOAD;THREADSAFE;
+file 367656 1670540003 os-awareness-interfaces.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539999;MOD:os-awareness-interfaces;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:osa_linux_software_info;PYIFACE:osa_linux_software_tracker_info;PYIFACE:osa_tracker_parameters;PYIFACE:osa_target_info;THREADSAFE;
+file 1103464 1670539961 os-awareness.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539955;MOD:os-awareness;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:osa_admin_emulator;CLS:os_awareness;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 376560 1670540002 partition-tracker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539997;MOD:partition-tracker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:partition_tracker;CLS:partition_mapper;CLS:partition_tracker_comp;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670539999 pc-config.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539998;MOD:pc-config;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pc-config;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 53360 1670539999 pc-shadow.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539998;MOD:pc-shadow;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pc-shadow;MODULE_LOAD;THREADSAFE;
+file 210752 1670540000 pci-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539998;MOD:pci-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pci-bus;MODULE_LOAD;THREADSAFE;
+file 17440 1670539999 pci-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539998;MOD:pci-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pci_bcm5703c_comp;CLS:pci_bcm5704c_comp;CLS:pci_am79c973_comp;CLS:pci_vga_comp;CLS:pci_accel_vga_comp;CLS:pci_i21152_comp;CLS:pci_i82543gc_comp;CLS:pci_i82546bg_comp;CLS:pci_i82559_comp;CLS:pci_pd6729_comp;CLS:pci_dec21041_comp;CLS:pci_dec21143_comp;CLS:pci_dec21140;CLS:pci_dec21140_panel;CLS:pci_dec21140a_comp;COMP:pci_bcm5703c_comp;COMP:pci_bcm5704c_comp;COMP:pci_am79c973_comp;COMP:pci_vga_comp;COMP:pci_accel_vga_comp;COMP:pci_i21152_comp;COMP:pci_i82543gc_comp;COMP:pci_i82546bg_comp;COMP:pci_i82559_comp;COMP:pci_pd6729_comp;COMP:pci_dec21041_comp;COMP:pci_dec21143_comp;COMP:pci_dec21140;COMP:pci_dec21140_panel;COMP:pci_dec21140a_comp;MODULE_LOAD;THREADSAFE;
+file 17440 1670540000 pci-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539999;MOD:pci-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pci-bcm5703c;CLS:pci-bcm5704c;CLS:pci-dec21041;CLS:pci-dec21140a;CLS:pci-dec21143;CLS:pci-dec21140a-dml;CLS:pci-am79c973;CLS:pci-vga;CLS:pci-accel-vga;CLS:pci-i21152;CLS:pci-pd6729;CLS:pci-i82543gc;CLS:pci-i82546bg;CLS:pci-i82559;COMP:pci-bcm5703c;COMP:pci-bcm5704c;COMP:pci-dec21041;COMP:pci-dec21140a;COMP:pci-dec21143;COMP:pci-dec21140a-dml;COMP:pci-am79c973;COMP:pci-vga;COMP:pci-accel-vga;COMP:pci-i21152;COMP:pci-pd6729;COMP:pci-i82543gc;COMP:pci-i82546bg;COMP:pci-i82559;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670540000 pci-proxy.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539999;MOD:pci-proxy;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pci_proxy;CLS:pci_proxy_mf;MODULE_LOAD;THREADSAFE;
+file 242328 1670540001 pcie-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539999;MOD:pcie-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pcie-bus;CLS:pcie-switch;MODULE_LOAD;THREADSAFE;
+file 1135176 1670540008 pcie-downstream-port.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539999;MOD:pcie-downstream-port;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pcie-downstream-port;CLS:pcie-downstream-port-legacy;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670540001 phy-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540000;MOD:phy-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:phy_comp;COMP:phy_comp;MODULE_LOAD;THREADSAFE;
+file 17440 1670540001 phy-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540000;MOD:phy-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:phy-mii-transceiver;COMP:phy-mii-transceiver;MODULE_LOAD;THREADSAFE;
+file 67872 1670540002 pipe-manager-example.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540000;MOD:pipe-manager-example;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:pipe_manager;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540004 probe-monitor.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540002;MOD:probe-monitor;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:probe_monitor;CLS:probe_streamer;CLS:probe_system_perfmeter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 104680 1670540004 process-filter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540002;MOD:process-filter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:process_filter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540003 process-histogram.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540003;MOD:process-histogram;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:process_histogram;CLS:process_histogram_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 52856 1670540004 ram-tracer.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540003;MOD:ram-tracer;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ram_tracer;CLS:ram_tracer_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 246208 1670540006 real-network.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540003;MOD:real-network;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:rn-eth-bridge-tap;CLS:real-network-host;CLS:real-network-bridge;CLS:real_network_host_comp;CLS:real_network_bridge_comp;COMP:real-network-host;COMP:real-network-bridge;COMP:real_network_host_comp;COMP:real_network_bridge_comp;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 54184 1670540004 realtime.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540003;MOD:realtime;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:realtime;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 111720 1670540005 recorder.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540003;MOD:recorder;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:recorder;MODULE_LOAD;THREADSAFE;
+file 32664 1670540005 replace-consoles.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540004;MOD:replace-consoles;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:patch_vga_interfaces;SIMICS_START;THREADSAFE;
+file 17456 1670540005 sample-802-15-4-transceiver-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540004;MOD:sample-802-15-4-transceiver-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_802_15_4_transceiver_comp;CLS:sample_802_15_4_panel;COMP:sample_802_15_4_transceiver_comp;COMP:sample_802_15_4_panel;MODULE_LOAD;THREADSAFE;
+file 393200 1670540008 sample-802-15-4-transceiver.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540004;MOD:sample-802-15-4-transceiver;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_802_15_4_transceiver;MODULE_LOAD;THREADSAFE;
+file 17440 1670540006 sample-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540005;MOD:sample-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_pci_card;COMP:sample_pci_card;MODULE_LOAD;THREADSAFE;
+file 17440 1670540007 sample-cpci-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540006;MOD:sample-cpci-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:cpci_backplane;COMP:cpci_backplane;MODULE_LOAD;THREADSAFE;
+file 9916568 1670540024 sample-device-c++.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540007;MOD:sample-device-c++;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_device_cpp;CLS:sample_device_cpp_with_register_as_data;MODULE_LOAD;THREADSAFE;
+file 31984 1670540007 sample-device-c.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540007;MOD:sample-device-c;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample-device-c;MODULE_LOAD;THREADSAFE;
+file 575440 1670540013 sample-device-dml.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540007;MOD:sample-device-dml;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_device_dml;MODULE_LOAD;THREADSAFE;
+file 292360 1670540010 sample-device-mixed.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540006;MOD:sample-device-mixed;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_device_mixed;MODULE_LOAD;THREADSAFE;
+file 17440 1670540008 sample-device-python.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540007;MOD:sample-device-python;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_device_python;MODULE_LOAD;THREADSAFE;
+file 7798512 1670540026 sample-dma-device-c++.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540008;MOD:sample-dma-device-c++;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_dma_device_cpp;MODULE_LOAD;THREADSAFE;
+file 685968 1670540015 sample-dma-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540008;MOD:sample-dma-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_dma_device;MODULE_LOAD;THREADSAFE;
+file 17440 1670540009 sample-dynamic-connectors.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540008;MOD:sample-dynamic-connectors;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_dynamic_connectors;COMP:sample_dynamic_connectors;MODULE_LOAD;THREADSAFE;
+file 265976 1670540012 sample-event-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540009;MOD:sample-event-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_event_device;MODULE_LOAD;THREADSAFE;
+file 895648 1670540017 sample-firewire-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540009;MOD:sample-firewire-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_firewire_device;MODULE_LOAD;THREADSAFE;
+file 106488 1670540012 sample-generic-message-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540009;MOD:sample-generic-message-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_generic_message_device;MODULE_LOAD;THREADSAFE;
+file 65200 1670540011 sample-i2c-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540009;MOD:sample-i2c-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_i2c_device;MODULE_LOAD;THREADSAFE;
+file 733600 1670540014 sample-i3c-devices.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540009;MOD:sample-i3c-devices;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_i3c_slave;CLS:sample_i3c_master;MODULE_LOAD;THREADSAFE;
+file 125800 1670540012 sample-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540010;MOD:sample-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:sample;THREADSAFE;
+file 342008 1670540013 sample-interrupt-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540009;MOD:sample-interrupt-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_interrupt_device;MODULE_LOAD;THREADSAFE;
+file 325792 1670540014 sample-linux-tracker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-linux-tracker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_linux_tracker;CLS:sample_linux_mapper;CLS:sample_linux_tracker_comp;MODULE_LOAD;THREADSAFE;
+file 42936 1670540012 sample-memhier.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-memhier;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample-memhier;THREADSAFE;
+file 171248 1670540015 sample-notifier-dml.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-notifier-dml;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_notifier_dml;MODULE_LOAD;THREADSAFE;
+file 1332000 1670540024 sample-pci-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-pci-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_pci_device;MODULE_LOAD;THREADSAFE;
+file 893024 1670540021 sample-pcie-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-pcie-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_pcie_device;MODULE_LOAD;THREADSAFE;
+file 5355376 1670540054 sample-pcie-sriov-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-pcie-sriov-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_pcie_sriov_device;MODULE_LOAD;THREADSAFE;
+file 453384 1670540015 sample-risc.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-risc;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample-risc;CLS:sample-risc-core;MODULE_LOAD;THREADSAFE;
+file 359296 1670540015 sample-serial-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-serial-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_serial_device;MODULE_LOAD;THREADSAFE;
+file 99296 1670540014 sample-signal-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540011;MOD:sample-signal-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_signal_device_impl;CLS:sample_signal_device;MODULE_LOAD;THREADSAFE;
+file 17456 1670540013 sample-system-panel-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540012;MOD:sample-system-panel-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_system_panel_component;CLS:sample_bitmap_panel;COMP:sample_system_panel_component;COMP:sample_bitmap_panel;MODULE_LOAD;THREADSAFE;
+file 315608 1670540016 sample-timer-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540012;MOD:sample-timer-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample_timer_device;MODULE_LOAD;THREADSAFE;
+file 126608 1670540015 sample-transaction-atoms.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540012;MOD:sample-transaction-atoms;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;THREADSAFE;
+file 46408 1670540013 sample-user-decoder.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540012;MOD:sample-user-decoder;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample-user-decoder;THREADSAFE;
+file 50360 1670540013 sample-x86-isa-extension.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540012;MOD:sample-x86-isa-extension;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sample-x86-isa-extension;MODULE_LOAD;THREADSAFE;
+file 520112 1670540017 sata.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540012;MOD:sata;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sata;MODULE_LOAD;THREADSAFE;
+file 540176 1670540018 sdl-console.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540013;MOD:sdl-console;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sdl-console;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 88624 1670540014 selfprof.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540013;MOD:selfprof;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:selfprof;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 87664 1670540014 ser-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540013;MOD:ser-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:ser-link-impl;CLS:ser-link-endpoint;CLS:ser_link;COMP:ser_link;MODULE_LOAD;THREADSAFE;
+file 2348416 1670539960 service-node.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539953;MOD:service-node;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:service-node;CLS:service-node-device;CLS:port-forward-outgoing-server;CLS:port-forward-incoming-server;CLS:std-service-node;CLS:service_node_comp;COMP:std-service-node;COMP:service_node_comp;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 33648 1670540015 set-memory.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540014;MOD:set-memory;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:set-memory;MODULE_LOAD;THREADSAFE;
+file 64616 1670540016 signal-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540014;MOD:signal-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:signal-bus;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 67752 1670540015 signal-link.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540014;MOD:signal-link;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:signal_link_impl;CLS:signal_link_endpoint;CLS:signal_link;COMP:signal_link;MODULE_LOAD;THREADSAFE;
+file 53664 1670540016 signal-to-interrupt.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540014;MOD:signal-to-interrupt;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:signal_to_interrupt;MODULE_LOAD;THREADSAFE;
+file 97808 1670540016 simics-inspector.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540015;MOD:simics-inspector;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sr_histogram;CLS:sr_histogram_connection;CLS:sr_ticks;CLS:sr_ticks_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540016 simics-telemetry.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540015;MOD:simics-telemetry;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:telemetry_manager;MODULE_LOAD;THREADSAFE;
+file 447968 1670540017 simicsfs-server.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540015;MOD:simicsfs-server;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simicsfs_server;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 36496 1670540016 simple-byte-dump.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540015;MOD:simple-byte-dump;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simple-byte-dump;MODULE_LOAD;THREADSAFE;
+file 424048 1670540020 simple-cache-tool.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:simple-cache-tool;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;CLS:simple_cache_tool;CLS:simple_cache_connection;CLS:simple_cache;CLS:simple_directory;PYIFACE:simple_cache;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 100152 1670540018 simple-i2c-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:simple-i2c-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simple_i2c_device;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 913840 1670540026 simple-pcie-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:simple-pcie-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simple_pcie_device;MODULE_LOAD;THREADSAFE;
+file 151088 1670540018 simple-scsi-disk.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:simple-scsi-disk;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simple-scsi-disk;MODULE_LOAD;THREADSAFE;
+file 157376 1670540019 simple-timing-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:simple-timing-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:simple_timing_v2;THREADSAFE;
+file 58392 1670540017 simple-tty.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:simple-tty;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:simple-tty;THREADSAFE;
+file 1347488 1670540029 sja1000-can.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540016;MOD:sja1000-can;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sja1000_can;MODULE_LOAD;THREADSAFE;
+file 17440 1670540018 sparse-memory.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540017;MOD:sparse-memory;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:sparse-memory;MODULE_LOAD;THREADSAFE;
+file 17424 1670540018 spi_checker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540017;MOD:spi_checker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:spi_checker;MODULE_LOAD;THREADSAFE;
+file 287544 1670540020 state-assertion.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540018;MOD:state-assertion;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:state-assertion;MODULE_LOAD;THREADSAFE;
+file 17440 1670540019 std-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540018;MOD:std-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:dummy_comp;CLS:etg_comp;CLS:etg_panel_comp;CLS:graphics_console_comp;CLS:host_serial_console_comp;CLS:ide_cdrom_comp;CLS:ide_disk_comp;CLS:mmc_card_comp;CLS:pcmcia_flash_disk_comp;CLS:sata_disk_comp;CLS:sata_cdrom_comp;CLS:server_console_comp;CLS:telnet_console_comp;CLS:text_console_comp;CLS:text_graphics_console_comp;COMP:dummy_comp;COMP:etg_comp;COMP:etg_panel_comp;COMP:graphics_console_comp;COMP:host_serial_console_comp;COMP:ide_cdrom_comp;COMP:ide_disk_comp;COMP:mmc_card_comp;COMP:pcmcia_flash_disk_comp;COMP:sata_disk_comp;COMP:sata_cdrom_comp;COMP:server_console_comp;COMP:telnet_console_comp;COMP:text_console_comp;COMP:text_graphics_console_comp;MODULE_LOAD;THREADSAFE;
+file 183696 1670540022 system-panel-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540019;MOD:system-panel-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:system_panel;PYIFACE:system_panel_object;PYIFACE:system_panel_layout;PYIFACE:system_panel_state_manager;PYIFACE:system_panel_frontend;THREADSAFE;
+file 17440 1670540019 system-panel-text.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540019;MOD:system-panel-text;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:text_panel_frontend;MODULE_LOAD;THREADSAFE;
+file 280448 1670540023 system-panel.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540019;MOD:system-panel;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:system_panel_bool;CLS:system_panel_number;CLS:system_panel_state_manager;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540020 system-perfmeter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540019;MOD:system-perfmeter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;SIMICS_START;THREADSAFE;
+file 17440 1670539949 systemc-commands.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539948;MOD:systemc-commands;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;MODULE_LOAD;THREADSAFE;
+file 454896 1670539952 systemc-interfaces.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539949;MOD:systemc-interfaces;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:sc_trace;PYIFACE:sc_object;PYIFACE:sc_module;PYIFACE:sc_process;PYIFACE:sc_initiator_gasket;PYIFACE:sc_export;PYIFACE:sc_port;PYIFACE:sc_process_profiler;PYIFACE:sc_process_profiler_control;PYIFACE:sc_memory_profiler;PYIFACE:sc_memory_profiler_control;PYIFACE:sc_signal_read;PYIFACE:sc_signal_write;PYIFACE:sc_tlm_fw_transport;PYIFACE:sc_tlm_bw_transport;PYIFACE:sc_vector;PYIFACE:sc_event;PYIFACE:sc_register_access;PYIFACE:sc_memory_access;PYIFACE:sc_simcontext;PYIFACE:sc_version;PYIFACE:sc_gasket_info;PYIFACE:sc_provider_controller;PYIFACE:sc_tool_connection;MODULE_LOAD;THREADSAFE;
+file 17440 1670540020 systemc-tools.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540019;MOD:systemc-tools;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:systemc_filter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 10528616 1670540005 tcf-agent.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539963;MOD:tcf-agent;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;CLS:tcf-agent;CLS:tcf-context-proxy;CLS:tcf-serial-tee;PYIFACE:agent_proxy_finder;PYIFACE:tcf_breakpoints;PYIFACE:tcf_pathmap;PYIFACE:tcf_memorymap;PYIFACE:tcf_elf;PYIFACE:tcf_pe;PYIFACE:tcf_uefi_tracker_inspection;PYIFACE:tcf_trace;PYIFACE:tcf_target_identification;PYIFACE:debug_internal;PYIFACE:tcf_serial_tap;PYIFACE:symdebug;PYIFACE:run_control;PYIFACE:debug_config;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 186416 1670540021 telnet-console.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540019;MOD:telnet-console;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:telnet_console;CLS:server-console;MODULE_LOAD;THREADSAFE;
+file 95096 1670540021 telnet-frontend.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540020;MOD:telnet-frontend;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:telnet_frontend;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 60800 1670540022 test-cdrom-media-wrapper.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540020;MOD:test-cdrom-media-wrapper;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:test_cdrom_media_wrapper;THREADSAFE;
+file 67624 1670540022 test-generic-message-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540021;MOD:test-generic-message-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:test_generic_message_device;THREADSAFE;
+file 70424 1670540025 test-usb-device.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540023;MOD:test-usb-device;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:test_usb_device;THREADSAFE;
+file 758664 1670539957 textcon.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670539952;MOD:textcon;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:textcon;CLS:text-frontend-winsome;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 129416 1670540025 time-server-c.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540023;MOD:time-server-c;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:time-server;SIMICS_START;THREADSAFE;
+file 60856 1670540025 trace-sync.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540023;MOD:trace-sync;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:trace-sync;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 201880 1670540026 trace.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540023;MOD:trace;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:trace-mem-hier;CLS:base-trace-mem-hier;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 32280 1670540024 trans-staller.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540023;MOD:trans-staller;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:trans-staller;THREADSAFE;
+file 126504 1670540027 tsc-update-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:tsc-update-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:tsc_update;THREADSAFE;
+file 1430128 1670540032 uefi-fw-tracker.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:uefi-fw-tracker;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:uefi_fw_tracker;CLS:uefi_fw_mapper;CLS:uefi_fw_tracker_comp;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17424 1670540025 usb-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:usb-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:usb_disk_comp;CLS:usb_tablet_component;COMP:usb_disk_comp;COMP:usb_tablet_component;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540025 usb-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:usb-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:usb-disk;CLS:usb-tablet-comp;COMP:usb-disk;COMP:usb-tablet-comp;MODULE_LOAD;THREADSAFE;
+file 186856 1670540028 usb-disk.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:usb-disk;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:usb_disk;THREADSAFE;
+file 17456 1670540025 usb-hid-components.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:usb-hid-components;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:usb_mouse_comp;CLS:usb_keyboard_comp;CLS:usb_hs_keyboard_comp;COMP:usb_mouse_comp;COMP:usb_keyboard_comp;COMP:usb_hs_keyboard_comp;MODULE_LOAD;THREADSAFE;
+file 518568 1670540031 usb-input-devices.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:usb-input-devices;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:usb_mouse;CLS:usb_keyboard;CLS:usb_hs_keyboard;MODULE_LOAD;THREADSAFE;
+file 153720 1670540028 usb-tablet.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540024;MOD:usb-tablet;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:usb_tablet;MODULE_LOAD;THREADSAFE;
+file 604920 1670540029 vga-pci.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540026;MOD:vga-pci;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:vga_pci;MODULE_LOAD;THREADSAFE;
+file 341536 1670540029 vga.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540025;MOD:vga;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:vga;MODULE_LOAD;THREADSAFE;
+file 17440 1670540027 virtio-pcie-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540026;MOD:virtio-pcie-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:virtio_pcie_net_comp;CLS:virtio_pcie_blk_comp;COMP:virtio_pcie_net_comp;COMP:virtio_pcie_blk_comp;MODULE_LOAD;THREADSAFE;
+file 4901848 1670540045 virtio.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540026;MOD:virtio;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:virtio_mmio_blk;CLS:virtio_mmio_net;CLS:virtio_pcie_blk;CLS:virtio_pcie_net;MODULE_LOAD;THREADSAFE;
+file 141112 1670540029 vmcom.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540026;MOD:vmcom;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:vmcom;MODULE_LOAD;THREADSAFE;
+file 17440 1670540028 vtune-measurement.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540026;MOD:vtune-measurement;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:vtune_measurement;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 534384 1670540031 x11-console.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540027;MOD:x11-console;ABI:6191;API:5;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:gfx-console;CLS:x11-console;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 47840 1670540029 x86-branch-profiler.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540028;MOD:x86-branch-profiler;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86_branch_profiler;CLS:x86_branch_prof_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 17440 1670540030 x86-comp.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540028;MOD:x86-comp;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86_chassis;CLS:motherboard_x86_simple;CLS:motherboard_x86_simple_no_apic;COMP:x86_chassis;COMP:motherboard_x86_simple;COMP:motherboard_x86_simple_no_apic;MODULE_LOAD;THREADSAFE;
+file 17440 1670540030 x86-mode-filter.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540029;MOD:x86-mode-filter;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86_mode_filter;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 56352 1670540030 x86-mode-histogram.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540029;MOD:x86-mode-histogram;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86_mode_histogram;CLS:x86_mode_histogram_connection;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 136536 1670540033 x86-reset-bus-interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540030;MOD:x86-reset-bus-interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:x86_reset_bus;THREADSAFE;
+file 39552 1670540030 x86-reset-bus.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540029;MOD:x86-reset-bus;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86-reset-bus;MODULE_LOAD;THREADSAFE;
+file 35688 1670540031 x86_broadcast.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540030;MOD:x86_broadcast;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86_broadcast;MODULE_LOAD;THREADSAFE;
+file 146728 1670540032 x86_tlb.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540030;MOD:x86_tlb;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x86-tlb;MODULE_LOAD;SIMICS_START;THREADSAFE;
+file 970424 1670540039 x86ex_interface.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540033;MOD:x86ex_interface;ABI:6191;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:x86_txt_chipset;PYIFACE:x86_unplug;PYIFACE:x86_unplug_v2;PYIFACE:x86_external_reset;PYIFACE:x86_smm_notification;PYIFACE:apic_bus_v2;PYIFACE:apic_timer;PYIFACE:x86_sai;PYIFACE:mktme;PYIFACE:apic_to_apic_bus;PYIFACE:apic_bus_to_apic;PYIFACE:x86_cstate_notification_v2;PYIFACE:x86_monitor_notification;PYIFACE:x86_monitor;PYIFACE:x86_vcounters;THREADSAFE;
+file 51280 1670540031 x87_exception.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540030;MOD:x87_exception;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:x87_exception;MODULE_LOAD;THREADSAFE;
+file 555928 1670540034 xterm-console.so
+cap VER:5000;BLD:6191;BLD_NS:simics;BUILDDATE:1670540031;MOD:xterm-console;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:xterm-console;CLS:text-console;MODULE_LOAD;SIMICS_START;THREADSAFE;

@@ -1,0 +1,78 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sd_card</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_script-params.html" class="previous">script-params</a>
+<a href="__rm_class_sdl-console.html" class="next">sdl-console</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sd_card">sd_card</a></h1>
+<p>
+
+<a name="sd_card"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_generic-sdmmc-card">generic-sdmmc-card</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>sd_card</b> implements SD(v 3.00)/SDIO(v 3.00) memory card.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, mmc</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.cia</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, io_memory, register_view)<br><b>bank.regs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:flash_image"><b><i>flash_image</i></b></dt><p><a name="__rm_attribute_sd_card_flash_image"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Image that will hold the memory contents
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:mem_type"><b><i>mem_type</i></b></dt><p><a name="__rm_attribute_sd_card_mem_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>; <b>persistent</b> attribute.
+Memory type based on its size: 0 - SC, 1 - HC, 2 - XC</dd></dl><p></p><dl><dt id="dt:bank-regs-cid"><b><i>bank.regs.CID</i></b></dt><p><a name="__rm_attribute_sd_card_regs.CID"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{16}]</code>.
+CID: Card identification register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-csd"><b><i>bank.regs.CSD</i></b></dt><p><a name="__rm_attribute_sd_card_regs.CSD"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{16}]</code>.
+CSD: Device-Specific Data register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-csr"><b><i>bank.regs.CSR</i></b></dt><p><a name="__rm_attribute_sd_card_regs.CSR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+CSR: Card status (R1 response fields). Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-dsr"><b><i>bank.regs.DSR</i></b></dt><p><a name="__rm_attribute_sd_card_regs.DSR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+DSR: Driver stage register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-ocr"><b><i>bank.regs.OCR</i></b></dt><p><a name="__rm_attribute_sd_card_regs.OCR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+OCR: Operation condition register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-rca"><b><i>bank.regs.RCA</i></b></dt><p><a name="__rm_attribute_sd_card_regs.RCA"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+RCA: Relative device address. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-scr"><b><i>bank.regs.SCR</i></b></dt><p><a name="__rm_attribute_sd_card_regs.SCR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+SCR: SD CARD Configuration (SCR) register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-ssr"><b><i>bank.regs.SSR</i></b></dt><p><a name="__rm_attribute_sd_card_regs.SSR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{64}]</code>.
+SSR: SD status register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:sd_type"><b><i>sd_type</i></b></dt><p><a name="__rm_attribute_sd_card_sd_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Memory card type: 0 - SD, 1 - SDIO</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sd_card_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sd_card_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_script-params.html" class="previous">script-params</a>
+<a href="__rm_class_sdl-console.html" class="next">sdl-console</a>
+</div>

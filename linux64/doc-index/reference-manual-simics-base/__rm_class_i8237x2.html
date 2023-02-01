@@ -1,0 +1,82 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i8237x2</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i82077.html" class="previous">i82077</a>
+<a href="__rm_class_i8254.html" class="next">i8254</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i8237x2">i8237x2</a></h1>
+<p>
+
+<a name="i8237x2"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_8237x2">8237x2</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The 8237x2 device implements the functionality of two cascaded 8237 DMA controllers. The 8237x2 supplies 7 dma channels that other devices can use for direct transfers to and from physical memory. The channel to use should be set in the device requesting DMA transfers. The 8237x2 exports two functions for reading and writing data. Limitation: Most registers in the 8237x2 device change hardware specific parameters. These do nothing in the 8237x2. Memory-to-Memory DMA transfers are not supported. The <i>verify</i> transfer type is not supported. Transfer delays are not modelled correctly, all transfers are completed in the same cycle as they are initiated by the device. Software initiated DMA requests are not supported.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, legacy_dma, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:auto_init"><b><i>auto_init</i></b></dt><p><a name="__rm_attribute_i8237x2_auto_init"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>(0|1, 0|1, 0|1, 0|1), (0|1, 0|1, 0|1, 0|1)</code> If set re-initialize registers at terminal count.</dd></dl><p></p><dl><dt id="dt:base_addr"><b><i>base_addr</i></b></dt><p><a name="__rm_attribute_i8237x2_base_addr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> The base address register for both chips' 4 DMA channels.</dd></dl><p></p><dl><dt id="dt:base_count"><b><i>base_count</i></b></dt><p><a name="__rm_attribute_i8237x2_base_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> The base count register.</dd></dl><p></p><dl><dt id="dt:current_addr"><b><i>current_addr</i></b></dt><p><a name="__rm_attribute_i8237x2_current_addr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> The current address register. a1 - a4 are addresses of the first chip's 4 DMA channels' and b1 - b4 are for the second chip.</dd></dl><p></p><dl><dt id="dt:current_count"><b><i>current_count</i></b></dt><p><a name="__rm_attribute_i8237x2_current_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> The current count register.</dd></dl><p></p><dl><dt id="dt:dec_address"><b><i>dec_address</i></b></dt><p><a name="__rm_attribute_i8237x2_dec_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>(0|1, 0|1, 0|1, 0|1), (0|1, 0|1, 0|1, 0|1)</code> If set decrement addresses on transfers instead of increment. Per channel.</dd></dl><p></p><dl><dt id="dt:disabled"><b><i>disabled</i></b></dt><p><a name="__rm_attribute_i8237x2_disabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+(<code>0|1</code>,<code>0|1</code>) If the chips are disabled or enabled.</dd></dl><p></p><dl><dt id="dt:dma_mode"><b><i>dma_mode</i></b></dt><p><a name="__rm_attribute_i8237x2_dma_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> DMA mode 0 (demand), 1 (single), 2 (block), 3 (cascade) for all channels.</dd></dl><p></p><dl><dt id="dt:dma_type"><b><i>dma_type</i></b></dt><p><a name="__rm_attribute_i8237x2_dma_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> DMA type 0 (verify), 1 (write), 2 (read), 3 (illegal) for all channels.</dd></dl><p></p><dl><dt id="dt:extra_page_addr"><b><i>extra_page_addr</i></b></dt><p><a name="__rm_attribute_i8237x2_extra_page_addr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> Extra page address registers. These registers have no function in the device.</dd></dl><p></p><dl><dt id="dt:flip_flop"><b><i>flip_flop</i></b></dt><p><a name="__rm_attribute_i8237x2_flip_flop"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+<code>(</code><i>hi</i><code>, </code><i>lo</i><code>)</code> <i>hi</i>/<i>lo</i> byte access selector.</dd></dl><p></p><dl><dt id="dt:mask"><b><i>mask</i></b></dt><p><a name="__rm_attribute_i8237x2_mask"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>(0|1, 0|1, 0|1, 0|1), (0|1, 0|1, 0|1, 0|1)</code> Which channels are disables/enabled.</dd></dl><p></p><dl><dt id="dt:memory"><b><i>memory</i></b></dt><p><a name="__rm_attribute_i8237x2_memory"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+The physical memory to connect the DMA device to.</dd></dl><p></p><dl><dt id="dt:page_addr"><b><i>page_addr</i></b></dt><p><a name="__rm_attribute_i8237x2_page_addr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> The 64k/128k page that DMA is relative.</dd></dl><p></p><dl><dt id="dt:page_size"><b><i>page_size</i></b></dt><p><a name="__rm_attribute_i8237x2_page_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+<code>(</code><i>page-size1</i><code>, </code><i>page-size2</i><code>)</code> Page size for the controllers. 64k or 128k.</dd></dl><p></p><dl><dt id="dt:request"><b><i>request</i></b></dt><p><a name="__rm_attribute_i8237x2_request"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>((</code><i>a1</i><code>, </code><i>a2</i><code>, </code><i>a3</i><code>, </code><i>a4</i><code>), (</code><i>b1</i><code>, </code><i>b2</i><code>, </code><i>b3</i><code>, </code><i>b4</i><code>))</code> The request register.</dd></dl><p></p><dl><dt id="dt:tc"><b><i>tc</i></b></dt><p><a name="__rm_attribute_i8237x2_tc"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]{2}]</code>.
+<code>(0|1, 0|1, 0|1, 0|1), (0|1, 0|1, 0|1, 0|1)</code> Bit set on terminal count (TC) for a DMA channel.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8237x2_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8237x2_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i82077.html" class="previous">i82077</a>
+<a href="__rm_class_i8254.html" class="next">i8254</a>
+</div>

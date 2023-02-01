@@ -1,0 +1,70 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>remote_sync_domain</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_recorder.html" class="previous">recorder</a>
+<a href="__rm_class_remote_sync_node.html" class="next">remote_sync_node</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_remote_sync_domain">remote_sync_domain</a></h1>
+<p>
+
+<a name="remote_sync_domain"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A controller object for a group of synchronized nodes.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, dist_control, link_config, link_route, log_object, sync_domain_controller, sync_initial_time</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:finished"><b><i>finished</i></b></dt><p><a name="__rm_attribute_remote_sync_domain_finished"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>nil</code>.
+Set to indicate that the local configuration is done and let the server accept other clients</dd></dl><p></p><dl><dt id="dt:min_latency"><b><i>min_latency</i></b></dt><p><a name="__rm_attribute_remote_sync_domain_min_latency"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>float</code>.
+The min-latency.</dd></dl><p></p><dl><dt id="dt:nodes"><b><i>nodes</i></b></dt><p><a name="__rm_attribute_remote_sync_domain_nodes"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[o]</code>.
+The nodes connected to this domain.</dd></dl><p></p><dl><dt id="dt:report_time"><b><i>report_time</i></b></dt><p><a name="__rm_attribute_remote_sync_domain_report_time"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>float</code> or <code>nil</code>.
+The report time.</dd></dl><p></p><dl><dt id="dt:server"><b><i>server</i></b></dt><p><a name="__rm_attribute_remote_sync_domain_server"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The address of the server. A string on the format "host:port", or "host" for default port 1920.</dd></dl><p></p><dl><dt id="dt:stop_time"><b><i>stop_time</i></b></dt><p><a name="__rm_attribute_remote_sync_domain_stop_time"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>float</code> or <code>nil</code>.
+The stop time.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_remote_sync_domain_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_remote_sync_domain_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_recorder.html" class="previous">recorder</a>
+<a href="__rm_class_remote_sync_node.html" class="next">remote_sync_node</a>
+</div>

@@ -1,0 +1,75 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>branch_recorder</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_bp-manager.html" class="previous">bp-manager</a>
+<a href="__rm_class_breakpoints-old.html" class="next">breakpoints-old</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_branch_recorder">branch_recorder</a></h1>
+<p>
+
+<a name="branch_recorder"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A branch recorder records the branches taken by the zero or more processors that it is attached to. For each pair of addresses, the branch recorder keeps track of how many times the processors have branched from the first to the second address. This information can be used directly, or be processed to yield e.g. execution count for each address.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">address_profiler, branch_arc, conf_object, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:address_type"><b><i>address_type</i></b></dt><p><a name="__rm_attribute_branch_recorder_address_type"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Record physical ('2') or virtual ('1') addresses?</dd></dl><p></p><dl><dt id="dt:branches"><b><i>branches</i></b></dt><p><a name="__rm_attribute_branch_recorder_branches"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[iii]*]</code> or <code>nil</code>.
+branches collected by branch recorder</dd></dl><p></p><dl><dt id="dt:clean"><b><i>clean</i></b></dt><p><a name="__rm_attribute_branch_recorder_clean"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>nil</code>.
+Write <code>nil</code> to this attribute to erase all recorded branch arcs.</dd></dl><p></p><dl><dt id="dt:cpu_type"><b><i>cpu_type</i></b></dt><p><a name="__rm_attribute_branch_recorder_cpu_type"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+Type of processor this branch recorder can handle.</dd></dl><p></p><dl><dt id="dt:num_arcs"><b><i>num_arcs</i></b></dt><p><a name="__rm_attribute_branch_recorder_num_arcs"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Number of branch arcs in this recorder.</dd></dl><p></p><dl><dt id="dt:processors"><b><i>processors</i></b></dt><p><a name="__rm_attribute_branch_recorder_processors"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+Processors this branch recorder is attached to.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface address_profiler</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_address_profiler_gt_.address-profile-data">address-profile-data</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_address_profiler_gt_.address-profile-info">address-profile-info</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_address_profiler_gt_.address-profile-toplist">address-profile-toplist</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_branch_recorder_gt_.clean">clean</a></b></td><td class="jdocu_noborder">delete all branch arcs in the branch recorder</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_branch_recorder_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_branch_recorder_gt_.print-branch-arcs">print-branch-arcs</a></b></td><td class="jdocu_noborder">print branch arcs</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_branch_recorder_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_bp-manager.html" class="previous">bp-manager</a>
+<a href="__rm_class_breakpoints-old.html" class="next">breakpoints-old</a>
+</div>

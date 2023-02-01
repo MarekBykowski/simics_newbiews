@@ -1,0 +1,113 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2.7 test-runner</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="checkpoint-merge.html" class="previous">2.6 checkpoint-merge</a>
+<a href="project-setup-model-builder-functionality.html" class="next">2.8 project-setup Model Builder functionality</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="command-line-tools-and-programs.html">2 Command-Line Tools and Programs</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="test-runner">2.7 test-runner</a></h1>
+<p>
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">test-runner [<em>options</em>] <em>[suite-pattern</em> ...]</pre><p>
+</p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">List or run Simics tests.
+<p>
+Simics tests are placed in <em>test suites</em>, which are directories
+containing a <code>SUITEINFO</code> file. By default, the
+<b>test-runner</b> command searches for test suites in the directories
+<code>test</code>, <code>targets</code> and <code>modules</code> of
+the Simics project, and in the <code>test</code> directory of installed
+Simics packages.
+</p><p>
+If the program is run with the flag <i>--list</i>, the names of
+all found test suites are listed:
+</p><pre class="jdocu_small">  $ <b>./bin/test-runner</b> --list
+  modules/bar/test
+  modules/foo/test
+  test/t15_checkpoints: [simics]/test/t15_checkpoints
+</pre><p>
+</p><p>
+The name of a suite is the path of the directory, relative to the project
+or Simics installation path, using / as directory separator. If the test
+suite is located in the Simics installation, then the absolute path is
+printed as well.
+</p><p>
+The flag <i>--test</i> can be used to list the individual tests of
+each test suite:
+</p><pre class="jdocu_small">  $ <b>./bin/test-runner</b> --tests --suite=modules/bar/test
+  Suite: modules/foo/test
+      s-foo
+      s-info-status
+</pre><p>
+</p><p>
+If neither <i>--list</i> nor <i>--tests</i> is passed, all
+found test suites will be run. For example, the command
+<em>./bin/test-runner --suite=modules/bar/test</em> will run all tests
+of the test suite <code>modules/bar/test</code>. If <code>test-runner</code>
+is run with no arguments, then all tests in all test suites will be run.
+</p><p>
+Other than the argument <i>--suite</i>, a <em>suite pattern</em> can
+also be used to filter test suites. If one or more suite patterns are provided,
+only the suites matching at least one of the patterns will be run. A suite
+matches a suite pattern if the pattern is a substring of the suite's
+name. For example, if there is a suite <code>modules/foo/test</code>, then
+the command <b>./bin/test-runner foo</b> will run that suite, and possibly
+other suites as well.
+</p><p>
+When an environment variable <code>TEST_PATTERN</code> is set, the value will
+be used as a pattern to filter the tests to be run within the test suite.
+The pattern is interpreted according to Python's regular expression syntax.
+For example, if the variable is set as <b>export
+TEST_PATTERN="s-.+DMA-"</b>, then <b>test-runner</b> will run tests named
+<code>s-xyz-DMA-read</code> and <code>s-abc-DMA-write</code>, and skip
+tests named <code>Xs-xyz-DMA-read</code> or <code>s-abc-DMAwrite</code>.
+</p><p>
+The variable can also be set to multiple patterns with the semicolon as
+a separator, e.g. <b>export TEST_PATTERN="pattern0;pattern1"</b>.
+This will run tests that match any one of the given patterns.
+</p><p>
+By default, all tests run sequentially. When the <i>-j</i> option
+is passed, automatically added <code>s-*.py</code> scripts, may be
+executed in parallel. The tests will be executed in an unspecified
+order, so <i>-j</i> should only be used if you know that there
+are no dependencies between the tests of the suite.
+</p><p>
+</p></dd>
+<dt class="jdocu_descitem">Options</dt><dd class="jdocu_descitem"><dl><dt id="dt:-h-help"><b><code>-h, --help</code></b></dt><dd>show this help message and exit</dd><dt id="dt:-details"><b><code>--details</code></b></dt><dd>print detail help information</dd><dt id="dt:-logdir"><b><code>--logdir</code></b></dt><dd>the directory tests save logfiles in, defaults to [project]/logs/tests</dd><dt id="dt:-basedir"><b><code>--basedir</code></b></dt><dd>the base directory where the modules containing the tests exist, defaults to 'modules'</dd><dt id="dt:-moduledirs"><b><code>--moduledirs</code></b></dt><dd>directories with modules containing tests,separated by ';'</dd><dt id="dt:-project-only"><b><code>--project-only</code></b></dt><dd>disable the tests from Simics packages</dd><dt id="dt:-l-list"><b><code>-l, --list</code></b></dt><dd>list the suites matching the patterns</dd><dt id="dt:-t-tests"><b><code>-t, --tests</code></b></dt><dd>list tests matching the given patterns</dd><dt id="dt:-tag-tag"><b><code>--tag TAG</code></b></dt><dd>Run all suites where a tag in SUITEINFO matches TAG</dd><dt id="dt:-suite-suite"><b><code>--suite SUITE</code></b></dt><dd>specify a test suite to be executed</dd><dt id="dt:-n-name-name-name"><b><code>-n NAME, --name NAME</code></b></dt><dd>specify a test name to be executed</dd><dt id="dt:-j-n-jobs-n"><b><code>-j N, --jobs N</code></b></dt><dd>run up to N Simics script tests in parallel in each test suite; N will be automatically set to the number of processors on the machine if not specified</dd><dt id="dt:-v-verbose"><b><code>-v, --verbose</code></b></dt><dd>print more verbose information when running</dd><dt id="dt:-py3"><b><code>--py3</code></b></dt><dd>Deprecated, no effect.</dd><dt id="dt:-py2"><b><code>--py2</code></b></dt><dd>Deprecated, no effect.</dd></dl><p></p></dd>
+<dt class="jdocu_descitem">Return Value</dt><dd class="jdocu_descitem">The exit status is 0 if selected test suites succeed, 1 if there is an
+  internal error, and 2 if any test fails.
+</dd>
+<dt class="jdocu_descitem">See Also</dt><dd class="jdocu_descitem">The test framework in the <em>API Reference Manual</em>
+</dd>
+</dl><p></p><div class=chain>
+<a href="checkpoint-merge.html" class="previous">2.6 checkpoint-merge</a>
+<a href="project-setup-model-builder-functionality.html" class="next">2.8 project-setup Model Builder functionality</a>
+</div>

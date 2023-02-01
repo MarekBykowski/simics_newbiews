@@ -1,0 +1,60 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>disassemble_arm</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_dec21143.html" class="previous">DEC21143</a>
+<a href="__rm_class_disassemble_x86.html" class="next">disassemble_x86</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_disassemble_arm">disassemble_arm</a></h1>
+<p>
+
+<a name="disassemble_arm"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_disassemble-arm">disassemble-arm</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This class implements the disassemble interface for the ARM architecture. Use the attributes to set up the instruction  mode prior to using the interface.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, disassemble, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:fail_on_bad"><b><i>fail_on_bad</i></b></dt><p><a name="__rm_attribute_disassemble_arm_fail_on_bad"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to true if disassemble_next should fail on illegal instructions. Set to false if such instructions should be disassembled as <code>&lt;illegal&gt;</code> instead.</dd></dl><p></p><dl><dt id="dt:instruction_mode"><b><i>instruction_mode</i></b></dt><p><a name="__rm_attribute_disassemble_arm_instruction_mode"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>0</code>|<code>1</code>|<code>2</code> Set to 0 for ARM, 1 for Thumb or 2 for AArch64.</dd></dl><p></p><dl><dt id="dt:v8_extension"><b><i>v8_extension</i></b></dt><p><a name="__rm_attribute_disassemble_arm_v8_extension"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The ARMv8.x extension version x to disassemble for. The maximum handled version will be the version that the arm-v8 module has support for.</dd></dl><p></p><dl><dt id="dt:vfp_version"><b><i>vfp_version</i></b></dt><p><a name="__rm_attribute_disassemble_arm_vfp_version"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The VFP major version to disassemble for. The maximum handled version will be the version that the arm-v8 module has support for.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_dec21143.html" class="previous">DEC21143</a>
+<a href="__rm_class_disassemble_x86.html" class="next">disassemble_x86</a>
+</div>

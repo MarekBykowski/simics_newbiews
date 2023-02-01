@@ -1,0 +1,68 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>pcie-switch</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_pcie-downstream-port-legacy.html" class="previous">pcie-downstream-port-legacy</a>
+<a href="__rm_class_perfanalyze-client.html" class="next">perfanalyze-client</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_pcie-switch">pcie-switch</a></h1>
+<p>
+
+<a name="pcie-switch"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_pcie-bus">pcie-bus</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The pcie-bus device models a logical <i>PCI Express</i> switch that PCI Express devices can be connected to. The switch needs memory-space objects connected, representing the three PCI Express address spaces 'configuration', 'I/O' and 'memory'. The switch itself should be connected to a PCI Express bridge device.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object, pci_bus, pci_downstream, pci_express, pci_upstream, pci_upstream_operation</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>port.downstream</b> (transaction) : Downstream Transactions, used by RC's<br><b>port.upstream</b> (transaction) : Upstream Transactions, used by endpoints</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bridge"><b><i>bridge</i></b></dt><p><a name="__rm_attribute_pcie-switch_bridge"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>, <code>object</code>, or <code>nil</code>.
+Upstream PCI bridge object, which must implement the pci_bridge and the pci_express interface. It can also implement the optional pci_express_hotplug interface. For cPCI use-case, multiple bridges can be assigned and signals will be sent to all of them.</dd></dl><p></p><dl><dt id="dt:bus_number"><b><i>bus_number</i></b></dt><p><a name="__rm_attribute_pcie-switch_bus_number"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+PCI bus number of this bus. In most cases this is 0, but some exceptions exist. This attribute is set by the bridge and should not be changed by the user.</dd></dl><p></p><dl><dt id="dt:conf_space"><b><i>conf_space</i></b></dt><p><a name="__rm_attribute_pcie-switch_conf_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Memory-space object representing the PCI configuration space.</dd></dl><p></p><dl><dt id="dt:interrupt"><b><i>interrupt</i></b></dt><p><a name="__rm_attribute_pcie-switch_interrupt"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>, <code>object</code>, or <code>nil</code>.
+One or more interrupt device objects that implements the pci_interrupt interface. This attribute only has to be set if the bridge does not handle PCI interrupts.</dd></dl><p></p><dl><dt id="dt:io_space"><b><i>io_space</i></b></dt><p><a name="__rm_attribute_pcie-switch_io_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Memory-space object representing the PCI I/O space.</dd></dl><p></p><dl><dt id="dt:memory_space"><b><i>memory_space</i></b></dt><p><a name="__rm_attribute_pcie-switch_memory_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Memory-space object representing the PCI memory space.</dd></dl><p></p><dl><dt id="dt:pci_devices"><b><i>pci_devices</i></b></dt><p><a name="__rm_attribute_pcie-switch_pci_devices"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iio]|[iioi]*]</code>.
+((<i>id</i>, <i>function</i>, <i>object</i>)*). <i>id</i> is the PCI device id. <i>function</i> is the PCI device logical function. <i>object</i> is the PCI device itself, which must implement the pci_device interface. The object can also optionally implement either or both of: the pci_express interface, a port-object named 'port.pcie_message' implementing the transaction interface.The tuple may also contain an additional integer that tells if the PCI device is enabled or not. As default the PCI device is enabled.</dd></dl><p></p><dl><dt id="dt:send_interrupt_to_bridge"><b><i>send_interrupt_to_bridge</i></b></dt><p><a name="__rm_attribute_pcie-switch_send_interrupt_to_bridge"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If non-zero (default), interrupt will be routed to the PCI bridge as well as the interrupt devices.</dd></dl><p></p><dl><dt id="dt:sub_bus_number"><b><i>sub_bus_number</i></b></dt><p><a name="__rm_attribute_pcie-switch_sub_bus_number"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Subordinate PCI bus number for this bus. This attribute is set by the bridge and should not be changed by the user.</dd></dl><p></p><dl><dt id="dt:upstream_target"><b><i>upstream_target</i></b></dt><p><a name="__rm_attribute_pcie-switch_upstream_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+If non-NULL, all upstream transactions are forwarded to the specified object using the pci_upstream or transaction interface.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_pcie-downstream-port-legacy.html" class="previous">pcie-downstream-port-legacy</a>
+<a href="__rm_class_perfanalyze-client.html" class="next">perfanalyze-client</a>
+</div>

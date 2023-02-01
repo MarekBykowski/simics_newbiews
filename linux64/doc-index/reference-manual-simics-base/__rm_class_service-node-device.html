@@ -1,0 +1,75 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>service-node-device</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_service-node.html" class="previous">service-node</a>
+<a href="__rm_class_set-memory.html" class="next">set-memory</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_service-node-device">service-node-device</a></h1>
+<p>
+
+<a name="service-node-device"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_service-node">service-node</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Ethernet device for the service-node class.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ethernet_common, log_object, recorded</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:arp_table"><b><i>arp_table</i></b></dt><p><a name="__rm_attribute_service-node-device_arp_table"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[[ss]*]</code>.
+Compatibility attribute for old checkpoints.</dd></dl><p></p><dl><dt id="dt:ip_addresses"><b><i>ip_addresses</i></b></dt><p><a name="__rm_attribute_service-node-device_ip_addresses"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+The configured IP addresses for this network interface. They are on the form <code>"</code><i>addr</i><code>/</code><i>prefixlen</i><code>"</code> and allows both IPv4 and IPv6 addresses.  This list does not include automatically assigned IP number, such as link-local IPv6 addresses.</dd></dl><p></p><dl><dt id="dt:link"><b><i>link</i></b></dt><p><a name="__rm_attribute_service-node-device_link"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The network link that this service node Ethernet device is attached to.</dd></dl><p></p><dl><dt id="dt:link_state"><b><i>link_state</i></b></dt><p><a name="__rm_attribute_service-node-device_link_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The network link that this service node Ethernet device is attached to (for checkpointing).</dd></dl><p></p><dl><dt id="dt:mac_address"><b><i>mac_address</i></b></dt><p><a name="__rm_attribute_service-node-device_mac_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiiiii]</code> or <code>string</code>.
+The MAC address used by this service node Ethernet device.</dd></dl><p></p><dl><dt id="dt:mtu"><b><i>mtu</i></b></dt><p><a name="__rm_attribute_service-node-device_mtu"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MTU, maximum transfer unit, is the largest Ethernet payload (without Ethernet header and CRC) that will be sent out on the network without fragmentation. Default 1500.</dd></dl><p></p><dl><dt id="dt:neighbors"><b><i>neighbors</i></b></dt><p><a name="__rm_attribute_service-node-device_neighbors"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code>.
+The neighbor table used by this Ethernet interface.</dd></dl><p></p><dl><dt id="dt:partial_packets_v4"><b><i>partial_packets_v4</i></b></dt><p><a name="__rm_attribute_service-node-device_partial_packets_v4"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ddf[[dib]*]]*]</code>.
+((<i>id</i>, <i>ip_hdr</i>, <i>timestamp</i>, (<i>data</i>, <i>offset</i>, <i>more_flag</i>)*)*)<br><br>IPv4 partial packets.</dd></dl><p></p><dl><dt id="dt:partial_packets_v6"><b><i>partial_packets_v6</i></b></dt><p><a name="__rm_attribute_service-node-device_partial_packets_v6"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ssif[[diib]*]]*]</code>.
+((<i>source_ip</i>, <i>dest_ip</i>, <i>identification</i>, <i>timestamp</i>, (<i>ip_frame</i>, <i>start</i>, <i>end</i>, <i>more_flag</i>)*)*)<br><br>IPv6 partial packets.</dd></dl><p></p><dl><dt id="dt:service_node"><b><i>service_node</i></b></dt><p><a name="__rm_attribute_service-node-device_service_node"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+The service node that the Ethernet device is attached to.</dd></dl><p></p><dl><dt id="dt:tx_bandwidth"><b><i>tx_bandwidth</i></b></dt><p><a name="__rm_attribute_service-node-device_tx_bandwidth"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The transmit bandwidth of the network interface in bits per second. The network interface will limit the rate at which it sends packets to remain below this bandwidth. Default limit is 1Gbit/s.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node-device_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node-device_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_service-node.html" class="previous">service-node</a>
+<a href="__rm_class_set-memory.html" class="next">set-memory</a>
+</div>

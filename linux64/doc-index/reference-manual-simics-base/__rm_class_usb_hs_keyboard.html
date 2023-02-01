@@ -1,0 +1,83 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>usb_hs_keyboard</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_usb_disk.html" class="previous">usb_disk</a>
+<a href="__rm_class_usb_keyboard.html" class="next">usb_keyboard</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_usb_hs_keyboard">usb_hs_keyboard</a></h1>
+<p>
+
+<a name="usb_hs_keyboard"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_usb-input-devices">usb-input-devices</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A High-Speed USB keyboard device.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, keyboard, log_object, usb_device</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:descriptor_data"><b><i>descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The descriptors in data format.</dd></dl><p></p><dl><dt id="dt:device_address"><b><i>device_address</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_device_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+USB device/function address.</dd></dl><p></p><dl><dt id="dt:device_qualifier_descriptor_data"><b><i>device_qualifier_descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_device_qualifier_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The device qualifier in data format.</dd></dl><p></p><dl><dt id="dt:device_state"><b><i>device_state</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_device_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+USB device state.</dd></dl><p></p><dl><dt id="dt:hid_data"><b><i>hid_data</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_hid_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiiiiiii]</code>.
+The USB HID report data</dd></dl><p></p><dl><dt id="dt:hid_report_descriptor_data"><b><i>hid_report_descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_hid_report_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The descriptors in data format.</dd></dl><p></p><dl><dt id="dt:key_queue"><b><i>key_queue</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_key_queue"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+contains key events which can not be reported yet without losing previous key events</dd></dl><p></p><dl><dt id="dt:ms_os_descriptor"><b><i>ms_os_descriptor</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_ms_os_descriptor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The Microsoft OS Descriptor.</dd></dl><p></p><dl><dt id="dt:string_descriptor_array"><b><i>string_descriptor_array</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_string_descriptor_array"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[d*]</code>.
+String descriptors.</dd></dl><p></p><dl><dt id="dt:tr_table"><b><i>tr_table</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_tr_table"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Keyboard translation table</dd></dl><p></p><dl><dt id="dt:usb_host"><b><i>usb_host</i></b></dt><p><a name="__rm_attribute_usb_hs_keyboard_usb_host"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The USB host controller.
+<p>
+Required interfaces: <code>usb</code>.</p></dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_hs_keyboard_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_hs_keyboard_gt_.key-down">key-down</a></b></td><td class="jdocu_noborder">send key down event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_hs_keyboard_gt_.key-press">key-press</a></b></td><td class="jdocu_noborder">send key event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_hs_keyboard_gt_.key-up">key-up</a></b></td><td class="jdocu_noborder">send key up event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_hs_keyboard_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_usb_disk.html" class="previous">usb_disk</a>
+<a href="__rm_class_usb_keyboard.html" class="next">usb_keyboard</a>
+</div>

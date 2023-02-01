@@ -1,0 +1,92 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>simple-scsi-disk</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_simple-byte-dump.html" class="previous">simple-byte-dump</a>
+<a href="__rm_class_simple-tty.html" class="next">simple-tty</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_simple-scsi-disk">simple-scsi-disk</a></h1>
+<p>
+
+<a name="simple-scsi-disk"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_simple-scsi-disk">simple-scsi-disk</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Simple model of a SCSI disk for use with a SCSI controller. This model is not intended to be connected to a SCSI bus.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, simple_scsi_target</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:controller"><b><i>controller</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_controller"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Name of the controller that this disk is connected to.</dd></dl><p></p><dl><dt id="dt:geometry"><b><i>geometry</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_geometry"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[iii]</code>.
+The geometry of the disk. ()</dd></dl><p></p><dl><dt id="dt:image"><b><i>image</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_image"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+The image object holding the actual data of the disk. This object must implement the 'image' interface.</dd></dl><p></p><dl><dt id="dt:mode_pages"><b><i>mode_pages</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_mode_pages"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>.
+Mode pages for the disk.</dd></dl><p></p><dl><dt id="dt:model"><b><i>model</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_model"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Model name of the disk.</dd></dl><p></p><dl><dt id="dt:queue_length"><b><i>queue_length</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_queue_length"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Length of SCSI command queue (not implemented).</dd></dl><p></p><dl><dt id="dt:revision"><b><i>revision</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_revision"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Revision string of the disk.</dd></dl><p></p><dl><dt id="dt:scsi_commands"><b><i>scsi_commands</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_scsi_commands"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; <b>integer</b> indexed;  indexed type: <code>string</code>.
+Pseudo attribute returning the SCSI command name (as a string) given an integer index representing the command.</dd></dl><p></p><dl><dt id="dt:scsi_standard"><b><i>scsi_standard</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_scsi_standard"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+(Internal) Set SCSI standard to 2 or 3. Default value depends on device type.</dd></dl><p></p><dl><dt id="dt:sector_data"><b><i>sector_data</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_sector_data"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; <b>integer</b> indexed;  indexed type: <code>data</code>.
+Can be used to access a sector (512 bytes) on the disk.</dd></dl><p></p><dl><dt id="dt:sectors_read"><b><i>sectors_read</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_sectors_read"></a></p><dd><b>Session</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Number of sectors read in the current simulation session.</dd></dl><p></p><dl><dt id="dt:sectors_written"><b><i>sectors_written</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_sectors_written"></a></p><dd><b>Session</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Number of sectors written in the current simulation session.</dd></dl><p></p><dl><dt id="dt:sense_key"><b><i>sense_key</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_sense_key"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current Sense Key code.</dd></dl><p></p><dl><dt id="dt:vendor"><b><i>vendor</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_vendor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Vendor name of the disk.</dd></dl><p></p><dl><dt id="dt:vendor_specific_id"><b><i>vendor_specific_id</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_vendor_specific_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Vendor Specific string for the disk - often used as serial id.</dd></dl><p></p><dl><dt id="dt:vpd_pages"><b><i>vpd_pages</i></b></dt><p><a name="__rm_attribute_simple-scsi-disk_vpd_pages"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>.
+VPD pages for the disk.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.add-diff-file">add-diff-file</a></b></td><td class="jdocu_noborder">add a diff file to the image</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.add-partial-diff-file">add-partial-diff-file</a></b></td><td class="jdocu_noborder">add a partial diff file to the image</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.create-partition">create-partition</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — add a partition to disk</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.info">info</a></b></td><td class="jdocu_noborder">information about current state of the SCSI disk</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.print-partition-info">print-partition-info</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — print info about a pc-style partition</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.print-partition-table">print-partition-table</a></b></td><td class="jdocu_noborder">print the partition table</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.save-diff-file">save-diff-file</a></b></td><td class="jdocu_noborder">save diff file to disk</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple-scsi-disk_gt_.save-mbr-partition">save-mbr-partition</a></b></td><td class="jdocu_noborder">save an MBR partition to a file</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_simple-byte-dump.html" class="previous">simple-byte-dump</a>
+<a href="__rm_class_simple-tty.html" class="next">simple-tty</a>
+</div>

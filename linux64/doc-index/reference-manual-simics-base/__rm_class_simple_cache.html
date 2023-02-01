@@ -1,0 +1,108 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>simple_cache</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_simple-tty.html" class="previous">simple-tty</a>
+<a href="__rm_class_simple_cache_connection.html" class="next">simple_cache_connection</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_simple_cache">simple_cache</a></h1>
+<p>
+
+<a name="simple_cache"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_simple-cache-tool">simple-cache-tool</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Simple cache structure
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, simple_cache, table</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:cache_block_size"><b><i>cache_block_size</i></b></dt><p><a name="__rm_attribute_simple_cache_cache_block_size"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+cache_block_size</dd></dl><p></p><dl><dt id="dt:cache_conn"><b><i>cache_conn</i></b></dt><p><a name="__rm_attribute_simple_cache_cache_conn"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+The instrumentation connection</dd></dl><p></p><dl><dt id="dt:cache_set_number"><b><i>cache_set_number</i></b></dt><p><a name="__rm_attribute_simple_cache_cache_set_number"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+cache_set_number</dd></dl><p></p><dl><dt id="dt:cache_ways"><b><i>cache_ways</i></b></dt><p><a name="__rm_attribute_simple_cache_cache_ways"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+cache_ways</dd></dl><p></p><dl><dt id="dt:cpu"><b><i>cpu</i></b></dt><p><a name="__rm_attribute_simple_cache_cpu"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>, <code>object</code>, or <code>nil</code>.
+The cpus connected to the cache</dd></dl><p></p><dl><dt id="dt:directory"><b><i>directory</i></b></dt><p><a name="__rm_attribute_simple_cache_directory"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Directory controlling this cache level</dd></dl><p></p><dl><dt id="dt:evicted_modified"><b><i>evicted_modified</i></b></dt><p><a name="__rm_attribute_simple_cache_evicted_modified"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of eviction of modified data</dd></dl><p></p><dl><dt id="dt:evicted_total"><b><i>evicted_total</i></b></dt><p><a name="__rm_attribute_simple_cache_evicted_total"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of total eviction.</dd></dl><p></p><dl><dt id="dt:ip_read_prefetcher"><b><i>ip_read_prefetcher</i></b></dt><p><a name="__rm_attribute_simple_cache_ip_read_prefetcher"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Use instruction pointer based read stride prefetcher.</dd></dl><p></p><dl><dt id="dt:ip_write_prefetcher"><b><i>ip_write_prefetcher</i></b></dt><p><a name="__rm_attribute_simple_cache_ip_write_prefetcher"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Use instruction pointer based write stride prefetcher.</dd></dl><p></p><dl><dt id="dt:level"><b><i>level</i></b></dt><p><a name="__rm_attribute_simple_cache_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Cache level 1 - N</dd></dl><p></p><dl><dt id="dt:meta_content"><b><i>meta_content</i></b></dt><p><a name="__rm_attribute_simple_cache_meta_content"></a></p><dd><b>Session</b> attribute; <b>read-only</b> access; type: <code>[[iiiii]*]</code>.
+Cache meta content for each line: [State, tag, accessed, in prefetch stride, prefetched line].State is encoded as: 0 in Invalid, 1 is Shared, 2 is Exclusive, and 3 is Modified.</dd></dl><p></p><dl><dt id="dt:next_level"><b><i>next_level</i></b></dt><p><a name="__rm_attribute_simple_cache_next_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+next hierarchy object</dd></dl><p></p><dl><dt id="dt:policy"><b><i>policy</i></b></dt><p><a name="__rm_attribute_simple_cache_policy"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Cache policy, either 'inclusive', 'exclusive', or 'nine' which is default</dd></dl><p></p><dl><dt id="dt:prefetch_additional"><b><i>prefetch_additional</i></b></dt><p><a name="__rm_attribute_simple_cache_prefetch_additional"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Additional consecutive lines to prefetch</dd></dl><p></p><dl><dt id="dt:prefetch_adjacent"><b><i>prefetch_adjacent</i></b></dt><p><a name="__rm_attribute_simple_cache_prefetch_adjacent"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Prefetch the adjacent cache line as well so the total fetch region is block size * 2, naturally aligned.</dd></dl><p></p><dl><dt id="dt:prev_level"><b><i>prev_level</i></b></dt><p><a name="__rm_attribute_simple_cache_prev_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o|n*]</code> or <code>nil</code>.
+Previous caches in hierarchy</dd></dl><p></p><dl><dt id="dt:read_miss_penalty"><b><i>read_miss_penalty</i></b></dt><p><a name="__rm_attribute_simple_cache_read_miss_penalty"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Read miss penalty</dd></dl><p></p><dl><dt id="dt:read_penalty"><b><i>read_penalty</i></b></dt><p><a name="__rm_attribute_simple_cache_read_penalty"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Read penalty</dd></dl><p></p><dl><dt id="dt:snoop_penalty"><b><i>snoop_penalty</i></b></dt><p><a name="__rm_attribute_simple_cache_snoop_penalty"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Extra penalty for issuing snooping transaction.</dd></dl><p></p><dl><dt id="dt:stat_data_prefetch"><b><i>stat_data_prefetch</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_prefetch"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of prefetches</dd></dl><p></p><dl><dt id="dt:stat_data_prefetch_miss"><b><i>stat_data_prefetch_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_prefetch_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of prefetch misses</dd></dl><p></p><dl><dt id="dt:stat_data_prefetch_read_for_ownership"><b><i>stat_data_prefetch_read_for_ownership</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_prefetch_read_for_ownership"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of read for ownership prefetches</dd></dl><p></p><dl><dt id="dt:stat_data_prefetch_read_for_ownership_miss"><b><i>stat_data_prefetch_read_for_ownership_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_prefetch_read_for_ownership_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of read for ownership prefetch misses</dd></dl><p></p><dl><dt id="dt:stat_data_read"><b><i>stat_data_read</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_read"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of reads</dd></dl><p></p><dl><dt id="dt:stat_data_read_for_ownership"><b><i>stat_data_read_for_ownership</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_read_for_ownership"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of read for ownership</dd></dl><p></p><dl><dt id="dt:stat_data_read_for_ownership_miss"><b><i>stat_data_read_for_ownership_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_read_for_ownership_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of read for ownership misses</dd></dl><p></p><dl><dt id="dt:stat_data_read_miss"><b><i>stat_data_read_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_read_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of reads misses</dd></dl><p></p><dl><dt id="dt:stat_data_write"><b><i>stat_data_write</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_write"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of writes</dd></dl><p></p><dl><dt id="dt:stat_data_write_back"><b><i>stat_data_write_back</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_write_back"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of writes</dd></dl><p></p><dl><dt id="dt:stat_data_write_back_miss"><b><i>stat_data_write_back_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_write_back_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of writes misses</dd></dl><p></p><dl><dt id="dt:stat_data_write_miss"><b><i>stat_data_write_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_data_write_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of writes misses</dd></dl><p></p><dl><dt id="dt:stat_instr_fetch"><b><i>stat_instr_fetch</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_instr_fetch"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of instr</dd></dl><p></p><dl><dt id="dt:stat_instr_fetch_miss"><b><i>stat_instr_fetch_miss</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_instr_fetch_miss"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of instr miss</dd></dl><p></p><dl><dt id="dt:stat_prefetches_used"><b><i>stat_prefetches_used</i></b></dt><p><a name="__rm_attribute_simple_cache_stat_prefetches_used"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+n. of prefetched lines used.</dd></dl><p></p><dl><dt id="dt:write_allocate"><b><i>write_allocate</i></b></dt><p><a name="__rm_attribute_simple_cache_write_allocate"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, write misses reads the cache line first, and then the line is modified, otherwise write through on write miss.</dd></dl><p></p><dl><dt id="dt:write_back"><b><i>write_back</i></b></dt><p><a name="__rm_attribute_simple_cache_write_back"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, modified cache line is written back to memory when line is flushed, otherwise write through.</dd></dl><p></p><dl><dt id="dt:write_miss_penalty"><b><i>write_miss_penalty</i></b></dt><p><a name="__rm_attribute_simple_cache_write_miss_penalty"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Write miss penalty, also read for ownership penalty.</dd></dl><p></p><dl><dt id="dt:write_penalty"><b><i>write_penalty</i></b></dt><p><a name="__rm_attribute_simple_cache_write_penalty"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Write penalty</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface table</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_table_gt_.export-table-csv">export-table-csv</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_table_gt_.print-table">print-table</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_gt_.print-cache-content">print-cache-content</a></b></td><td class="jdocu_noborder">meta content</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_gt_.print-statistics">print-statistics</a></b></td><td class="jdocu_noborder">print statistics</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_simple-tty.html" class="previous">simple-tty</a>
+<a href="__rm_class_simple_cache_connection.html" class="next">simple_cache_connection</a>
+</div>

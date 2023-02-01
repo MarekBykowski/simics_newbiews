@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>Suspending Time or Execution</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="changing-the-step-rate.html" class="previous">Changing the Step Rate</a>
+<a href="multiprocessor-simulation.html" class="next">4 Multiprocessor Simulation</a>
+</div>
+<div class=path>
+<a href="index.html">Understanding Simics Timing</a>&nbsp;/&nbsp;
+<a href="instruction-execution-timing.html">3 Instruction Execution Timing</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="Suspending-Time-or-Execution">Suspending Time or Execution</a></h1>
+<p>
+
+</p><p>
+<a name="timesuspending"></a>
+It is possible to set the <a name="step-rate">step rate</a> to infinity, or equivalently, to
+suspend <a name="simulated-time">simulated time</a> while executing steps. This is done by
+setting the <i>step_per_cycle_mode</i> processor attribute to one of the
+following values:
+</p><p>
+</p><dl><dt id="dt:-constant-"><b><code>"constant"</code></b></dt><dd>Steps are executed at the constant and finite rate specified in
+     the <i>step_rate</i> attribute</dd><dt id="dt:-infinite-"><b><code>"infinite"</code></b></dt><dd>Steps are executed with no progress in simulated time</dd></dl><p>While time is suspended, the cycle counter does not advance, nor are
+any time events run. To the simulated machine this appears as if all
+instructions are run infinitely fast. Using the same example as above,
+we set the step per cycle mode to "infinite" to prevent the simulated
+time from advancing:
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>cpu0-&gt;step_per_cycle_mode = "infinite"</b>
+simics&gt; <b>c 1000000</b>
+[cpu0] v:0xfff8a614 p:0x1fff8a614  cmpw r3,r5
+simics&gt; <b>print-time</b>
+processor                 steps             cycles    time [s]
+cpu0                    1000000                  0       0.000
+simics&gt;
+</pre><p>
+</p><p>
+<a name="executionsuspending"></a>
+<a name="processorenabling"></a><a name="processordisabling"></a>
+<a name="disabling-processors"></a><a name="enabling-processors"></a>
+Conversely, it is possible set the step rate to zero, thus suspending
+execution while letting simulated time pass. This can be done by
+<a name="stalling">stalling</a> the processor for a finite time (see
+<b>Stalling</b> above) or by <em>disabling</em>
+the processor for an indefinite time. Disabling and re-enabling
+processors is done with the commands <b>&lt;processor&gt;.enable</b>
+and <b>&lt;processor&gt;.disable</b>.
+</p><p>
+The processor has executed 1 million steps but the simulated time has not
+advanced. Note that setting this mode would probably prevent a machine like
+Ebony from booting since many hardware events (like interrupts) are time-based.
+</p><p>
+</p><div class=chain>
+<a href="changing-the-step-rate.html" class="previous">Changing the Step Rate</a>
+<a href="multiprocessor-simulation.html" class="next">4 Multiprocessor Simulation</a>
+</div>

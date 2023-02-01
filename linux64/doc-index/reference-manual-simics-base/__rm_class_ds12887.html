@@ -1,0 +1,93 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>DS12887</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_dm9161.html" class="previous">dm9161</a>
+<a href="__rm_class_ds12887-c.html" class="next">DS12887-c</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_DS12887">DS12887</a></h1>
+<p>
+
+<a name="DS12887"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_DS12887">DS12887</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This is a simulation model for the DS12887 real-time clock.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object, temporal_state</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.port_registers</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, io_memory, register_view)<br><b>bank.registers</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, io_memory, register_view)</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:base_rtc_time"><b><i>base_rtc_time</i></b></dt><p><a name="__rm_attribute_DS12887_base_rtc_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The real-time clock time when the oscillator was enabled, in seconds since 1970-01-01 00:00:00.</dd></dl><p></p><dl><dt id="dt:base_time"><b><i>base_time</i></b></dt><p><a name="__rm_attribute_DS12887_base_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The simulated time when the oscillator was enabled, in seconds since the start of the simulation.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_DS12887_irq_dev"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The device that interrupts are sent to, or Nil if the interrupt line is not connected to anything.
+<p>
+Required interfaces: <code>simple_interrupt</code>.</p></dd></dl><p></p><dl><dt id="dt:irq_level"><b><i>irq_level</i></b></dt><p><a name="__rm_attribute_DS12887_irq_level"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The level at which interrupts are sent.</dd></dl><p></p><dl><dt id="dt:bank-port_registers-address"><b><i>bank.port_registers.address</i></b></dt><p><a name="__rm_attribute_DS12887_port_registers.address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Port space address register. Specifies the DS12887 register that reads and writes to the port space data register are forwarded to.</dd></dl><p></p><dl><dt id="dt:bank-registers-a"><b><i>bank.registers.a</i></b></dt><p><a name="__rm_attribute_DS12887_registers.a"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Register A.</dd></dl><p></p><dl><dt id="dt:bank-registers-b"><b><i>bank.registers.b</i></b></dt><p><a name="__rm_attribute_DS12887_registers.b"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Register B.</dd></dl><p></p><dl><dt id="dt:bank-registers-c"><b><i>bank.registers.c</i></b></dt><p><a name="__rm_attribute_DS12887_registers.c"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Register C.</dd></dl><p></p><dl><dt id="dt:bank-registers-d"><b><i>bank.registers.d</i></b></dt><p><a name="__rm_attribute_DS12887_registers.d"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Register D.</dd></dl><p></p><dl><dt id="dt:bank-registers-date_of_the_month"><b><i>bank.registers.date_of_the_month</i></b></dt><p><a name="__rm_attribute_DS12887_registers.date_of_the_month"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Day of the month register. In binary format in the range 1-31, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-day_of_the_week"><b><i>bank.registers.day_of_the_week</i></b></dt><p><a name="__rm_attribute_DS12887_registers.day_of_the_week"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Day of the week register. In binary format in the range 1-7, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-hours"><b><i>bank.registers.hours</i></b></dt><p><a name="__rm_attribute_DS12887_registers.hours"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Hours register. In binary format in the range 0-23, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-hours_alarm"><b><i>bank.registers.hours_alarm</i></b></dt><p><a name="__rm_attribute_DS12887_registers.hours_alarm"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Hours alarm register. In binary format in the range 0-23, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-minutes"><b><i>bank.registers.minutes</i></b></dt><p><a name="__rm_attribute_DS12887_registers.minutes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Minutes register. In binary format in the range 0-59, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-minutes_alarm"><b><i>bank.registers.minutes_alarm</i></b></dt><p><a name="__rm_attribute_DS12887_registers.minutes_alarm"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Minutes alarm register. In binary format in therange 0-59, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-month"><b><i>bank.registers.month</i></b></dt><p><a name="__rm_attribute_DS12887_registers.month"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Month register. In binary format in the range 1-12, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-nvram"><b><i>bank.registers.nvram</i></b></dt><p><a name="__rm_attribute_DS12887_registers.nvram"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{114}]</code>; <b>persistent</b> attribute.
+NVRAM registers, corresponding to the offsets 14 to 127.</dd></dl><p></p><dl><dt id="dt:bank-registers-seconds"><b><i>bank.registers.seconds</i></b></dt><p><a name="__rm_attribute_DS12887_registers.seconds"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Seconds register. In binary format in the range 0-59, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-seconds_alarm"><b><i>bank.registers.seconds_alarm</i></b></dt><p><a name="__rm_attribute_DS12887_registers.seconds_alarm"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Seconds alarm register. In binary format in the range 0-59, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:bank-registers-year"><b><i>bank.registers.year</i></b></dt><p><a name="__rm_attribute_DS12887_registers.year"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Year register. In binary format in the range 0-99, regardless of the current register mode.</dd></dl><p></p><dl><dt id="dt:time"><b><i>time</i></b></dt><p><a name="__rm_attribute_DS12887_time"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The internal time of the real-time clock on the format "YY-MM-DD hh:mm:ss".</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887_gt_.get-date-time">get-date-time</a></b></td><td class="jdocu_noborder">get date and time</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887_gt_.set-date-time">set-date-time</a></b></td><td class="jdocu_noborder">set date and time</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_dm9161.html" class="previous">dm9161</a>
+<a href="__rm_class_ds12887-c.html" class="next">DS12887-c</a>
+</div>

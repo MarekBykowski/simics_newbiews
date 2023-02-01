@@ -1,0 +1,71 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>pc-config</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_patch_vga_interfaces.html" class="previous">patch_vga_interfaces</a>
+<a href="__rm_class_pc-shadow.html" class="next">pc-shadow</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_pc-config">pc-config</a></h1>
+<p>
+
+<a name="pc-config"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_pc-config">pc-config</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This device listens to the BIOS output port. It also initializes
+certain in-memory tables when the BIOS requests that.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:build_acpi_tables"><b><i>build_acpi_tables</i></b></dt><p><a name="__rm_attribute_pc-config_build_acpi_tables"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:cpu_list"><b><i>cpu_list</i></b></dt><p><a name="__rm_attribute_pc-config_cpu_list"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[[o,o|n,b]*]</code>.
+List of CPUs where is list item is itself a (cpu, apic, is_logical) list. The is_logical field is true if the CPU is a logical CPUs.</dd></dl><p></p><dl><dt id="dt:ebda_base"><b><i>ebda_base</i></b></dt><p><a name="__rm_attribute_pc-config_ebda_base"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Physical address of EBDA.</dd></dl><p></p><dl><dt id="dt:high_desc_offs"><b><i>high_desc_offs</i></b></dt><p><a name="__rm_attribute_pc-config_high_desc_offs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:high_desc_offs2"><b><i>high_desc_offs2</i></b></dt><p><a name="__rm_attribute_pc-config_high_desc_offs2"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:ioapic_id"><b><i>ioapic_id</i></b></dt><p><a name="__rm_attribute_pc-config_ioapic_id"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:megs"><b><i>megs</i></b></dt><p><a name="__rm_attribute_pc-config_megs"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:memory_space"><b><i>memory_space</i></b></dt><p><a name="__rm_attribute_pc-config_memory_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Memory space to which tables are written.</dd></dl><p></p><dl><dt id="dt:nvr_desc_offs"><b><i>nvr_desc_offs</i></b></dt><p><a name="__rm_attribute_pc-config_nvr_desc_offs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:reclaim_desc_offs"><b><i>reclaim_desc_offs</i></b></dt><p><a name="__rm_attribute_pc-config_reclaim_desc_offs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:rsdp_offs"><b><i>rsdp_offs</i></b></dt><p><a name="__rm_attribute_pc-config_rsdp_offs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:smem_offs"><b><i>smem_offs</i></b></dt><p><a name="__rm_attribute_pc-config_smem_offs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p></p><dl><dt id="dt:user_rsdp_address"><b><i>user_rsdp_address</i></b></dt><p><a name="__rm_attribute_pc-config_user_rsdp_address"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+BIOS helper device variable.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_patch_vga_interfaces.html" class="previous">patch_vga_interfaces</a>
+<a href="__rm_class_pc-shadow.html" class="next">pc-shadow</a>
+</div>

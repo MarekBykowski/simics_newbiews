@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2.8 project-setup Model Builder functionality</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="test-runner.html" class="previous">2.7 test-runner</a>
+<a href="commands.html" class="next">3 Commands</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="command-line-tools-and-programs.html">2 Command-Line Tools and Programs</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="project-setup-Model-Builder-functionality">2.8 project-setup Model Builder functionality</a></h1>
+<p>
+
+</p><p>
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small"><b>project-setup</b> [<em>options</em>] [<em>project</em>]</pre><p>
+ 
+</p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This section only includes the Model Builder specific functionality
+of <b>project-setup</b>. The documentation for the basic functionality
+can be found in the <em>Simics Reference Manual</em>.
+</dd>
+<dt class="jdocu_descitem">Options</dt><dd class="jdocu_descitem"><dl><dt id="dt:-device-device_name-dml-device-device_name"><b><code>--device=DEVICE_NAME,
+           --dml-device=DEVICE_NAME</code></b></dt><dd>Generate skeleton code for a device, suitable to use
+       as a starting point for implementing your own device.
+       The default implementation language is DML. See the
+       <i>--c-device</i> and <i>--py-device</i> options for creating
+       devices using other languages. If the device already
+       exists, this option is ignored. To recreate the
+       skeleton, remove the device directory.</dd><dt id="dt:-c-device-device_name"><b><code>--c-device=DEVICE_NAME</code></b></dt><dd>Similar to <i>--device</i>, but creates a device using C
+        instead of DML.</dd><dt id="dt:-c-device-device_name-2"><b><code>--c++-device=DEVICE_NAME</code></b></dt><dd>Similar to <i>--device</i>, but creates a device using C++
+        instead of DML.</dd><dt id="dt:-py-device-device_name"><b><code>--py-device=DEVICE_NAME</code></b></dt><dd>Similar to <i>--device</i>, but creates a device using Python
+        instead of DML.</dd><dt id="dt:-component-component_name"><b><code>--component=COMPONENT_NAME</code></b></dt><dd>Similar to <i>--device</i>, but creates a component skeleton
+        in Python.</dd><dt id="dt:-copy-module-device_name"><b><code>--copy-module=DEVICE_NAME</code></b></dt><dd>Copies the source code of a module into the project. The files will
+        be copied from the Simics installation. If the module already exist
+        in your project, you must manually delete it first.</dd><dt id="dt:-list-modules"><b><code>--list-modules</code></b></dt><dd>List the modules with source code that can be copied into the project
+        using the --copy-module argument.</dd><dt id="dt:-osa-tracker-tracker_name"><b><code>--osa-tracker=TRACKER_NAME</code></b></dt><dd>Generate skeleton code for an OS Awareness tracker, suitable to use as
+        a starting point for implementing your own OS Awareness tracker. If
+        the module already exists, this option is ignored. To recreate the
+        skeleton, remove the module directory. The skeleton will be created in
+        a directory named after the TRACKER_NAME and suffixed with
+        '-tracker'.</dd><dt id="dt:-instrumentation-tool-tool_name"><b><code>--instrumentation-tool=TOOL_NAME</code></b></dt><dd>Generate skeleton code for an instrumentation tool, suitable to use as
+        a starting point for implementing your own tool. If
+        the module already exists, this option is ignored. To recreate the
+        skeleton, remove the module directory. The skeleton will be created in
+        a directory named after the TOOL_NAME.</dd><dt id="dt:-instrumentation-filter-filter_name"><b><code>--instrumentation-filter=FILTER_NAME</code></b></dt><dd>Generate skeleton code for an instrumentation filter, suitable to use as
+        a starting point for implementing your own filter. If
+        the module already exists, this option is ignored. To recreate the
+        skeleton, remove the module directory. The skeleton will be created in
+        a directory named after the FILTER_NAME.</dd></dl><p>
+</p></dd>
+</dl><p></p><div class=chain>
+<a href="test-runner.html" class="previous">2.7 test-runner</a>
+<a href="commands.html" class="next">3 Commands</a>
+</div>

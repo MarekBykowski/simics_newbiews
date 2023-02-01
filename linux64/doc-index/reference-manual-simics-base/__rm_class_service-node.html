@@ -1,0 +1,133 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>service-node</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_server-console.html" class="previous">server-console</a>
+<a href="__rm_class_service-node-device.html" class="next">service-node-device</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_service-node">service-node</a></h1>
+<p>
+
+<a name="service-node"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_service-node">service-node</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This class provides services on an Ethernet network.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, tcp, udp, udp_service</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:allow_real_dns"><b><i>allow_real_dns</i></b></dt><p><a name="__rm_attribute_service-node_allow_real_dns"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the service node's DNS server will forward queries for unknown hosts to a real DNS server.</dd></dl><p></p><dl><dt id="dt:async_real_dns"><b><i>async_real_dns</i></b></dt><p><a name="__rm_attribute_service-node_async_real_dns"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the service node will forward the real DNS lookup in asynchronous mode.</dd></dl><p></p><dl><dt id="dt:bootparam_udp_port"><b><i>bootparam_udp_port</i></b></dt><p><a name="__rm_attribute_service-node_bootparam_udp_port"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The UDP port currently used for the Sun RPC Bootparam protocol replies. For checkpointing only.</dd></dl><p></p><dl><dt id="dt:default_boot_filename"><b><i>default_boot_filename</i></b></dt><p><a name="__rm_attribute_service-node_default_boot_filename"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Default boot filename supplied in replies from the BOOTP/DHCP server if no client specific filename is configured in the host_boot_filename attribute.</dd></dl><p></p><dl><dt id="dt:default_dhcp_options"><b><i>default_dhcp_options</i></b></dt><p><a name="__rm_attribute_service-node_default_dhcp_options"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[id]*]</code>.
+Extension of the build-in set of DHCP options that the DHCP server uses in replies. These default options are used if no client specific options are set in the host_dhcp_options attribute.</dd></dl><p></p><dl><dt id="dt:dhcp6_allocated_addresses"><b><i>dhcp6_allocated_addresses</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_allocated_addresses"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[sii]*]</code>.
+The allocated addresses. The sub-entries for each allocated address are <i>address</i>, <i>commit-flag</i>, <i>decline-flag</i>. <i>address</i> must be an IPv6 address.</dd></dl><p></p><dl><dt id="dt:dhcp6_clients"><b><i>dhcp6_clients</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_clients"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[d[[iii[[sii]*]]*][[i[[sii]*]]*]]*]</code>.
+All known clients.</dd></dl><p></p><dl><dt id="dt:dhcp6_dns_servers"><b><i>dhcp6_dns_servers</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_dns_servers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+List of IPv6 addresses to DNS recursive name servers.</dd></dl><p></p><dl><dt id="dt:dhcp6_domain_search_list"><b><i>dhcp6_domain_search_list</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_domain_search_list"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+List of domain names representing the domain search list.</dd></dl><p></p><dl><dt id="dt:dhcp6_lifetimes"><b><i>dhcp6_lifetimes</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_lifetimes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Preferred and valid lifetimes for IPv6 addresses.</dd></dl><p></p><dl><dt id="dt:dhcp6_nis_domain_name"><b><i>dhcp6_nis_domain_name</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_nis_domain_name"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The NIS domain name.</dd></dl><p></p><dl><dt id="dt:dhcp6_nis_servers"><b><i>dhcp6_nis_servers</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_nis_servers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+List of IPv6 addresses to NIS servers.</dd></dl><p></p><dl><dt id="dt:dhcp6_nisp_domain_name"><b><i>dhcp6_nisp_domain_name</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_nisp_domain_name"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The NIS+ domain name.</dd></dl><p></p><dl><dt id="dt:dhcp6_nisp_servers"><b><i>dhcp6_nisp_servers</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_nisp_servers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+List of IPv6 addresses to NIS+ servers.</dd></dl><p></p><dl><dt id="dt:dhcp6_serverid"><b><i>dhcp6_serverid</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_serverid"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>string</code>.
+The DUID identifying the DHCPv6 server.</dd></dl><p></p><dl><dt id="dt:dhcp6_valid_prefixes"><b><i>dhcp6_valid_prefixes</i></b></dt><p><a name="__rm_attribute_service-node_dhcp6_valid_prefixes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[is]*]</code>.
+The IPv6 prefixes that are valid on the local link. The sub-entries for each prefix are <i>prefix-length</i>, <i>ip-address</i>. <i>ip-address</i> must be an IPv6 address.</dd></dl><p></p><dl><dt id="dt:dhcp_leases"><b><i>dhcp_leases</i></b></dt><p><a name="__rm_attribute_service-node_dhcp_leases"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ssdii]*]</code>.
+The active leases used by the DHCP service. The sub-entries for each lease are <i>ip-address</i>, <i>mac-address</i>, <i>client-id</i>, <i>lease-time</i>, <i>timestamp</i>. The lease time is given in seconds since the lease was issued.</dd></dl><p></p><dl><dt id="dt:dhcp_max_lease_time"><b><i>dhcp_max_lease_time</i></b></dt><p><a name="__rm_attribute_service-node_dhcp_max_lease_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code> or <code>nil</code>.
+The maximum lease time handed out by the DHCP server. If the value is Nil, or 0xffffffff, infinite leases are allowed.</dd></dl><p></p><dl><dt id="dt:eth_interfaces"><b><i>eth_interfaces</i></b></dt><p><a name="__rm_attribute_service-node_eth_interfaces"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[o*]</code>.
+The Ethernet interface objects used by this service node.</dd></dl><p></p><dl><dt id="dt:host_boot_filename"><b><i>host_boot_filename</i></b></dt><p><a name="__rm_attribute_service-node_host_boot_filename"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ss|n]*]</code>.
+Extensions to the host database with the BOOTP/DHCP boot filename. Each entry in the list is a sub list with a client IP address and the boot filename. If no entry exists in the host database for a client boots using BOOTP or DHCP, then the value of the default_boot_filename attribute is used.</dd></dl><p></p><dl><dt id="dt:host_dhcp_options"><b><i>host_dhcp_options</i></b></dt><p><a name="__rm_attribute_service-node_host_dhcp_options"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[s[[id]*]]*]</code>.
+Extensions to the host database with client specific DHCP option values that the DHCP server uses in replies. If no client specific option exists, then the value in the default_dhcp_options attribute, if set, is used. There are also a number of built-in DHCP options that the server always replies to. A built-in option can be disabled by specifying an empty value for the option in question. Each entry in the attribute list is a sub list with a client IP address followed by yet one list with two entries: the option number and a byte array with the reply. Vendor specific options can not be defined using this attribute.</dd></dl><p></p><dl><dt id="dt:host_pools"><b><i>host_pools</i></b></dt><p><a name="__rm_attribute_service-node_host_pools"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i,s,s,s[[s|n,s,s,s]*]]*]</code>.
+The host database used by the DHCP and DNS servers.</dd></dl><p></p><dl><dt id="dt:hosts"><b><i>hosts</i></b></dt><p><a name="__rm_attribute_service-node_hosts"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[s|n,s,s,s]*]</code>.
+(mac, ip, host, domain) The host database used by the DHCP and DNS servers.</dd></dl><p></p><dl><dt id="dt:napt_enable"><b><i>napt_enable</i></b></dt><p><a name="__rm_attribute_service-node_napt_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+When set to non-zero, the service node will provide network address port translation as specified by RFC 3022. The current implementation can only handle TCP NAPT.</dd></dl><p></p><dl><dt id="dt:next_tcp_port"><b><i>next_tcp_port</i></b></dt><p><a name="__rm_attribute_service-node_next_tcp_port"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Next new local TCP port.</dd></dl><p></p><dl><dt id="dt:recorder"><b><i>recorder</i></b></dt><p><a name="__rm_attribute_service-node_recorder"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Recorder device for recording and playback of network traffic.</dd></dl><p></p><dl><dt id="dt:routing_table"><b><i>routing_table</i></b></dt><p><a name="__rm_attribute_service-node_routing_table"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ss|iso]*]</code>.
+The routing table used by this service node. The four sub-entries for each routing table entry are <i>network</i>, <i>netmask</i>, <i>gateway</i> and <i>service-node</i>. The network and gateway are specified as IP addresses in dot notation, and the netmask is specified as an IP address or as a prefix length. The service-node is the node connected to the network where the gateway resides. For a route where the destination is reachable on the other service-node's connected network, the gateway should be set to 0.0.0.0. To create a default route, both the network and netmask should be set to 0.0.0.0.</dd></dl><p></p><dl><dt id="dt:rpc_bindings"><b><i>rpc_bindings</i></b></dt><p><a name="__rm_attribute_service-node_rpc_bindings"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iiii]*]</code>.
+List of RPC bindings (program, version, protocol, port) that are used by port mapper or RPCBIND services within the service node.</dd></dl><p></p><dl><dt id="dt:services"><b><i>services</i></b></dt><p><a name="__rm_attribute_service-node_services"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code>.
+The network services provided by the service-node, as a dictionary, and their enabled/disabled status.</dd></dl><p></p><dl><dt id="dt:tcp_iss"><b><i>tcp_iss</i></b></dt><p><a name="__rm_attribute_service-node_tcp_iss"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+TCP initial sequence number.</dd></dl><p></p><dl><dt id="dt:tcp_pcbs"><b><i>tcp_pcbs</i></b></dt><p><a name="__rm_attribute_service-node_tcp_pcbs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[o|ni|si|siiisioiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii[d*][d*][d*]]*]</code>.
+TCP PCBs. Do not attempt to setup connections yourself using this attribute, but use functionality in each separate TCP service to do so.</dd></dl><p></p><dl><dt id="dt:tcp_pcbs_all"><b><i>tcp_pcbs_all</i></b></dt><p><a name="__rm_attribute_service-node_tcp_pcbs_all"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[o|ni|si|siiisioiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii[d*][d*][d*]]*]</code>.
+TCP PCBs. This attribute is identical to tcp_pcbs with the exception that it can only be read and that it also includes connections that will not be checkpointed.</dd></dl><p></p><dl><dt id="dt:tcp_ticks"><b><i>tcp_ticks</i></b></dt><p><a name="__rm_attribute_service-node_tcp_ticks"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+TCP ticks.</dd></dl><p></p><dl><dt id="dt:tcp_timer"><b><i>tcp_timer</i></b></dt><p><a name="__rm_attribute_service-node_tcp_timer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+TCP timer.</dd></dl><p></p><dl><dt id="dt:tcp_timer_active"><b><i>tcp_timer_active</i></b></dt><p><a name="__rm_attribute_service-node_tcp_timer_active"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+Unused, kept for checkpoint compatibility.</dd></dl><p></p><dl><dt id="dt:tftp_root_directory"><b><i>tftp_root_directory</i></b></dt><p><a name="__rm_attribute_service-node_tftp_root_directory"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+The directory in which files read or written over TFTP are located. If it is null, the Simics search path is used for reading files, and uploaded files are stored in the current directory.</dd></dl><p></p><dl><dt id="dt:tftp_sessions"><b><i>tftp_sessions</i></b></dt><p><a name="__rm_attribute_service-node_tftp_sessions"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iissssi]*]</code>.
+The active sessions in the TFTP service. The sub-entries for each session are <i>server TID</i>, <i>client TID</i>, <i>read/write</i>, <i>server IP address</i>, <i>client IP address</i>, <i>file name</i>, <i>last read block</i>. </dd></dl><p></p><dl><dt id="dt:udp_pcbs"><b><i>udp_pcbs</i></b></dt><p><a name="__rm_attribute_service-node_udp_pcbs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[o|ni|si|siiiiiiioi]*]</code>.
+UDP PCBs. Do not attempt to setup connections yourself using this attribute, but use functionality in each separate UDP service to do so.</dd></dl><p></p><dl><dt id="dt:udp_pcbs_all"><b><i>udp_pcbs_all</i></b></dt><p><a name="__rm_attribute_service-node_udp_pcbs_all"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[o|ni|si|siiiiiiioi]*]</code>.
+UDP PCBs. This attribute is identical to udp_pcbs with the exception that it can only be read and that it also includes connections that will not be checkpointed.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.add-host">add-host</a></b></td><td class="jdocu_noborder">add host entry</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.arp">arp</a></b></td><td class="jdocu_noborder">inspect and manipulate ARP table</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.delete-host">delete-host</a></b></td><td class="jdocu_noborder">delete host entry</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.dhcp-add-pool">dhcp-add-pool</a></b></td><td class="jdocu_noborder">add DHCP pool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.dhcp-leases">dhcp-leases</a></b></td><td class="jdocu_noborder">print DHCP leases</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.disable-real-dns">disable-real-dns</a></b></td><td class="jdocu_noborder">disable real DNS</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.disable-service">disable-service</a></b></td><td class="jdocu_noborder">disable network service</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.enable-ftp-alg">enable-ftp-alg</a></b></td><td class="jdocu_noborder">enable FTP ALG</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.enable-real-dns">enable-real-dns</a></b></td><td class="jdocu_noborder">enable real DNS</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.enable-service">enable-service</a></b></td><td class="jdocu_noborder">enable network service</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.get-ip-address-from-pool">get-ip-address-from-pool</a></b></td><td class="jdocu_noborder">pop an IP address from the DHCP pool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.list-host-info">list-host-info</a></b></td><td class="jdocu_noborder">list host info database</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.route">route</a></b></td><td class="jdocu_noborder">show the routing table</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.set-tftp-directory">set-tftp-directory</a></b></td><td class="jdocu_noborder">set TFTP directory</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_service-node_gt_.tcpip-info">tcpip-info</a></b></td><td class="jdocu_noborder">show TCP/IP info</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_server-console.html" class="previous">server-console</a>
+<a href="__rm_class_service-node-device.html" class="next">service-node-device</a>
+</div>

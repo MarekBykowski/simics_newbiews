@@ -1,0 +1,104 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>Changing the Step Rate</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="choosing-an-execution-mode.html" class="previous">Choosing an Execution Mode</a>
+<a href="suspending-time-or-execution.html" class="next">Suspending Time or Execution</a>
+</div>
+<div class=path>
+<a href="index.html">Understanding Simics Timing</a>&nbsp;/&nbsp;
+<a href="instruction-execution-timing.html">3 Instruction Execution Timing</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="Changing-the-Step-Rate">Changing the Step Rate</a></h1>
+<p>
+
+</p><p>
+The <em><a name="step-rate">step rate</a></em> is the number of steps executed each
+cycle, disregarding any stalling. It is expressed as the quotient
+q/p. By default, p=q=1; this
+schedules one step to run in each cycle. This can be changed by
+using the <b>&lt;processor&gt;.set-step-rate</b> command. For example,
+</p><p>
+</p><pre class="jdocu_small">cpu0.set-step-rate "3/4"
+</pre><p>
+</p><p>
+will set the step rate of <b>cpu0</b> to 3/4; that is, three steps
+every four cycles.
+</p><p>
+If q&lt;p, then some cycles will execute no step at all; if
+q&gt;p, then some cycles will execute more than one step.  The step
+rate parameters are currently limited to 1 ≤ p ≤ 128 with
+p=2<sup>k</sup> for some integer k, and
+1 ≤ q ≤ 128.
+</p><p>
+Setting a non-unity step rate can be used to better approximate the
+timing of a target machine averaging more or less than one instruction
+per cycle. It can also be used to compensate for Simics running
+instructions slower than actual hardware when it is desirable to have
+the simulated time match real time; specifying a lower step rate will
+cause simulated time go faster. Finally, a lower step rate may improve
+simulator performance by reducing the number of instructions executed
+between consecutive simulated timer interrupts. This is, however, to a
+high degree depending on the workload in question. Some workloads even
+benefit from a larger number of steps between timer interrupts.
+</p><p>
+The step rate is sometimes called <a name="IPC">IPC</a> (instructions per
+cycle), and its inverse, the <em><a name="cycle-rate">cycle rate</a></em>, may be
+called <a name="CPI">CPI</a> (cycles per instruction). The actual rates will
+depend on how many extra cycles are added by stalling.
+</p><p>
+Let us look at an example using a single Ebony card. We will first run 1
+million steps with the default settings:
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>c 1000000</b>
+[cpu0] v:0xfff8a610 p:0x1fff8a610  mftbu r5
+simics&gt; <b>print-time</b>
+processor                 steps             cycles    time [s]
+cpu0                    1000000            1000000       0.010
+</pre><p>
+</p><p>
+The processor has run 1 million steps, taking 1 million cycles to execute
+them. Let us set the cycle rate to the value mentioned above, 3 steps for every
+4 cycles:
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>cpu0.set-step-rate "3/4"</b>
+simics&gt; <b>cb 1200000</b>
+simics&gt; <b>c</b>
+[cpu0] v:0xfff8a634 p:0x1fff8a634  bl 0xfff8a608
+simics&gt; <b>print-time</b>
+processor                 steps             cycles    time [s]
+cpu0                    1900000            2200000       0.022
+simics&gt; 
+</pre><p>
+</p><p>
+When running the next 1.2 million cycles, the processor executes only 900000
+steps, which corresponds to the 3/4 rate that we configured.
+</p><p>
+</p><div class=chain>
+<a href="choosing-an-execution-mode.html" class="previous">Choosing an Execution Mode</a>
+<a href="suspending-time-or-execution.html" class="next">Suspending Time or Execution</a>
+</div>

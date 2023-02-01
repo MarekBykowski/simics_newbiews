@@ -1,0 +1,74 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>usb_disk</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_usb-host-connector.html" class="previous">usb-host-connector</a>
+<a href="__rm_class_usb_hs_keyboard.html" class="next">usb_hs_keyboard</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_usb_disk">usb_disk</a></h1>
+<p>
+
+<a name="usb_disk"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_usb-disk">usb-disk</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A standard USB SCSI disk.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, simple_scsi_controller, usb_device</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bytes_transfered"><b><i>bytes_transfered</i></b></dt><p><a name="__rm_attribute_usb_disk_bytes_transfered"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of bytes sent in data stage.</dd></dl><p></p><dl><dt id="dt:command_status"><b><i>command_status</i></b></dt><p><a name="__rm_attribute_usb_disk_command_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The execution status of the command block.</dd></dl><p></p><dl><dt id="dt:current_cbw"><b><i>current_cbw</i></b></dt><p><a name="__rm_attribute_usb_disk_current_cbw"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The current handled CBW.</dd></dl><p></p><dl><dt id="dt:descriptor_data"><b><i>descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_disk_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The descriptors in data format.</dd></dl><p></p><dl><dt id="dt:device_address"><b><i>device_address</i></b></dt><p><a name="__rm_attribute_usb_disk_device_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+USB device/function address.</dd></dl><p></p><dl><dt id="dt:device_qualifier_descriptor_data"><b><i>device_qualifier_descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_disk_device_qualifier_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The device qualifier in data format.</dd></dl><p></p><dl><dt id="dt:device_state"><b><i>device_state</i></b></dt><p><a name="__rm_attribute_usb_disk_device_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+USB device state.</dd></dl><p></p><dl><dt id="dt:hid_report_descriptor_data"><b><i>hid_report_descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_disk_hid_report_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The descriptors in data format.</dd></dl><p></p><dl><dt id="dt:ms_os_descriptor"><b><i>ms_os_descriptor</i></b></dt><p><a name="__rm_attribute_usb_disk_ms_os_descriptor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The Microsoft OS Descriptor.</dd></dl><p></p><dl><dt id="dt:scsi_data"><b><i>scsi_data</i></b></dt><p><a name="__rm_attribute_usb_disk_scsi_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+Buffered SCSI data.</dd></dl><p></p><dl><dt id="dt:scsi_disk"><b><i>scsi_disk</i></b></dt><p><a name="__rm_attribute_usb_disk_scsi_disk"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+The SCSI disk holding the data.
+<p>
+Required interfaces: <code>simple_scsi_target</code>.</p></dd></dl><p></p><dl><dt id="dt:string_descriptor_array"><b><i>string_descriptor_array</i></b></dt><p><a name="__rm_attribute_usb_disk_string_descriptor_array"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[d*]</code>.
+String descriptors.</dd></dl><p></p><dl><dt id="dt:transport_state"><b><i>transport_state</i></b></dt><p><a name="__rm_attribute_usb_disk_transport_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+State for mass storage command/data/status protocol.</dd></dl><p></p><dl><dt id="dt:usb_host"><b><i>usb_host</i></b></dt><p><a name="__rm_attribute_usb_disk_usb_host"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The USB host controller.
+<p>
+Required interfaces: <code>usb</code>.</p></dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_usb-host-connector.html" class="previous">usb-host-connector</a>
+<a href="__rm_class_usb_hs_keyboard.html" class="next">usb_hs_keyboard</a>
+</div>

@@ -1,0 +1,59 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2.5 project-setup</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="install-simics.html" class="previous">2.4 install-simics</a>
+<a href="checkpoint-merge.html" class="next">2.6 checkpoint-merge</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="command-line-tools-and-programs.html">2 Command-Line Tools and Programs</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="project-setup">2.5 project-setup</a></h1>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small"><b>project-setup</b> [<em>options</em>] [<em>project</em>]</pre><p>
+ 
+</p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Creates or updates a Simics project for user scripts and modules.
+If project directory is omitted, the current working directory is used.
+</dd>
+<dt class="jdocu_descitem">Options</dt><dd class="jdocu_descitem"><dl><dt id="dt:-h-help"><b><code>-h, --help</code></b></dt><dd>Show help message and exit.</dd><dt id="dt:-v-version"><b><code>-v, --version</code></b></dt><dd>Prints information about Simics (version, installation directory).
+     </dd><dt id="dt:-v-verbose"><b><code>-V, --verbose</code></b></dt><dd>Print more information about the actions taken by the script.</dd><dt id="dt:-n-dry-run"><b><code>-n, --dry-run</code></b></dt><dd>Execute normally, but do not change or create any files.</dd><dt id="dt:-ignore-existing-files"><b><code>--ignore-existing-files</code></b></dt>'
+     <dd>Suppress warnings when creating a new project using a directory that
+       is not empty.</dd><dt id="dt:-package-list"><b><code>--package-list</code></b></dt><dd>Provide an explicit list of add-on packages for the project.
+       Each line must be an absolute path for an add-on package.
+       A project-local .package-list file will be created.</dd><dt id="dt:-ignore-cygwin-warning"><b><code>--ignore-cygwin-warning</code></b></dt><dd>(Windows-only) Prevent the script from checking whether the project
+         directory looks like a Cygwin path or not.</dd><dt id="dt:-force"><b><code>--force</code></b></dt><dd>Force the project-setup script to create or update a project. Files
+         that would be overwritten will be backed up automatically.</dd><dt id="dt:-check-project-version"><b><code>--check-project-version</code></b></dt><dd>Check the version of the project, and return 1 if it needs
+         to be created or updated, 0 otherwise.</dd><dt id="dt:-cmake"><b><code>--cmake</code></b></dt><dd>Create a project with CMake support.</dd></dl><p>
+</p></dd>
+</dl><p></p><div class=chain>
+<a href="install-simics.html" class="previous">2.4 install-simics</a>
+<a href="checkpoint-merge.html" class="next">2.6 checkpoint-merge</a>
+</div>

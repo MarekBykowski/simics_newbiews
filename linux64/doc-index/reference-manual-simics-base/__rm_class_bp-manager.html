@@ -1,0 +1,62 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>bp-manager</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_bitmask-translator.html" class="previous">bitmask-translator</a>
+<a href="__rm_class_branch_recorder.html" class="next">branch_recorder</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_bp-manager">bp-manager</a></h1>
+<p>
+
+<a name="bp-manager"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_bp-manager">bp-manager</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The set of breakpoints in Simics
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">bp_manager, breakpoint_registration, breakpoint_type, conf_object, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank</b> (breakpoint_type_provider, instrumentation_tool) : device access<br><b>console_string</b> (breakpoint_type_provider) : target console string output breakpoints<br><b>control_register</b> (breakpoint_type_provider) : control register access breakpoints<br><b>cycle</b> (breakpoint_type_provider) : cycle queue breakpoints<br><b>cycle_event</b> (breakpoint_type_provider) : cycle event breakpoints<br><b>exception</b> (breakpoint_type_provider) : exception breakpoints<br><b>gfx</b> (breakpoint_type_provider) : graphics console output breakpoints<br><b>hap</b> (breakpoint_type_provider) : hap occurrence breakpoints<br><b>log</b> (breakpoint_type_provider) : log message breakpoints<br><b>magic</b> (breakpoint_type_provider) : magic breakpoints<br><b>memory</b> (breakpoint_type_provider) : memory access breakpoints<br><b>notifier</b> (breakpoint_type_provider) : notifier trigger breakpoints<br><b>os_awareness</b> (breakpoint_type_provider) : OS Awareness breakpoints<br><b>source_line</b> (breakpoint_type_provider) : source code line breakpoints<br><b>source_location</b> (breakpoint_type_provider) : source code location breakpoints<br><b>step</b> (breakpoint_type_provider) : step queue breakpoints<br><b>step_event</b> (breakpoint_type_provider) : step event breakpoints<br><b>time</b> (breakpoint_type_provider) : virtual time breakpoints</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface bp_manager</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.delete">delete</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.disable">disable</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.enable">enable</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.enabled">enabled</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.ignore-count">ignore-count</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.list">list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.list-types">list-types</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.show">show</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.test-trigger">test-trigger</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_bp_manager_gt_.wait-for-breakpoint">wait-for-breakpoint</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_bp-manager_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_bp-manager_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_bitmask-translator.html" class="previous">bitmask-translator</a>
+<a href="__rm_class_branch_recorder.html" class="next">branch_recorder</a>
+</div>

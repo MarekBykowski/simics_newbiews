@@ -1,0 +1,118 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>3 Next Steps</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="tutorials.html" class="previous">2 Tutorials</a>
+</div>
+<div class=path>
+<a href="index.html">Getting Started</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Next-Steps">3 Next Steps</a></h1>
+<p>
+
+</p><p>
+This <em>Getting Started</em> document only provides a short introduction of
+the Simics product and all its capabilities. Other documents describe the Simics
+functionality in more detail. <em>Simics User's Guide</em> covers the basic
+feature set of the product. <em>Analyzer User's Guide</em> describes the tools
+used for software debugging and analysis. Similarly, the <em>Model Builder
+User's Guide</em> covers model development and configuration for Simics. There
+are also reference manuals that provide details on commands, interfaces and API
+functions.
+</p><p>
+To access the documentation run the <code>documentation.bat</code> (<code>documentation</code> on Linux) script in your Simics project.
+The script will index all the documents for the packages associated with your project, and then it will open the documentation in your webbrowser.
+</p><p>
+
+
+
+
+</p><p>
+Simics provides a few commands that assist in exploring large
+simulated systems, and for exploring the CLI.
+</p><p>
+Such a command is <b>help</b>. Use it to receive help about almost
+anything in Simics that has a name, in particular the commands you
+have seen in this document, and which you will see in the rest of the
+Simics documentation.
+</p><p>
+Another important command is <b>help-search</b>, also
+known as <b>apropos</b>. It can be used to search the
+Simics reference documentation for a particular text string.
+</p><p>
+</p><div class="note">
+<b>Note:</b>
+Both <b>help</b> and <b>apropos</b> limit their search to
+documentation about everything that is currently loaded into
+Simics. This means it is usually best to run them after you have
+loaded the target system you want to explore.
+</div>A simulation in Simics is built from objects. Each object provides
+local (or <em>namespaced</em>) commands. Different kinds of objects
+provides different namespaced commands.
+<p>
+Sometimes you know of an interesting namespaced command you want to
+use, for example the <b>enable-tracker</b> command, but you don't know which
+objects provide the command. To find those objects, first use
+the <b>apropos</b> command to find which kinds of objects that provide
+the command:
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>apropos enable-tracker</b>
+The text 'enable-tracker' appears in the documentation
+for the following items:
+
+Command        &lt;os_awareness&gt;.disable-tracker
+Command        &lt;os_awareness&gt;.enable-tracker
+</pre><p>
+</p><p>
+You can see that the command is provided
+by the <b>os_awareness</b> objects. To find such objects in the
+target system, use <b>list-objects</b>:
+</p><p>
+</p><pre class="jdocu_small">simics&gt; <b>list-objects -all class = os_awareness</b>
+┌──────────────┬──────────────┐
+│    Class     │    Object    │
+├──────────────┼──────────────┤
+│&lt;os_awareness&gt;│board.software│
+└──────────────┴──────────────┘
+</pre><p>
+</p><p>
+Evidently, the only <b>os_awareness</b> object in the target system
+is <b>board.software</b>.
+</p><p>
+Note the use of the <i>-all</i> flag to
+make <b>list-objects</b> list all matching objects. Without it,
+the command only lists objects in the current namespace. In Simics,
+certain objects called components contain other objects and form a
+local namespace. In this case <b>board</b>
+contains <b>board.software</b>.
+</p><p>
+These simple commands goes a long way when you want to explore more of
+Simics yourself.
+</p><p>
+</p><div class=chain>
+<a href="tutorials.html" class="previous">2 Tutorials</a>
+</div>

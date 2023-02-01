@@ -1,0 +1,134 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sdl-console</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sd_card.html" class="previous">sd_card</a>
+<a href="__rm_class_selfprof.html" class="next">selfprof</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sdl-console">sdl-console</a></h1>
+<p>
+
+<a name="sdl-console"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_sdl-console">sdl-console</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>sdl-console</b> class implements a graphical console, representing a computer screen. Several consoles may be present at any time. It also supports input of keyboard and mouse events. The objects of the <b>sdl-console</b> class should be connected to a graphics card device and a keyboard/mouse device. The console shows its content in gray-scale when the simulation is stopped. The method to provide mouse input is specified with the <i>grab_button</i> and <i>grab_modifier</i> attributes.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">abs_pointer_activate, checkpoint, clipboard_peer, conf_object, gfx_console, keyboard_console, log_object, recorded</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:abs_pointer"><b><i>abs_pointer</i></b></dt><p><a name="__rm_attribute_sdl-console_abs_pointer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Absolute positioning pointer device connected to the console. Must implement the abs_pointer interface</dd></dl><p></p><dl><dt id="dt:abs_pointer_enabled"><b><i>abs_pointer_enabled</i></b></dt><p><a name="__rm_attribute_sdl-console_abs_pointer_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if the absolute positioning pointer is enabled. The pointer can either be enabled statically in the script or from the device itself.</dd></dl><p></p><dl><dt id="dt:auto_release"><b><i>auto_release</i></b></dt><p><a name="__rm_attribute_sdl-console_auto_release"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Flag whether the graphics console automatically shall send a release event when the window focus is lost and keys still are pressed</dd></dl><p></p><dl><dt id="dt:break"><b><i>break</i></b></dt><p><a name="__rm_attribute_sdl-console_break"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; <b>string</b> indexed;  indexed type: <code>integer</code>.
+<code>(</code><i>source_obj</i><code>, </code><i>filename</i><code>)</code>. Activate a graphical breakpoint previously saved to <code>filename</code>. Returns a breakpoint ID.</dd></dl><p></p><dl><dt id="dt:clipboard_peer"><b><i>clipboard_peer</i></b></dt><p><a name="__rm_attribute_sdl-console_clipboard_peer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Clipboard peer object.</dd></dl><p></p><dl><dt id="dt:delete"><b><i>delete</i></b></dt><p><a name="__rm_attribute_sdl-console_delete"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+Delete breakpoint with given ID.</dd></dl><p></p><dl><dt id="dt:depth"><b><i>depth</i></b></dt><p><a name="__rm_attribute_sdl-console_depth"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The simulated depth in bits per pixel (8, 16, 24 or 32).</dd></dl><p></p><dl><dt id="dt:double_x_limit"><b><i>double_x_limit</i></b></dt><p><a name="__rm_attribute_sdl-console_double_x_limit"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If the width of the console is less than or equal to this value, the width of every pixel will be doubled.</dd></dl><p></p><dl><dt id="dt:double_y_limit"><b><i>double_y_limit</i></b></dt><p><a name="__rm_attribute_sdl-console_double_y_limit"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If the height of the console is less than or equal to this value, the height of every pixel will be doubled.</dd></dl><p></p><dl><dt id="dt:fullscreen"><b><i>fullscreen</i></b></dt><p><a name="__rm_attribute_sdl-console_fullscreen"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set fullscreen mode. The console will only run in fullscreen while input grabbing is active. Note that not all graphics console implementations support fullscreen.</dd></dl><p></p><dl><dt id="dt:grab_button"><b><i>grab_button</i></b></dt><p><a name="__rm_attribute_sdl-console_grab_button"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+One of left, middle and right The grab button specifies which mouse button that is used to grab and ungrab input for the console.</dd></dl><p></p><dl><dt id="dt:grab_modifier"><b><i>grab_modifier</i></b></dt><p><a name="__rm_attribute_sdl-console_grab_modifier"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+One of control, shift, alt and none. The modifier key used for grabbing and ungrabbing input for the console. When a modifier is selected, pressing only the middle mouse button cause the console to send this button event to the simulator. Currently only the left side modifier are interpreted.</dd></dl><p></p><dl><dt id="dt:input_enable"><b><i>input_enable</i></b></dt><p><a name="__rm_attribute_sdl-console_input_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable keyboard and mouse input to the console.</dd></dl><p></p><dl><dt id="dt:input_key_event"><b><i>input_key_event</i></b></dt><p><a name="__rm_attribute_sdl-console_input_key_event"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[ii]</code>.
+Set to a enter a key event. The first list element is 0 for key down, 1 for key up. The second list element is the key code.</dd></dl><p></p><dl><dt id="dt:kbd_event_queue"><b><i>kbd_event_queue</i></b></dt><p><a name="__rm_attribute_sdl-console_kbd_event_queue"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ii]*]</code>.
+Keyboard event queue.</dd></dl><p></p><dl><dt id="dt:keyboard"><b><i>keyboard</i></b></dt><p><a name="__rm_attribute_sdl-console_keyboard"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The console's keyboard device. Must implement the keyboard interface.</dd></dl><p></p><dl><dt id="dt:microm_x"><b><i>microm_x</i></b></dt><p><a name="__rm_attribute_sdl-console_microm_x"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Micrometers per horizontal pixel.</dd></dl><p></p><dl><dt id="dt:microm_y"><b><i>microm_y</i></b></dt><p><a name="__rm_attribute_sdl-console_microm_y"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Micrometers per vertical pixel.</dd></dl><p></p><dl><dt id="dt:minimize_window"><b><i>minimize_window</i></b></dt><p><a name="__rm_attribute_sdl-console_minimize_window"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>boolean</code>.
+By writing TRUE to this attribute, the graphics console window is minimized. A write of FALSE restores it again.</dd></dl><p></p><dl><dt id="dt:mouse"><b><i>mouse</i></b></dt><p><a name="__rm_attribute_sdl-console_mouse"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The console's mouse device. Must implement the mouse interface</dd></dl><p></p><dl><dt id="dt:raise_window"><b><i>raise_window</i></b></dt><p><a name="__rm_attribute_sdl-console_raise_window"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>boolean</code>.
+By writing any value to this attribute, the graphics console window moved in front of other windows on the display.</dd></dl><p></p><dl><dt id="dt:recorder"><b><i>recorder</i></b></dt><p><a name="__rm_attribute_sdl-console_recorder"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Recorder device for recording and playback of serial input.</dd></dl><p></p><dl><dt id="dt:refresh"><b><i>refresh</i></b></dt><p><a name="__rm_attribute_sdl-console_refresh"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>any</code>.
+If set the console will be completely redrawn.</dd></dl><p></p><dl><dt id="dt:restore_window_size"><b><i>restore_window_size</i></b></dt><p><a name="__rm_attribute_sdl-console_restore_window_size"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>boolean</code>.
+By writing any value to this attribute, the graphics console window size will be restored to the size set by the simulation.</dd></dl><p></p><dl><dt id="dt:rgb_colors"><b><i>rgb_colors</i></b></dt><p><a name="__rm_attribute_sdl-console_rgb_colors"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iii]{256}]</code>.
+<code>((</code><i>r</i><code>, </code><i>g</i><code>, </code><i>b</i><code>){256})</code> The color palette. 256 colors.</dd></dl><p></p><dl><dt id="dt:save_bmp"><b><i>save_bmp</i></b></dt><p><a name="__rm_attribute_sdl-console_save_bmp"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>string</code>.
+Save current console bitmap as a BMP file.</dd></dl><p></p><dl><dt id="dt:save_break"><b><i>save_break</i></b></dt><p><a name="__rm_attribute_sdl-console_save_break"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[siiiis]</code>.
+<code>(</code><i>source_obj</i><code>, </code><i>filename</i><code>, </code><i>left</i><code>, </code><i>top</i><code>, </code><i>right</i><code>, </code><i>bottom</i><code>, </code><i>comment</i><code>) </code>. Saves a graphical breakpoint rectangle (top,left)-&gt;(bottom,right) to <code>filename</code>.</dd></dl><p></p><dl><dt id="dt:save_png"><b><i>save_png</i></b></dt><p><a name="__rm_attribute_sdl-console_save_png"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[sii]</code>.
+Save current console bitmap as a PNG file. For additional integers are the width and height of the resulting image. They cannot be larger than the original image. If specified as 0, then the original image size is used.</dd></dl><p></p><dl><dt id="dt:title"><b><i>title</i></b></dt><p><a name="__rm_attribute_sdl-console_title"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The console window title.</dd></dl><p></p><dl><dt id="dt:try_open"><b><i>try_open</i></b></dt><p><a name="__rm_attribute_sdl-console_try_open"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If set to 1, the window will be opened. Close with 0.</dd></dl><p></p><dl><dt id="dt:video"><b><i>video</i></b></dt><p><a name="__rm_attribute_sdl-console_video"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The console's video device. Used to import video breakpoint functions. Must implement the video interface.</dd></dl><p></p><dl><dt id="dt:visual_feedback"><b><i>visual_feedback</i></b></dt><p><a name="__rm_attribute_sdl-console_visual_feedback"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enable or disable visual feedback.</dd></dl><p></p><dl><dt id="dt:x_size"><b><i>x_size</i></b></dt><p><a name="__rm_attribute_sdl-console_x_size"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The width of the console.</dd></dl><p></p><dl><dt id="dt:y_size"><b><i>y_size</i></b></dt><p><a name="__rm_attribute_sdl-console_y_size"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The height of the console.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.auto-release">auto-release</a></b></td><td class="jdocu_noborder">get/set auto-release flag</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.break">break</a></b></td><td class="jdocu_noborder">break on a graphics event specified by filename</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.close">close</a></b></td><td class="jdocu_noborder">close console window</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.delete">delete</a></b></td><td class="jdocu_noborder">delete breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.disable-input">disable-input</a></b></td><td class="jdocu_noborder">ignore console input</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.disable-visual-feedback">disable-visual-feedback</a></b></td><td class="jdocu_noborder">disable visual feedback</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.enable-input">enable-input</a></b></td><td class="jdocu_noborder">enable console input</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.enable-visual-feedback">enable-visual-feedback</a></b></td><td class="jdocu_noborder">enable visual feedback</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.fullscreen-off">fullscreen-off</a></b></td><td class="jdocu_noborder">disable fullscreen mode</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.fullscreen-on">fullscreen-on</a></b></td><td class="jdocu_noborder">enable fullscreen mode</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.grab-setup">grab-setup</a></b></td><td class="jdocu_noborder">set grab button and modifier</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.input">input</a></b></td><td class="jdocu_noborder">send string to a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.open">open</a></b></td><td class="jdocu_noborder">open console window</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.refresh">refresh</a></b></td><td class="jdocu_noborder">refresh console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.restore-window-size">restore-window-size</a></b></td><td class="jdocu_noborder">restore window size</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.rotate-ccw">rotate-ccw</a></b></td><td class="jdocu_noborder">rotate console counterclockwise</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.rotate-cw">rotate-cw</a></b></td><td class="jdocu_noborder">rotate console clockwise</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.save-bmp">save-bmp</a></b></td><td class="jdocu_noborder">save BMP image</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.save-break-xy">save-break-xy</a></b></td><td class="jdocu_noborder">specify and save a graphical breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdl-console_gt_.save-png">save-png</a></b></td><td class="jdocu_noborder">save PNG image</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sd_card.html" class="previous">sd_card</a>
+<a href="__rm_class_selfprof.html" class="next">selfprof</a>
+</div>

@@ -1,0 +1,95 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sample-risc-core</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sample-risc.html" class="previous">sample-risc</a>
+<a href="__rm_class_sample-user-decoder.html" class="next">sample-user-decoder</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sample-risc-core">sample-risc-core</a></h1>
+<p>
+
+<a name="sample-risc-core"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_sample-risc">sample-risc</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Sample RISC core.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, context_handler, exception, int_register, log_object, opcode_info, processor_cli, processor_info, processor_info_v2</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">EXTERNAL_INTERRUPT (signal) : External interrupt line.</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:core_enabled"><b><i>core_enabled</i></b></dt><p><a name="__rm_attribute_sample-risc-core_core_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Core state: enabled.</dd></dl><p></p><dl><dt id="dt:current_context"><b><i>current_context</i></b></dt><p><a name="__rm_attribute_sample-risc-core_current_context"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Current context object</dd></dl><p></p><dl><dt id="dt:freq_mhz"><b><i>freq_mhz</i></b></dt><p><a name="__rm_attribute_sample-risc-core_freq_mhz"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The frequency in MHz for the core.</dd></dl><p></p><dl><dt id="dt:idle_cycles"><b><i>idle_cycles</i></b></dt><p><a name="__rm_attribute_sample-risc-core_idle_cycles"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of idle cycles.</dd></dl><p></p><dl><dt id="dt:msr"><b><i>msr</i></b></dt><p><a name="__rm_attribute_sample-risc-core_msr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+msr</dd></dl><p></p><dl><dt id="dt:pc"><b><i>pc</i></b></dt><p><a name="__rm_attribute_sample-risc-core_pc"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+pc</dd></dl><p></p><dl><dt id="dt:physical_memory_space"><b><i>physical_memory_space</i></b></dt><p><a name="__rm_attribute_sample-risc-core_physical_memory_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Physical memory space.</dd></dl><p></p><dl><dt id="dt:processor_number"><b><i>processor_number</i></b></dt><p><a name="__rm_attribute_sample-risc-core_processor_number"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Simics internal number for an instance of the 'processor_info' interface. Each instance must have a unique number. This attribute can only be set as part of an initial configuration.</dd></dl><p></p><dl><dt id="dt:r0"><b><i>r0</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r0"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r0</dd></dl><p></p><dl><dt id="dt:r1"><b><i>r1</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r1"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r1</dd></dl><p></p><dl><dt id="dt:r10"><b><i>r10</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r10"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r10</dd></dl><p></p><dl><dt id="dt:r11"><b><i>r11</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r11"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r11</dd></dl><p></p><dl><dt id="dt:r12"><b><i>r12</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r12"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r12</dd></dl><p></p><dl><dt id="dt:r13"><b><i>r13</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r13"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r13</dd></dl><p></p><dl><dt id="dt:r14"><b><i>r14</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r14"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r14</dd></dl><p></p><dl><dt id="dt:r15"><b><i>r15</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r15"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r15</dd></dl><p></p><dl><dt id="dt:r2"><b><i>r2</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r2"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r2</dd></dl><p></p><dl><dt id="dt:r3"><b><i>r3</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r3"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r3</dd></dl><p></p><dl><dt id="dt:r4"><b><i>r4</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r4"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r4</dd></dl><p></p><dl><dt id="dt:r5"><b><i>r5</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r5"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r5</dd></dl><p></p><dl><dt id="dt:r6"><b><i>r6</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r6"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r6</dd></dl><p></p><dl><dt id="dt:r7"><b><i>r7</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r7"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r7</dd></dl><p></p><dl><dt id="dt:r8"><b><i>r8</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r8"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r8</dd></dl><p></p><dl><dt id="dt:r9"><b><i>r9</i></b></dt><p><a name="__rm_attribute_sample-risc-core_r9"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+r9</dd></dl><p></p><dl><dt id="dt:registers"><b><i>registers</i></b></dt><p><a name="__rm_attribute_sample-risc-core_registers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+The registers.</dd></dl><p></p><dl><dt id="dt:sample_risc"><b><i>sample_risc</i></b></dt><p><a name="__rm_attribute_sample-risc-core_sample_risc"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Cosimulator object.</dd></dl><p></p><dl><dt id="dt:stallable_memops"><b><i>stallable_memops</i></b></dt><p><a name="__rm_attribute_sample-risc-core_stallable_memops"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If true, read and write transactions will be issued as stallable operations.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface context_handler</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_context_handler_gt_.set-context">set-context</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface exception</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.bp-break-exception">bp-break-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.bp-run-until-exception">bp-run-until-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.bp-trace-exception">bp-trace-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.bp-wait-for-exception">bp-wait-for-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.break-exception">break-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.trace-exception">trace-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.unbreak-exception">unbreak-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.untrace-exception">untrace-exception</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_exception_gt_.wait-for-exception">wait-for-exception</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface processor_info</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.debug">debug</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.disable">disable</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.disassemble">disassemble</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.enable">enable</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.enabled">enabled</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.load-binary">load-binary</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.logical-to-physical">logical-to-physical</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.print-processor-registers">print-processor-registers</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.read-reg">read-reg</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.set-pc">set-pc</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.write-reg">write-reg</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_processor_info_gt_.x">x</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample-risc-core_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample-risc-core_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sample-risc.html" class="previous">sample-risc</a>
+<a href="__rm_class_sample-user-decoder.html" class="next">sample-user-decoder</a>
+</div>

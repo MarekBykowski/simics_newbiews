@@ -1,0 +1,86 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>static_link_connector</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_state-assertion.html" class="previous">state-assertion</a>
+<a href="__rm_class_step-counter-extension.html" class="next">step-counter-extension</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_static_link_connector">static_link_connector</a></h1>
+<p>
+
+<a name="static_link_connector"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Static link connector representing one connection to the link. This
+    connector does not grow dynamically and can be reused several times. It is
+    useful for links that have specific ports to which only one device can
+    connect (for example, a serial link with two devices).
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, connector, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:connector_name"><b><i>connector_name</i></b></dt><p><a name="__rm_attribute_static_link_connector_connector_name"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Name of the connector</dd></dl><p></p><dl><dt id="dt:connector_template"><b><i>connector_template</i></b></dt><p><a name="__rm_attribute_static_link_connector_connector_template"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Name of the link connector template used to create this connector</dd></dl><p></p><dl><dt id="dt:connector_type"><b><i>connector_type</i></b></dt><p><a name="__rm_attribute_static_link_connector_connector_type"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Type used to match which other connector objects this connector can
+        connect to.</dd></dl><p></p><dl><dt id="dt:destination"><b><i>destination</i></b></dt><p><a name="__rm_attribute_static_link_connector_destination"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+List of connections to this connector object. The connections listed
+        here are not yet valid if the connecting component or the component
+        itself are not instantiated yet.</dd></dl><p></p><dl><dt id="dt:direction"><b><i>direction</i></b></dt><p><a name="__rm_attribute_static_link_connector_direction"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Direction of the connector: up, down or any</dd></dl><p></p><dl><dt id="dt:endpoint"><b><i>endpoint</i></b></dt><p><a name="__rm_attribute_static_link_connector_endpoint"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Link endpoint object associated to this connector</dd></dl><p></p><dl><dt id="dt:hotpluggable"><b><i>hotpluggable</i></b></dt><p><a name="__rm_attribute_static_link_connector_hotpluggable"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If true, this connector can be connected or disconnected after
+        instantiation. If false, the connection must be made before the
+        component is instantiated.</dd></dl><p></p><dl><dt id="dt:multi"><b><i>multi</i></b></dt><p><a name="__rm_attribute_static_link_connector_multi"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If true, more than one connector object can be connected to this
+        connector at the same time.</dd></dl><p></p><dl><dt id="dt:old_destination"><b><i>old_destination</i></b></dt><p><a name="__rm_attribute_static_link_connector_old_destination"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+List of valid connections as of the last instantiation that
+        concerned this component.</dd></dl><p></p><dl><dt id="dt:owner"><b><i>owner</i></b></dt><p><a name="__rm_attribute_static_link_connector_owner"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Component to which this connector applies</dd></dl><p></p><dl><dt id="dt:required"><b><i>required</i></b></dt><p><a name="__rm_attribute_static_link_connector_required"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If true, this connector should be connected before its component can
+        be instantiated. If false, it can be left empty.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_static_link_connector_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_static_link_connector_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_state-assertion.html" class="previous">state-assertion</a>
+<a href="__rm_class_step-counter-extension.html" class="next">step-counter-extension</a>
+</div>

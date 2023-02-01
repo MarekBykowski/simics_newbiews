@@ -1,0 +1,101 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sdram-memory-module</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sata_disk_comp.html" class="previous">sata_disk_comp</a>
+<a href="__rm_class_sdram_memory_module_comp.html" class="next">sdram_memory_module_comp</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="components.html">4 Components</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sdram-memory-module">sdram-memory-module</a></h1>
+<p>
+
+<a name="sdram-memory-module"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_memory-components">memory-components</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The "sdram-memory-module" component represents a SDRAM memory module.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">component, component_connector, conf_object, log_object</dd>
+<dt class="jdocu_descitem"><b>Connectors</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_border"><b>Name</b></td><td class="jdocu_border"><b>Type</b></td><td class="jdocu_border"><b>Direction</b></td></tr>
+
+<tr><td class="jdocu_border">mem_bus</td><td class="jdocu_border">mem-bus</td><td class="jdocu_border">up</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:banks"><b><i>banks</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_banks"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of banks.</dd></dl><p></p><dl><dt id="dt:cas_latency"><b><i>cas_latency</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_cas_latency"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+CAS-latency; each set bit corresponds to a latency the memory can handle</dd></dl><p></p><dl><dt id="dt:columns"><b><i>columns</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_columns"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of columns.</dd></dl><p></p><dl><dt id="dt:component_queue"><b><i>component_queue</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_component_queue"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>any</code>.
+The overriding queue object for this component.</dd></dl><p></p><dl><dt id="dt:connections"><b><i>connections</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_connections"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[sos]*]</code>.
+This attribute should not be used anymore. Each component has connector objects that contain all connector functionality. List of connections for the component. The format is a list of lists, each containing the name of the connector, the connected component, and the name of the connector on the other component.</dd></dl><p></p><dl><dt id="dt:dynamic_slots"><b><i>dynamic_slots</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_dynamic_slots"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code> or <code>nil</code>.
+Dictionary with dynamic slots.</dd></dl><p></p><dl><dt id="dt:ecc_width"><b><i>ecc_width</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_ecc_width"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The error correction width.</dd></dl><p></p><dl><dt id="dt:instantiated"><b><i>instantiated</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_instantiated"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE if the component has been instantiated.</dd></dl><p></p><dl><dt id="dt:memory_megs"><b><i>memory_megs</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_memory_megs"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Total about of memory in MB.</dd></dl><p></p><dl><dt id="dt:module_data_width"><b><i>module_data_width</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_module_data_width"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The module SDRAM width (including ECC width if enabled).</dd></dl><p></p><dl><dt id="dt:module_type"><b><i>module_type</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_module_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Type of memory.</dd></dl><p></p><dl><dt id="dt:object_list"><b><i>object_list</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_object_list"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>dictionary</code> or <code>nil</code>.
+Dictionary with objects that the component consists of.</dd></dl><p></p><dl><dt id="dt:object_prefix"><b><i>object_prefix</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_object_prefix"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Object prefix string used by the component. The prefix is typically set by the <b>set-component-prefix</b> command before the component is created.</dd></dl><p></p><dl><dt id="dt:pending_cell_object_factories"><b><i>pending_cell_object_factories</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_pending_cell_object_factories"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ss]*]</code>.
+Internal attribute for pending cell objects factories.</dd></dl><p></p><dl><dt id="dt:primary_width"><b><i>primary_width</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_primary_width"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Primary SDRAM width.</dd></dl><p></p><dl><dt id="dt:rank_density"><b><i>rank_density</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_rank_density"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The rank density.</dd></dl><p></p><dl><dt id="dt:ranks"><b><i>ranks</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_ranks"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of ranks (logical banks).</dd></dl><p></p><dl><dt id="dt:rows"><b><i>rows</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_rows"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of rows.</dd></dl><p></p><dl><dt id="dt:top_component"><b><i>top_component</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_top_component"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The top level component. Attribute is not valid until the component has been instantiated.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Class-Attributes">Class Attributes</a></h2>
+<p>
+
+</p><dl><dt id="dt:basename"><b><i>basename</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_basename"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+The basename of the component.</dd></dl><p></p><dl><dt id="dt:component_icon"><b><i>component_icon</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_component_icon"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>string</code> or <code>nil</code>.
+Name of a 24x24 pixels large icon in PNG format used to graphically represent the component in a configuration viewer.</dd></dl><p></p><dl><dt id="dt:config_attributes"><b><i>config_attributes</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_config_attributes"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>[[s[a*]]*]</code>.
+Internal bug 12881, list of attributes.</dd></dl><p></p><dl><dt id="dt:connectors"><b><i>connectors</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_connectors"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>dictionary</code>.
+This attribute should not be used anymore. Each component has connector objects that contain all connector functionality. Dictionary of dictionaries with connectors defined by this component class, indexed by name. Each connector contains the name of the connector "type", a "direction" ("up", "down" or "any"), a flag indicating if the connector can be "empty", another flag that is set if the connector is "hotplug" capable, and finally a flag that is TRUE if multiple connections to this connector is allowed.</dd></dl><p></p><dl><dt id="dt:top_level"><b><i>top_level</i></b></dt><p><a name="__rm_attribute_sdram-memory-module_top_level"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>boolean</code> or <code>nil</code>.
+Set to TRUE for top-level components, i.e. the root of a hierarchy.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface component</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.connect">connect</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.connect-to">connect-to</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.delete">delete</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.disconnect">disconnect</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-available-connector">get-available-connector</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-component-object">get-component-object</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-connection">get-connection</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-connector-list">get-connector-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_component_gt_.get-processor-list">get-processor-list</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdram-memory-module_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sdram-memory-module_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sata_disk_comp.html" class="previous">sata_disk_comp</a>
+<a href="__rm_class_sdram_memory_module_comp.html" class="next">sdram_memory_module_comp</a>
+</div>

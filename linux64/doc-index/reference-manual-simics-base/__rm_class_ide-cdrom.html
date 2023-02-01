@@ -1,0 +1,120 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>ide-cdrom</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_ide.html" class="previous">ide</a>
+<a href="__rm_class_ide-disk.html" class="next">ide-disk</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_ide-cdrom">ide-cdrom</a></h1>
+<p>
+
+<a name="ide-cdrom"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_ide">ide</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>ide-cdrom</b> class models a single slot removable IDE/ATAPI CD-ROM.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ide_device, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:atapi_packet"><b><i>atapi_packet</i></b></dt><p><a name="__rm_attribute_ide-cdrom_atapi_packet"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{12}]</code>.
+(<i>b0</i>, ..., <i>b11</i>). ATAPI packet.</dd></dl><p></p><dl><dt id="dt:buf"><b><i>buf</i></b></dt><p><a name="__rm_attribute_ide-cdrom_buf"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code>, <code>string</code>, or <code>nil</code>.
+<code>sector buffer</code> | <code>atapi packet</code>. Current transfer source/destination.</dd></dl><p></p><dl><dt id="dt:cd_media"><b><i>cd_media</i></b></dt><p><a name="__rm_attribute_ide-cdrom_cd_media"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Device media implementing cdrom_media. Eject media by setting this attribute to NIL.</dd></dl><p></p><dl><dt id="dt:command"><b><i>command</i></b></dt><p><a name="__rm_attribute_ide-cdrom_command"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Last command.</dd></dl><p></p><dl><dt id="dt:current_profile"><b><i>current_profile</i></b></dt><p><a name="__rm_attribute_ide-cdrom_current_profile"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Current profile. Set to CD-ROM or DVD-ROM if media is present. It should be set to Nil if no media is present in the drive.</dd></dl><p></p><dl><dt id="dt:cylinder"><b><i>cylinder</i></b></dt><p><a name="__rm_attribute_ide-cdrom_cylinder"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Cylinder number (cylinder high and cylinder low).</dd></dl><p></p><dl><dt id="dt:error"><b><i>error</i></b></dt><p><a name="__rm_attribute_ide-cdrom_error"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Error register.</dd></dl><p></p><dl><dt id="dt:features"><b><i>features</i></b></dt><p><a name="__rm_attribute_ide-cdrom_features"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Feature register.</dd></dl><p></p><dl><dt id="dt:firmware_id"><b><i>firmware_id</i></b></dt><p><a name="__rm_attribute_ide-cdrom_firmware_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Device firmware id. Up to 8 character long string.</dd></dl><p></p><dl><dt id="dt:geometry_valid"><b><i>geometry_valid</i></b></dt><p><a name="__rm_attribute_ide-cdrom_geometry_valid"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Geometry valid.</dd></dl><p></p><dl><dt id="dt:head"><b><i>head</i></b></dt><p><a name="__rm_attribute_ide-cdrom_head"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Lower four bits of the head register.</dd></dl><p></p><dl><dt id="dt:irq_pending"><b><i>irq_pending</i></b></dt><p><a name="__rm_attribute_ide-cdrom_irq_pending"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+IRQ Pending.</dd></dl><p></p><dl><dt id="dt:locked"><b><i>locked</i></b></dt><p><a name="__rm_attribute_ide-cdrom_locked"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Media locked.</dd></dl><p></p><dl><dt id="dt:media_change"><b><i>media_change</i></b></dt><p><a name="__rm_attribute_ide-cdrom_media_change"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Media has changed since the last GET_MEDIA_STATUS command.</dd></dl><p></p><dl><dt id="dt:model_id"><b><i>model_id</i></b></dt><p><a name="__rm_attribute_ide-cdrom_model_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Device model id. Up to 40 character long string.</dd></dl><p></p><dl><dt id="dt:multiword_dma_enabled"><b><i>multiword_dma_enabled</i></b></dt><p><a name="__rm_attribute_ide-cdrom_multiword_dma_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set if multiword DMA is enabled.</dd></dl><p></p><dl><dt id="dt:multiword_dma_mode"><b><i>multiword_dma_mode</i></b></dt><p><a name="__rm_attribute_ide-cdrom_multiword_dma_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current multiword DMA mode (upper byte in identify device word 63).</dd></dl><p></p><dl><dt id="dt:no_48bits_lba_support"><b><i>no_48bits_lba_support</i></b></dt><p><a name="__rm_attribute_ide-cdrom_no_48bits_lba_support"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+48-bit address feature set not supported (bit 10 in identify device word 83).</dd></dl><p></p><dl><dt id="dt:pio_mode"><b><i>pio_mode</i></b></dt><p><a name="__rm_attribute_ide-cdrom_pio_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current PIO mode (upper byte in identify device word 51).</dd></dl><p></p><dl><dt id="dt:power_mode"><b><i>power_mode</i></b></dt><p><a name="__rm_attribute_ide-cdrom_power_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Device power mode (0==active, 1==idle, 2==standby, 3==sleep).</dd></dl><p></p><dl><dt id="dt:sector_buffer"><b><i>sector_buffer</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sector_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{2048}]</code>.
+(<i>b0</i>, ..., <i>b2047</i>). Sector buffer.</dd></dl><p></p><dl><dt id="dt:sector_cnt"><b><i>sector_cnt</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sector_cnt"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sector count register.</dd></dl><p></p><dl><dt id="dt:sector_num"><b><i>sector_num</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sector_num"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sector number register.</dd></dl><p></p><dl><dt id="dt:sectors_per_int"><b><i>sectors_per_int</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sectors_per_int"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sectors per interrupt (lower byte in identify device word 59).</dd></dl><p></p><dl><dt id="dt:sense_asc"><b><i>sense_asc</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sense_asc"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sense ASC.</dd></dl><p></p><dl><dt id="dt:sense_ascq"><b><i>sense_ascq</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sense_ascq"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sense ASCQ.</dd></dl><p></p><dl><dt id="dt:sense_key"><b><i>sense_key</i></b></dt><p><a name="__rm_attribute_ide-cdrom_sense_key"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sense key.</dd></dl><p></p><dl><dt id="dt:serial_number"><b><i>serial_number</i></b></dt><p><a name="__rm_attribute_ide-cdrom_serial_number"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Device serial number. Up to 20 character long string.</dd></dl><p></p><dl><dt id="dt:stat_atapi_commands"><b><i>stat_atapi_commands</i></b></dt><p><a name="__rm_attribute_ide-cdrom_stat_atapi_commands"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{256}]</code>.
+(<i>f0</i>, ..., <i>f255</i>). Executed ATAPI command count (command i has been issued <i>fi</i> times).</dd></dl><p></p><dl><dt id="dt:stat_bytes_read"><b><i>stat_bytes_read</i></b></dt><p><a name="__rm_attribute_ide-cdrom_stat_bytes_read"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of bytes read from device using PIO.</dd></dl><p></p><dl><dt id="dt:stat_bytes_transfered_dma"><b><i>stat_bytes_transfered_dma</i></b></dt><p><a name="__rm_attribute_ide-cdrom_stat_bytes_transfered_dma"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of bytes read or written to or from device using DMA.</dd></dl><p></p><dl><dt id="dt:stat_bytes_written"><b><i>stat_bytes_written</i></b></dt><p><a name="__rm_attribute_ide-cdrom_stat_bytes_written"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total number of bytes written to device using PIO.</dd></dl><p></p><dl><dt id="dt:stat_commands"><b><i>stat_commands</i></b></dt><p><a name="__rm_attribute_ide-cdrom_stat_commands"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{256}]</code>.
+(<i>f0</i>, ..., <i>f255</i>). Executed command count (command i has been issued <i>fi</i> times).</dd></dl><p></p><dl><dt id="dt:state"><b><i>state</i></b></dt><p><a name="__rm_attribute_ide-cdrom_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Device state.</dd></dl><p></p><dl><dt id="dt:status"><b><i>status</i></b></dt><p><a name="__rm_attribute_ide-cdrom_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status register.</dd></dl><p></p><dl><dt id="dt:tr_bytes_remaining"><b><i>tr_bytes_remaining</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_bytes_remaining"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transfer bytes remaining.</dd></dl><p></p><dl><dt id="dt:tr_current_lba"><b><i>tr_current_lba</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_current_lba"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current transfer address.</dd></dl><p></p><dl><dt id="dt:tr_disk_finished"><b><i>tr_disk_finished</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_disk_finished"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transfer finished (device view).</dd></dl><p></p><dl><dt id="dt:tr_dma_finished"><b><i>tr_dma_finished</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_dma_finished"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+DMA finished.</dd></dl><p></p><dl><dt id="dt:tr_drq_bytes"><b><i>tr_drq_bytes</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_drq_bytes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Bytes per DRQ.</dd></dl><p></p><dl><dt id="dt:tr_drq_bytes_handled"><b><i>tr_drq_bytes_handled</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_drq_bytes_handled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Bytes handled in DRQ block before the active sector.</dd></dl><p></p><dl><dt id="dt:tr_drq_start_offset"><b><i>tr_drq_start_offset</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_drq_start_offset"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Offset in sector buffer where the active DRQ block starts.</dd></dl><p></p><dl><dt id="dt:tr_num_blocks"><b><i>tr_num_blocks</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_num_blocks"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of blocks in transfer.</dd></dl><p></p><dl><dt id="dt:tr_op"><b><i>tr_op</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_op"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+DMA transfer operation type.</dd></dl><p></p><dl><dt id="dt:tr_packet_use_dma"><b><i>tr_packet_use_dma</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_packet_use_dma"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Use DMA for PACKET command data transfer.</dd></dl><p></p><dl><dt id="dt:tr_pos"><b><i>tr_pos</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_pos"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transfer position.</dd></dl><p></p><dl><dt id="dt:tr_req_length"><b><i>tr_req_length</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_req_length"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Requested length of transfer.</dd></dl><p></p><dl><dt id="dt:tr_sectors_last_block"><b><i>tr_sectors_last_block</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_sectors_last_block"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transfer sectors last block.</dd></dl><p></p><dl><dt id="dt:tr_sectors_per_block"><b><i>tr_sectors_per_block</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_sectors_per_block"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transfer sectors per block.</dd></dl><p></p><dl><dt id="dt:tr_sectors_size"><b><i>tr_sectors_size</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_sectors_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transfer sector size.</dd></dl><p></p><dl><dt id="dt:tr_update_address"><b><i>tr_update_address</i></b></dt><p><a name="__rm_attribute_ide-cdrom_tr_update_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Update address during transfer.</dd></dl><p></p><dl><dt id="dt:udma_enabled"><b><i>udma_enabled</i></b></dt><p><a name="__rm_attribute_ide-cdrom_udma_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set if UDMA is enabled.</dd></dl><p></p><dl><dt id="dt:udma_mode"><b><i>udma_mode</i></b></dt><p><a name="__rm_attribute_ide-cdrom_udma_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current UDMA mode (upper byte in identify device word 88).</dd></dl><p></p><dl><dt id="dt:unit_attension"><b><i>unit_attension</i></b></dt><p><a name="__rm_attribute_ide-cdrom_unit_attension"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current unit attention condition, 0 if unit attention condition not present.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ide-cdrom_gt_.eject">eject</a></b></td><td class="jdocu_noborder">eject media from CD-ROM drive</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ide-cdrom_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ide-cdrom_gt_.insert">insert</a></b></td><td class="jdocu_noborder">insert media in CD-ROM drive</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_ide.html" class="previous">ide</a>
+<a href="__rm_class_ide-disk.html" class="next">ide-disk</a>
+</div>

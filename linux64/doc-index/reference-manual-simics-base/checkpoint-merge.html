@@ -1,0 +1,67 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2.6 checkpoint-merge</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="project-setup.html" class="previous">2.5 project-setup</a>
+<a href="test-runner.html" class="next">2.7 test-runner</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="command-line-tools-and-programs.html">2 Command-Line Tools and Programs</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="checkpoint-merge">2.6 checkpoint-merge</a></h1>
+<p>
+  
+  </p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small"><b>checkpoint-merge</b> [<em>options</em>] <em>src</em> <em>dst</em> [<em>paths</em>...]</pre><p>  
+</p><p>
+   </p><dl><dt id="dt:src"><b><em>src</em></b></dt><dd>The checkpoint to merge files from.</dd><dt id="dt:dst"><b><em>dst</em></b></dt><dd>The new checkpoint.</dd><dt id="dt:paths"><b>paths</b></dt><dd>Paths to checkpoint files. This parameter may be omitted,
+       in which case paths are derived from the source checkpoint.
+     </dd></dl><p>
+    </p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Merges all ancestors of a given checkpoint into a new
+      checkpoint. The output checkpoint therefore has no dependencies;
+      it is an absolute checkpoint. This is useful if you, for
+      example, want to distribute a checkpoint.
+<p>
+      Note that this also merges image files with disk and memory
+      contents, to make sure the output checkpoint really is self-contained.
+</p><p>
+      With the <code>--checkpoints-only</code> option, the resulting
+      checkpoint will still have references to initial image files, so
+      it will not really be entirely self-contained. However, it is
+      likely to be smaller and the merge itself takes less time.
+      </p><p>
+      Any recordings in the given checkpoint, i.e. the most recent source checkpoint, are discarded.
+    </p></dd>
+<dt class="jdocu_descitem">Options</dt><dd class="jdocu_descitem"><dl><dt id="dt:-c-checkpoints-only"><b><code>-c, --checkpoints-only</code></b></dt><dd>Only combine checkpoints, keeping dependencies on base image files.
+     </dd><dt id="dt:-j-n-jobs-n"><b><code>-j N, --jobs=N</code></b></dt><dd>Run up to <code>N</code> craff/copy jobs in parallel.</dd><dt id="dt:-h-help"><b><code>-h, --help</code></b></dt><dd>Show help message and exit.</dd></dl><p>
+    </p></dd>
+</dl><p></p><div class=chain>
+<a href="project-setup.html" class="previous">2.5 project-setup</a>
+<a href="test-runner.html" class="next">2.7 test-runner</a>
+</div>

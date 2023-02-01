@@ -1,0 +1,134 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>7.4 Test Framework Libraries Available in Simics Tests</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="test-framework-libraries-available-outside-simics.html" class="previous">7.3 Test Framework Libraries Available Outside Simics</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="test-framework.html">7 Test Framework</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Test-Framework-Libraries-Available-in-Simics-Tests">7.4 Test Framework Libraries Available in Simics Tests</a></h1>
+<p>
+
+These are libraries you can use from Python tests running in Simics. The
+libraries help you test that your virtual platform works with Simics features.
+</p><p>
+</p><h2 class="jdocu"><a name="__pymodreverse_execution">7.4.1 reverse_execution</a></h2>
+<p>
+
+
+ Library for running reverse execution tests on an entire system.
+</p><p>
+ The tests checks the state of processors and images when using reverse
+ execution.
+ 
+</p><h3 class="jdocu"><a class="not-numbered" name="__pyclassreverse_execution.reverse_execution_test">reverse_execution_test</a></h3>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Superclasses</dt><dd class="jdocu_descitem">builtins.object</dd>
+<dt class="jdocu_descitem">Constructor</dt><dd class="jdocu_descitem"><pre class="jdocu_small">reverse_execution_test(start = 0, totlen = 100000000, n1 = 10, n2 = 20, len1 = 1000000, seed = 1091, debug = False, trace_pc = False)</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Runs reverse execution tests.
+ The test sets up a number of points within an interval and runs several
+ reverse execution checks in an interval after each point.
+ 
+ Constructor arguments (all have default values):
+ <dl><dt id="dt:start"><b>start</b></dt><dd>the start of the interval to test within</dd><dt id="dt:totlen"><b>totlen</b></dt><dd>the length of the interval to test within</dd><dt id="dt:n1"><b>n1</b></dt><dd>number of checks to run at each test point</dd><dt id="dt:n2"><b>n2</b></dt><dd>number of points to run checks at</dd><dt id="dt:len1"><b>len1</b></dt><dd>length of the interval to run checks past each test point</dd><dt id="dt:seed"><b>seed</b></dt><dd>random number seed to use for generating test points and checks</dd><dt id="dt:debug"><b>debug</b></dt><dd>set to True for more debug messages</dd><dt id="dt:trace_pc"><b>trace_pc</b></dt><dd>set to True to get the program counter printed at each test</dd></dl><p></p></dd>
+</dl><p></p><h4 class="jdocu"><a class="not-numbered" name="__pyfunreverse_execution.reverse_execution_test.print_parameters">print_parameters</a></h4>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">obj.print_parameters()</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Prints the parameters used by this object.
+ </dd>
+</dl><p></p><h4 class="jdocu"><a class="not-numbered" name="__pyfunreverse_execution.reverse_execution_test.runtest">runtest</a></h4>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">obj.runtest(points = None, randvals = None, cpu = None)</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Run reverse execution checks.
+<p>
+ Arguments:
+ </p><dl><dt id="dt:points"><b>points</b></dt><dd>points to run the checks at, optional, defaults to points generated
+     based on the parameters provided when constructing this object</dd><dt id="dt:randvals"><b>randvals</b></dt><dd>offsets past each point to check state at, optional, defaults to
+     offsets generated based on the parameters provided when constructing
+     this object</dd><dt id="dt:cpu"><b>cpu</b></dt><dd>the processor to use as a time base, optional, defaults to the
+     current processor</dd></dl><p></p></dd>
+</dl><p></p><h4 class="jdocu"><a class="not-numbered" name="__pyfunreverse_execution.reverse_execution_test.testone">testone</a></h4>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">obj.testone(offstable, cpu = None)</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Run reverse execution checks for the point the cpu is currently at.
+<p>
+ Arguments:
+ </p><dl><dt id="dt:offstable"><b>offstable</b></dt><dd>offsets from the current cycle to check the state of the system at
+     </dd><dt id="dt:cpu-2"><b>cpu</b></dt><dd>the processor to use as a time base, optional, defaults to the
+     current processor</dd></dl><p></p></dd>
+</dl><p>
+
+</p><h2 class="jdocu"><a name="__pymodinfo_status">7.4.2 info_status</a></h2>
+<p>
+
+
+ Library for checking if classes has info and status commands.
+ 
+</p><h3 class="jdocu"><a class="not-numbered" name="__pyfuninfo_status.report_info_status_errors">report_info_status_errors</a></h3>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">report_info_status_errors(missing_info, missing_status, unexpected_info, unexpected_status)</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Prints its input lists and quits Simics with an error.
+<p>
+ First each provided list is printed in a human readable manner and then
+ the function quits Simics with the result 1, which will be detected by
+ the test system as a test failure.
+</p><p>
+ Arguments:
+ </p><dl><dt id="dt:missing_info"><b>missing_info</b></dt><dd>a list of classes which do not have <b>info</b> commands</dd><dt id="dt:missing_status"><b>missing_status</b></dt><dd>a list of classes which do not have <b>status</b> commands</dd><dt id="dt:unexpected_info"><b>unexpected_info</b></dt><dd>a list of classes which have <b>info</b> commands, but which were on
+     the info command passlist</dd><dt id="dt:unexpected_status"><b>unexpected_status</b></dt><dd>a list of classes which have <b>status</b> commands, but which were
+     on the status command passlist</dd></dl><p></p></dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyfuninfo_status.check_for_info_status">check_for_info_status</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">check_for_info_status(modules, info_passlist = [], status_passlist = [], report_errors = &lt;function report_info_status_errors&gt;)</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Check that the classes in a list of modules have info and status commands.
+<p>
+ Classes are Simics configuration classes, not python classes. The
+ function checks all the classes in the named modules to see if they
+ have <b>info</b> and <b>status</b> commands. If any such
+ command is missing it will be detected as an error, but you can
+ provide passlists. If a class is passlisted and still has the
+ command it will be detected as an error. If any errors are detected
+ the function calls a function to report this. By default the
+ <b><i>report_info_status_error</i></b> is called, but you can override
+ this with the <i>report_errors</i> argument.
+</p><p>
+ The modules named in modules will be loaded into Simics as a side
+ effect of running this test.
+</p><p>
+ Arguments:
+ </p><dl><dt id="dt:modules"><b>modules</b></dt><dd>the modules whose classes to test</dd><dt id="dt:info_passlist"><b>info_passlist</b></dt><dd>the list of classes which should not have info commands</dd><dt id="dt:status_passlist"><b>status_passlist</b></dt><dd>the list of classes which should not have status commands</dd><dt id="dt:report_errors"><b>report_errors</b></dt><dd>the function to call to report errors</dd></dl><p></p></dd>
+</dl><p>
+
+</p><div class=chain>
+<a href="test-framework-libraries-available-outside-simics.html" class="previous">7.3 Test Framework Libraries Available Outside Simics</a>
+</div>
