@@ -1,0 +1,39 @@
+// plugin_device.dml - Skeleton code to base new DML device modules on
+
+dml 1.2;
+
+device plugin_device;
+
+parameter desc = "example plugin device";
+parameter documentation = "Plugin device example for Model Builder User's Guide";
+
+import "utility.dml";
+import "talk.dml";
+
+// USER-TODO: add connect definitions here, if needed
+
+// USER-TODO: add attribute definitions here, if needed
+
+// Basic bank declaration
+
+// USER-TODO: add implement and port declarations here, if needed
+implement talk {
+    method hello {
+        log "info": "Hi there!";
+    }
+}
+
+// USER-TODO: add event declarations here, if needed
+
+// USER-TODO: add common methods here, if needed
+
+// USER-TODO: add templates here, if needed
+
+// Implementation of registers
+
+// USER-TODO: Add init() and post_init() methods here, if needed.
+// init() will be run to set the empty state of the model, before any
+// configuration or checkpointed attributes are set.  post_init() is run after
+// all configuration attributes have been set.  This happens both when the
+// initial configuration is set and when the configuration is loaded from a
+// checkpoint.
