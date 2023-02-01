@@ -1,0 +1,75 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>clock</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_clipboard-gateway.html" class="previous">clipboard-gateway</a>
+<a href="__rm_class_clock-extension.html" class="next">clock-extension</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_clock">clock</a></h1>
+<p>
+
+<a name="clock"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_clock">clock</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>clock</b> class can be used to drive the simulation when there is no processor in the system. It implements the <code>cycle</code> interface, which means that devices and other objects can post events on it to be executed at a later time. The clock frequency determines the length of a clock cycle, which is used as the granularity for executing events. It is not possible to post step events to the clock.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">concurrency_mode, conf_object, cycle, execute, execute_control, frequency, frequency_listener, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>vtime.cycles</b> &lt;cycle-counter&gt; : cycle queue<br><b>vtime.ps</b> &lt;ps-clock&gt; : event queue (ps)<br><b>vtime</b> &lt;vtime&gt; : event handler</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">stop_notification (simple_dispatcher) : Add/remove notification on simulator stop requests.</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:cell"><b><i>cell</i></b></dt><p><a name="__rm_attribute_clock_cell"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Cell</dd></dl><p></p><dl><dt id="dt:cycles"><b><i>cycles</i></b></dt><p><a name="__rm_attribute_clock_cycles"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Time measured in cycles from machine start.</dd></dl><p></p><dl><dt id="dt:do_not_schedule"><b><i>do_not_schedule</i></b></dt><p><a name="__rm_attribute_clock_do_not_schedule"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE to prevent this object from being scheduled by the cell.</dd></dl><p></p><dl><dt id="dt:freq_mhz"><b><i>freq_mhz</i></b></dt><p><a name="__rm_attribute_clock_freq_mhz"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>float</code> or <code>integer</code>.
+Clock frequency in MHz.</dd></dl><p></p><dl><dt id="dt:mca_concurrency_mode"><b><i>mca_concurrency_mode</i></b></dt><p><a name="__rm_attribute_clock_mca_concurrency_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Multicore Accelerator mode used by processor. One of Sim_Concurrency_Mode_Serialized (1), Sim_Concurrency_Mode_Serialized_Memory (2), or Sim_Concurrency_Mode_Full (4)</dd></dl><p></p><dl><dt id="dt:multicore_accelerator_enabled"><b><i>multicore_accelerator_enabled</i></b></dt><p><a name="__rm_attribute_clock_multicore_accelerator_enabled"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE the clock enabled for Multicore Accelerator execution, otherwise FALSE</dd></dl><p></p><dl><dt id="dt:stop_listeners"><b><i>stop_listeners</i></b></dt><p><a name="__rm_attribute_clock_stop_listeners"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[o,n|s]*]</code>.
+List of objects listening for stop signal. Each object/port pair needs to implement the pulse interface through which the information to stop will be signaled. Port can be NIL in which case the pulse interface will be used without a port.</dd></dl><p></p><dl><dt id="dt:time_queue"><b><i>time_queue</i></b></dt><p><a name="__rm_attribute_clock_time_queue"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>[[osaai]*]</code>.
+((<i>object</i>, <i>evclass</i>, <i>value</i>, <i>slot</i>, <i>when</i>)*). Pending cycle queue events.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface cycle</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-break-cycle">bp-break-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-break-time">bp-break-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-run-until-cycle">bp-run-until-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-run-until-time">bp-run-until-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-trace-cycle">bp-trace-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-trace-time">bp-trace-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-wait-for-cycle">bp-wait-for-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-wait-for-time">bp-wait-for-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.cycle-break">cycle-break</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.cycle-break-absolute">cycle-break-absolute</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.print-time">print-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.wait-for-cycle">wait-for-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.wait-for-time">wait-for-time</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_clock_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_clock_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_clipboard-gateway.html" class="previous">clipboard-gateway</a>
+<a href="__rm_class_clock-extension.html" class="next">clock-extension</a>
+</div>

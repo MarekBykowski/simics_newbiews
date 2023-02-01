@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>generic_eth_phy</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_generic-mmc-card.html" class="previous">generic-mmc-card</a>
+<a href="__rm_class_generic_pcie_switch_port.html" class="next">generic_pcie_switch_port</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_generic_eth_phy">generic_eth_phy</a></h1>
+<p>
+
+<a name="generic_eth_phy"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_generic_eth_phy">generic_eth_phy</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Represents a generic Ethernet 802.3 PHY with MII and MDIO45 interfaces. It reflects link-status in the MII registers but does not autonegotiate speed with the link. All Ethernet frames are passed through unmodified, except when loopback mode is enabled in the MII registers, then they are immediately returned back to the MAC. The <b>generic_eth_phy</b> can optionally model a maximum transmit bandwidth, see the <i>tx_bandwidth</i> attribute.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ethernet_cable, ethernet_common, ieee_802_3_phy, ieee_802_3_phy_v2, ieee_802_3_phy_v3, log_object, mdio45_phy, mii, mii_management</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.mii_regs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_auto_neg</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_default</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_dte_xs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_mii_ext</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_pcs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_phy_xs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_pma_pmd</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_tc</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_vendor1</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_vendor2</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>bank.mmd_wis</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)<br><b>port.HRESET</b> (signal)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:address"><b><i>address</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+PHY identifier sent in calls to ieee_802_3_mac interface methods.</dd></dl><p></p><dl><dt id="dt:link"><b><i>link</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_link"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The Ethernet link that the PHY is connected to or Nil if the PHY is disconnected.
+<p>
+Required interfaces: <code>ethernet_common</code>.</p></dd></dl><p></p><dl><dt id="dt:link_led"><b><i>link_led</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_link_led"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+An object that will get a high signal when the link status is up.
+<p>
+Required interfaces: <code>signal</code>.</p></dd></dl><p></p><dl><dt id="dt:loopback_delay"><b><i>loopback_delay</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_loopback_delay"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The time in seconds for sending back a frame when in loopback mode</dd></dl><p></p><dl><dt id="dt:mac"><b><i>mac</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_mac"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+Media access controller (MAC) object</dd></dl><p></p><dl><dt id="dt:bank-mii_regs-ext_status"><b><i>bank.mii_regs.ext_status</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_mii_regs.ext_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Default value of MII Extended Status (MII register address 15)</dd></dl><p></p><dl><dt id="dt:bank-mii_regs-status"><b><i>bank.mii_regs.status</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_mii_regs.status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Default value of MII Status (MII register address 1)</dd></dl><p></p><dl><dt id="dt:phy_id"><b><i>phy_id</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_phy_id"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+32-bit PHY identifier</dd></dl><p></p><dl><dt id="dt:register_defaults"><b><i>register_defaults</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_register_defaults"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[n|i{32}]</code>.
+Reset values of the MII registers. A <b>nil</b> value denotes that the standard reset value for that register is used.</dd></dl><p></p><dl><dt id="dt:registers"><b><i>registers</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_registers"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>[i{32}]</code>.
+The 32 MII management registers</dd></dl><p></p><dl><dt id="dt:tx_bandwidth"><b><i>tx_bandwidth</i></b></dt><p><a name="__rm_attribute_generic_eth_phy_tx_bandwidth"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The transmit bandwidth of the network interface in bits per second. The network interface will limit the rate at which it sends packets to remain below this bandwidth. Set to 0 for unlimited bandwidth.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic_eth_phy_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic_eth_phy_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_generic-mmc-card.html" class="previous">generic-mmc-card</a>
+<a href="__rm_class_generic_pcie_switch_port.html" class="next">generic_pcie_switch_port</a>
+</div>

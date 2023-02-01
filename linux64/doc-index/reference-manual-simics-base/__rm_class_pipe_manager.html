@@ -1,0 +1,69 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>pipe_manager</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_persistent-ram.html" class="previous">persistent-ram</a>
+<a href="__rm_class_port-forward-incoming-server.html" class="next">port-forward-incoming-server</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_pipe_manager">pipe_manager</a></h1>
+<p>
+
+<a name="pipe_manager"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_pipe-manager-example">pipe-manager-example</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A class that receives and transmits data through a magic pipe connection to a pipe agent running in the target system.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:haps"><b><i>haps</i></b></dt><p><a name="__rm_attribute_pipe_manager_haps"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Magic hap count</dd></dl><p></p><dl><dt id="dt:input"><b><i>input</i></b></dt><p><a name="__rm_attribute_pipe_manager_input"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Input file</dd></dl><p></p><dl><dt id="dt:magic"><b><i>magic</i></b></dt><p><a name="__rm_attribute_pipe_manager_magic"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Magic number of the pipe agent</dd></dl><p></p><dl><dt id="dt:output"><b><i>output</i></b></dt><p><a name="__rm_attribute_pipe_manager_output"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Output file</dd></dl><p></p><dl><dt id="dt:pipe"><b><i>pipe</i></b></dt><p><a name="__rm_attribute_pipe_manager_pipe"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Connected pipe object or NIL</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_pipe_manager_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_pipe_manager_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_persistent-ram.html" class="previous">persistent-ram</a>
+<a href="__rm_class_port-forward-incoming-server.html" class="next">port-forward-incoming-server</a>
+</div>

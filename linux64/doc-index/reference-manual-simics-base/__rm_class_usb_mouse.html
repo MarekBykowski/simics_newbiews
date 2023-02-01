@@ -1,0 +1,88 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>usb_mouse</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_usb_keyboard.html" class="previous">usb_keyboard</a>
+<a href="__rm_class_usb_tablet.html" class="next">usb_tablet</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_usb_mouse">usb_mouse</a></h1>
+<p>
+
+<a name="usb_mouse"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_usb-input-devices">usb-input-devices</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A USB mouse device.<br>Note: There are two interfaces ("abs_pointer" and "mouse") implemented in the usb_mouse. But use of the "abs_pointer" interface imposes a number of limitations on the functionality of the usb_mouse, please use the "mouse" interface.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">abs_pointer, conf_object, log_object, mouse, usb_device</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:curr_x"><b><i>curr_x</i></b></dt><p><a name="__rm_attribute_usb_mouse_curr_x"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current position: x of the cursor.</dd></dl><p></p><dl><dt id="dt:curr_y"><b><i>curr_y</i></b></dt><p><a name="__rm_attribute_usb_mouse_curr_y"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current position: y of the cursor.</dd></dl><p></p><dl><dt id="dt:descriptor_data"><b><i>descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_mouse_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The descriptors in data format.</dd></dl><p></p><dl><dt id="dt:device_address"><b><i>device_address</i></b></dt><p><a name="__rm_attribute_usb_mouse_device_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+USB device/function address.</dd></dl><p></p><dl><dt id="dt:device_qualifier_descriptor_data"><b><i>device_qualifier_descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_mouse_device_qualifier_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The device qualifier in data format.</dd></dl><p></p><dl><dt id="dt:device_state"><b><i>device_state</i></b></dt><p><a name="__rm_attribute_usb_mouse_device_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+USB device state.</dd></dl><p></p><dl><dt id="dt:hid_data"><b><i>hid_data</i></b></dt><p><a name="__rm_attribute_usb_mouse_hid_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiii]</code>.
+The USB HID report data</dd></dl><p></p><dl><dt id="dt:hid_report_descriptor_data"><b><i>hid_report_descriptor_data</i></b></dt><p><a name="__rm_attribute_usb_mouse_hid_report_descriptor_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The descriptors in data format.</dd></dl><p></p><dl><dt id="dt:ms_os_descriptor"><b><i>ms_os_descriptor</i></b></dt><p><a name="__rm_attribute_usb_mouse_ms_os_descriptor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+The Microsoft OS Descriptor.</dd></dl><p></p><dl><dt id="dt:ratio"><b><i>ratio</i></b></dt><p><a name="__rm_attribute_usb_mouse_ratio"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The ratio of the movement.</dd></dl><p></p><dl><dt id="dt:string_descriptor_array"><b><i>string_descriptor_array</i></b></dt><p><a name="__rm_attribute_usb_mouse_string_descriptor_array"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[d*]</code>.
+String descriptors.</dd></dl><p></p><dl><dt id="dt:usb_host"><b><i>usb_host</i></b></dt><p><a name="__rm_attribute_usb_mouse_usb_host"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The USB host controller.
+<p>
+Required interfaces: <code>usb</code>.</p></dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.left-button">left-button</a></b></td><td class="jdocu_noborder">send button down/up event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.middle-button">middle-button</a></b></td><td class="jdocu_noborder">send button down/up event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.moveto">moveto</a></b></td><td class="jdocu_noborder">move mouse cursor</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.reset">reset</a></b></td><td class="jdocu_noborder">reset mouse cursor</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.right-button">right-button</a></b></td><td class="jdocu_noborder">send button down/up event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_usb_mouse_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_usb_keyboard.html" class="previous">usb_keyboard</a>
+<a href="__rm_class_usb_tablet.html" class="next">usb_tablet</a>
+</div>

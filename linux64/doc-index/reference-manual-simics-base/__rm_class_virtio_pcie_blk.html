@@ -1,0 +1,69 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>virtio_pcie_blk</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_virtio_mmio_net.html" class="previous">virtio_mmio_net</a>
+<a href="__rm_class_virtio_pcie_net.html" class="next">virtio_pcie_net</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_virtio_pcie_blk">virtio_pcie_blk</a></h1>
+<p>
+
+<a name="virtio_pcie_blk"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_virtio">virtio</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Virtio PCIE block device based on the Virtio 1.1 specification. Implements the base functionality. Does not implement:<ul><li>VIRTIO_BLK_F_SIZE_MAX</li><li>VIRTIO_BLK_F_SEG_MAX</li><li>VIRTIO_BLK_F_GEOMETRY</li><li>VIRTIO_BLK_F_RO</li><li>VIRTIO_BLK_F_BLK_SIZE</li><li>VIRTIO_BLK_F_FLUSH</li><li>VIRTIO_BLK_F_TOPOLOGY</li><li>VIRTIO_BLK_F_CONFIG_WCE</li><li>VIRTIO_BLK_F_DISCARD</li><li>VIRTIO_BLK_F_WRITE_Z</li></ul>
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, pcie_device</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.msix_data</b> (bank_instrumentation_subscribe, instrumentation_order, io_memory, register_view, register_view_read_only)<br><b>bank.pcie_config</b> (bank_instrumentation_subscribe, instrumentation_order, register_view, register_view_read_only, transaction)<br><b>bank.virtio_config</b> (bank_instrumentation_subscribe, instrumentation_order, io_memory, register_view, register_view_read_only)<br><b>port.HRESET</b> (signal)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:image"><b><i>image</i></b></dt><p><a name="__rm_attribute_virtio_pcie_blk_image"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+disk image
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:bank-pcie_config-function_number"><b><i>bank.pcie_config.function_number</i></b></dt><p><a name="__rm_attribute_virtio_pcie_blk_pcie_config.function_number"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+PCIe function number of this bank</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_virtio_pcie_blk_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_virtio_pcie_blk_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_virtio_mmio_net.html" class="previous">virtio_mmio_net</a>
+<a href="__rm_class_virtio_pcie_net.html" class="next">virtio_pcie_net</a>
+</div>

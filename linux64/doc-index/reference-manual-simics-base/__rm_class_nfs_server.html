@@ -1,0 +1,73 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>nfs_server</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_new-flash-memory.html" class="previous">new-flash-memory</a>
+<a href="__rm_class_ns16450.html" class="next">NS16450</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_nfs_server">nfs_server</a></h1>
+<p>
+
+<a name="nfs_server"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_nfs-server">nfs-server</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This class represents a user mode NFS server that can export parts of the host file system to the simulated network. Currently, only the mount protocol and NFS version 3 over UDP is supported (RFC1813).
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, tcp_service, udp_service</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:enabled"><b><i>enabled</i></b></dt><p><a name="__rm_attribute_nfs_server_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to true (default) if the NFS server will listen for connections.</dd></dl><p></p><dl><dt id="dt:exports"><b><i>exports</i></b></dt><p><a name="__rm_attribute_nfs_server_exports"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[sbs]*]</code>.
+List of exported directories, where each directory is represented by [host path, writeable, exported path]. The host path is normally an absolute path. On windows, / is used as separator and the drive letter is substituted for ///drive/. The trailing slash is omitted unless the path is root directory.</dd></dl><p></p><dl><dt id="dt:server_ip"><b><i>server_ip</i></b></dt><p><a name="__rm_attribute_nfs_server_server_ip"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Server IPv4 address. Typically from one of the service nodes.</dd></dl><p></p><dl><dt id="dt:udp"><b><i>udp</i></b></dt><p><a name="__rm_attribute_nfs_server_udp"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+UDP layer. Must implement the udp interface.</dd></dl><p></p><dl><dt id="dt:udp_ports"><b><i>udp_ports</i></b></dt><p><a name="__rm_attribute_nfs_server_udp_ports"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Port numbers for the NFS and mount services.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_nfs_server_gt_.add-export">add-export</a></b></td><td class="jdocu_noborder">add NFS export</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_nfs_server_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_nfs_server_gt_.remove-export">remove-export</a></b></td><td class="jdocu_noborder">remove NFS export</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_nfs_server_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_new-flash-memory.html" class="previous">new-flash-memory</a>
+<a href="__rm_class_ns16450.html" class="next">NS16450</a>
+</div>

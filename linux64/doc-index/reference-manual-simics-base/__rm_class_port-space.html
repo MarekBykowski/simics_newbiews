@@ -1,0 +1,73 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>port-space</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_port-forward-outgoing-server.html" class="previous">port-forward-outgoing-server</a>
+<a href="__rm_class_preferences.html" class="next">preferences</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_port-space">port-space</a></h1>
+<p>
+
+<a name="port-space"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Class providing a 16-bit+3 port address space. In response to an address being asserted on the bus, an actual EISA or ISA device signals how large a transfer it can handle through the I/O chip select 16 line (ISA), and the EX16 and EX32 lines (EISA). This allows for example a 2-byte access at address A to have different meaning than two 1-byte accesses at address A and A+1. In the port-space class, the maximal width for each address should be specified in the map attribute. Mapping 2 bytes at address A also automatically maps 1 byte at address A+1. In the same way, mapping 4 bytes at A also maps 1 byte at A+1, 2 bytes at A+2, and 1 byte at A+3.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, map_demap, port_space</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:default_target"><b><i>default_target</i></b></dt><p><a name="__rm_attribute_port-space_default_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[oiio|n]</code> or <code>nil</code>.
+(<i>object</i>, <i>function</i>, <i>offset</i>, <i>target</i>). An access not targeting any object in the map attribute will be forwarded to the default target. <i>target</i> should be non-nil if and only if <i>object</i> is a translation object.</dd></dl><p></p><dl><dt id="dt:map"><b><i>map</i></b></dt><p><a name="__rm_attribute_port-space_map"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[io|[os|n]iii]*]</code>.
+((<i>base</i>, <i>object</i>, <i>function</i>, <i>offset</i>, <i>length</i>)*). Maps zero or more object to the port space. <i>object</i>, which must implement the <code>io-memory</code> interface, is mapped from <i>base</i> to <i>base</i> + <i>length</i> − 1 (inclusive). Both <i>function</i> and <i>offset</i> is handed on to the mapped <i>object</i> through the <code>io-memory</code> interface. A mapped region larger than 4 bytes will be internally split into multiple 4-byte mappings. Mappings larger than 4 bytes must be a multiple of 4 bytes long, and must start at a 4-byte aligned address.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface port_space</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.get">get</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.get-string">get-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.read">read</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.read-string">read-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.set">set</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.set-string">set-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.write">write</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_port_space_gt_.write-string">write-string</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_port-space_gt_.add-map">add-map</a></b></td><td class="jdocu_noborder">map device in a port-space</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_port-space_gt_.del-map">del-map</a></b></td><td class="jdocu_noborder">remove device map from a port-space</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_port-space_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_port-space_gt_.map">map</a></b></td><td class="jdocu_noborder">print port map</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_port-space_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_port-forward-outgoing-server.html" class="previous">port-forward-outgoing-server</a>
+<a href="__rm_class_preferences.html" class="next">preferences</a>
+</div>

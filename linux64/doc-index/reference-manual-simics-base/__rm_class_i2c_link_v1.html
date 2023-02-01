@@ -1,0 +1,72 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i2c_link_v1</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i2c_link.html" class="previous">i2c_link</a>
+<a href="__rm_class_i2c_slave_v2_to_bus_adapter.html" class="next">i2c_slave_v2_to_bus_adapter</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i2c_link_v1">i2c_link_v1</a></h1>
+<p>
+
+<a name="i2c_link_v1"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_i2c-link-v1">i2c-link-v1</a>
+</dd>
+<dt class="jdocu_descitem"><b>Aliases</b></dt><dd class="jdocu_descitem">i2c_link</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The i2c_link_v1 class implements the functionality of an I2C bus, to which several I2C devices can connect. Connecting I2C devices should implement the <code>i2c_master</code> or <code>i2c_slave</code> interface.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, i2c_link, i2c_master_v2, i2c_slave_v2, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bus_freed_queue"><b><i>bus_freed_queue</i></b></dt><p><a name="__rm_attribute_i2c_link_v1_bus_freed_queue"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+List of i2c master devices waiting for a bus_freed call. Index 0 is first in the queue.</dd></dl><p></p><dl><dt id="dt:enqueued_start"><b><i>enqueued_start</i></b></dt><p><a name="__rm_attribute_i2c_link_v1_enqueued_start"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+When connected as slave to an i2c-link-v2 object, a stop and a start request may arrive while waiting for an ack_read_response from a slave.  This attribute stores the start address, -1 if no start is enqueued.</dd></dl><p></p><dl><dt id="dt:link_state"><b><i>link_state</i></b></dt><p><a name="__rm_attribute_i2c_link_v1_link_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Internal state of the link</dd></dl><p></p><dl><dt id="dt:link_v2"><b><i>link_v2</i></b></dt><p><a name="__rm_attribute_i2c_link_v1_link_v2"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+This connect is used to connect with Link v2. It should only setby the component
+<p>
+Required interfaces: <code>i2c_master_v2</code>, <code>i2c_slave_v2</code>.</p></dd></dl><p></p><dl><dt id="dt:slave_devices"><b><i>slave_devices</i></b></dt><p><a name="__rm_attribute_i2c_link_v1_slave_devices"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[oi]*]</code>.
+Contains a list of the slave devices connected to the link. Each list entry is a list of <i>(device, address)</i> for each address that has a device connected. Devices connect themselves using the <code>i2c_link</code> interface.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i2c_link_v1_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i2c_link_v1_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i2c_link.html" class="previous">i2c_link</a>
+<a href="__rm_class_i2c_slave_v2_to_bus_adapter.html" class="next">i2c_slave_v2_to_bus_adapter</a>
+</div>

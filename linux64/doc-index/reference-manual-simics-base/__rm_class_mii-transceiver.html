@@ -1,0 +1,85 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>mii-transceiver</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_mii-management-bus.html" class="previous">mii-management-bus</a>
+<a href="__rm_class_mmc_card.html" class="next">mmc_card</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_mii-transceiver">mii-transceiver</a></h1>
+<p>
+
+<a name="mii-transceiver"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_mii-transceiver">mii-transceiver</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">mii-transceiver is an IEEE 802.3 physical layer device with MII interface
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ethernet_common, ieee_802_3_phy, ieee_802_3_phy_v2, ieee_802_3_phy_v3, log_object, mii, mii_management</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">MDC (signal) : MDIO clock signal<br>MDIO (signal) : MDIO data signal</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:add_crc_on_inject"><b><i>add_crc_on_inject</i></b></dt><p><a name="__rm_attribute_mii-transceiver_add_crc_on_inject"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Frames injected using the 'inject_packet' will get a correctly calculated CRC added at the end when this attribute is set to 1 (default). When set to 0, the user has to supply a CRC field with the injected frame. Note that you must always provide room for the CRC field, even when this attribute is set to 1.</dd></dl><p></p><dl><dt id="dt:address"><b><i>address</i></b></dt><p><a name="__rm_attribute_mii-transceiver_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+PHY identifier sent in calls to ieee_802_3_mac interface methods.</dd></dl><p></p><dl><dt id="dt:duplex_mode"><b><i>duplex_mode</i></b></dt><p><a name="__rm_attribute_mii-transceiver_duplex_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to 1 for full duplex (0 for half duplex).</dd></dl><p></p><dl><dt id="dt:inject_packet"><b><i>inject_packet</i></b></dt><p><a name="__rm_attribute_mii-transceiver_inject_packet"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>data</code>.
+Attribute used to send a packet to the network device. Writing this attribute at any time injects a new packet into the device (without involving the network simulation). Injecting a packet copies the packet data, allowing the caller to reuse or dispose of the buffer used for creating the packet, after the attribute is written.</dd></dl><p></p><dl><dt id="dt:link"><b><i>link</i></b></dt><p><a name="__rm_attribute_mii-transceiver_link"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The Ethernet link that the network device is connected to.</dd></dl><p></p><dl><dt id="dt:link_speed"><b><i>link_speed</i></b></dt><p><a name="__rm_attribute_mii-transceiver_link_speed"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The link speed (usually 10 or 100 Mbit/s).</dd></dl><p></p><dl><dt id="dt:link_status"><b><i>link_status</i></b></dt><p><a name="__rm_attribute_mii-transceiver_link_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The status of the link - 0 when completely unconnected, 1 when connected but down, and 2 when connected and up.</dd></dl><p></p><dl><dt id="dt:mac"><b><i>mac</i></b></dt><p><a name="__rm_attribute_mii-transceiver_mac"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[os]</code> or <code>object</code>.
+Set to a media access controller (MAC) object, implementing the ieee_802_3_mac_v3 or ieee_802_3_mac interface.</dd></dl><p></p><dl><dt id="dt:mac_address"><b><i>mac_address</i></b></dt><p><a name="__rm_attribute_mii-transceiver_mac_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{6}]</code>, <code>string</code>, or <code>nil</code>.
+Ethernet (MAC) address of the network interface.</dd></dl><p></p><dl><dt id="dt:mdio_target"><b><i>mdio_target</i></b></dt><p><a name="__rm_attribute_mii-transceiver_mdio_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Describes where the outgoing MDIO signal should be connected</dd></dl><p></p><dl><dt id="dt:model_crc"><b><i>model_crc</i></b></dt><p><a name="__rm_attribute_mii-transceiver_model_crc"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Deprecated. Do not use.</dd></dl><p></p><dl><dt id="dt:network"><b><i>network</i></b></dt><p><a name="__rm_attribute_mii-transceiver_network"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Obsolete attribute. Use link instead.</dd></dl><p></p><dl><dt id="dt:registers"><b><i>registers</i></b></dt><p><a name="__rm_attribute_mii-transceiver_registers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{32}]</code>.
+The MII management register set as described in IEEE 802.3.</dd></dl><p></p><dl><dt id="dt:serial_clock"><b><i>serial_clock</i></b></dt><p><a name="__rm_attribute_mii-transceiver_serial_clock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_data_in"><b><i>serial_data_in</i></b></dt><p><a name="__rm_attribute_mii-transceiver_serial_data_in"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_data_out"><b><i>serial_data_out</i></b></dt><p><a name="__rm_attribute_mii-transceiver_serial_data_out"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_num_cycles"><b><i>serial_num_cycles</i></b></dt><p><a name="__rm_attribute_mii-transceiver_serial_num_cycles"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_port_status"><b><i>serial_port_status</i></b></dt><p><a name="__rm_attribute_mii-transceiver_serial_port_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:tx_bandwidth"><b><i>tx_bandwidth</i></b></dt><p><a name="__rm_attribute_mii-transceiver_tx_bandwidth"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The transmit bandwidth of the network interface in bits per second. The network interface will limit the rate at which it sends packets to remain below this bandwidth. Set to 0 for unlimited bandwidth.</dd></dl><p></p><dl><dt id="dt:tx_next_time"><b><i>tx_next_time</i></b></dt><p><a name="__rm_attribute_mii-transceiver_tx_next_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The earliest time at which that the network interface may send another packet. Used for transmit bandwidth limitation.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mii-transceiver_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mii-transceiver_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_mii-management-bus.html" class="previous">mii-management-bus</a>
+<a href="__rm_class_mmc_card.html" class="next">mmc_card</a>
+</div>

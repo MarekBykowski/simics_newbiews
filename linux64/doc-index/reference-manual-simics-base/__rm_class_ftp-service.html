@@ -1,0 +1,71 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>ftp-service</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_ftp-data.html" class="previous">ftp-data</a>
+<a href="__rm_class_g-cache.html" class="next">g-cache</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_ftp-service">ftp-service</a></h1>
+<p>
+
+<a name="ftp-service"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_ftp-service">ftp-service</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The ftp-service class implements a simple FTP server in the service node. There is no authentication, all user names and passwords will be accepted and give access to all files the Simics process may access. The most commonly used FTP commands are implemented such as RETR, STOR, PWD, CWD, CDUP, MODE, USER, PASS, TYPE, PASV, PORT, NOOP, STRU, LIST, NSLT and QUIT. Unimplemented features include IPv6, creation and deletion of directories and file deletion and renaming. ASCII transfers will handled as binary ones.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, tcp_service</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:c_sessions"><b><i>c_sessions</i></b></dt><p><a name="__rm_attribute_ftp-service_c_sessions"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ssisi]*]</code>.
+The active control sessions in the FTP service. The sub-entries for each session are: <i>server IP address</i>, <i>client IP address</i>, <i>client port</i>, <i>current directory</i>, <i>dsession id</i>.</dd></dl><p></p><dl><dt id="dt:d_sessions"><b><i>d_sessions</i></b></dt><p><a name="__rm_attribute_ftp-service_d_sessions"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[bbbs|niisi]*]</code>.
+The active data sessions in the FTP service. The sub-entries for each session are: <i>passive mode</i>, <i>connected (in passive mode)</i>, <i>write</i> <i>file name</i>, <i>file offset</i>, <i>write buffer size</i>, <i>directory listing</i>, <i>c_session id</i>.</dd></dl><p></p><dl><dt id="dt:enabled"><b><i>enabled</i></b></dt><p><a name="__rm_attribute_ftp-service_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to true (default) if the FTP server will listen for connections on the IP addresses specified in the server_ip_list attribute.</dd></dl><p></p><dl><dt id="dt:ftp_helpers"><b><i>ftp_helpers</i></b></dt><p><a name="__rm_attribute_ftp-service_ftp_helpers"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[oo]</code>.
+FTP helper objects. One ftp-control object and one ftp-data object.</dd></dl><p></p><dl><dt id="dt:ftp_root_directory"><b><i>ftp_root_directory</i></b></dt><p><a name="__rm_attribute_ftp-service_ftp_root_directory"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The directory in which files read or written over FTP are located; the default is the current working directory. The client can read and write to any subdirectories of the root directory. The Simics search path is always used to locate files to read.</dd></dl><p></p><dl><dt id="dt:server_ip_list"><b><i>server_ip_list</i></b></dt><p><a name="__rm_attribute_ftp-service_server_ip_list"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+Server IPv4 addresses. Typically one for each interface of the service node. New addresses may be added at the end of the list, but removal is not supported.</dd></dl><p></p><dl><dt id="dt:tcp"><b><i>tcp</i></b></dt><p><a name="__rm_attribute_ftp-service_tcp"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+TCP layer. Must implement the tcp interface.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ftp-service_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_ftp-service_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_ftp-data.html" class="previous">ftp-data</a>
+<a href="__rm_class_g-cache.html" class="next">g-cache</a>
+</div>

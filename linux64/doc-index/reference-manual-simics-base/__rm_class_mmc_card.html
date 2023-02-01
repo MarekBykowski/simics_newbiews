@@ -1,0 +1,93 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>mmc_card</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_mii-transceiver.html" class="previous">mii-transceiver</a>
+<a href="__rm_class_mnemonic_histogram_connection.html" class="next">mnemonic_histogram_connection</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_mmc_card">mmc_card</a></h1>
+<p>
+
+<a name="mmc_card"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_generic-sdmmc-card">generic-sdmmc-card</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>mmc_card</b> implements JESD84-B50.1-compliant eMMC card.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, mmc</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.regs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, register_view)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bkops_status"><b><i>bkops_status</i></b></dt><p><a name="__rm_attribute_mmc_card_bkops_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+This field indicates the level of background operations urgency: 0x0: No operations required, 0x1: Operations outstanding – non critical, 0x2: Operations outstanding – performance being impacted, 0x3: Operations outstanding – critical </dd></dl><p></p><dl><dt id="dt:boot_part_preconf"><b><i>boot_part_preconf</i></b></dt><p><a name="__rm_attribute_mmc_card_boot_part_preconf"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Pre-configured bootable partition ('disable', 'user', 'boot0', 'boot1'). Indicate which partition is enabled for booting by host.</dd></dl><p></p><dl><dt id="dt:cmdq_delayed_ready"><b><i>cmdq_delayed_ready</i></b></dt><p><a name="__rm_attribute_mmc_card_cmdq_delayed_ready"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Marking task "Ready for execution" after some random delay</dd></dl><p></p><dl><dt id="dt:cmdq_enable"><b><i>cmdq_enable</i></b></dt><p><a name="__rm_attribute_mmc_card_cmdq_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+The card maintains a queue of up to 32 data transfers. Commands CMD44/CMD45 are sent to queue up transfers in advance, and then one of the transfers is selected to execute by CMD46/CMD47 at which point data transfer begins.This attribute sets EXT_CSD_CMDQ_SUPPORT bit and defines eMMC v5.1 revision in EXT_CSD_REV fields</dd></dl><p></p><dl><dt id="dt:flash_image"><b><i>flash_image</i></b></dt><p><a name="__rm_attribute_mmc_card_flash_image"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Image that will hold the memory contents
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:gp_part_preconf"><b><i>gp_part_preconf</i></b></dt><p><a name="__rm_attribute_mmc_card_gp_part_preconf"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+True means that the gp partitions and/or enhanced user data area have been pre-configured  by the host</dd></dl><p></p><dl><dt id="dt:mem_enhanced_area_offset"><b><i>mem_enhanced_area_offset</i></b></dt><p><a name="__rm_attribute_mmc_card_mem_enhanced_area_offset"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>; <b>persistent</b> attribute.
+Starting address of the enhanced user data area</dd></dl><p></p><dl><dt id="dt:mem_enhanced_area_size"><b><i>mem_enhanced_area_size</i></b></dt><p><a name="__rm_attribute_mmc_card_mem_enhanced_area_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>; <b>persistent</b> attribute.
+Enhanced user data area size</dd></dl><p></p><dl><dt id="dt:mem_part_access"><b><i>mem_part_access</i></b></dt><p><a name="__rm_attribute_mmc_card_mem_part_access"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>; <b>persistent</b> attribute.
+Mask of available partitions according to EXT_CSD_PART_CONFIG_ACC order</dd></dl><p></p><dl><dt id="dt:partition_map"><b><i>partition_map</i></b></dt><p><a name="__rm_attribute_mmc_card_partition_map"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o|[os]|n{0:7}]</code>.
+An array of 7 objects or ports implementing the image interface used to store the data of the physical partitions, or NIL for unimplemented partitions.
+<p>
+Required interfaces: <code>image</code>.</p></dd></dl><p></p><dl><dt id="dt:bank-regs-cid"><b><i>bank.regs.CID</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.CID"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{16}]</code>.
+CID: Card identification register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-csd"><b><i>bank.regs.CSD</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.CSD"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{16}]</code>.
+CSD: Device-Specific Data register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-csr"><b><i>bank.regs.CSR</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.CSR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+CSR: Card status (R1 response fields). Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-dsr"><b><i>bank.regs.DSR</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.DSR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+DSR: Driver stage register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-extcsd"><b><i>bank.regs.ExtCSD</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.ExtCSD"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{512}]</code>.
+ExtCSD: Extended CSD register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-ocr"><b><i>bank.regs.OCR</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.OCR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+OCR: Operation condition register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-qsr"><b><i>bank.regs.QSR</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.QSR"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+QSR: Queue Status Register. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:bank-regs-rca"><b><i>bank.regs.RCA</i></b></dt><p><a name="__rm_attribute_mmc_card_regs.RCA"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+RCA: Relative device address. Isn't mapped onto io_memory space area.</dd></dl><p></p><dl><dt id="dt:rpmb_auth_enable"><b><i>rpmb_auth_enable</i></b></dt><p><a name="__rm_attribute_mmc_card_rpmb_auth_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+This function provides means for the system to store data to the specific memory area in an authenticated and replay protected manner</dd></dl><p></p><dl><dt id="dt:rpmb_auth_key"><b><i>rpmb_auth_key</i></b></dt><p><a name="__rm_attribute_mmc_card_rpmb_auth_key"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+One time programmable authentication key register. This register cannot be overwritten, erased or read. The key is used by the eMMC RPMB engine to authenticate the accesses when MAC is calculated.</dd></dl><p></p><dl><dt id="dt:rpmb_mac_data"><b><i>rpmb_mac_data</i></b></dt><p><a name="__rm_attribute_mmc_card_rpmb_mac_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>.
+Accumulation buffer to calculate MAC data</dd></dl><p></p><dl><dt id="dt:rpmb_response"><b><i>rpmb_response</i></b></dt><p><a name="__rm_attribute_mmc_card_rpmb_response"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code> or <code>nil</code>; <b>persistent</b> attribute.
+RPMB response data frame</dd></dl><p></p><dl><dt id="dt:rpmb_state"><b><i>rpmb_state</i></b></dt><p><a name="__rm_attribute_mmc_card_rpmb_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+RPMB internal state</dd></dl><p></p><dl><dt id="dt:rpmb_write_counter"><b><i>rpmb_write_counter</i></b></dt><p><a name="__rm_attribute_mmc_card_rpmb_write_counter"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Counter value for the total amount of successful authenticated data write requests made by the host. Initial value after eMMC production is 0x0000 0000. Value will be incremented by one automatically by the eMMC RPMB engine along with successful programming accesses. The value cannot be reset. After the counter has reached its maximum value 0xFFFF FFFF it will not be incremented anymore (overflow prevention) and the bit [7] in Operation Result value will be permanently set.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mmc_card_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mmc_card_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_mii-transceiver.html" class="previous">mii-transceiver</a>
+<a href="__rm_class_mnemonic_histogram_connection.html" class="next">mnemonic_histogram_connection</a>
+</div>

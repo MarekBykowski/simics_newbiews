@@ -1,0 +1,94 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>simple_cache_tool</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_simple_cache_connection.html" class="previous">simple_cache_connection</a>
+<a href="__rm_class_simple_directory.html" class="next">simple_directory</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_simple_cache_tool">simple_cache_tool</a></h1>
+<p>
+
+<a name="simple_cache_tool"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_simple-cache-tool">simple-cache-tool</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Empty tool to create a connection
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, instrumentation_tool, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:connections"><b><i>connections</i></b></dt><p><a name="__rm_attribute_simple_cache_tool_connections"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[o*]</code>.
+List of connection sub-objects used.</dd></dl><p></p><dl><dt id="dt:cycle_staller"><b><i>cycle_staller</i></b></dt><p><a name="__rm_attribute_simple_cache_tool_cycle_staller"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Cycle staller object.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-filter">add-filter</a></b></td><td class="jdocu_noborder">add filter to the tool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-instrumentation">add-instrumentation</a></b></td><td class="jdocu_noborder">add instrumentation</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-l1d-cache">add-l1d-cache</a></b></td><td class="jdocu_noborder">add level 1 data cache</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-l1i-cache">add-l1i-cache</a></b></td><td class="jdocu_noborder">add level 1 instruction cache</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-l2-cache">add-l2-cache</a></b></td><td class="jdocu_noborder">add level 2 cache</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-l3-cache">add-l3-cache</a></b></td><td class="jdocu_noborder">add l3</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.add-l3-cache-slice">add-l3-cache-slice</a></b></td><td class="jdocu_noborder">add level 3 slice</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.delete">delete</a></b></td><td class="jdocu_noborder">deletes instrumentation tool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.disable-instrumentation">disable-instrumentation</a></b></td><td class="jdocu_noborder">disable instrumentation</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.enable-instrumentation">enable-instrumentation</a></b></td><td class="jdocu_noborder">enable instrumentation</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.list-caches">list-caches</a></b></td><td class="jdocu_noborder">list connected caches</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.list-providers">list-providers</a></b></td><td class="jdocu_noborder">list-provider objects</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.remove-filter">remove-filter</a></b></td><td class="jdocu_noborder">remove filter from the tool</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.remove-instrumentation">remove-instrumentation</a></b></td><td class="jdocu_noborder">remove instrumentation</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_simple_cache_tool_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_simple_cache_connection.html" class="previous">simple_cache_connection</a>
+<a href="__rm_class_simple_directory.html" class="next">simple_directory</a>
+</div>

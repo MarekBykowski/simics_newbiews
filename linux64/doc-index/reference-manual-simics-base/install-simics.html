@@ -1,0 +1,63 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2.4 install-simics</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="craff.html" class="previous">2.3 craff</a>
+<a href="project-setup.html" class="next">2.5 project-setup</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="command-line-tools-and-programs.html">2 Command-Line Tools and Programs</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="install-simics">2.4 install-simics</a></h1>
+<p>
+  
+  </p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">       install-simics.pl
+  (or) install-simics.pl [<em>options</em>] <em>package1</em> [<em>key1</em>] <em>package2</em> [<em>key2</em>] ...
+  (or) install-simics.pl [<em>options</em>] <em>package_keyfile</em></pre><p>
+</p><p>
+    </p><dl><dt id="dt:packagen"><b><em>packageN</em></b></dt><dd>Filename (*.tar.gz.aes) of a package to install.</dd><dt id="dt:keyn"><b>keyN</b></dt><dd>Key corresponding to <em>packageN</em>, 32 or 64 hex characters.</dd><dt id="dt:package_keyfile"><b>package_keyfile</b></dt><dd>Format: one package and corresponding key per line,
+          separated by a space, each following the same
+          format specified above for <em>packageN</em> and <em>keyN</em>.</dd></dl><p>
+    </p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Installs and configure Simics and Simics add-on packages.
+    </dd>
+<dt class="jdocu_descitem">Options</dt><dd class="jdocu_descitem"><dl><dt id="dt:-a-autoselect"><b>-a, --autoselect</b></dt><dd>If Simics and Simics add-on packages are installed at the
+      same time, the script will automatically configure the
+      new Simics installation to use these add-on packages.</dd><dt id="dt:-b-batch"><b>-b, --batch</b></dt><dd>The script will act according to the command-line arguments
+      without asking any questions.</dd><dt id="dt:-h-help"><b>-h, --help</b></dt><dd>Display this help text.</dd><dt id="dt:-p-path-prefix-path"><b>-p PATH, --prefix PATH</b></dt><dd>Specify the directory in which to install the packages (defaults to the
+  last directory used, or <code>/opt/simics/simics-6/</code>).</dd><dt id="dt:-s-path-select-in-path"><b>-s PATH, --select-in PATH</b></dt><dd>Configure automatically the Simics installation in <code>PATH</code>
+      to use the Simics add-on packages being installed.</dd><dt id="dt:-u-path-upgrade-from-path"><b>-u PATH, --upgrade-from PATH</b></dt><dd>Re-use the configuration of an existing Simics installation
+      located in <code>PATH</code>.</dd><dt id="dt:-v-version"><b>-v, --version</b></dt><dd>Print the version of the script and the major version of Simics that
+      it can be used with.</dd><dt id="dt:-leave-tmp-files"><b>--leave-tmp-files</b></dt><dd>Do not delete the temporary files created during
+      installation.</dd></dl><p>
+    </p></dd>
+</dl><p></p><div class=chain>
+<a href="craff.html" class="previous">2.3 craff</a>
+<a href="project-setup.html" class="next">2.5 project-setup</a>
+</div>

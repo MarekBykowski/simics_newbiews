@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>legacy-clock-extension</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_leader.html" class="previous">leader</a>
+<a href="__rm_class_linux_analyzer.html" class="next">linux_analyzer</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_legacy-clock-extension">legacy-clock-extension</a></h1>
+<p>
+
+<a name="legacy-clock-extension"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>legacy-clock-extension</b> class is used to augment old style clocks and CPUs which only implements the <code>cycle</code> interface with functionality needed by Simics Core.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">event_delta, frequency</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>vtime.cycles</b> &lt;cycle-counter&gt; : cycle queue<br><b>vtime.ps</b> &lt;ps-clock&gt; : event queue (ps)<br><b>vtime</b> &lt;vtime&gt; : event handler</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:cell"><b><i>cell</i></b></dt><p><a name="__rm_attribute_legacy-clock-extension_cell"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Cell</dd></dl><p>
+</p><div class=chain>
+<a href="__rm_class_leader.html" class="previous">leader</a>
+<a href="__rm_class_linux_analyzer.html" class="next">linux_analyzer</a>
+</div>

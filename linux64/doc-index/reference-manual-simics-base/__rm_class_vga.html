@@ -1,0 +1,104 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>vga</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_usb_tablet.html" class="previous">usb_tablet</a>
+<a href="__rm_class_vga_pci.html" class="next">vga_pci</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_vga">vga</a></h1>
+<p>
+
+<a name="vga"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_vga">vga</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The VGA device implements a standard VGA graphics adapter. Most graphics modes are supported, but non-standard graphics settings may not work as on a real adapter. Modes known to work fairly well are: 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0xd, 0xe, 0xf, 0x10, 0x11, 0x12, 0x13 and modeX. Limitations: Not all possible video modes are tested. Read Mode 1 is not yet implemented. Panning is not supported. Split Screen is not supported. Blinking text is not supported. Blinking color in video mode 0xf is not supported. Underlining in MDA compatibility mode is not supported. Extend ninth bit in text mode is not implemented.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object, vga_text, vga_text_info, vga_update, video</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:attrib_next_index"><b><i>attrib_next_index</i></b></dt><p><a name="__rm_attribute_vga_attrib_next_index"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Decides whether the next access to an attribute controller register (through port 0x3C0) will contain an address or data.</dd></dl><p></p><dl><dt id="dt:attrib_next_reg"><b><i>attrib_next_reg</i></b></dt><p><a name="__rm_attribute_vga_attrib_next_reg"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The address of the attribute controller register designated for the next access.</dd></dl><p></p><dl><dt id="dt:attrib_regs"><b><i>attrib_regs</i></b></dt><p><a name="__rm_attribute_vga_attrib_regs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+(<i>Register-0</i> ... <i>Register-20</i>) is a list of attribute registers.</dd></dl><p></p><dl><dt id="dt:attrib_video_enable"><b><i>attrib_video_enable</i></b></dt><p><a name="__rm_attribute_vga_attrib_video_enable"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Decides whether video is enabled or not.</dd></dl><p></p><dl><dt id="dt:console"><b><i>console</i></b></dt><p><a name="__rm_attribute_vga_console"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Console object that must implement either gfx_con or gfx_console or both the serial_device and extended_serial interfaces.</dd></dl><p></p><dl><dt id="dt:crtc_next"><b><i>crtc_next</i></b></dt><p><a name="__rm_attribute_vga_crtc_next"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Integer register representing the next CRTC address.</dd></dl><p></p><dl><dt id="dt:crtc_regs"><b><i>crtc_regs</i></b></dt><p><a name="__rm_attribute_vga_crtc_regs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+(<i>Register-0</i> ... <i>Register-24</i>) is a list of CRTC registers.</dd></dl><p></p><dl><dt id="dt:dump_charset"><b><i>dump_charset</i></b></dt><p><a name="__rm_attribute_vga_dump_charset"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Write-only pseudo attribute. A write operation will print the current character map to the console if the vga device is in alpha-numeric mode.</dd></dl><p></p><dl><dt id="dt:gfx_latch"><b><i>gfx_latch</i></b></dt><p><a name="__rm_attribute_vga_gfx_latch"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiii]</code>.
+(<i>Latch-0</i> ... <i>Latch-4</i>) List of four graphics data controller latches.</dd></dl><p></p><dl><dt id="dt:gfx_next"><b><i>gfx_next</i></b></dt><p><a name="__rm_attribute_vga_gfx_next"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Represents the address of the graphics controller register designated for the next read/write access.</dd></dl><p></p><dl><dt id="dt:gfx_regs"><b><i>gfx_regs</i></b></dt><p><a name="__rm_attribute_vga_gfx_regs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+(<i>Register-0</i> ... <i>Register-8</i>) is a list of the nine graphics controller registers found in an VGA adapter.</dd></dl><p></p><dl><dt id="dt:h_cnt"><b><i>h_cnt</i></b></dt><p><a name="__rm_attribute_vga_h_cnt"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Horizontal counter (used for generating retrace signals).</dd></dl><p></p><dl><dt id="dt:image"><b><i>image</i></b></dt><p><a name="__rm_attribute_vga_image"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Image object containing the VRAM.</dd></dl><p></p><dl><dt id="dt:memory_space"><b><i>memory_space</i></b></dt><p><a name="__rm_attribute_vga_memory_space"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Memory space to which the device is mapped. Needed for dynamic remapping.</dd></dl><p></p><dl><dt id="dt:misc_reg"><b><i>misc_reg</i></b></dt><p><a name="__rm_attribute_vga_misc_reg"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Miscellaneous output register.</dd></dl><p></p><dl><dt id="dt:pel_addr"><b><i>pel_addr</i></b></dt><p><a name="__rm_attribute_vga_pel_addr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+PEL address register.</dd></dl><p></p><dl><dt id="dt:pel_mask"><b><i>pel_mask</i></b></dt><p><a name="__rm_attribute_vga_pel_mask"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+PEL mask register.</dd></dl><p></p><dl><dt id="dt:pel_next_color"><b><i>pel_next_color</i></b></dt><p><a name="__rm_attribute_vga_pel_next_color"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Next color in access to PEL data register (read, green, or blue).</dd></dl><p></p><dl><dt id="dt:pel_pal"><b><i>pel_pal</i></b></dt><p><a name="__rm_attribute_vga_pel_pal"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iii]{256}]</code>.
+((<i>red</i>, <i>green</i>, <i>blue</i>) ... (<i>red</i>, <i>green</i>, <i>blue</i>)) List of 256 colors, each a tuple of red, green, and blue.</dd></dl><p></p><dl><dt id="dt:ramdac_rw_state"><b><i>ramdac_rw_state</i></b></dt><p><a name="__rm_attribute_vga_ramdac_rw_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+RAMDAC read/write state.</dd></dl><p></p><dl><dt id="dt:redraw"><b><i>redraw</i></b></dt><p><a name="__rm_attribute_vga_redraw"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>any</code>.
+Forces a complete update when set.</dd></dl><p></p><dl><dt id="dt:refresh_based_on_virtual_time"><b><i>refresh_based_on_virtual_time</i></b></dt><p><a name="__rm_attribute_vga_refresh_based_on_virtual_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, then the refresh rate will refresh the screen based on virtual time, otherwise the refresh will be based on real time. Real time is the default.</dd></dl><p></p><dl><dt id="dt:refresh_rate"><b><i>refresh_rate</i></b></dt><p><a name="__rm_attribute_vga_refresh_rate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Refresh rate (in hertz). Set to 0 to disable screen refresh</dd></dl><p></p><dl><dt id="dt:seq_next"><b><i>seq_next</i></b></dt><p><a name="__rm_attribute_vga_seq_next"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Represents the address of the sequence register designated for the next read/write access.</dd></dl><p></p><dl><dt id="dt:seq_regs"><b><i>seq_regs</i></b></dt><p><a name="__rm_attribute_vga_seq_regs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+(<i>Register-0</i> ... <i>Register-4</i>) is a list of sequence registers found in the VGA adapter.</dd></dl><p></p><dl><dt id="dt:text_page"><b><i>text_page</i></b></dt><p><a name="__rm_attribute_vga_text_page"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[s*]</code> or <code>nil</code>.
+A list representation (one line per element) of the text mode contents.</dd></dl><p></p><dl><dt id="dt:text_refresh_rate"><b><i>text_refresh_rate</i></b></dt><p><a name="__rm_attribute_vga_text_refresh_rate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Rate (in hertz) of virtual time that VGA text data is sent to the console. Set to 0 to disable text refresh</dd></dl><p></p><dl><dt id="dt:v_cnt"><b><i>v_cnt</i></b></dt><p><a name="__rm_attribute_vga_v_cnt"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Vertical counter (used for generating retrace signals).</dd></dl><p></p><dl><dt id="dt:vga_memory"><b><i>vga_memory</i></b></dt><p><a name="__rm_attribute_vga_vga_memory"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>data</code>.
+Contains the VGA memory (256 KB of data).</dd></dl><p></p><dl><dt id="dt:view_size_x"><b><i>view_size_x</i></b></dt><p><a name="__rm_attribute_vga_view_size_x"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+With of the internal cache.</dd></dl><p></p><dl><dt id="dt:view_size_y"><b><i>view_size_y</i></b></dt><p><a name="__rm_attribute_vga_view_size_y"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Height of the internal cache.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_vga_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_vga_gt_.redraw">redraw</a></b></td><td class="jdocu_noborder">redraw display</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_vga_gt_.refresh-rate">refresh-rate</a></b></td><td class="jdocu_noborder">set refresh rate for the display</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_vga_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_vga_gt_.text-dump">text-dump</a></b></td><td class="jdocu_noborder">print text contents of display</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_vga_gt_.wait-for-string">wait-for-string</a></b></td><td class="jdocu_noborder">wait for substring in text mode</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_usb_tablet.html" class="previous">usb_tablet</a>
+<a href="__rm_class_vga_pci.html" class="next">vga_pci</a>
+</div>

@@ -1,0 +1,105 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sample_802_15_4_transceiver</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sample-x86-isa-extension.html" class="previous">sample-x86-isa-extension</a>
+<a href="__rm_class_sample_device_cpp.html" class="next">sample_device_cpp</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sample_802_15_4_transceiver">sample_802_15_4_transceiver</a></h1>
+<p>
+
+<a name="sample_802_15_4_transceiver"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_sample-802-15-4-transceiver">sample-802-15-4-transceiver</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">a sample IEEE 802.15.4 transceiver
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ieee_802_15_4_receiver, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.regs</b> (bank_instrumentation_subscribe, instrumentation_order, int_register, io_memory, register_view)<br><b>port.reset</b> (signal)</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:channel_num"><b><i>channel_num</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_channel_num"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The channel number.</dd></dl><p></p><dl><dt id="dt:channel_page"><b><i>channel_page</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_channel_page"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The channel page.</dd></dl><p></p><dl><dt id="dt:contention_count"><b><i>contention_count</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_contention_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Contention failure times.</dd></dl><p></p><dl><dt id="dt:contention_target"><b><i>contention_target</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_contention_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The NumberOutput for contention times.
+<p>
+Required interfaces: <code>uint64_state</code>.</p></dd></dl><p></p><dl><dt id="dt:crc"><b><i>crc</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_crc"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The CRC status.</dd></dl><p></p><dl><dt id="dt:ep"><b><i>ep</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_ep"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The endpoint that the device will be connected to.
+<p>
+Required interfaces: <code>ieee_802_15_4_link</code>.</p></dd></dl><p></p><dl><dt id="dt:id"><b><i>id</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+node id</dd></dl><p></p><dl><dt id="dt:id_target"><b><i>id_target</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_id_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The NumberOutput for ID.
+<p>
+Required interfaces: <code>uint64_state</code>.</p></dd></dl><p></p><dl><dt id="dt:lost_frames_count"><b><i>lost_frames_count</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_lost_frames_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of lost frames.</dd></dl><p></p><dl><dt id="dt:pkt_lost_target"><b><i>pkt_lost_target</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_pkt_lost_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The NumberOutput for lost packets.
+<p>
+Required interfaces: <code>uint64_state</code>.</p></dd></dl><p></p><dl><dt id="dt:pkt_recv_target"><b><i>pkt_recv_target</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_pkt_recv_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The NumberOutput for received packets.
+<p>
+Required interfaces: <code>uint64_state</code>.</p></dd></dl><p></p><dl><dt id="dt:pkt_sent_target"><b><i>pkt_sent_target</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_pkt_sent_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+The NumberOutput for sent packets.
+<p>
+Required interfaces: <code>uint64_state</code>.</p></dd></dl><p></p><dl><dt id="dt:received_frames_count"><b><i>received_frames_count</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_received_frames_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of received frames.</dd></dl><p></p><dl><dt id="dt:sent_frames_count"><b><i>sent_frames_count</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_sent_frames_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The number of sent frames.</dd></dl><p></p><dl><dt id="dt:tx_buffer"><b><i>tx_buffer</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_tx_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+A buffer for transmit FIFO.</dd></dl><p></p><dl><dt id="dt:tx_buffer_pos"><b><i>tx_buffer_pos</i></b></dt><p><a name="__rm_attribute_sample_802_15_4_transceiver_tx_buffer_pos"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The next pos to fill in the buffer.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.rm-rssi">rm-rssi</a></b></td><td class="jdocu_noborder">remove RSSI value</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.set-contention-ratio">set-contention-ratio</a></b></td><td class="jdocu_noborder">set contention-ratio</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.set-rssi">set-rssi</a></b></td><td class="jdocu_noborder">set RSSI value</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.set-rssi-always-drop">set-rssi-always-drop</a></b></td><td class="jdocu_noborder">set rssi-always-drop</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.set-rssi-random-drop">set-rssi-random-drop</a></b></td><td class="jdocu_noborder">set rssi-random-drop</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.set-rssi-random-drop-ratio">set-rssi-random-drop-ratio</a></b></td><td class="jdocu_noborder">set rssi-random-drop-ratio</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_802_15_4_transceiver_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sample-x86-isa-extension.html" class="previous">sample-x86-isa-extension</a>
+<a href="__rm_class_sample_device_cpp.html" class="next">sample_device_cpp</a>
+</div>

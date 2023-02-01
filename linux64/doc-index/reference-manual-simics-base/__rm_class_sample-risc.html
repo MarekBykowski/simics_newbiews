@@ -1,0 +1,78 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sample-risc</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sample-memhier.html" class="previous">sample-memhier</a>
+<a href="__rm_class_sample-risc-core.html" class="next">sample-risc-core</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sample-risc">sample-risc</a></h1>
+<p>
+
+<a name="sample-risc"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_sample-risc">sample-risc</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The sample RISC (Reduced Instructions Set Computer/Cosimulator).
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">breakpoint_change, conf_object, cycle, direct_memory_update, event_delta, execute, frequency, frequency_listener, log_object, simulator_cache, stall, step</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>vtime.cycles</b> &lt;cycle-counter&gt; : cycle queue<br><b>vtime.ps</b> &lt;ps-clock&gt; : event queue (ps)<br><b>vtime</b> &lt;vtime&gt; : event handler</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">cpu_frequency (simple_dispatcher) : Broadcasts changes in CPU frequency.</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:cached_pages"><b><i>cached_pages</i></b></dt><p><a name="__rm_attribute_sample-risc_cached_pages"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[oiii]*]</code>.
+Cached pages; for debugging/testing purposes only</dd></dl><p></p><dl><dt id="dt:cell"><b><i>cell</i></b></dt><p><a name="__rm_attribute_sample-risc_cell"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Cell</dd></dl><p></p><dl><dt id="dt:current_risc_core"><b><i>current_risc_core</i></b></dt><p><a name="__rm_attribute_sample-risc_current_risc_core"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Currently active core used for commands that normally target the current processor.</dd></dl><p></p><dl><dt id="dt:cycles"><b><i>cycles</i></b></dt><p><a name="__rm_attribute_sample-risc_cycles"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Time measured in cycles from machine start.</dd></dl><p></p><dl><dt id="dt:do_not_schedule"><b><i>do_not_schedule</i></b></dt><p><a name="__rm_attribute_sample-risc_do_not_schedule"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to TRUE to prevent this object from being scheduled by the cell.</dd></dl><p></p><dl><dt id="dt:freq_mhz"><b><i>freq_mhz</i></b></dt><p><a name="__rm_attribute_sample-risc_freq_mhz"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>float</code> or <code>integer</code>.
+Processor clock frequency in MHz.</dd></dl><p></p><dl><dt id="dt:frequency"><b><i>frequency</i></b></dt><p><a name="__rm_attribute_sample-risc_frequency"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>, <code>[os]</code>, or <code>object</code>.
+Processor clock frequency in Hz, as a rational number [numerator, denominator].</dd></dl><p></p><dl><dt id="dt:step_queue"><b><i>step_queue</i></b></dt><p><a name="__rm_attribute_sample-risc_step_queue"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[osaii]*]</code>.
+((<i>object</i>, <i>evclass</i>, <i>value</i>, <i>slot</i>, <i>step</i>)*).</dd></dl><p></p><dl><dt id="dt:steps"><b><i>steps</i></b></dt><p><a name="__rm_attribute_sample-risc_steps"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Time measured in steps from machine start.</dd></dl><p></p><dl><dt id="dt:time_queue"><b><i>time_queue</i></b></dt><p><a name="__rm_attribute_sample-risc_time_queue"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[osaii]*]</code>.
+((<i>object</i>, <i>evclass</i>, <i>value</i>, <i>slot</i>, <i>step</i>)*).</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface cycle</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-break-cycle">bp-break-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-break-time">bp-break-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-run-until-cycle">bp-run-until-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-run-until-time">bp-run-until-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-trace-cycle">bp-trace-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-trace-time">bp-trace-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-wait-for-cycle">bp-wait-for-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.bp-wait-for-time">bp-wait-for-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.cycle-break">cycle-break</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.cycle-break-absolute">cycle-break-absolute</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.print-time">print-time</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.wait-for-cycle">wait-for-cycle</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_gt_.wait-for-time">wait-for-time</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface step</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.bp-break-step">bp-break-step</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.bp-run-until-step">bp-run-until-step</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.bp-trace-step">bp-trace-step</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.bp-wait-for-step">bp-wait-for-step</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.force-step-instruction">force-step-instruction</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.step-break">step-break</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.step-break-absolute">step-break-absolute</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_step_gt_.wait-for-step">wait-for-step</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample-risc_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample-risc_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sample-memhier.html" class="previous">sample-memhier</a>
+<a href="__rm_class_sample-risc-core.html" class="next">sample-risc-core</a>
+</div>

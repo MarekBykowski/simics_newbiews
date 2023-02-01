@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>cell</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_cdrom_image.html" class="previous">cdrom_image</a>
+<a href="__rm_class_cl-pd6729.html" class="next">CL-PD6729</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_cell">cell</a></h1>
+<p>
+
+<a name="cell"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">A simulation cell, representing an autonomous partition of the configuration and able to be simulated in parallel with other cells. See the "Multithreading" section in the Introduction chapter of the <em>API Reference Manual</em>.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">breakpoint_trigger, cell_inspection, concurrency_group, conf_object, dist_control_node, link_route, log_object, sync_node, temporal_state</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>ps</b> &lt;ps-clock&gt; : ps clock</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">breakpoint_change (simple_dispatcher) : Port for registering breakpoint listeners.</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:clocks"><b><i>clocks</i></b></dt><p><a name="__rm_attribute_cell_clocks"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[o*]</code>.
+Clock objects that belong to the cell. </dd></dl><p></p><dl><dt id="dt:current_cycle_obj"><b><i>current_cycle_obj</i></b></dt><p><a name="__rm_attribute_cell_current_cycle_obj"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Current cycle queue in this cell</dd></dl><p></p><dl><dt id="dt:current_processor"><b><i>current_processor</i></b></dt><p><a name="__rm_attribute_cell_current_processor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Current processor in this cell</dd></dl><p></p><dl><dt id="dt:current_step_obj"><b><i>current_step_obj</i></b></dt><p><a name="__rm_attribute_cell_current_step_obj"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Current step queue in this cell</dd></dl><p></p><dl><dt id="dt:leader"><b><i>leader</i></b></dt><p><a name="__rm_attribute_cell_leader"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Leader object</dd></dl><p></p><dl><dt id="dt:machine_sync_events"><b><i>machine_sync_events</i></b></dt><p><a name="__rm_attribute_cell_machine_sync_events"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[osaai]*]</code>.
+((<i>object</i>, <i>evclass</i>, <i>value</i>, <i>obsolete</i> <i>when</i>)*). Pending machine sync events.</dd></dl><p></p><dl><dt id="dt:max_time_span_ps"><b><i>max_time_span_ps</i></b></dt><p><a name="__rm_attribute_cell_max_time_span_ps"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Upper limit of the allowed global time difference for CPUs simulated simultaneously using multiple host threads, or 0 if no limit is desired.</dd></dl><p></p><dl><dt id="dt:schedule_list"><b><i>schedule_list</i></b></dt><p><a name="__rm_attribute_cell_schedule_list"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+Execute objects that belong to the cell, in scheduling order</dd></dl><p></p><dl><dt id="dt:scheduled_object"><b><i>scheduled_object</i></b></dt><p><a name="__rm_attribute_cell_scheduled_object"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Currently scheduled object for this cell</dd></dl><p></p><dl><dt id="dt:sync_domain"><b><i>sync_domain</i></b></dt><p><a name="__rm_attribute_cell_sync_domain"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Synchronization domain for this cell</dd></dl><p></p><dl><dt id="dt:time_quantum"><b><i>time_quantum</i></b></dt><p><a name="__rm_attribute_cell_time_quantum"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Length of the time quantum in seconds, or 0 if not specified.</dd></dl><p></p><dl><dt id="dt:time_quantum_ps"><b><i>time_quantum_ps</i></b></dt><p><a name="__rm_attribute_cell_time_quantum_ps"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Length of the time quantum in picoseconds, or 0 if not specified.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_cell_gt_.cpu-switch-time">cpu-switch-time</a></b></td><td class="jdocu_noborder">get/set the time quantum for a given cell</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_cell_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_cell_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_cdrom_image.html" class="previous">cdrom_image</a>
+<a href="__rm_class_cl-pd6729.html" class="next">CL-PD6729</a>
+</div>

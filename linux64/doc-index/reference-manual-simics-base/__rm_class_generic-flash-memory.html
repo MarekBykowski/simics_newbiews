@@ -1,0 +1,107 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>generic-flash-memory</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_gdb-remote.html" class="previous">gdb-remote</a>
+<a href="__rm_class_generic-mmc-card.html" class="next">generic-mmc-card</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_generic-flash-memory">generic-flash-memory</a></h1>
+<p>
+
+<a name="generic-flash-memory"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_generic-flash-memory">generic-flash-memory</a>
+</dd>
+<dt class="jdocu_descitem"><b>Aliases</b></dt><dd class="jdocu_descitem">new-flash-memory</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The generic-flash-memory class simulates different types of flash-memory depending on which attributes are set.
+ Refer to [simics]/src/extensions/apps-python/flash_memory.py for a complete description of the features implemented and the flash chips that are pre-configured.
+<p>
+</p><dl><dt id="dt:limitations"><b>Limitations</b></dt><dd><ul>  <li>Many vendor-specific commands are not implemented.</li>  <li>Erase suspend will complete the erase, and resume      will then simply be ignored.</li></ul></dd></dl><p></p></dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, translator</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>port.Reset</b> (signal) : Reset the flash<br><b>port.io</b> (io_memory)<br><b>port.wren</b> (signal) : Enable/Disable Write to flash sector</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:accept_smaller_reads"><b><i>accept_smaller_reads</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_accept_smaller_reads"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Obsolete, do not use.</dd></dl><p></p><dl><dt id="dt:accept_smaller_writes"><b><i>accept_smaller_writes</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_accept_smaller_writes"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Obsolete, do not use.</dd></dl><p></p><dl><dt id="dt:amd_ignore_cmd_address"><b><i>amd_ignore_cmd_address</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_amd_ignore_cmd_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If 1, the address will be ignored when parsing AMD commands. Default is 0.</dd></dl><p></p><dl><dt id="dt:amd_lock_register"><b><i>amd_lock_register</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_amd_lock_register"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>; <b>persistent</b> attribute.
+AMD lock register contents.</dd></dl><p></p><dl><dt id="dt:amd_ppb_lock_bit"><b><i>amd_ppb_lock_bit</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_amd_ppb_lock_bit"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>; <b>persistent</b> attribute.
+AMD PPB lock bit</dd></dl><p></p><dl><dt id="dt:big_endian"><b><i>big_endian</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_big_endian"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If 1, the flash device will behave as a big endian device. If 0, it will behave as a little endian device. Default is 0.</dd></dl><p></p><dl><dt id="dt:bus_width"><b><i>bus_width</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_bus_width"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Total width (in bits) of the data path connected to the flash device.</dd></dl><p></p><dl><dt id="dt:busy_signal_targets"><b><i>busy_signal_targets</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_busy_signal_targets"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[n|o|[os]*]</code>.
+(dst_object, dst_signal)* The destination device and signal name to connect the busy signal of the chips to. The destinations should implement the <code>signal</code> interface. Without a timing model, the device will never raise the busy signal.</dd></dl><p></p><dl><dt id="dt:cfi_query"><b><i>cfi_query</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_cfi_query"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i+]</code>, <code>data</code>, or <code>nil</code>.
+CFI query structure (if the device is CFI compatible). Default is none (device is not CFI compatible).</dd></dl><p></p><dl><dt id="dt:chip_mode"><b><i>chip_mode</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_chip_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[s*]</code>.
+Current state for all chips.</dd></dl><p></p><dl><dt id="dt:chip_write_buffer"><b><i>chip_write_buffer</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_chip_write_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[d|n*]</code>.
+Current write buffer for all chips.</dd></dl><p></p><dl><dt id="dt:chip_write_buffer_current_count"><b><i>chip_write_buffer_current_count</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_chip_write_buffer_current_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Current write buffer count for all chips.</dd></dl><p></p><dl><dt id="dt:chip_write_buffer_start_address"><b><i>chip_write_buffer_start_address</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_chip_write_buffer_start_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Current write buffer start address for all chips.</dd></dl><p></p><dl><dt id="dt:command_set"><b><i>command_set</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_command_set"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If no CFI structure is provided, this attribute should be set to indicate the command-set to use. Default is 0 (invalid command-set).</dd></dl><p></p><dl><dt id="dt:device_id"><b><i>device_id</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_device_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i+]</code> or <code>integer</code>.
+Device ID/code as used in Intel identifier codes and AMD autoselect mode. Default is 0.</dd></dl><p></p><dl><dt id="dt:dyb_bits"><b><i>dyb_bits</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_dyb_bits"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>.
+AMD volatile (dynamic) section protection bits.</dd></dl><p></p><dl><dt id="dt:hardware_lock_status"><b><i>hardware_lock_status</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_hardware_lock_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>.
+Hardware lock status for all units (for Intel advanced lock system).</dd></dl><p></p><dl><dt id="dt:ignore_timing"><b><i>ignore_timing</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_ignore_timing"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Obsolete attribute since timing is not modeled. Kept for backward compatibility only.</dd></dl><p></p><dl><dt id="dt:intel_chip_erase"><b><i>intel_chip_erase</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_intel_chip_erase"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the flash device supports Intel chip erase command operations. If FALSE, Intel chip erase command is flagged as error. Default is FALSE.</dd></dl><p></p><dl><dt id="dt:intel_configuration"><b><i>intel_configuration</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_intel_configuration"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If 1, the flash device supports Intel configuration operations. If 0, Intel configuration operations are ignored. Default is 0.</dd></dl><p></p><dl><dt id="dt:intel_lock"><b><i>intel_lock</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_intel_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If 2, the flash device supports advanced lock/unlock/lock down operations. If 1, the flash device supports simple lock/unlock all operations. If 0, lock operations are ignored. Default is 0.</dd></dl><p></p><dl><dt id="dt:intel_program_verify"><b><i>intel_program_verify</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_intel_program_verify"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the flash device supports Intel program verify command operations. If FALSE, Intel program verify command is flagged as error. Default is FALSE.</dd></dl><p></p><dl><dt id="dt:intel_protection_program"><b><i>intel_protection_program</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_intel_protection_program"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If 1, the flash device supports Intel protection program operations. If 0, Intel protection program operations are ignored. Default is 0.</dd></dl><p></p><dl><dt id="dt:intel_write_buffer"><b><i>intel_write_buffer</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_intel_write_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If 1, the flash device supports Intel write buffer operations. If 0, Intel write buffer operations are ignored. Default is 0.</dd></dl><p></p><dl><dt id="dt:interleave"><b><i>interleave</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_interleave"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interleave (number of parallel flash memory chips).</dd></dl><p></p><dl><dt id="dt:lock_status"><b><i>lock_status</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_lock_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>.
+Lock status for all units.</dd></dl><p></p><dl><dt id="dt:manufacturer_id"><b><i>manufacturer_id</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_manufacturer_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Manufacturer ID/code as used in Intel identifier codes and AMD autoselect mode. Default is 0.</dd></dl><p></p><dl><dt id="dt:max_chip_width"><b><i>max_chip_width</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_max_chip_width"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Maximum data width (for example, specified as 16 for a x8/x16 capable device).</dd></dl><p></p><dl><dt id="dt:ppb_bits"><b><i>ppb_bits</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_ppb_bits"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>; <b>persistent</b> attribute.
+AMD non-volatile PPB section bits.</dd></dl><p></p><dl><dt id="dt:reset"><b><i>reset</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_reset"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+Set to 1 in order to reset the device.</dd></dl><p></p><dl><dt id="dt:storage_ram"><b><i>storage_ram</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_storage_ram"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+RAM object providing the backing store area.</dd></dl><p></p><dl><dt id="dt:strict_cmd_set"><b><i>strict_cmd_set</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_strict_cmd_set"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+If set to 1, warnings that the command-set is misused become errors. Default is 0.</dd></dl><p></p><dl><dt id="dt:unit_erase_time"><b><i>unit_erase_time</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_unit_erase_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Obsolete attribute since timing is not modeled. Kept for backward compatibility only.</dd></dl><p></p><dl><dt id="dt:unit_size"><b><i>unit_size</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_unit_size"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[i+]</code>.
+A list of block/sector sizes.</dd></dl><p></p><dl><dt id="dt:unit_status"><b><i>unit_status</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_unit_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i*]*]</code>.
+Status for all units.</dd></dl><p></p><dl><dt id="dt:write_buffer_size"><b><i>write_buffer_size</i></b></dt><p><a name="__rm_attribute_generic-flash-memory_write_buffer_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Write buffer size *in bytes* for write buffer commands. Default is 32 (standard value for Intel Strataflash®).</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface translator</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_translator_gt_.memory-map">memory-map</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic-flash-memory_gt_.accept-inquiries">accept-inquiries</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — set whether or not to handle inquiry accesses</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic-flash-memory_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_generic-flash-memory_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_gdb-remote.html" class="previous">gdb-remote</a>
+<a href="__rm_class_generic-mmc-card.html" class="next">generic-mmc-card</a>
+</div>

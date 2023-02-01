@@ -1,0 +1,76 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>sample_device_cpp</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_sample_802_15_4_transceiver.html" class="previous">sample_802_15_4_transceiver</a>
+<a href="__rm_class_sample_device_cpp_with_register_as_data.html" class="next">sample_device_cpp_with_register_as_data</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_sample_device_cpp">sample_device_cpp</a></h1>
+<p>
+
+<a name="sample_device_cpp"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_sample-device-c++">sample-device-c++</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This is a sample Simics device written in C++.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, signal</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>bank.b</b> &lt;index-map&gt; : internal - provides object arrays<br><b>bank.b[0..1]</b> (bank_instrumentation_subscribe, instrumentation_order, register_view, register_view_read_only, transaction) : sample bank<br><b>sample_port</b> &lt;index-map&gt; : internal - provides object arrays<br><b>sample_port[0..1]</b> (ethernet_common, signal) : sample_device_cpp port</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:x_v"><b><i>X_v</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_X_v"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current value of X</dd></dl><p></p><dl><dt id="dt:y_v"><b><i>Y_v</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_Y_v"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The current value of Y</dd></dl><p></p><dl><dt id="dt:blob"><b><i>blob</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_blob"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+Some data</dd></dl><p></p><dl><dt id="dt:flags"><b><i>flags</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_flags"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[bb]</code>.
+The flags</dd></dl><p></p><dl><dt id="dt:hidden"><b><i>hidden</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_hidden"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+A hidden value</dd></dl><p></p><dl><dt id="dt:implementation_status"><b><i>implementation_status</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_implementation_status"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+A description</dd></dl><p></p><dl><dt id="dt:mode"><b><i>mode</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The current mode</dd></dl><p></p><dl><dt id="dt:name0"><b><i>name0</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_name0"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The first name</dd></dl><p></p><dl><dt id="dt:name1"><b><i>name1</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_name1"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The first name</dd></dl><p></p><dl><dt id="dt:other"><b><i>other</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_other"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Another object</dd></dl><p></p><dl><dt id="dt:value"><b><i>value</i></b></dt><p><a name="__rm_attribute_sample_device_cpp_value"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+A value</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_device_cpp_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_sample_device_cpp_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_sample_802_15_4_transceiver.html" class="previous">sample_802_15_4_transceiver</a>
+<a href="__rm_class_sample_device_cpp_with_register_as_data.html" class="next">sample_device_cpp_with_register_as_data</a>
+</div>

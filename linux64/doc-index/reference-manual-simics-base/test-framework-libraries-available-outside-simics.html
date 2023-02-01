@@ -1,0 +1,146 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>7.3 Test Framework Libraries Available Outside Simics</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="defining-tests.html" class="previous">7.2 Defining Test Suites</a>
+<a href="test-framework-libraries-available-in-simics-tests.html" class="next">7.4 Test Framework Libraries Available in Simics Tests</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="test-framework.html">7 Test Framework</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Test-Framework-Libraries-Available-Outside-Simics">7.3 Test Framework Libraries Available Outside Simics</a></h1>
+<p>
+
+These are libraries you can use in your <code>tests.py</code> file.
+</p><p>
+</p><h2 class="jdocu"><a name="__pymodvptest_utils">7.3.1 vptest_utils</a></h2>
+<p>
+
+
+ 
+ Python API for virtual platform test.
+ 
+</p><h3 class="jdocu"><a class="not-numbered" name="__pyfunvptest_utils.add_checkpoint_tests">add_checkpoint_tests</a></h3>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">add_checkpoint_tests(suite, target, script, start, duration, variation = '', assert_objs = ['cpu0'], extra_args = [], assert_time = 10, check_cycles_and_steps_in_sync = True)</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Add tests to check that reading and writing checkpoints does not change the
+ behavior of a target system.
+<p>
+ The test does this by running Simics several times:
+ </p><ol>
+ <li>first load the target, run to time start, and then collect the
+     state-assertion file while running for duration cycles,</li>
+ <li>then save a checkpoint at time start and run for duration cycles,
+     comparing against the state-assertion file,</li>
+ <li>then load the checkpoint from the previous step, write a new checkpoint
+     and run for duration cycles, comparing against the state-assertion file,
+     </li>
+ <li>then load the new checkpoint and run for duration cycles comparing
+     against the state-assertion file,</li>
+ <li>finally a test is run which runs up to time start and then writes several
+     checkpoints with duration cycles between them.</li>
+ </ol>
+<p>
+ Arguments:
+ </p><dl><dt id="dt:suite"><b>suite</b></dt><dd>the test suite to add the tests to</dd><dt id="dt:target"><b>target</b></dt><dd>the name of the target directory in <code>[project]/targets</code></dd><dt id="dt:script"><b>script</b></dt><dd>the script in that directory which creates and sets up the
+     target</dd><dt id="dt:start"><b>start</b></dt><dd>the time the checks performed by the tests should be started ad, in
+     steps</dd><dt id="dt:duration"><b>duration</b></dt><dd>the number of steps past the start time the tests should check the state
+     of the system</dd><dt id="dt:variation"><b>variation</b></dt><dd>a name for this variation of testing the target, defaults to
+     the empty string</dd><dt id="dt:assert_objs"><b>assert_objs</b></dt><dd>a list of objects to use in the state assertion, defaults to
+     ["cpu0"]</dd><dt id="dt:extra_args"><b>extra_args</b></dt><dd>extra arguments passed to each Simics process started by the
+     test, defaults to []</dd><dt id="dt:assert_time"><b>assert_time</b></dt><dd>the interval in steps between state-assertion saves, defaults
+     to 10</dd><dt id="dt:check_cycles_and_steps_in_sync"><b>check_cycles_and_steps_in_sync</b></dt><dd>if True the tests check that the cycle and step counts remain in sync,
+     defaults to True</dd></dl><p></p></dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyfunvptest_utils.add_random_command_tests">add_random_command_tests</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">add_random_command_tests(suite, target, script, name = None, project_only = False, disabled_commands = [], disabled_classes = [], disabled_interfaces = [])</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Add tests to check all the commands provided by the virtual platform can
+ be run properly.
+<p>
+ Arguments:
+ </p><dl><dt id="dt:suite-2"><b>suite</b></dt><dd>the test suite to add the tests to</dd><dt id="dt:target-2"><b>target</b></dt><dd>the name of the target directory in <code>[project]/targets</code></dd><dt id="dt:script-2"><b>script</b></dt><dd>the script in that directory which creates and sets up the
+     target</dd><dt id="dt:name"><b>name</b></dt><dd>the test name, defaults to None</dd><dt id="dt:project_only"><b>project_only</b></dt><dd>if True the tests will test the commands of local modules, defaults
+     to False</dd><dt id="dt:disabled_commands"><b>disabled_commands</b></dt><dd>the commands which will be ignored by the test, defaults to []</dd><dt id="dt:disabled_classes"><b>disabled_classes</b></dt><dd>the classes which will be ignored by the test, defaults to []</dd><dt id="dt:disabled_interfaces"><b>disabled_interfaces</b></dt><dd>the interfaces which will be ignored by the test, defaults to []</dd></dl><p></p></dd>
+</dl><p>
+</p><h2 class="jdocu"><a name="__pymodtestparams">7.3.2 testparams</a></h2>
+<p>
+
+
+ 
+ Information about the test environment and some test utilities.
+ 
+</p><h3 class="jdocu"><a class="not-numbered" name="__pyfuntestparams.fail">fail</a></h3>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">fail(reason = '')</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Raise a <b>TestFailure</b> exception.
+<p>
+ Argument:
+ </p><dl><dt id="dt:reason"><b>reason</b></dt><dd>a string containing the reason for the failure, passed to the
+     <b>TestFailure</b> constructor</dd></dl><p></p></dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyfuntestparams.timeout">timeout</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">timeout()</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Raise a <b>TestTimeout</b> exception.
+ </dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyfuntestparams.simics_base_path">simics_base_path</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">simics_base_path()</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Return the absolute path to the Simics base package.
+ </dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyfuntestparams.project_path">project_path</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">project_path()</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Returns the absolute path to the project under test. Tests added with
+ suite.add_simics_test() and suite.add_simics_tests() run Simics in
+ this project.
+ </dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyfuntestparams.test_root">test_root</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">test_root()</pre><p></p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Return the absolute path to the simics-base test directory.
+ </dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyclasstestparams.TestFailure">TestFailure</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Superclasses</dt><dd class="jdocu_descitem">builtins.Exception</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Exception which test functions should raise to indicate test failure.
+ </dd>
+</dl><p></p><h3 class="jdocu"><a class="not-numbered" name="__pyclasstestparams.TestTimeout">TestTimeout</a></h3>
+<p></p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Superclasses</dt><dd class="jdocu_descitem">builtins.Exception</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Exception which test functions should raise to indicate timeout.
+ </dd>
+</dl><p>
+
+</p><div class=chain>
+<a href="defining-tests.html" class="previous">7.2 Defining Test Suites</a>
+<a href="test-framework-libraries-available-in-simics-tests.html" class="next">7.4 Test Framework Libraries Available in Simics Tests</a>
+</div>

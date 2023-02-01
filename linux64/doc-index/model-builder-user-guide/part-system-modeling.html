@@ -1,0 +1,46 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>IV Creating Virtual Systems</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="modeling-ethernet-devices.html" class="previous">23 Modeling Ethernet Devices</a>
+<a href="memory-space.html" class="next">24 Memory Spaces</a>
+</div>
+<div class=path>
+<a href="index.html">Model Builder User's Guide</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="part-system-modeling">IV Creating Virtual Systems</a></h1>
+<p>
+
+
+ 
+
+
+
+</p><ul class="subsections"><li><a href="memory-space.html">24 Memory Spaces</a></li><li><a href="creating-configurations.html">25 Components</a></li><li><a href="adding-flash-to-a-system.html">26 Adding Flash to a System</a></li><li><a href="software-domains.html">27 Software Domains</a></li><li><a href="machine-creation.html">28 System Configurations</a></li></ul><div class=chain>
+<a href="modeling-ethernet-devices.html" class="previous">23 Modeling Ethernet Devices</a>
+<a href="memory-space.html" class="next">24 Memory Spaces</a>
+</div>

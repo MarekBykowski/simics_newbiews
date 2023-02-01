@@ -1,0 +1,105 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>DEC21140A</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_dec21041.html" class="previous">DEC21041</a>
+<a href="__rm_class_dec21140a-dml.html" class="next">DEC21140A-dml</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_DEC21140A">DEC21140A</a></h1>
+<p>
+
+<a name="DEC21140A"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_DEC21140A">DEC21140A</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The DEC21140A is a fast Ethernet LAN controller providing a direct interface to the PCI bus. The DEC21140A interfaces to the host processor by using on-chip control and status registers (CSRs) and a shared host memory area, set up mainly during initialization.
+<p>
+Current limitations:
+</p><ul><li>Inquiry accesses are not supported.</li><li>Only aligned, 32-bits CSR accesses are supported.</li><li>Large incoming frames will not be split over several buffers, but dropped.</li><li>Mac address filtering is not supported.</li></ul>
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ethernet_common, io_memory, log_object, pci_device</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:add_crc_on_inject"><b><i>add_crc_on_inject</i></b></dt><p><a name="__rm_attribute_DEC21140A_add_crc_on_inject"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Frames injected using the 'inject_packet' will get a correctly calculated CRC added at the end when this attribute is set to 1 (default). When set to 0, the user has to supply a CRC field with the injected frame. Note that you must always provide room for the CRC field, even when this attribute is set to 1.</dd></dl><p></p><dl><dt id="dt:anar"><b><i>anar</i></b></dt><p><a name="__rm_attribute_DEC21140A_anar"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:aner"><b><i>aner</i></b></dt><p><a name="__rm_attribute_DEC21140A_aner"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:anlpar"><b><i>anlpar</i></b></dt><p><a name="__rm_attribute_DEC21140A_anlpar"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:bmcr"><b><i>bmcr</i></b></dt><p><a name="__rm_attribute_DEC21140A_bmcr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:bmsr"><b><i>bmsr</i></b></dt><p><a name="__rm_attribute_DEC21140A_bmsr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:config_register_info"><b><i>config_register_info</i></b></dt><p><a name="__rm_attribute_DEC21140A_config_register_info"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[isii]*]</code>.
+Register info for all registered configuration registers. The format for each entry is (offset, name, size, write-mask).</dd></dl><p></p><dl><dt id="dt:config_registers"><b><i>config_registers</i></b></dt><p><a name="__rm_attribute_DEC21140A_config_registers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{64}]</code>.
+The 64 PCI configuration registers, each 32 bits in size.</dd></dl><p></p><dl><dt id="dt:cs_conf"><b><i>cs_conf</i></b></dt><p><a name="__rm_attribute_DEC21140A_cs_conf"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:csrs"><b><i>csrs</i></b></dt><p><a name="__rm_attribute_DEC21140A_csrs"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Control and status registers.</dd></dl><p></p><dl><dt id="dt:current_rx_descriptor"><b><i>current_rx_descriptor</i></b></dt><p><a name="__rm_attribute_DEC21140A_current_rx_descriptor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Receive address.</dd></dl><p></p><dl><dt id="dt:current_tx_descriptor"><b><i>current_tx_descriptor</i></b></dt><p><a name="__rm_attribute_DEC21140A_current_tx_descriptor"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Transmit address.</dd></dl><p></p><dl><dt id="dt:ether"><b><i>ether</i></b></dt><p><a name="__rm_attribute_DEC21140A_ether"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>string</code>.
+Ethernet (MAC) address.</dd></dl><p></p><dl><dt id="dt:expansion_rom"><b><i>expansion_rom</i></b></dt><p><a name="__rm_attribute_DEC21140A_expansion_rom"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[oii]</code> or <code>nil</code>.
+ROM object, map size, and map function number for the Expansion ROM.</dd></dl><p></p><dl><dt id="dt:inject_packet"><b><i>inject_packet</i></b></dt><p><a name="__rm_attribute_DEC21140A_inject_packet"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>data</code>.
+Attribute used to send a packet to the network device. Writing this attribute at any time injects a new packet into the device (without involving the network simulation). Injecting a packet copies the packet data, allowing the caller to reuse or dispose of the buffer used for creating the packet, after the attribute is written.</dd></dl><p></p><dl><dt id="dt:interrupt_pin"><b><i>interrupt_pin</i></b></dt><p><a name="__rm_attribute_DEC21140A_interrupt_pin"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iiii]</code>.
+State of the interrupt pin.</dd></dl><p></p><dl><dt id="dt:link"><b><i>link</i></b></dt><p><a name="__rm_attribute_DEC21140A_link"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The Ethernet link that the network device is connected to.</dd></dl><p></p><dl><dt id="dt:mac_address"><b><i>mac_address</i></b></dt><p><a name="__rm_attribute_DEC21140A_mac_address"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{6}]</code>, <code>string</code>, or <code>nil</code>.
+Ethernet (MAC) address of the network interface.</dd></dl><p></p><dl><dt id="dt:mappings"><b><i>mappings</i></b></dt><p><a name="__rm_attribute_DEC21140A_mappings"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[i{5:8}]|[iiiiiiiio|nii]*]</code>.
+List of all current PCI IO and memory mappings.</dd></dl><p></p><dl><dt id="dt:mode"><b><i>mode</i></b></dt><p><a name="__rm_attribute_DEC21140A_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:model_crc"><b><i>model_crc</i></b></dt><p><a name="__rm_attribute_DEC21140A_model_crc"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Deprecated. Do not use.</dd></dl><p></p><dl><dt id="dt:network"><b><i>network</i></b></dt><p><a name="__rm_attribute_DEC21140A_network"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Obsolete attribute. Use link instead.</dd></dl><p></p><dl><dt id="dt:pci_bus"><b><i>pci_bus</i></b></dt><p><a name="__rm_attribute_DEC21140A_pci_bus"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The PCI bus this device is connected to, implementing the <code>pci-bus</code> interface.</dd></dl><p></p><dl><dt id="dt:pending_irq"><b><i>pending_irq</i></b></dt><p><a name="__rm_attribute_DEC21140A_pending_irq"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Whether and interrupt is pending or not.</dd></dl><p></p><dl><dt id="dt:poll_reg"><b><i>poll_reg</i></b></dt><p><a name="__rm_attribute_DEC21140A_poll_reg"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:send_delay"><b><i>send_delay</i></b></dt><p><a name="__rm_attribute_DEC21140A_send_delay"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+How often (in seconds) that packets are send out to the network.</dd></dl><p></p><dl><dt id="dt:serial_clock"><b><i>serial_clock</i></b></dt><p><a name="__rm_attribute_DEC21140A_serial_clock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_data_in"><b><i>serial_data_in</i></b></dt><p><a name="__rm_attribute_DEC21140A_serial_data_in"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_data_out"><b><i>serial_data_out</i></b></dt><p><a name="__rm_attribute_DEC21140A_serial_data_out"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_num_cycles"><b><i>serial_num_cycles</i></b></dt><p><a name="__rm_attribute_DEC21140A_serial_num_cycles"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:serial_port_status"><b><i>serial_port_status</i></b></dt><p><a name="__rm_attribute_DEC21140A_serial_port_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+MII Management Interface serial communication state.</dd></dl><p></p><dl><dt id="dt:srom_address_width"><b><i>srom_address_width</i></b></dt><p><a name="__rm_attribute_DEC21140A_srom_address_width"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of address bits when communicating with the serial ROM.</dd></dl><p></p><dl><dt id="dt:srom_info"><b><i>srom_info</i></b></dt><p><a name="__rm_attribute_DEC21140A_srom_info"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[diiiiii]</code>.
+State information of the serial ROM.</dd></dl><p></p><dl><dt id="dt:tp10_conf"><b><i>tp10_conf</i></b></dt><p><a name="__rm_attribute_DEC21140A_tp10_conf"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Internal Register</dd></dl><p></p><dl><dt id="dt:write_masks"><b><i>write_masks</i></b></dt><p><a name="__rm_attribute_DEC21140A_write_masks"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ii]*]</code>.
+Write masks for all registered configuration registers. The format for each entry is (offset, mask).</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DEC21140A_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DEC21140A_gt_.print-pci-config-regs">print-pci-config-regs</a></b></td><td class="jdocu_noborder">print PCI configuration registers</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DEC21140A_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_dec21041.html" class="previous">DEC21041</a>
+<a href="__rm_class_dec21140a-dml.html" class="next">DEC21140A-dml</a>
+</div>

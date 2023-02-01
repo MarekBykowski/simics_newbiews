@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>rn-eth-bridge-tap</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_rev-execution.html" class="previous">rev-execution</a>
+<a href="__rm_class_rom.html" class="next">rom</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_rn-eth-bridge-tap">rn-eth-bridge-tap</a></h1>
+<p>
+
+<a name="rn-eth-bridge-tap"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_real-network">real-network</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Ethernet bridge using a TAP interface.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, ethernet_common, log_object, real_network, recorded</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:connected"><b><i>connected</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_connected"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to true if the object is connected to the real network and configured properly. Also used to initiate a new connection. If the object successfully opened the TAP device but failed to read the IP address and netmask, this attribute has to be set to true again after the TAP device has been configured.</dd></dl><p></p><dl><dt id="dt:host_ip"><b><i>host_ip</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_host_ip"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+IP address of the network adapter (TAP) connected to the real network.</dd></dl><p></p><dl><dt id="dt:host_netmask"><b><i>host_netmask</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_host_netmask"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+Network address mask of the host Ethernet network.</dd></dl><p></p><dl><dt id="dt:interface"><b><i>interface</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_interface"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+The name of the TAP interface on the host.</dd></dl><p></p><dl><dt id="dt:link"><b><i>link</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_link"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Simulated Ethernet link to connect to.</dd></dl><p></p><dl><dt id="dt:recorder"><b><i>recorder</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_recorder"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Recorder device for recording and playback of traffic from the real network.</dd></dl><p></p><dl><dt id="dt:run_in_thread"><b><i>run_in_thread</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_run_in_thread"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The run_in_thread level, either 1 or 2.</dd></dl><p></p><dl><dt id="dt:tap_bridge"><b><i>tap_bridge</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_tap_bridge"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Should be set to true if the TAP interface is used to  setup an Ethernet bridge.</dd></dl><p></p><dl><dt id="dt:tx_bandwidth"><b><i>tx_bandwidth</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_tx_bandwidth"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The transmit bandwidth of the network interface in bits per second. The network interface will limit the rate at which it sends packets to remain below this bandwidth. Set to 0 for unlimited bandwidth. Default limit is 10Mbit/s.</dd></dl><p></p><dl><dt id="dt:tx_next_time"><b><i>tx_next_time</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_tx_next_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Next time the bandwidth limitation allows us to send a frame</dd></dl><p></p><dl><dt id="dt:tx_packet_rate"><b><i>tx_packet_rate</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_tx_packet_rate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The maximum transmit rate of the network interface in packets per second. The network interface will limit the rate at which it sends packets to remain below this rate. Set to 0 for unlimited rate, which is the default.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Class-Attributes">Class Attributes</a></h2>
+<p>
+
+</p><dl><dt id="dt:network_devices"><b><i>network_devices</i></b></dt><p><a name="__rm_attribute_rn-eth-bridge-tap_network_devices"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>[s*]</code>.
+List of TAP interfaces on the host machine.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_rn-eth-bridge-tap_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_rn-eth-bridge-tap_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_rev-execution.html" class="previous">rev-execution</a>
+<a href="__rm_class_rom.html" class="next">rom</a>
+</div>

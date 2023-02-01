@@ -1,0 +1,62 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>ps-clock</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_process_histogram_connection.html" class="previous">process_histogram_connection</a>
+<a href="__rm_class_pseudo_namespace.html" class="next">pseudo_namespace</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_ps-clock">ps-clock</a></h1>
+<p>
+
+<a name="ps-clock"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>ps-clock</b> class implements a clock counting pico-seconds. The class also provides global time handling.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">callback_info, conf_object, cycle_control, cycle_event, cycle_event_instrumentation, frequency, global_time, log_object, temporal_state</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">cycle_event_probes (probe_index, probe_subscribe) : Port for event probes.</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:events"><b><i>events</i></b></dt><p><a name="__rm_attribute_ps-clock_events"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[osaai]*]</code>.
+((<i>object</i>, <i>evclass</i>, <i>value</i>, <i>unused</i>, <i>when</i>)*). Pending events.</dd></dl><p></p><dl><dt id="dt:frequency"><b><i>frequency</i></b></dt><p><a name="__rm_attribute_ps-clock_frequency"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[of]</code>, <code>float</code>, <code>integer</code>, or <code>object</code>.
+Cycle frequency in Hz or an object implementing the <code>frequency</code> interface.</dd></dl><p></p><dl><dt id="dt:vtime"><b><i>vtime</i></b></dt><p><a name="__rm_attribute_ps-clock_vtime"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+The vtime object driving this clock. The default clock associated with the object is used if the attribute is set to NULL.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface callback_info</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_callback_info_gt_.list-instrumentation-callbacks">list-instrumentation-callbacks</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface cycle_event_instrumentation</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_event_instrumentation_gt_.bp-break-cycle-event">bp-break-cycle-event</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_event_instrumentation_gt_.bp-run-until-cycle-event">bp-run-until-cycle-event</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_event_instrumentation_gt_.bp-trace-cycle-event">bp-trace-cycle-event</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_cycle_event_instrumentation_gt_.bp-wait-for-cycle-event">bp-wait-for-cycle-event</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_process_histogram_connection.html" class="previous">process_histogram_connection</a>
+<a href="__rm_class_pseudo_namespace.html" class="next">pseudo_namespace</a>
+</div>

@@ -1,0 +1,156 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i8042</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i3c_wire.html" class="previous">i3c_wire</a>
+<a href="__rm_class_i82077.html" class="next">i82077</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i8042">i8042</a></h1>
+<p>
+
+<a name="i8042"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_8042">8042</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The i8042 device models a legacy PC keyboard controller together with a 105-key standard keyboard, and a mouse with three buttons, three buttons and a wheel or five buttons and a wheel.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, keyboard, log_object, mouse</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:allow_keyboard_buffer_overflow"><b><i>allow_keyboard_buffer_overflow</i></b></dt><p><a name="__rm_attribute_i8042_allow_keyboard_buffer_overflow"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+By default this attribute is false, which implies that the i8042 will not allow the keyboard buffer to overflow. Instead it will force the console to buffer the input until there is room for it in the keyboard buffer. This makes the console generally easier to work with, since you are guaranteed that it won't drop characters. If you for some reason want to allow keyboard buffer overflows, set this attribute to true.</dd></dl><p></p><dl><dt id="dt:alt_l_down"><b><i>alt_l_down</i></b></dt><p><a name="__rm_attribute_i8042_alt_l_down"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the left alt key.</dd></dl><p></p><dl><dt id="dt:alt_r_down"><b><i>alt_r_down</i></b></dt><p><a name="__rm_attribute_i8042_alt_r_down"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the right alt key.</dd></dl><p></p><dl><dt id="dt:button_event"><b><i>button_event</i></b></dt><p><a name="__rm_attribute_i8042_button_event"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; <b>integer</b> indexed;  indexed type: <code>boolean</code>.
+<i>Write-only</i>. Forces mouse button events. Writing <code></code><i>value</i><code></code> to index <code>0</code> (<code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>) causes the left (right, middle, fourth, or fifth) button to be pressed if <code></code><i>value</i><code></code> is false, or released if <code></code><i>value</i><code></code> is false.</dd></dl><p></p><dl><dt id="dt:cmd_buttons"><b><i>cmd_buttons</i></b></dt><p><a name="__rm_attribute_i8042_cmd_buttons"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The state of the mouse buttons as set by the <code>button-event</code> pseudo attribute. Bit 0 = left button pressed, bit 1 = right button pressed, and 2 = middle button pressed.</dd></dl><p></p><dl><dt id="dt:command_last"><b><i>command_last</i></b></dt><p><a name="__rm_attribute_i8042_command_last"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if the last write to the keyboard was a command.</dd></dl><p></p><dl><dt id="dt:console"><b><i>console</i></b></dt><p><a name="__rm_attribute_i8042_console"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Console device implementing the 'gfx_con' or 'gfx_console' or 'keyboard_console' interfaces.</dd></dl><p></p><dl><dt id="dt:ctrl_l_down"><b><i>ctrl_l_down</i></b></dt><p><a name="__rm_attribute_i8042_ctrl_l_down"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the left ctrl key.</dd></dl><p></p><dl><dt id="dt:ctrl_r_down"><b><i>ctrl_r_down</i></b></dt><p><a name="__rm_attribute_i8042_ctrl_r_down"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the right ctrl key.</dd></dl><p></p><dl><dt id="dt:fast_a20"><b><i>fast_a20</i></b></dt><p><a name="__rm_attribute_i8042_fast_a20"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The fast A20 bit (port 92h).</dd></dl><p></p><dl><dt id="dt:fast_init"><b><i>fast_init</i></b></dt><p><a name="__rm_attribute_i8042_fast_init"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The fast init bit (port 92h).</dd></dl><p></p><dl><dt id="dt:ifull"><b><i>ifull</i></b></dt><p><a name="__rm_attribute_i8042_ifull"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if input buffer full flag. Always false in the current implementation.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_i8042_irq_dev"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Interrupt device implementing the <code>simple_interrupt</code> interface.</dd></dl><p></p><dl><dt id="dt:irq_freq"><b><i>irq_freq</i></b></dt><p><a name="__rm_attribute_i8042_irq_freq"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The maximum frequency in Hz at which the i8042 will generate interrupts. The default is 2000 Hz, which simulates the timing of a real device. However, some operating systems and X servers may have problems keeping up with that interrupt frequency when run with low processor clock frequencies and may start to lose input. If that happens you can lower the interrupt frequency. 20 Hz seems to work well with X servers on Linux in the configurations distributed with Simics.</dd></dl><p></p><dl><dt id="dt:irq_sent"><b><i>irq_sent</i></b></dt><p><a name="__rm_attribute_i8042_irq_sent"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to <code>1</code> if the keyboard interrupt line is raised, <code>2</code> if the mouse interrupt is raised, or <code>0</code> otherwise.</dd></dl><p></p><dl><dt id="dt:kbd_disabled"><b><i>kbd_disabled</i></b></dt><p><a name="__rm_attribute_i8042_kbd_disabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Keyboard disabled flag.</dd></dl><p></p><dl><dt id="dt:kbd_irq_en"><b><i>kbd_irq_en</i></b></dt><p><a name="__rm_attribute_i8042_kbd_irq_en"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Keyboard interrupt enabled flag.</dd></dl><p></p><dl><dt id="dt:kbd_irq_level"><b><i>kbd_irq_level</i></b></dt><p><a name="__rm_attribute_i8042_kbd_irq_level"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt level of the keyboard. Use to send interrupts to irq_dev using the <code>simple_interrupt</code>.</dd></dl><p></p><dl><dt id="dt:key_buf_num"><b><i>key_buf_num</i></b></dt><p><a name="__rm_attribute_i8042_key_buf_num"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of entries used after <code>key_first</code> in the <code>key_buffer</code>.</dd></dl><p></p><dl><dt id="dt:key_buffer"><b><i>key_buffer</i></b></dt><p><a name="__rm_attribute_i8042_key_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+<code>(</code><i>b0</i><code>, </code><i>b1</i><code>, ..., </code><i>b15</i><code>)</code> Controller keyboard output data.</dd></dl><p></p><dl><dt id="dt:key_caps_lock"><b><i>key_caps_lock</i></b></dt><p><a name="__rm_attribute_i8042_key_caps_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Caps lock led flag.</dd></dl><p></p><dl><dt id="dt:key_enabled"><b><i>key_enabled</i></b></dt><p><a name="__rm_attribute_i8042_key_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Flag saying if the keyboard is enabled.</dd></dl><p></p><dl><dt id="dt:key_event"><b><i>key_event</i></b></dt><p><a name="__rm_attribute_i8042_key_event"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; <b>integer</b> indexed;  indexed type: <code>boolean</code>.
+<i>Write-only</i>. Forces keyboard events. Writing <code></code><i>value</i><code></code> (an integer) to index <i>i</i> forces key number <i>i</i> to be pressed if <code></code><i>value</i><code></code> is false, or released if <code></code><i>value</i><code></code> is true.</dd></dl><p></p><dl><dt id="dt:key_first"><b><i>key_first</i></b></dt><p><a name="__rm_attribute_i8042_key_first"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Index of the next data that will be read from the <code>key_buffer</code>.</dd></dl><p></p><dl><dt id="dt:key_next_write"><b><i>key_next_write</i></b></dt><p><a name="__rm_attribute_i8042_key_next_write"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Command expected for the next write to the controller. <code>0 = Undefined</code>, <code>1 = Led</code>, <code>2 = Typematic</code>, and <code>3 = Scan</code>.</dd></dl><p></p><dl><dt id="dt:key_num_lock"><b><i>key_num_lock</i></b></dt><p><a name="__rm_attribute_i8042_key_num_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Num lock led flag.</dd></dl><p></p><dl><dt id="dt:key_scan_codes"><b><i>key_scan_codes</i></b></dt><p><a name="__rm_attribute_i8042_key_scan_codes"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Selected scan codes.</dd></dl><p></p><dl><dt id="dt:key_scroll_lock"><b><i>key_scroll_lock</i></b></dt><p><a name="__rm_attribute_i8042_key_scroll_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Scroll lock led flag.</dd></dl><p></p><dl><dt id="dt:led_caps_lock"><b><i>led_caps_lock</i></b></dt><p><a name="__rm_attribute_i8042_led_caps_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Caps lock led signal target.</dd></dl><p></p><dl><dt id="dt:led_num_lock"><b><i>led_num_lock</i></b></dt><p><a name="__rm_attribute_i8042_led_num_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Num lock led signal target.</dd></dl><p></p><dl><dt id="dt:led_scroll_lock"><b><i>led_scroll_lock</i></b></dt><p><a name="__rm_attribute_i8042_led_scroll_lock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Scroll lock led signal target.</dd></dl><p></p><dl><dt id="dt:mfull"><b><i>mfull</i></b></dt><p><a name="__rm_attribute_i8042_mfull"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if <code>obuffer</code> contains mouse data.</dd></dl><p></p><dl><dt id="dt:mode_select_state"><b><i>mode_select_state</i></b></dt><p><a name="__rm_attribute_i8042_mode_select_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mode selection state. <code>0 = knocking not in progress</code>, <code>1 = having set sample rate to 200 Hz once</code>, <code>2 = having set sample rate to 200 Hz twice</code>, and <code>3 = having set sample rate to 100 Hz</code>.</dd></dl><p></p><dl><dt id="dt:mou_buf_num"><b><i>mou_buf_num</i></b></dt><p><a name="__rm_attribute_i8042_mou_buf_num"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Number of entries used from <code>mou_first</code> in <code>mou_buffer</code>.</dd></dl><p></p><dl><dt id="dt:mou_buffer"><b><i>mou_buffer</i></b></dt><p><a name="__rm_attribute_i8042_mou_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{48}]</code>.
+<code>(</code><i>b0</i><code>, </code><i>b1</i><code>, ..., </code><i>b47</i><code>)</code> Controller output mouse data.</dd></dl><p></p><dl><dt id="dt:mou_enabled"><b><i>mou_enabled</i></b></dt><p><a name="__rm_attribute_i8042_mou_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse enabled flag.</dd></dl><p></p><dl><dt id="dt:mou_first"><b><i>mou_first</i></b></dt><p><a name="__rm_attribute_i8042_mou_first"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Index of next data in <code>mou_buffer</code>.</dd></dl><p></p><dl><dt id="dt:mou_next_write"><b><i>mou_next_write</i></b></dt><p><a name="__rm_attribute_i8042_mou_next_write"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Command expected for the next write to the mouse controller. <code>0 = Undefined</code>, <code>1 = Resolution</code>, and <code>3 = SampleRate</code>.</dd></dl><p></p><dl><dt id="dt:mou_resolution"><b><i>mou_resolution</i></b></dt><p><a name="__rm_attribute_i8042_mou_resolution"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse resolution. The resolution is <code>1 &lt;&lt; </code><i>value</i><code></code> counts / mm.</dd></dl><p></p><dl><dt id="dt:mou_sample_rate"><b><i>mou_sample_rate</i></b></dt><p><a name="__rm_attribute_i8042_mou_sample_rate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Sample rate in Hz.</dd></dl><p></p><dl><dt id="dt:mou_two_to_one"><b><i>mou_two_to_one</i></b></dt><p><a name="__rm_attribute_i8042_mou_two_to_one"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Scaling is 2:1 flag.</dd></dl><p></p><dl><dt id="dt:mouse_connected"><b><i>mouse_connected</i></b></dt><p><a name="__rm_attribute_i8042_mouse_connected"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse connected flag.</dd></dl><p></p><dl><dt id="dt:mouse_current_button_state"><b><i>mouse_current_button_state</i></b></dt><p><a name="__rm_attribute_i8042_mouse_current_button_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current mouse button state.</dd></dl><p></p><dl><dt id="dt:mouse_disabled"><b><i>mouse_disabled</i></b></dt><p><a name="__rm_attribute_i8042_mouse_disabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse disabled flag.</dd></dl><p></p><dl><dt id="dt:mouse_event"><b><i>mouse_event</i></b></dt><p><a name="__rm_attribute_i8042_mouse_event"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; <b>integer</b> indexed;  indexed type: <code>integer</code>.
+<i>Write-only</i>. Forces mouse events. Writes to indices <code>0</code> through <code>5</code> result in movement in directions <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code>, <code>wheel up</code>, or <code>wheel down</code> by <code></code><i>value</i><code></code> mm.</dd></dl><p></p><dl><dt id="dt:mouse_irq_en"><b><i>mouse_irq_en</i></b></dt><p><a name="__rm_attribute_i8042_mouse_irq_en"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse interrupt enabled flag.</dd></dl><p></p><dl><dt id="dt:mouse_irq_level"><b><i>mouse_irq_level</i></b></dt><p><a name="__rm_attribute_i8042_mouse_irq_level"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt level of the mouse. Use to send interrupts to irq_dev using the <code>simple_interrupt</code>.</dd></dl><p></p><dl><dt id="dt:mouse_mode"><b><i>mouse_mode</i></b></dt><p><a name="__rm_attribute_i8042_mouse_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mode operating mode. <code>0 = 3-button mode</code>, <code>1 = 3-button wheel mode</code>, and <code>2 = 5-button wheel mode</code>.</dd></dl><p></p><dl><dt id="dt:mouse_movement_x"><b><i>mouse_movement_x</i></b></dt><p><a name="__rm_attribute_i8042_mouse_movement_x"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse movement since last packet.</dd></dl><p></p><dl><dt id="dt:mouse_movement_y"><b><i>mouse_movement_y</i></b></dt><p><a name="__rm_attribute_i8042_mouse_movement_y"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse movement since last packet.</dd></dl><p></p><dl><dt id="dt:mouse_movement_z"><b><i>mouse_movement_z</i></b></dt><p><a name="__rm_attribute_i8042_mouse_movement_z"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse movement since last packet.</dd></dl><p></p><dl><dt id="dt:mouse_report_button_state"><b><i>mouse_report_button_state</i></b></dt><p><a name="__rm_attribute_i8042_mouse_report_button_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Mouse button state in last packet.</dd></dl><p></p><dl><dt id="dt:mouse_type"><b><i>mouse_type</i></b></dt><p><a name="__rm_attribute_i8042_mouse_type"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Modeled mouse type. <code>0 = 3-button mouse</code> (default), <code>1 = 3-button wheel mouse</code>, and <code>2 = 5-button wheel mouse</code>.</dd></dl><p></p><dl><dt id="dt:next_write"><b><i>next_write</i></b></dt><p><a name="__rm_attribute_i8042_next_write"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The next write expected on the command port. <code>0 = Undefined</code>, <code>1 = Command</code>, <code>2 = Output</code>, <code>3 = Mouse</code>, and <code>4 = MouseBuffer</code>.</dd></dl><p></p><dl><dt id="dt:obuffer"><b><i>obuffer</i></b></dt><p><a name="__rm_attribute_i8042_obuffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The next data that will be read from the keyboard.</dd></dl><p></p><dl><dt id="dt:ofull"><b><i>ofull</i></b></dt><p><a name="__rm_attribute_i8042_ofull"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if <code>obuffer</code> contains data.</dd></dl><p></p><dl><dt id="dt:output_port"><b><i>output_port</i></b></dt><p><a name="__rm_attribute_i8042_output_port"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The 8042 controller's output port P2. Only bits 2 and 3 are in this attribute. Use other attributes for the remaining bits.</dd></dl><p></p><dl><dt id="dt:output_port_mask"><b><i>output_port_mask</i></b></dt><p><a name="__rm_attribute_i8042_output_port_mask"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+One bit set for each locked bit in output port P2.</dd></dl><p></p><dl><dt id="dt:reset_target"><b><i>reset_target</i></b></dt><p><a name="__rm_attribute_i8042_reset_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Object implementing the <code>x86_reset_bus</code> interface.</dd></dl><p></p><dl><dt id="dt:scan_convert"><b><i>scan_convert</i></b></dt><p><a name="__rm_attribute_i8042_scan_convert"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Flag whether we do scan code conversion.</dd></dl><p></p><dl><dt id="dt:selftest_ok"><b><i>selftest_ok</i></b></dt><p><a name="__rm_attribute_i8042_selftest_ok"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if the selftest flag signals OK.</dd></dl><p></p><dl><dt id="dt:sent_time"><b><i>sent_time</i></b></dt><p><a name="__rm_attribute_i8042_sent_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+The last time we sent an interrupt.</dd></dl><p></p><dl><dt id="dt:shift_l_down"><b><i>shift_l_down</i></b></dt><p><a name="__rm_attribute_i8042_shift_l_down"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the left shift key.</dd></dl><p></p><dl><dt id="dt:shift_r_down"><b><i>shift_r_down</i></b></dt><p><a name="__rm_attribute_i8042_shift_r_down"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the right shift key.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Class-Attributes">Class Attributes</a></h2>
+<p>
+
+</p><dl><dt id="dt:keys"><b><i>keys</i></b></dt><p><a name="__rm_attribute_i8042_keys"></a></p><dd><b>Pseudo</b> <b>class</b> attribute; <b>read-only</b> access; type: <code>[s*]</code>.
+List with the names of all keys on the keyboard. Their index in the list represents the Simics internal key code.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.ctrl-alt-del">ctrl-alt-del</a></b></td><td class="jdocu_noborder">send ctrl-alt-del to console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.key-down">key-down</a></b></td><td class="jdocu_noborder">send key down event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.key-press">key-press</a></b></td><td class="jdocu_noborder">send key press</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.key-up">key-up</a></b></td><td class="jdocu_noborder">send key up event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.left-button">left-button</a></b></td><td class="jdocu_noborder">set button state</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.middle-button">middle-button</a></b></td><td class="jdocu_noborder">set button state</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.mouse-down">mouse-down</a></b></td><td class="jdocu_noborder">move mouse</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.mouse-left">mouse-left</a></b></td><td class="jdocu_noborder">move mouse</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.mouse-right">mouse-right</a></b></td><td class="jdocu_noborder">move mouse</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.mouse-up">mouse-up</a></b></td><td class="jdocu_noborder">move mouse</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.right-button">right-button</a></b></td><td class="jdocu_noborder">set button state</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8042_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i3c_wire.html" class="previous">i3c_wire</a>
+<a href="__rm_class_i82077.html" class="next">i82077</a>
+</div>

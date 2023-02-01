@@ -1,0 +1,87 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>DS12887-c</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_ds12887.html" class="previous">DS12887</a>
+<a href="__rm_class_ds3231.html" class="next">DS3231</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_DS12887-c">DS12887-c</a></h1>
+<p>
+
+<a name="DS12887-c"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_DS12887-c">DS12887-c</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The DS12887 device implements real time clock functionality and non-volatile storage (NVRAM). The device is often referred to as CMOS Clock. The DS12887 includes time-of-day alarm, both 12 and 24 hour time format, periodic interrupts and 114 bytes of general purpose RAM. Limitations: Alarm interrupt not implemented. Daylight Savings Time not implemented.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:hour"><b><i>hour</i></b></dt><p><a name="__rm_attribute_DS12887-c_hour"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current hour [0,23].</dd></dl><p></p><dl><dt id="dt:interrupt_pin"><b><i>interrupt_pin</i></b></dt><p><a name="__rm_attribute_DS12887-c_interrupt_pin"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Status of the interrupt pin.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_DS12887-c_irq_dev"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Device to send interrupts to, implementing the <code>simple_interrupt</code>.</dd></dl><p></p><dl><dt id="dt:irq_level"><b><i>irq_level</i></b></dt><p><a name="__rm_attribute_DS12887-c_irq_level"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Level at which interrupts are sent.</dd></dl><p></p><dl><dt id="dt:last_pie"><b><i>last_pie</i></b></dt><p><a name="__rm_attribute_DS12887-c_last_pie"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Time of last PIE interrupt in simulator time.</dd></dl><p></p><dl><dt id="dt:mday"><b><i>mday</i></b></dt><p><a name="__rm_attribute_DS12887-c_mday"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current day of the month [1,31].</dd></dl><p></p><dl><dt id="dt:minute"><b><i>minute</i></b></dt><p><a name="__rm_attribute_DS12887-c_minute"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current minute [0,59].</dd></dl><p></p><dl><dt id="dt:month"><b><i>month</i></b></dt><p><a name="__rm_attribute_DS12887-c_month"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current month [1,12].</dd></dl><p></p><dl><dt id="dt:next_addr"><b><i>next_addr</i></b></dt><p><a name="__rm_attribute_DS12887-c_next_addr"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Next NVRAM address to be accessed.</dd></dl><p></p><dl><dt id="dt:nvram"><b><i>nvram</i></b></dt><p><a name="__rm_attribute_DS12887-c_nvram"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i{128}]</code>; <b>persistent</b> attribute.
+The contents of the non-volatile storage, as a list of 128 bytes.</dd></dl><p></p><dl><dt id="dt:period_in_us"><b><i>period_in_us</i></b></dt><p><a name="__rm_attribute_DS12887-c_period_in_us"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[i{16}]</code>.
+Time between periodic interrupts, in microseconds</dd></dl><p></p><dl><dt id="dt:second"><b><i>second</i></b></dt><p><a name="__rm_attribute_DS12887-c_second"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current second [0,59].</dd></dl><p></p><dl><dt id="dt:seconds_last"><b><i>seconds_last</i></b></dt><p><a name="__rm_attribute_DS12887-c_seconds_last"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>; <b>persistent</b> attribute.
+Current time-of-day, counted in seconds.</dd></dl><p></p><dl><dt id="dt:time_last"><b><i>time_last</i></b></dt><p><a name="__rm_attribute_DS12887-c_time_last"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Simulated time in seconds at last update.</dd></dl><p></p><dl><dt id="dt:time_regs_changed"><b><i>time_regs_changed</i></b></dt><p><a name="__rm_attribute_DS12887-c_time_regs_changed"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Set to true if time register were modified while SET = 1.</dd></dl><p></p><dl><dt id="dt:year"><b><i>year</i></b></dt><p><a name="__rm_attribute_DS12887-c_year"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Current year (full four-digit format).</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887-c_gt_.get-date-time">get-date-time</a></b></td><td class="jdocu_noborder">get date and time</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887-c_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887-c_gt_.set-date-time">set-date-time</a></b></td><td class="jdocu_noborder">set date and time</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887-c_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_DS12887-c_gt_.trace-nvram">trace-nvram</a></b></td><td class="jdocu_noborder">trace nvram updates</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_ds12887.html" class="previous">DS12887</a>
+<a href="__rm_class_ds3231.html" class="next">DS3231</a>
+</div>

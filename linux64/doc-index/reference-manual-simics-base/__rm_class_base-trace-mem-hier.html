@@ -1,0 +1,85 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>base-trace-mem-hier</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_bank_patch_tool_connection.html" class="previous">bank_patch_tool_connection</a>
+<a href="__rm_class_bcm5703c.html" class="next">BCM5703C</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_base-trace-mem-hier">base-trace-mem-hier</a></h1>
+<p>
+
+<a name="base-trace-mem-hier"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_trace">trace</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The base class for the trace mode. This module provides an easy way of generating traces from Simics. Actions traced are executed instructions, memory accesses and, occurred exceptions. Traces will by default be printed as text to the terminal but can also be directed to a file in which case a binary format is available as well.
+<p>
+It is also possible to control what will be traced by setting a few of the provided attributes. Some of those should be set before enabling the tracer for the first time. If processors and memory-spaces from different cells are traced, then multi-threading must be disabled
+</p></dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:consumer"><b><i>consumer</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_consumer"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Optional consumer object. Must implement trace_consume.</dd></dl><p></p><dl><dt id="dt:cpu_list"><b><i>cpu_list</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_cpu_list"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>[o*]</code> or <code>nil</code>.
+List of processor objects to restrict the trace to or NIL to include all processor objects. The attribute must be set before enabling the tracer for the first time. If processor objects from different cells are traced, then multi-threading must be disabled.</dd></dl><p></p><dl><dt id="dt:data_intervals_p"><b><i>data_intervals_p</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_data_intervals_p"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>[[ii]*]</code>.
+List of physical address intervals for data tracing. If no intervals are specified, all addresses are traced.</dd></dl><p></p><dl><dt id="dt:data_intervals_v"><b><i>data_intervals_v</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_data_intervals_v"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>[[ii]*]</code>.
+List of virtual address intervals for data tracing. If no intervals are specified, all addresses are traced.</dd></dl><p></p><dl><dt id="dt:enabled"><b><i>enabled</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_enabled"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable tracing, 0 to disable.</dd></dl><p></p><dl><dt id="dt:file"><b><i>file</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_file"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+Name of output file that the trace is written to. If the name ends in <code>.gz</code>, the output will be gzipped.</dd></dl><p></p><dl><dt id="dt:filter_duplicates"><b><i>filter_duplicates</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_filter_duplicates"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to filter out duplicate trace entries. Useful to filter out multiple steps in looping or repeating instructions.</dd></dl><p></p><dl><dt id="dt:memory_space_list"><b><i>memory_space_list</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_memory_space_list"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+List of additional memory spaces to add to the trace besides those connected to the processors in the cpu_list attribute. Should be set before enabling the tracer for the first time. If memory-spaces from different cells are traced, then multi-threading must be disabled</dd></dl><p></p><dl><dt id="dt:print_access_type"><b><i>print_access_type</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_access_type"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable printing of the memory access type, 0 to disable.</dd></dl><p></p><dl><dt id="dt:print_data"><b><i>print_data</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_data"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable printing of data and instruction op codes, 0 to disable.</dd></dl><p></p><dl><dt id="dt:print_linear_address"><b><i>print_linear_address</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_linear_address"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable printing of the linear address, 0 to disable.</dd></dl><p></p><dl><dt id="dt:print_memory_space"><b><i>print_memory_space</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_memory_space"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+<code>true</code>|<code>false</code> Set to true to enable printing of memory spaces. False is default.</dd></dl><p></p><dl><dt id="dt:print_memory_type"><b><i>print_memory_type</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_memory_type"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable printing of the memory type, 0 to disable.</dd></dl><p></p><dl><dt id="dt:print_physical_address"><b><i>print_physical_address</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_physical_address"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable printing of the physical address, 0 to disable.</dd></dl><p></p><dl><dt id="dt:print_virtual_address"><b><i>print_virtual_address</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_print_virtual_address"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable printing of the virtual address, 0 to disable.</dd></dl><p></p><dl><dt id="dt:raw_mode"><b><i>raw_mode</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_raw_mode"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 for raw output format, and 0 for ascii. Raw output format is only supported when writing to a file.</dd></dl><p></p><dl><dt id="dt:trace_data"><b><i>trace_data</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_trace_data"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable tracing of data, 0 to disable.</dd></dl><p></p><dl><dt id="dt:trace_exceptions"><b><i>trace_exceptions</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_trace_exceptions"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable tracing of exceptions, 0 to disable.</dd></dl><p></p><dl><dt id="dt:trace_instructions"><b><i>trace_instructions</i></b></dt><p><a name="__rm_attribute_base-trace-mem-hier_trace_instructions"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 to enable instruction tracing, 0 to disable.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_base-trace-mem-hier_gt_.start">start</a></b></td><td class="jdocu_noborder">control default tracer</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_base-trace-mem-hier_gt_.stop">stop</a></b></td><td class="jdocu_noborder">stop default tracer</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_bank_patch_tool_connection.html" class="previous">bank_patch_tool_connection</a>
+<a href="__rm_class_bcm5703c.html" class="next">BCM5703C</a>
+</div>

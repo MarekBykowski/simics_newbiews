@@ -1,0 +1,54 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>freerun-extension</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_framebuffer.html" class="previous">framebuffer</a>
+<a href="__rm_class_frequency_bus.html" class="next">frequency_bus</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_freerun-extension">freerun-extension</a></h1>
+<p>
+
+<a name="freerun-extension"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_Simics-Core">Simics Core</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>freerun-extension</b> class is used to augment clock and CPU classes with functionality to allow them to base virtual time on realtime.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">freerun</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:freerun_enabled"><b><i>freerun_enabled</i></b></dt><p><a name="__rm_attribute_freerun-extension_freerun_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Freerun mode enabled</dd></dl><p></p><dl><dt id="dt:freerun_max_ips"><b><i>freerun_max_ips</i></b></dt><p><a name="__rm_attribute_freerun-extension_freerun_max_ips"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Maximum allowed value for the number of instructions executed per virtual second, expressed as a fraction of the current CPU frequency.</dd></dl><p></p><dl><dt id="dt:freerun_min_ips"><b><i>freerun_min_ips</i></b></dt><p><a name="__rm_attribute_freerun-extension_freerun_min_ips"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Minimum allowed value for the number of instructions executed per virtual second, expressed as a fraction of the current CPU frequency.</dd></dl><p></p><dl><dt id="dt:freerun_speed"><b><i>freerun_speed</i></b></dt><p><a name="__rm_attribute_freerun-extension_freerun_speed"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>float</code>.
+Freerun speed. A value of 1.0 means realtime.</dd></dl><p>
+</p><div class=chain>
+<a href="__rm_class_framebuffer.html" class="previous">framebuffer</a>
+<a href="__rm_class_frequency_bus.html" class="next">frequency_bus</a>
+</div>

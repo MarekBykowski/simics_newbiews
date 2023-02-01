@@ -1,0 +1,154 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>graphcon</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_gml_link_impl.html" class="previous">gml_link_impl</a>
+<a href="__rm_class_gui.html" class="next">gui</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_graphcon">graphcon</a></h1>
+<p>
+
+<a name="graphcon"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_graphcon">graphcon</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>graphcon</b> class implements a graphical console, representing a computer screen. Several consoles may be present at any time. It also supports input of keyboard and mouse events. The objects of the <b>graphcon</b> class should be connected to a graphics card device and a keyboard/mouse device.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">abs_pointer_activate, break_strings, break_strings_v2, checkpoint, con_input, con_input_code, conf_object, extended_serial, external_connection_events, gfx_break, gfx_con, gfx_console, gfx_console_backend, keyboard_console, log_object, recorded, screenshot, vga_text_update, vnc_server</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>tcp</b> &lt;tcp-server&gt; : VNC TCP server<br><b>unix_socket</b> &lt;unix-socket-server&gt; : VNC Unix domain socket server</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:abs_mouse"><b><i>abs_mouse</i></b></dt><p><a name="__rm_attribute_graphcon_abs_mouse"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Absolute positioning pointer device connected to the console. Must implement the abs_pointer interface</dd></dl><p></p><dl><dt id="dt:abs_pointer_enabled"><b><i>abs_pointer_enabled</i></b></dt><p><a name="__rm_attribute_graphcon_abs_pointer_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Absolute positioning pointer enabled.</dd></dl><p></p><dl><dt id="dt:break_strings"><b><i>break_strings</i></b></dt><p><a name="__rm_attribute_graphcon_break_strings"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[sbbiib]*]</code>.
+List of console break strings (string, active, oneshot, hap ID, unused, regexp)</dd></dl><p></p><dl><dt id="dt:cmd_line_output"><b><i>cmd_line_output</i></b></dt><p><a name="__rm_attribute_graphcon_cmd_line_output"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code> or <code>nil</code>.
+If set to TRUE, the Simics command line will receive console text output, which will also be logged at level 3. If set to NIL, command line and log output will happen automatically when the console GUI is invisible. If set to FALSE, no command line or log output will happen.</dd></dl><p></p><dl><dt id="dt:device"><b><i>device</i></b></dt><p><a name="__rm_attribute_graphcon_device"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Video device the console is connected to.</dd></dl><p></p><dl><dt id="dt:gfx_breaks"><b><i>gfx_breaks</i></b></dt><p><a name="__rm_attribute_graphcon_gfx_breaks"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[isbbfiiiid]*]</code>.
+List of console graphical breakpoints. Each entry is (hap id, name, active, oneshot, update interval, minx, miny, maxx, maxy, image data)</dd></dl><p></p><dl><dt id="dt:grab_button"><b><i>grab_button</i></b></dt><p><a name="__rm_attribute_graphcon_grab_button"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+One of left, middle and right The grab button specifies which mouse button that is used to grab and ungrab input for the console.</dd></dl><p></p><dl><dt id="dt:grab_modifier"><b><i>grab_modifier</i></b></dt><p><a name="__rm_attribute_graphcon_grab_modifier"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+A string in (control, alt, shift), specifying the modifier key used for grabbing and ungrabbing input from the console. Currently only the left side modifier are interpreted.</dd></dl><p></p><dl><dt id="dt:keyboard"><b><i>keyboard</i></b></dt><p><a name="__rm_attribute_graphcon_keyboard"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Keyboard device the console is connected to.</dd></dl><p></p><dl><dt id="dt:keyboard_leds"><b><i>keyboard_leds</i></b></dt><p><a name="__rm_attribute_graphcon_keyboard_leds"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[bbb]</code>.
+State of keyboard leds (Caps lock, Num lock, Scroll lock).</dd></dl><p></p><dl><dt id="dt:max_screen_size"><b><i>max_screen_size</i></b></dt><p><a name="__rm_attribute_graphcon_max_screen_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Console window maximum allowed screen size, in pixels (width, height).</dd></dl><p></p><dl><dt id="dt:microm_per_pixel"><b><i>microm_per_pixel</i></b></dt><p><a name="__rm_attribute_graphcon_microm_per_pixel"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Micrometers per (horizontal, vertical) pixel for converting mouse movements. only used when not using an absolute positioning pointer.</dd></dl><p></p><dl><dt id="dt:mouse"><b><i>mouse</i></b></dt><p><a name="__rm_attribute_graphcon_mouse"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Mouse device the console is connected to.</dd></dl><p></p><dl><dt id="dt:mouse_state"><b><i>mouse_state</i></b></dt><p><a name="__rm_attribute_graphcon_mouse_state"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iibb]</code>.
+Mouse state, only used when not using an absolute positioning pointer.</dd></dl><p></p><dl><dt id="dt:new_vnc_port_if_busy"><b><i>new_vnc_port_if_busy</i></b></dt><p><a name="__rm_attribute_graphcon_new_vnc_port_if_busy"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Determines if a new TCP port may be used when restoring from a checkpoint and the saved port is already busy. The default value is TRUE. It may be set to FALSE for setups that rely on the same port being used all the time.</dd></dl><p></p><dl><dt id="dt:next_gfx_break_id"><b><i>next_gfx_break_id</i></b></dt><p><a name="__rm_attribute_graphcon_next_gfx_break_id"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Hap ID for next added breakpoint.</dd></dl><p></p><dl><dt id="dt:output_file"><b><i>output_file</i></b></dt><p><a name="__rm_attribute_graphcon_output_file"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+If set to a non-empty string, output will be directed to and appended to this file. Set to an empty string to stop file output.</dd></dl><p></p><dl><dt id="dt:output_line"><b><i>output_line</i></b></dt><p><a name="__rm_attribute_graphcon_output_line"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+The current output line of printable characters from the attached VGA device.</dd></dl><p></p><dl><dt id="dt:palette"><b><i>palette</i></b></dt><p><a name="__rm_attribute_graphcon_palette"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iii]{256}]</code>.
+<code>((</code><i>r</i><code>, </code><i>g</i><code>, </code><i>b</i><code>), ...)</code> Palette used in 8-bit mode. 256 colors, 8 bits/channel.</dd></dl><p></p><dl><dt id="dt:pending_kbd_input"><b><i>pending_kbd_input</i></b></dt><p><a name="__rm_attribute_graphcon_pending_kbd_input"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ib]*]</code>.
+Queued keyboard input waiting to be sent to the attached keyboard device. Each element is a key code and a make/break flag (TRUE on make).</dd></dl><p></p><dl><dt id="dt:recorder"><b><i>recorder</i></b></dt><p><a name="__rm_attribute_graphcon_recorder"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Recorder object</dd></dl><p></p><dl><dt id="dt:refresh_in_virtual_time"><b><i>refresh_in_virtual_time</i></b></dt><p><a name="__rm_attribute_graphcon_refresh_in_virtual_time"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, then the refresh rate will refresh the screen based on virtual time, instead of real time. Default is FALSE.</dd></dl><p></p><dl><dt id="dt:refresh_rate"><b><i>refresh_rate</i></b></dt><p><a name="__rm_attribute_graphcon_refresh_rate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Refresh rate (in hertz). Set to 0 to disable screen refresh</dd></dl><p></p><dl><dt id="dt:screen_data"><b><i>screen_data</i></b></dt><p><a name="__rm_attribute_graphcon_screen_data"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>data</code>.
+Console screen data.</dd></dl><p></p><dl><dt id="dt:screen_size"><b><i>screen_size</i></b></dt><p><a name="__rm_attribute_graphcon_screen_size"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[ii]</code>.
+Console window size in pixels (width, height).</dd></dl><p></p><dl><dt id="dt:vga_text_data"><b><i>vga_text_data</i></b></dt><p><a name="__rm_attribute_graphcon_vga_text_data"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[iiii[i*]d]</code> or <code>nil</code>.
+VGA text screen contents: (rows, columns, font width, font height, line lengths, text data). NIL if not currently in VGA text mode.</dd></dl><p></p><dl><dt id="dt:visible"><b><i>visible</i></b></dt><p><a name="__rm_attribute_graphcon_visible"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code> or <code>nil</code>.
+Show/hide console GUI window. Setting to NIL only has effect before instantiation, in which case it leads to the default visibility behaviour of showing the console window if it is the unique console in the configuration.</dd></dl><p></p><dl><dt id="dt:vnc_allow_compression"><b><i>vnc_allow_compression</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_allow_compression"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, then compressed encodings are used if the VNC client requests it, otherwise only raw encoding is used. Default is TRUE. Supported encodings are ZRLE and Tight.</dd></dl><p></p><dl><dt id="dt:vnc_clients"><b><i>vnc_clients</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_clients"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[di]*]</code>.
+List of (remote ip, remote port) for each VNC client.</dd></dl><p></p><dl><dt id="dt:vnc_keymap"><b><i>vnc_keymap</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_keymap"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[ii]*]</code>.
+VNC keyboard mapping for special keys: a list of pairs, keysym -&gt; sim_key_t.</dd></dl><p></p><dl><dt id="dt:vnc_password"><b><i>vnc_password</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_password"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+VNC server password. If this is set to a string, which must be non-empty, then the server will use the VNC authentication mechanism and require clients to provide the password on connect.</dd></dl><p></p><dl><dt id="dt:vnc_port"><b><i>vnc_port</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_port"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code> or <code>nil</code>.
+VNC listening port or NIL if no port should be opened. The port must not be privileged, i.e. the allowed range is [1024, 65535]. A value of 0 means that a random free port will be used.</dd></dl><p></p><dl><dt id="dt:vnc_unix_socket"><b><i>vnc_unix_socket</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_unix_socket"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+VNC UNIX socket. The file must not exist.</dd></dl><p></p><dl><dt id="dt:vnc_zlib_level"><b><i>vnc_zlib_level</i></b></dt><p><a name="__rm_attribute_graphcon_vnc_zlib_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+VNC zlib compression level, in range 0..9, default 6.</dd></dl><p></p><dl><dt id="dt:window_title"><b><i>window_title</i></b></dt><p><a name="__rm_attribute_graphcon_window_title"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Console GUI window title.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface break_strings_v2</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-break-console-string">bp-break-console-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-run-until-console-string">bp-run-until-console-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-trace-console-string">bp-trace-console-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_break_strings_v2_gt_.bp-wait-for-console-string">bp-wait-for-console-string</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface gfx_break</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_gfx_break_gt_.bp-break-gfx">bp-break-gfx</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_gfx_break_gt_.bp-run-until-gfx">bp-run-until-gfx</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_gfx_break_gt_.bp-trace-gfx">bp-trace-gfx</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_gfx_break_gt_.bp-wait-for-gfx">bp-wait-for-gfx</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.break">break</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — set a string to break on</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.break-gfx">break-gfx</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — break on a graphics event</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.capture-start">capture-start</a></b></td><td class="jdocu_noborder">capture output to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.capture-stop">capture-stop</a></b></td><td class="jdocu_noborder">stop output capture to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.get-pixel">get-pixel</a></b></td><td class="jdocu_noborder">read pixel value</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.gfx-break-info">gfx-break-info</a></b></td><td class="jdocu_noborder">return information about a graphical breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.gfx-break-match">gfx-break-match</a></b></td><td class="jdocu_noborder">determine if graphical breakpoint currently matches</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.gfx-break-png">gfx-break-png</a></b></td><td class="jdocu_noborder">export graphical breakpoint data to a PNG file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.grab-setup">grab-setup</a></b></td><td class="jdocu_noborder">set grab button and modifier</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.hide">hide</a></b></td><td class="jdocu_noborder">hide the console window</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.input">input</a></b></td><td class="jdocu_noborder">send string to a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.input-file">input-file</a></b></td><td class="jdocu_noborder">input a file into a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.list-break-strings">list-break-strings</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — list all active string breakpoints</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.list-gfx-breaks">list-gfx-breaks</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — list all active graphical breakpoints</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.save-break-xy">save-break-xy</a></b></td><td class="jdocu_noborder">specify and save a graphical breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.screenshot">screenshot</a></b></td><td class="jdocu_noborder">save screen as PNG or BMP</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.set-pixel">set-pixel</a></b></td><td class="jdocu_noborder">write pixel value</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.show">show</a></b></td><td class="jdocu_noborder">display the console window</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.unbreak">unbreak</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — stop breaking on string</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.unbreak-gfx">unbreak-gfx</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — delete graphical breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.vnc-setup">vnc-setup</a></b></td><td class="jdocu_noborder">setup VNC connection</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.vnc-status">vnc-status</a></b></td><td class="jdocu_noborder">return VNC connection data</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.wait-for-gfx-break">wait-for-gfx-break</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a graphical breakpoint in a script branch</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.wait-for-pixel-value">wait-for-pixel-value</a></b></td><td class="jdocu_noborder">real pixel value</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.wait-for-string">wait-for-string</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a string in a script branch</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_graphcon_gt_.wait-then-write">wait-then-write</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a string, then write an input string</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_gml_link_impl.html" class="previous">gml_link_impl</a>
+<a href="__rm_class_gui.html" class="next">gui</a>
+</div>

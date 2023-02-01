@@ -1,0 +1,85 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>7.2 Defining Test Suites</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="test-suite.html" class="previous">7.1 Test suite</a>
+<a href="test-framework-libraries-available-outside-simics.html" class="next">7.3 Test Framework Libraries Available Outside Simics</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="test-framework.html">7 Test Framework</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Defining-tests">7.2 Defining Test Suites</a></h1>
+<p>
+ 
+ The test framework supports two ways to discover tests in a suite:
+ </p><ul>
+   <li>automatic detection of tests</li>
+   <li>explicit registration of tests with respective API functions</li>
+ </ul>
+ <h2 class="jdocu"><a name="Automatic-Detection-of-Tests">7.2.1 Automatic Detection of Tests</a></h2>
+<p>
+ 
+</p><p>
+ In general, the test framework will search the files inside the suite
+ directory and add a Simics test for each file matching the pattern "s-*.py",
+ the test name will be named after the script file, with the extension
+ stripped.
+ 
+ </p><h2 class="jdocu"><a name="Explicit-Registration-of-Tests">7.2.2 Explicit Registration of Tests</a></h2>
+<p>
+ 
+</p><p>
+ If the suite directory contains a <code>tests.py</code> file, the
+ framework imports this file as a Python module and runs the <b><i>tests</i></b>
+ function defined within in order to add tests to the suite.  The signature of
+ this function is: <code>def&nbsp;tests(suite)</code>.
+</p><p>
+ The suite parameter supports the following methods:
+ </p><dl><dt id="dt:add_test-name-function-"><b>add_test(name, function)</b></dt><dd>Add a Python test named <i>name</i>, which runs
+     the <i>function</i>.</dd><dt id="dt:add_simics_test-script-timeout-120-name-none-extra_args-"><b>add_simics_test(script, timeout=120, name=None, extra_args=[])</b></dt><dd>Add a Simics test which runs <i>script</i>. You can specify a
+     timeout measured in seconds with <i>timeout</i>. The name of the
+     test defaults to the name of the script, with the extension stripped, but
+     can be overridden with <i>name</i>. <i>extra_args</i> is
+     a list of extra command line arguments to pass to Simics before the
+     script is run. Simics is run in batch mode and with the -werror
+     and -wdeprecated flags.
+<p>
+     The test should signal test failures by raising an exception, or exiting
+     Simics with a non zero exit code. There are support APIs for testing
+     documented in the <em>API Reference Manual</em>.</p></dd><dt id="dt:add_simics_tests-pattern-timeout-120-extra_args-"><b>add_simics_tests(pattern, timeout=120, extra_args=[])</b></dt><dd>Add a Simics test for each file in the suite directory which matches
+     <i>pattern</i>. This pattern is a glob. <i>timeout</i>
+     and <i>extra_args</i> is passed to <b><i>add_simics_test</i></b> for
+     each test.</dd><dt id="dt:set_suite_setup-setup-"><b>set_suite_setup(setup)</b></dt><dd>set a function to be run before the tests in the suite to perform setup
+     actions. The function should be callable without any arguments, and its
+     result is ignored.</dd><dt id="dt:set_suite_teardown-teardown-"><b>set_suite_teardown(teardown)</b></dt><dd>set a function to be run after the tests in the suite to perform cleanup
+     actions. The function should be callable without any arguments, and its
+     result is ignored.</dd></dl><p>
+ </p><div class=chain>
+<a href="test-suite.html" class="previous">7.1 Test suite</a>
+<a href="test-framework-libraries-available-outside-simics.html" class="next">7.3 Test Framework Libraries Available Outside Simics</a>
+</div>

@@ -1,0 +1,84 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>mtprof</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_ms1553-link-v2-snoop-endpoint.html" class="previous">ms1553-link-v2-snoop-endpoint</a>
+<a href="__rm_class_namespace.html" class="next">namespace</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_mtprof">mtprof</a></h1>
+<p>
+
+<a name="mtprof"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_mtprof">mtprof</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>mtprof</b> class is used for multithreaded performance profiling.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:active"><b><i>active</i></b></dt><p><a name="__rm_attribute_mtprof_active"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Enables or disables multithreaded simulation profiling.</dd></dl><p></p><dl><dt id="dt:cellrt"><b><i>cellrt</i></b></dt><p><a name="__rm_attribute_mtprof_cellrt"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[i*]</code>.
+List with the amount of cpu time (in us) used to simulate a particular cell. The order of the list is defined by the <i>cells</i> attribute.</dd></dl><p></p><dl><dt id="dt:cells"><b><i>cells</i></b></dt><p><a name="__rm_attribute_mtprof_cells"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[o*]</code>.
+List with cells; used to interpret the collected data.</dd></dl><p></p><dl><dt id="dt:data"><b><i>data</i></b></dt><p><a name="__rm_attribute_mtprof_data"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[[ff][f*][f*]]*]</code>; <b>integer</b> indexed;  indexed type: <code>[[ff][f*][f*]]</code>.
+Performance data.</dd></dl><p></p><dl><dt id="dt:interval"><b><i>interval</i></b></dt><p><a name="__rm_attribute_mtprof_interval"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Profiling interval (in ms). Default is 10 ms.</dd></dl><p></p><dl><dt id="dt:max_points"><b><i>max_points</i></b></dt><p><a name="__rm_attribute_mtprof_max_points"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Maximal number of data points to store in memory for later output to file or graph plotting. Default is 4000 points.</dd></dl><p></p><dl><dt id="dt:modelrt"><b><i>modelrt</i></b></dt><p><a name="__rm_attribute_mtprof_modelrt"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[i*]</code>.
+List with predictions how fast the simulation would run on a host at least as many hast threads as there are cells in the simulation. Each entry corresponds to a particular latency, see the <i>models</i> attribute.</dd></dl><p></p><dl><dt id="dt:models"><b><i>models</i></b></dt><p><a name="__rm_attribute_mtprof_models"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[i*]</code>.
+List of time synchronization models labelled by the latency setting of the model.</dd></dl><p></p><dl><dt id="dt:realtime"><b><i>realtime</i></b></dt><p><a name="__rm_attribute_mtprof_realtime"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Realtime elapsed (in us) while profiling.</dd></dl><p></p><dl><dt id="dt:totalrt"><b><i>totalrt</i></b></dt><p><a name="__rm_attribute_mtprof_totalrt"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+Total amount of CPU time used for the simulation.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.cellstat">cellstat</a></b></td><td class="jdocu_noborder">display cell profiling information</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.disable">disable</a></b></td><td class="jdocu_noborder">disable multithreaded simulation profiling</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.enable">enable</a></b></td><td class="jdocu_noborder">enable multithreaded simulation profiling</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.modelstat">modelstat</a></b></td><td class="jdocu_noborder">display ideal execution time on a sufficiently parallel host</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.save-data">save-data</a></b></td><td class="jdocu_noborder">save profiling data to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_mtprof_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_ms1553-link-v2-snoop-endpoint.html" class="previous">ms1553-link-v2-snoop-endpoint</a>
+<a href="__rm_class_namespace.html" class="next">namespace</a>
+</div>

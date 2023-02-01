@@ -1,0 +1,54 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>Simics in-order</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="instruction-execution-timing.html" class="previous">3 Instruction Execution Timing</a>
+<a href="stalling.html" class="next">Stalling</a>
+</div>
+<div class=path>
+<a href="index.html">Understanding Simics Timing</a>&nbsp;/&nbsp;
+<a href="instruction-execution-timing.html">3 Instruction Execution Timing</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="Simics-in-order">Simics in-order</a></h1>
+<p>
+
+</p><p>
+In the default model, the execution of a step takes no time by itself,
+and steps are run in program order. This is called the Simics
+<em><a name="in-order">in-order</a></em> model. It implements the basic instruction set
+abstraction that instructions execute discretely and sequentially.
+This minimalistic approach makes simulation fast but does not attempt
+to model <a name="execution-timing">execution timing</a> in any way.
+</p><p>
+Normally one step is executed every cycle, so that the step and cycle
+counts are the same. See the section <b>Changing the Step Rate</b> for
+how to change this.
+</p><p>
+</p><div class=chain>
+<a href="instruction-execution-timing.html" class="previous">3 Instruction Execution Timing</a>
+<a href="stalling.html" class="next">Stalling</a>
+</div>

@@ -1,0 +1,64 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>disassemble_x86</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_disassemble_arm.html" class="previous">disassemble_arm</a>
+<a href="__rm_class_dm9161.html" class="next">dm9161</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_disassemble_x86">disassemble_x86</a></h1>
+<p>
+
+<a name="disassemble_x86"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_disassemble_x86">disassemble_x86</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This class implements the disassemble interface for the x86 architecture. Use the attributes to set up the operating mode prior to using the interface.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, disassemble, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:cpu_level"><b><i>cpu_level</i></b></dt><p><a name="__rm_attribute_disassemble_x86_cpu_level"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+When instructions from different x86 generations share opcodes, this attribute is used to distinguish between them. Set to 3 for the 80386, 4 for the 80486, 5 for the Pentium® family, and to 6 for anything more modern than the Pentium® family (including all supported AMD processors).</dd></dl><p></p><dl><dt id="dt:cs_d"><b><i>cs_d</i></b></dt><p><a name="__rm_attribute_disassemble_x86_cs_d"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> The D-bit from the CS segment descriptor (1 for 32-bit mode, 0 for 16-bit mode).</dd></dl><p></p><dl><dt id="dt:disassemble"><b><i>disassemble</i></b></dt><p><a name="__rm_attribute_disassemble_x86_disassemble"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[is]</code>; <b>integer</b> indexed;  indexed type: <b>unknown type</b>.
+Disassemble instruction at the indexed host address. The returned value is a list with the length of the instruction and the disassembly string. It is up to the user to make sure that the host address given is valid and that it does not cause a memory access violation (which would crash the simulator).</dd></dl><p></p><dl><dt id="dt:host_byte"><b><i>host_byte</i></b></dt><p><a name="__rm_attribute_disassemble_x86_host_byte"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>; <b>integer</b> indexed;  indexed type: <b>unknown type</b>.
+Get the byte at the indexed host address. It is up to the user to make sure that the host address given is valid and that it does not cause a memory access violation (which would crash the simulator).</dd></dl><p></p><dl><dt id="dt:lm64_mode"><b><i>lm64_mode</i></b></dt><p><a name="__rm_attribute_disassemble_x86_lm64_mode"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> Set to 1 for 64-bit mode, 0 otherwise.</dd></dl><p></p><dl><dt id="dt:mov_default32"><b><i>mov_default32</i></b></dt><p><a name="__rm_attribute_disassemble_x86_mov_default32"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, movs to or from control and debug registers will default to 32-bits in 64-bit mode. If FALSE (which is the default value), such moves will be fixed at 64-bits.</dd></dl><p></p><dl><dt id="dt:near_branches_64"><b><i>near_branches_64</i></b></dt><p><a name="__rm_attribute_disassemble_x86_near_branches_64"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Determines how near branches are handled in 64-bit mode. If the attribute is TRUE, then the operand size is fixed at 64-bits, while the default value of FALSE allows an override to 16 bits.</dd></dl><p></p><dl><dt id="dt:ss_b"><b><i>ss_b</i></b></dt><p><a name="__rm_attribute_disassemble_x86_ss_b"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+<code>1</code>|<code>0</code> The B-bit from the SS segment descriptor (1 for 32-bit stack, 0 for 16-bit stack).</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_disassemble_arm.html" class="previous">disassemble_arm</a>
+<a href="__rm_class_dm9161.html" class="next">dm9161</a>
+</div>

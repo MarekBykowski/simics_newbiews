@@ -1,0 +1,119 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>telnet_console</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_telemetry_manager.html" class="previous">telemetry_manager</a>
+<a href="__rm_class_telnet_frontend.html" class="next">telnet_frontend</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_telnet_console">telnet_console</a></h1>
+<p>
+
+<a name="telnet_console"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_telnet-console">telnet-console</a>
+</dd>
+<dt class="jdocu_descitem"><b>Aliases</b></dt><dd class="jdocu_descitem">server-console</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Class allowing telnet access to a simulated serial port.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, recorded, serial_device</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:break_string"><b><i>break_string</i></b></dt><p><a name="__rm_attribute_telnet_console_break_string"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>string</code>.
+An output string causing Simics to trigger a Xterm_Break_String hap when the string is printed.</dd></dl><p></p><dl><dt id="dt:break_string_id"><b><i>break_string_id</i></b></dt><p><a name="__rm_attribute_telnet_console_break_string_id"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; <b>string</b> indexed;  indexed type: <code>integer</code>.
+Return an id for a string that is set to break on. The id can be used as index for the Xterm_Break_String hap.</dd></dl><p></p><dl><dt id="dt:break_string_once"><b><i>break_string_once</i></b></dt><p><a name="__rm_attribute_telnet_console_break_string_once"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>string</code>.
+An output string causing Simics to trigger a Xterm_Break_String hap when the string is printed. The breakpoint is removed after the first occurrence.</dd></dl><p></p><dl><dt id="dt:buffer_until_connection"><b><i>buffer_until_connection</i></b></dt><p><a name="__rm_attribute_telnet_console_buffer_until_connection"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, the console will buffer any output until a client connects. If FALSE, such output will be discarded.</dd></dl><p></p><dl><dt id="dt:data_in"><b><i>data_in</i></b></dt><p><a name="__rm_attribute_telnet_console_data_in"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Characters received by the telnet console but not yet delivered to the simulated serial port.</dd></dl><p></p><dl><dt id="dt:device"><b><i>device</i></b></dt><p><a name="__rm_attribute_telnet_console_device"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Serial device the console is connected to.</dd></dl><p></p><dl><dt id="dt:disconnect"><b><i>disconnect</i></b></dt><p><a name="__rm_attribute_telnet_console_disconnect"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>boolean</code>.
+Disconnects the telnet session if set to TRUE.</dd></dl><p></p><dl><dt id="dt:input"><b><i>input</i></b></dt><p><a name="__rm_attribute_telnet_console_input"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[db]</code> or <code>string</code>.
+Keyboard input queue.</dd></dl><p></p><dl><dt id="dt:input_delayed"><b><i>input_delayed</i></b></dt><p><a name="__rm_attribute_telnet_console_input_delayed"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>[sf]</code>.
+(string, seconds) This attribute appends characters to the input queue, after the specified simulated time have elapsed.</dd></dl><p></p><dl><dt id="dt:new_port_if_busy"><b><i>new_port_if_busy</i></b></dt><p><a name="__rm_attribute_telnet_console_new_port_if_busy"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Determines if a new TCP port may be used when restoring from a checkpoint and the saved port is already busy. The default value is true. It may be set to false for setups that rely on the same port being used all the time.</dd></dl><p></p><dl><dt id="dt:output_buffer"><b><i>output_buffer</i></b></dt><p><a name="__rm_attribute_telnet_console_output_buffer"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[i*]</code>.
+Characters transmitted by the simulated serial port, but not yet written out by the console. If <i>buffer_until_connection</i> is TRUE, then this attribute contains everything written to the simulated serial port.</dd></dl><p></p><dl><dt id="dt:output_file"><b><i>output_file</i></b></dt><p><a name="__rm_attribute_telnet_console_output_file"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>string</code> or <code>nil</code>.
+If given a file name, output will be directed to this file. Redirection is stopped by setting the attribute to NIL.</dd></dl><p></p><dl><dt id="dt:port"><b><i>port</i></b></dt><p><a name="__rm_attribute_telnet_console_port"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+TCP port for telnet console server.</dd></dl><p></p><dl><dt id="dt:raw"><b><i>raw</i></b></dt><p><a name="__rm_attribute_telnet_console_raw"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If set to TRUE, will not interpret telnet escapes or otherwise change the bytes transmitted in either direction.</dd></dl><p></p><dl><dt id="dt:recorded_string"><b><i>recorded_string</i></b></dt><p><a name="__rm_attribute_telnet_console_recorded_string"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The characters that have been recorded when the attribute <i>recording</i> is TRUE. Note that the recorded string will NOT be cleared when <i>recording</i> is reset.</dd></dl><p></p><dl><dt id="dt:recorder"><b><i>recorder</i></b></dt><p><a name="__rm_attribute_telnet_console_recorder"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Recorder device for recording and playback of serial input.</dd></dl><p></p><dl><dt id="dt:recording"><b><i>recording</i></b></dt><p><a name="__rm_attribute_telnet_console_recording"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+When TRUE, all characters written to the console will be recorded. The record can be read from the attribute <i>recorded-string</i>.</dd></dl><p></p><dl><dt id="dt:remote_ip"><b><i>remote_ip</i></b></dt><p><a name="__rm_attribute_telnet_console_remote_ip"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+The remote IPv4 address.</dd></dl><p></p><dl><dt id="dt:remote_port"><b><i>remote_port</i></b></dt><p><a name="__rm_attribute_telnet_console_remote_port"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>integer</code>.
+The remote TCP port number.</dd></dl><p></p><dl><dt id="dt:string_breakpoint_list"><b><i>string_breakpoint_list</i></b></dt><p><a name="__rm_attribute_telnet_console_string_breakpoint_list"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[[isi]*]</code>.
+List of all string breakpoints currently active. Each string breakpoint is a tuple of (id, string, trigger_once)</dd></dl><p></p><dl><dt id="dt:unbreak_id"><b><i>unbreak_id</i></b></dt><p><a name="__rm_attribute_telnet_console_unbreak_id"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+Remove breakpoint based on breakpoint id.</dd></dl><p></p><dl><dt id="dt:unbreak_string"><b><i>unbreak_string</i></b></dt><p><a name="__rm_attribute_telnet_console_unbreak_string"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>string</code>.
+Stop breaking on a specified string. Note that if a string is added several times, it also has to be removed the same number of times. I.e. if a hap callback is tied to a string and does  not want to be called again, it should both remove the string and unregister the hap callback, since another hap callback may want to break on the same string again.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.break">break</a></b></td><td class="jdocu_noborder">set a string to break on</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.capture-start">capture-start</a></b></td><td class="jdocu_noborder">capture output to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.capture-stop">capture-stop</a></b></td><td class="jdocu_noborder">stop output capture to file</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.disconnect">disconnect</a></b></td><td class="jdocu_noborder">terminates the telnet session</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.input">input</a></b></td><td class="jdocu_noborder">send string to a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.input-file">input-file</a></b></td><td class="jdocu_noborder">input a file into a console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.kbd-abort">kbd-abort</a></b></td><td class="jdocu_noborder">send a keyboard abort signal</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.list-break-strings">list-break-strings</a></b></td><td class="jdocu_noborder">list all active string breakpoints</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.playback-start">playback-start</a></b></td><td class="jdocu_noborder">start traffic generator</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.playback-stop">playback-stop</a></b></td><td class="jdocu_noborder">stop traffic generation</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.record-start">record-start</a></b></td><td class="jdocu_noborder">start recording of output on the console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.record-stop">record-stop</a></b></td><td class="jdocu_noborder">stop recording of output on the console</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.unbreak">unbreak</a></b></td><td class="jdocu_noborder">stop breaking on string</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.unbreak-id">unbreak-id</a></b></td><td class="jdocu_noborder">remove a breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.wait-for-string">wait-for-string</a></b></td><td class="jdocu_noborder">wait for a string in a script branch</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_telnet_console_gt_.wait-then-write">wait-then-write</a></b></td><td class="jdocu_noborder">wait for a string, then write an input string</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_telemetry_manager.html" class="previous">telemetry_manager</a>
+<a href="__rm_class_telnet_frontend.html" class="next">telnet_frontend</a>
+</div>

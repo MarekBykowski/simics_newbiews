@@ -1,0 +1,96 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>tcf-context-proxy</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_tcf-agent.html" class="previous">tcf-agent</a>
+<a href="__rm_class_tcf-serial-tee.html" class="next">tcf-serial-tee</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_tcf-context-proxy">tcf-context-proxy</a></h1>
+<p>
+
+<a name="tcf-context-proxy"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_tcf-agent">tcf-agent</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">TCF Context Proxy
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, run_control, symdebug</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:agent"><b><i>agent</i></b></dt><p><a name="__rm_attribute_tcf-context-proxy_agent"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+The TCF agent owning the TCF context this object is a proxy for</dd></dl><p></p><dl><dt id="dt:cid"><b><i>cid</i></b></dt><p><a name="__rm_attribute_tcf-context-proxy_cid"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The TCF context ID for the context this object is a proxy for</dd></dl><p></p><dl><dt id="dt:desc"><b><i>desc</i></b></dt><p><a name="__rm_attribute_tcf-context-proxy_desc"></a></p><dd><b>Required</b> attribute; <b>read/write</b> access; type: <code>[so]</code> or <code>[soi]</code>.
+Description of what this object is a proxy for. Either [<code>"simobj"</code>, <i>object</i>] or [<code>"sw-node"</code>, <i>software object</i>, <i>node ID</i>].</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface symdebug</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.down">down</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.finish-function">finish-function</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.frame">frame</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.list">list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.next-instruction">next-instruction</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.next-line">next-line</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.reverse-next-instruction">reverse-next-instruction</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.reverse-next-line">reverse-next-line</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.reverse-step-instruction">reverse-step-instruction</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.reverse-step-line">reverse-step-line</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.stack-trace">stack-trace</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.step-instruction">step-instruction</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.step-line">step-line</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-address">sym-address</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-file">sym-file</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-function">sym-function</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-line">sym-line</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-list">sym-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-source">sym-source</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-string">sym-string</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-type">sym-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-value">sym-value</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.sym-write">sym-write</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.uncall-function">uncall-function</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_symdebug_gt_.up">up</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-break-source-line">bp-break-source-line</a></b></td><td class="jdocu_noborder">add breakpoint at a source code line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-break-source-location">bp-break-source-location</a></b></td><td class="jdocu_noborder">add breakpoint at a location</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-run-until-source-line">bp-run-until-source-line</a></b></td><td class="jdocu_noborder">run until reaching source code line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-run-until-source-location">bp-run-until-source-location</a></b></td><td class="jdocu_noborder">run until reaching location</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-trace-source-line">bp-trace-source-line</a></b></td><td class="jdocu_noborder">enable tracing of source code line reaches</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-trace-source-location">bp-trace-source-location</a></b></td><td class="jdocu_noborder">enable tracing of location reaches</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-wait-for-source-line">bp-wait-for-source-line</a></b></td><td class="jdocu_noborder">wait until reaching source code line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.bp-wait-for-source-location">bp-wait-for-source-location</a></b></td><td class="jdocu_noborder">wait until reaching location</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.break-line">break-line</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — add breakpoint at a source code line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.break-location">break-location</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — add breakpoint at a location</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.run-until-line">run-until-line</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — run until reaching source code line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.run-until-location">run-until-location</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — run until reaching location</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.wait-for-line">wait-for-line</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait in the script branch until reaching source code line</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_tcf-context-proxy_gt_.wait-for-location">wait-for-location</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait in the script branch until reaching location</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_tcf-agent.html" class="previous">tcf-agent</a>
+<a href="__rm_class_tcf-serial-tee.html" class="next">tcf-serial-tee</a>
+</div>

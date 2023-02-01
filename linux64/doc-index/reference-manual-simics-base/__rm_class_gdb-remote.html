@@ -1,0 +1,89 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>gdb-remote</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_g-cache.html" class="previous">g-cache</a>
+<a href="__rm_class_generic-flash-memory.html" class="next">generic-flash-memory</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_gdb-remote">gdb-remote</a></h1>
+<p>
+
+<a name="gdb-remote"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_gdb-remote">gdb-remote</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>gdb-remote</b> module allows a GDB session to connect to Simics and control the execution. An object of class <b>gdb-remote</b> is used to accept incoming GDB connection requests.
+<p>
+A GDB binary capable of debugging many Simics target machines is included in the Simics Base package. If you want to build your own gdb, read on.
+</p><p>
+The following table lists, for each target architectures supported by <b>gdb-remote</b>, the string to give to <code>configure</code> as the <code>--target</code> parameter when building GDB, and any command you may have to enter at the GDB command prompt before connecting to Simics:
+</p><p>
+</p><dl><dt id="dt:ppc64"><b>ppc64</b></dt><dd><code>--target powerpc64-elf-linux</code><br>command: <code>set architecture powerpc:common64</code></dd><dt id="dt:risc-v64"><b>risc-v64</b></dt><dd><code>--target riscv64-linux-gnu</code><br>command: <code>set architecture riscv</code></dd><dt id="dt:h8300"><b>h8300</b></dt><dd><code>--target h8300-elf</code><br>command: <code>set architecture h8300(s|h)</code></dd><dt id="dt:x86-64"><b>x86-64</b></dt><dd><code>--target x86_64-pc-linux-gnu</code><br>command: <code>set architecture i386:x86-64</code></dd><dt id="dt:mips64be"><b>mips64be</b></dt><dd><code>--target mips64-elf64-linux64</code><br>command: <code>set architecture mips:isa64r2</code></dd><dt id="dt:arc600"><b>arc600</b></dt><dd><code>--target arc-elf32</code><br>command: <code>set architecture opella-target arc600</code></dd><dt id="dt:arm64"><b>arm64</b></dt><dd><code>--target aarch64-elf</code><br></dd><dt id="dt:sparc-v8"><b>sparc-v8</b></dt><dd><code>--target sparc-unknown-linux-gnu</code><br>command: <code>set architecture sparc:v8plus</code></dd><dt id="dt:mips64le"><b>mips64le</b></dt><dd><code>--target mips64el-elf64-linux64</code><br>command: <code>set architecture mips:isa64r2</code></dd><dt id="dt:ppce500"><b>ppce500</b></dt><dd><code>--target powerpc64-elf-linux</code><br>command: <code>set architecture powerpc:e500</code></dd><dt id="dt:ppc32"><b>ppc32</b></dt><dd><code>--target powerpc64-elf-linux</code><br>command: <code>set architecture powerpc:common</code></dd><dt id="dt:x86"><b>x86</b></dt><dd><code>--target x86_64-pc-linux-gnu</code><br>command: <code>set architecture i386</code></dd><dt id="dt:armle"><b>armle</b></dt><dd><code>--target armle-unknown-linux-gnu</code><br></dd><dt id="dt:risc-v32"><b>risc-v32</b></dt><dd>command: <code>set architecture riscv:rv32</code></dd><dt id="dt:xtensa"><b>xtensa</b></dt><dd><code>--target xtensa</code><br>command: <code>set architecture xtensa</code></dd><dt id="dt:arc700"><b>arc700</b></dt><dd><code>--target arc-elf32</code><br>command: <code>set architecture ARC700</code></dd><dt id="dt:armbe"><b>armbe</b></dt><dd><code>--target armbe-unknown-linux-gnu</code><br></dd><dt id="dt:mips32le"><b>mips32le</b></dt><dd><code>--target mips-elf-linux</code><br>command: <code>set architecture mips:isa32r2</code></dd><dt id="dt:mips32be"><b>mips32be</b></dt><dd><code>--target mips-elf-linux</code><br>command: <code>set architecture mips:isa32r2</code></dd><dt id="dt:nios2"><b>nios2</b></dt><dd><code>--target nios2-elf</code><br></dd><dt id="dt:m68k"><b>m68k</b></dt><dd><code>--target m68k</code><br>command: <code>set architecture m68k</code></dd></dl><p>Note that these <code>--target</code> flags are not the only ones that will work, just examples of ones that do work.
+</p></dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, external_connection_events, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>tcp</b> &lt;tcp-server&gt; : gdb-remote TCP server<br><b>unix_socket</b> &lt;unix-socket-server&gt; : gdb-remote Unix domain socket server</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:architecture"><b><i>architecture</i></b></dt><p><a name="__rm_attribute_gdb-remote_architecture"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+Architecture of target.</dd></dl><p></p><dl><dt id="dt:connected"><b><i>connected</i></b></dt><p><a name="__rm_attribute_gdb-remote_connected"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>boolean</code>.
+Returns true if the gdb-remote object is connected to a GDB session, false if not.</dd></dl><p></p><dl><dt id="dt:context_object"><b><i>context_object</i></b></dt><p><a name="__rm_attribute_gdb-remote_context_object"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Context object that this GDB session is attached to.</dd></dl><p></p><dl><dt id="dt:disconnect"><b><i>disconnect</i></b></dt><p><a name="__rm_attribute_gdb-remote_disconnect"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>boolean</code>.
+Disconnects the remote GDB</dd></dl><p></p><dl><dt id="dt:follow_context"><b><i>follow_context</i></b></dt><p><a name="__rm_attribute_gdb-remote_follow_context"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to non-zero if context should be followed.</dd></dl><p></p><dl><dt id="dt:large_operations"><b><i>large_operations</i></b></dt><p><a name="__rm_attribute_gdb-remote_large_operations"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to non-zero if memory operations received from GDB should be performed as single operations instead of bytewise</dd></dl><p></p><dl><dt id="dt:listen"><b><i>listen</i></b></dt><p><a name="__rm_attribute_gdb-remote_listen"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to start listening for incoming GDB connections on the specified port. If 0 is specified, an arbitrary available port will be used. Read to get the port currently listened on, or 0 if none.</dd></dl><p></p><dl><dt id="dt:processor"><b><i>processor</i></b></dt><p><a name="__rm_attribute_gdb-remote_processor"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Processor to connect the GDB stub to.</dd></dl><p></p><dl><dt id="dt:send_packet"><b><i>send_packet</i></b></dt><p><a name="__rm_attribute_gdb-remote_send_packet"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>string</code>.
+Sends a raw packet from gdb-remote to GDB. The string that this attribute is written with will be sent as a packet to GDB.</dd></dl><p></p><dl><dt id="dt:send_target_xml"><b><i>send_target_xml</i></b></dt><p><a name="__rm_attribute_gdb-remote_send_target_xml"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Should an XML target description be sent to GDB, default is true, but can be disabled since it can confuse some clients (e.g. Eclipse on a Linux host).</dd></dl><p></p><dl><dt id="dt:signal"><b><i>signal</i></b></dt><p><a name="__rm_attribute_gdb-remote_signal"></a></p><dd><b>Pseudo</b> attribute; <b>write-only</b> access; type: <code>integer</code>.
+Sends a signal to the remote GDB. This makes GDB think the program it is debugging has received a signal. See the <code>signal(7)</code> man page for a list of signal numbers.</dd></dl><p></p><dl><dt id="dt:use_ipv4"><b><i>use_ipv4</i></b></dt><p><a name="__rm_attribute_gdb-remote_use_ipv4"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+Determines if connections should be restricted to IPv4. Default is FALSE</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_gdb-remote_gt_.disconnect">disconnect</a></b></td><td class="jdocu_noborder">disconnect from the remote gdb</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_gdb-remote_gt_.follow-context">follow-context</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — follow context</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_gdb-remote_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_gdb-remote_gt_.signal">signal</a></b></td><td class="jdocu_noborder">tell remote gdb we got a signal</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_gdb-remote_gt_.target">target</a></b></td><td class="jdocu_noborder">set target CPU for gdb connection</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_g-cache.html" class="previous">g-cache</a>
+<a href="__rm_class_generic-flash-memory.html" class="next">generic-flash-memory</a>
+</div>

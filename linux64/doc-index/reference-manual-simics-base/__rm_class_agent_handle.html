@@ -1,0 +1,142 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>agent_handle</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_accel-vga.html" class="previous">accel-vga</a>
+<a href="__rm_class_agent_manager.html" class="next">agent_manager</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_agent_handle">agent_handle</a></h1>
+<p>
+
+<a name="agent_handle"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_matic">matic</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The <b>agent_handle</b> class is used by <i>Matic</i> to resemble
+    connections with Simics Agents, which are running on target systems. A
+    handle provides the user with commands so that she can interact with the
+    agent of the handle.
+<p>
+    An agent handle can only be connected to one Simics Agent but an agent may
+    be connected to several handles.
+</p><p>
+    Matic requires the simulation to run, allowing Simics Agents on the
+    target systems to run and respond. However, if the simulation is not
+    running, any commands will be queued on the agent handle until they are
+    run eventually.
+</p><p>
+    The
+    <b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_manager_gt_.connect-to-agent">
+    &lt;agent_manager&gt;.connect-to-agent</a></b> command creates an
+    agent handle that will be associated with an agent as soon as possible.
+    Agent handles should be deleted when they no longer are needed.
+</p><p>
+    The <i>stale_timeout</i> attribute controls the timeout period after
+    the end of an agent poll interval until the Simics Agent is declared dead
+    unless it has made contact. The setting applies individually to each Simics
+    Agent, but control is shared among its handles. Once dead, all its handles
+    will become stale and all their commands will be canceled. New commands
+    cannot be given to a stale handle.
+</p><p>
+    The handle also provides some other attributes: <i>connected_to</i>,
+    <i>magic</i>, <i>stale</i>, <i>state</i> and
+    <i>windows</i>. See the help text for each attribute for more
+    information.
+</p><p>
+    <b>See also:</b> <em>Simics User's Guide</em> as well as the
+    <b><a class="jdocu" href="__rm_class_agent_manager.html">agent_manager</a></b>
+    class.
+</p></dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:connected_to"><b><i>connected_to</i></b></dt><p><a name="__rm_attribute_agent_handle_connected_to"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+The agent-id of the connected agent.</dd></dl><p></p><dl><dt id="dt:magic"><b><i>magic</i></b></dt><p><a name="__rm_attribute_agent_handle_magic"></a></p><dd><b>Session</b> attribute; <b>read-only</b> access; type: <code>integer</code> or <code>nil</code>.
+The Simics Agent magic id number.</dd></dl><p></p><dl><dt id="dt:path"><b><i>path</i></b></dt><p><a name="__rm_attribute_agent_handle_path"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>string</code>.
+The private working directory on the target system.</dd></dl><p></p><dl><dt id="dt:stale"><b><i>stale</i></b></dt><p><a name="__rm_attribute_agent_handle_stale"></a></p><dd><b>Session</b> attribute; <b>read-only</b> access; type: <code>boolean</code>.
+True, if the handle has become stale.</dd></dl><p></p><dl><dt id="dt:stale_timeout"><b><i>stale_timeout</i></b></dt><p><a name="__rm_attribute_agent_handle_stale_timeout"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>float</code> or <code>integer</code>.
+Stale handle timeout, in seconds, started at the end of the poll interval. Requires an active connection.</dd></dl><p></p><dl><dt id="dt:state"><b><i>state</i></b></dt><p><a name="__rm_attribute_agent_handle_state"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>string</code>.
+The current state of the handle.</dd></dl><p></p><dl><dt id="dt:windows"><b><i>windows</i></b></dt><p><a name="__rm_attribute_agent_handle_windows"></a></p><dd><b>Session</b> attribute; <b>read/write</b> access; type: <code>boolean</code> or <code>nil</code>.
+True, if running on a Windows system.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.agent-poll-interval">agent-poll-interval</a></b></td><td class="jdocu_noborder">set the agent's polling interval</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.agent-quit">agent-quit</a></b></td><td class="jdocu_noborder">quit the agent for this handle</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.agent-restart">agent-restart</a></b></td><td class="jdocu_noborder">restart the Simics target agent</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.change-directory">change-directory</a></b></td><td class="jdocu_noborder">change this handle's working directory</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.delete-handle">delete-handle</a></b></td><td class="jdocu_noborder">delete this agent handle</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.discard-jobs">discard-jobs</a></b></td><td class="jdocu_noborder">discard jobs from this agent handle</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.download">download</a></b></td><td class="jdocu_noborder">download file from system to host</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.download-dir">download-dir</a></b></td><td class="jdocu_noborder">download directory from target to host</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.get-captured-output">get-captured-output</a></b></td><td class="jdocu_noborder">get or print the captured job output</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.list-files">list-files</a></b></td><td class="jdocu_noborder">list target directory contents</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.list-jobs">list-jobs</a></b></td><td class="jdocu_noborder">list commands posted on this handle</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.print-file">print-file</a></b></td><td class="jdocu_noborder">print file contents on Simics CLI</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.print-working-directory">print-working-directory</a></b></td><td class="jdocu_noborder">print this handle's working directory</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.run">run</a></b></td><td class="jdocu_noborder">execute a command on the target system</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.run-until-job">run-until-job</a></b></td><td class="jdocu_noborder">run simulation until job completed</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.target-time">target-time</a></b></td><td class="jdocu_noborder">set or get target system date and time</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.upload">upload</a></b></td><td class="jdocu_noborder">upload file from host to target</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.upload-dir">upload-dir</a></b></td><td class="jdocu_noborder">upload directory from host to target</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_agent_handle_gt_.wait-for-job">wait-for-job</a></b></td><td class="jdocu_noborder">suspend script branch until job completed</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_accel-vga.html" class="previous">accel-vga</a>
+<a href="__rm_class_agent_manager.html" class="next">agent_manager</a>
+</div>

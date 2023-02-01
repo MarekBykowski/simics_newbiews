@@ -1,0 +1,96 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>3.2 Advanced Options</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="common-options.html" class="previous">3.1 Common Options</a>
+<a href="cli.html" class="next">4 The Command Line Interface</a>
+</div>
+<div class=path>
+<a href="index.html">Simics User's Guide</a>&nbsp;/&nbsp;
+<a href="feature-overview.html">II Feature Overview</a>&nbsp;/&nbsp;
+<a href="startupoptions.html">3 Using Simics from the Command Line</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="Advanced-Options">3.2 Advanced Options</a></h1>
+<p>These are more unusual, advanced, command line options to Simics.
+</p><p>
+</p><dl><dt id="dt:-no-settings"><b><code>-no-settings</code></b></dt><dd>Do not read any settings files, such as preferences.</dd><dt id="dt:-wdeprecated"><b><code>-wdeprecated</code></b></dt><dd>Warn about all usage of deprecated features.</dd><dt id="dt:-no-wdeprecated"><b><code>-no-wdeprecated</code></b></dt><dd>Turn off warnings about deprecated features.</dd><dt id="dt:-e-expire-time"><b><code>-E, -expire TIME</code></b></dt><dd>Check out licenses with an expire time, for off-line use.
+                  Valid formats are:
+                  <ul>
+                  <li>dd-mmm-yyyy[:hh:mm] – where:
+                  <dl><dt id="dt:dd"><b>dd</b></dt><dd>day number in month</dd><dt id="dt:mmm"><b>mmm</b></dt><dd>abbreviated name of month</dd><dt id="dt:yyyy"><b>yyyy</b></dt><dd>year including century</dd><dt id="dt:hh"><b>hh</b></dt><dd>hour in 24-hour format</dd><dt id="dt:mm"><b>mm</b></dt><dd>minutes.</dd></dl><p></p></li>
+                  <li>+&lt;num&gt;h – setting the license to expire
+                  &lt;num&gt; hours from now.</li>
+                  <li>+&lt;num&gt;d – setting the license to expire
+                  &lt;num&gt; days from now.</li>
+                  </ul>
+                  </dd><dt id="dt:-l"><b><code>-L</code></b></dt><dd>Add a path to the directory list that Simics searches for modules.
+          </dd><dt id="dt:-python-verbose"><b><code>-python-verbose</code></b></dt><dd>Set the Python verbose flag. This will, for example, make Python
+          print information when Python modules are being loaded. This is the
+          same option as the <code>-v</code> flag in <code>mini-python</code>.
+          </dd><dt id="dt:-werror"><b><code>-werror</code></b></dt><dd>Treat many warnings in Simics as errors and exit.</dd><dt id="dt:-no-werror"><b><code>-no-werror</code></b></dt><dd>Do not treat warnings in Simics as errors. This is the default
+          behavior but may have been disabled in the user preferences.
+          </dd><dt id="dt:-no-stc"><b><code>-no-stc</code></b></dt><dd>Disable the Simics internal caches for memory operations and
+                  instruction fetches (STCs) that Simics uses to speed up the
+                  simulation.
+<p>
+                  Disabling the STCs (this flag disables both the D-STC and
+                  the I-STC) can be useful for debugging plug-ins such as cache
+                  models, since it will ensure that all memory accesses are
+                  fully visible.
+</p><p>
+                  It is possible to selectively disable the data and
+                  instruction STCs using the <code>-no-dstc</code> and
+                  <code>-no-istc</code> flags, respectively. The STCs are typically
+                  enabled by default, although in some versions of Simics they
+                  may be disabled. See also the <code>-stc</code> flag.
+                  </p></dd><dt id="dt:-stc"><b><code>-stc</code></b></dt><dd>Force the I-STC and D-STC to be enabled (default). See the
+                  <code>-no-stc</code> flag for more information. The STCs are
+                  typically enabled by default, although in some versions of
+                  Simics they may be disabled.
+                  </dd><dt id="dt:-no-istc"><b><code>-no-istc</code></b></dt><dd>Force the I-STC to be disabled. See the <code>-no-stc</code> flag
+                  for more information.
+                  </dd><dt id="dt:-no-dstc"><b><code>-no-dstc</code></b></dt><dd>Force the D-STC to be disabled. See the <code>-no-stc</code> flag
+                  for more information.
+                  </dd><dt id="dt:-istc"><b><code>-istc</code></b></dt><dd>Force the I-STC to be enabled. See the <code>-no-stc</code> flag
+                  for more information.
+                  </dd><dt id="dt:-dstc"><b><code>-dstc</code></b></dt><dd>Force the D-STC to be enabled. See the <code>-no-stc</code> flag
+                  for more information.
+                  </dd><dt id="dt:-no-copyright"><b><code>-no-copyright</code></b></dt><dd>Do not display copyright
+                   information when starting Simics. See also the
+                   <code>-verbose</code> and <code>-quiet</code>
+                   flags.
+                   </dd><dt id="dt:-n"><b><code>-n</code></b></dt><dd>Do not run the commands from the
+                  <code>startup-commands</code> script files.
+                  </dd><dt id="dt:-echo"><b><code>-echo</code></b></dt><dd>Enable command echoing.  When echoing is enabled,
+                          Simics will echo all commands executed by startup
+                          scripts. Note that this only affects any startup
+                          scripts loaded after the <code>-echo</code> flag on the
+                          command line.
+                          </dd><dt id="dt:-core"><b><code>-core</code></b></dt><dd>Allow Simics to dump core on fatal signals.</dd></dl><p></p><div class=chain>
+<a href="common-options.html" class="previous">3.1 Common Options</a>
+<a href="cli.html" class="next">4 The Command Line Interface</a>
+</div>

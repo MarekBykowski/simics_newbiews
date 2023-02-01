@@ -1,0 +1,77 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>2.2 addon-manager</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="simics.html" class="previous">2.1 simics</a>
+<a href="craff.html" class="next">2.3 craff</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="command-line-tools-and-programs.html">2 Command-Line Tools and Programs</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a name="addon-manager">2.2 addon-manager</a></h1>
+<p>
+  
+  </p><dl class="jdocu_di">
+<dt class="jdocu_descitem">Synopsis</dt><dd class="jdocu_descitem"><pre class="jdocu_small">    addon-manager [<em>options</em>] [-u <em>path</em>] [-s <em>path</em>] [-d <em>path</em>]</pre><p>
+ 
+    </p></dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">Configure Simics add-on packages to work with the Simics installation. When run
+      without any option, this script will list the current add-on packages
+      configuration. If any package listed is invalid (for example, if the package
+      has been deleted), the script will propose to update the configuration to
+      remove the invalid packages.
+    </dd>
+<dt class="jdocu_descitem">Options</dt><dd class="jdocu_descitem"><dl><dt id="dt:-b-batch"><b>-b, --batch</b></dt><dd>The script will act according to the
+       command-line arguments without asking
+       any questions.</dd><dt id="dt:-c-create-empty"><b>-c, --create-empty</b></dt><dd>Create an empty package list in the project.
+       This will cause the project to ignore
+       any package associations of the main Simics installation.
+       Only valid when operating on a project or together with the -f
+       parameter.</dd><dt id="dt:-c-copy-from-simics-base"><b>-C, --copy-from-simics-base</b></dt><dd>Create a new package list in a project,
+       by copying the package list from the main
+       Simics installation. Only valid when operating on a project
+       or together with the -f parameter.
+       Roughly equivalent to -u <code>simics_dir</code></dd><dt id="dt:-d-deselect-path"><b>-d, --deselect PATH</b></dt><dd>Remove the package in <code>PATH</code> from the add-on
+       package list. Note that listed packages that
+       do not exist anymore will be removed
+       automatically whenever this script runs.</dd><dt id="dt:-f-package-list"><b>-f, --package-list</b></dt><dd>Specify the file containing the package list.  This is an
+       alternative to the default (storing the list in the main
+       Simics installation) or running addon-manager in a project.</dd><dt id="dt:-s-select-path"><b>-s, --select PATH</b></dt><dd>Add the package in <code>PATH</code> to the add-on
+       package list.</dd><dt id="dt:-u-upgrade-path-file-"><b>-u, --upgrade [PATH|FILE]</b></dt><dd>Re-use the add-on package list found as <code>FILE</code>
+       or present in <code>PATH</code>. The current list
+       is backed-up as with a .backup extension.</dd><dt id="dt:-v-version"><b>-v, --version</b></dt><dd>Print the version of the script and the major version of Simics that it
+       can be used with.</dd><dt id="dt:-p-project-path"><b>-p, --project PATH</b></dt><dd>Handle the package associations of the project path
+       instead of the base package.
+       This can also be done by running the addon-manager
+       script located in path/bin.
+   </dd></dl><p>
+    </p></dd>
+</dl><p></p><div class=chain>
+<a href="simics.html" class="previous">2.1 simics</a>
+<a href="craff.html" class="next">2.3 craff</a>
+</div>

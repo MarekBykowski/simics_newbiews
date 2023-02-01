@@ -1,0 +1,101 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>os_awareness</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_onfi_flash.html" class="previous">onfi_flash</a>
+<a href="__rm_class_osa_admin_emulator.html" class="next">osa_admin_emulator</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_os_awareness">os_awareness</a></h1>
+<p>
+
+<a name="os_awareness"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_os-awareness">os-awareness</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">OS Awareness framework for controlling the trackers
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, log_object, osa_component, osa_control, osa_control_v2, osa_machine_notification, osa_machine_query, osa_node_path, osa_node_tree_admin, osa_node_tree_notification, osa_node_tree_query, osa_parameters, osa_tracker_state_admin, osa_tracker_state_notification, osa_tracker_state_query, temporal_state</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:next_node_id"><b><i>next_node_id</i></b></dt><p><a name="__rm_attribute_os_awareness_next_node_id"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+The next node ID</dd></dl><p></p><dl><dt id="dt:processors"><b><i>processors</i></b></dt><p><a name="__rm_attribute_os_awareness_processors"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+List of processors</dd></dl><p></p><dl><dt id="dt:processors_added"><b><i>processors_added</i></b></dt><p><a name="__rm_attribute_os_awareness_processors_added"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+True if processors have been added to trackers, false otherwise</dd></dl><p></p><dl><dt id="dt:top_mappers"><b><i>top_mappers</i></b></dt><p><a name="__rm_attribute_os_awareness_top_mappers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+The mappers which will receive enable/disable calls</dd></dl><p></p><dl><dt id="dt:top_trackers"><b><i>top_trackers</i></b></dt><p><a name="__rm_attribute_os_awareness_top_trackers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[o*]</code>.
+The trackers which will receive enable/disable calls</dd></dl><p></p><dl><dt id="dt:trackers"><b><i>trackers</i></b></dt><p><a name="__rm_attribute_os_awareness_trackers"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[oD]*]</code>.
+The node trees</dd></dl><p></p><dl><dt id="dt:trees"><b><i>trees</i></b></dt><p><a name="__rm_attribute_os_awareness_trees"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[oDD]*]</code>.
+The node trees</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface osa_component</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_component_gt_.bp-break">bp-break</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_component_gt_.bp-run-until">bp-run-until</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_component_gt_.bp-trace">bp-trace</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_component_gt_.bp-wait-for">bp-wait-for</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface osa_parameters</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_parameters_gt_.load-parameters">load-parameters</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_parameters_gt_.save-parameters">save-parameters</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_osa_parameters_gt_.supports-parameters">supports-parameters</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.active-node">active-node</a></b></td><td class="jdocu_noborder">list the active nodes</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.break-enter">break-enter</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — break the simulation when a processor becomes active on the node</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.break-exit">break-exit</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — break the simulation when a processor becomes inactive on the node</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.delete-tracker">delete-tracker</a></b></td><td class="jdocu_noborder">delete tracker component</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.disable-tracker">disable-tracker</a></b></td><td class="jdocu_noborder">stop using software tracking</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.enable-tracker">enable-tracker</a></b></td><td class="jdocu_noborder">enable software tracking</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.find">find</a></b></td><td class="jdocu_noborder">find a node</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.insert-tracker">insert-tracker</a></b></td><td class="jdocu_noborder">insert a new child tracker</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.list">list</a></b></td><td class="jdocu_noborder">list all processes/tasks</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.node-info">node-info</a></b></td><td class="jdocu_noborder">print all properties of a software node</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.node-tree">node-tree</a></b></td><td class="jdocu_noborder">list software node tree</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.unbreak">unbreak</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — cancel a software breakpoint</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.wait-for-activated">wait-for-activated</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a processor to become activated on the node</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_os_awareness_gt_.wait-for-deactivated">wait-for-deactivated</a></b></td><td class="jdocu_noborder"><i>deprecated</i> — wait for a processor to become deactivated on the node</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_onfi_flash.html" class="previous">onfi_flash</a>
+<a href="__rm_class_osa_admin_emulator.html" class="next">osa_admin_emulator</a>
+</div>

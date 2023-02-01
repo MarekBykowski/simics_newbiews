@@ -1,0 +1,76 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>pcie-downstream-port-legacy</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_pcie-downstream-port.html" class="previous">pcie-downstream-port</a>
+<a href="__rm_class_pcie-switch.html" class="next">pcie-switch</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_pcie-downstream-port-legacy">pcie-downstream-port-legacy</a></h1>
+<p>
+
+<a name="pcie-downstream-port-legacy"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_pcie-downstream-port">pcie-downstream-port</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">This is the legacy-compatible variant of the pcie-downstream-port class
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object, pci_bus, pci_downstream, pci_express, pci_upstream, pci_upstream_operation, pcie_map, transaction, translator</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>cfg_space</b> &lt;memory-space&gt; : downstream Config space<br><b>conf_space</b> &lt;memory-space&gt; : legacy Config space<br><b>impl.cfg_to_conf</b> (translator) : translates to legacy conf space<br><b>impl.conf_to_cfg</b> (translator) : translates from legacy conf space<br><b>io_space</b> &lt;memory-space&gt; : downstream I/O space<br><b>mem_space</b> &lt;memory-space&gt; : downstream Memory space<br><b>msg_space</b> &lt;memory-space&gt; : downstream Message space<br><b>port.HOT_RESET</b> (signal)<br><b>port.cfg</b> (transaction_translator) : access point into downstream Config space<br><b>port.downstream</b> (pcie_device, pcie_port_control, transaction) : access point into downstream PCIe space<br><b>port.ecam</b> (translator) : ECAM configuration space<br><b>port.io</b> (transaction_translator) : access point into downstream I/O space<br><b>port.mem</b> (transaction_translator) : access point into downstream Memory space<br><b>port.msg</b> (transaction_translator) : access point into downstream Message space<br><b>port.upstream</b> (transaction)</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bridge"><b><i>bridge</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_bridge"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Pseudo-attribute to make this look like a legacy pcie-bus</dd></dl><p></p><dl><dt id="dt:bus_number"><b><i>bus_number</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_bus_number"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Secondary bus number</dd></dl><p></p><dl><dt id="dt:devices"><b><i>devices</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_devices"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iio]|[io]|o*]</code>.
+Connected PCIe devices. Format is (device_number, function_number, object)*). The <i>device_number</i> can be omitted, in which case <i>function_number</i> is an 8-bit or 16-bit number. In the case of a 16-bit number, the bus number (bits 8 through 15) is hardcoded for this device, even though it is physically connected to whatever bus this downstream port is configured to. The <i>object</i> must implement the <code>pcie_device</code> interface. Note that after being connected, devices must add their functions through the <code>pcie_map</code> interface, no transactions will be forwarded to the device by default. If both <i>device_number</i> and <i>function_number</i> are omitted, the <i>object</i> does not correspond to a physical device on this bus, but will receive the same calls as any other device. This is useful for transparent bridges to other buses.</dd></dl><p></p><dl><dt id="dt:memory_space"><b><i>memory_space</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_memory_space"></a></p><dd><b>Pseudo</b> attribute; <b>read/write</b> access; type: <code>object</code>.
+Legacy Memory space</dd></dl><p></p><dl><dt id="dt:pci_devices"><b><i>pci_devices</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_pci_devices"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[[iio]|[iioi]*]</code>.
+((<i>id</i>, <i>function</i>, <i>object</i>)*). <i>id</i> is the PCI device id. <i>function</i> is the PCI device logical function. <i>object</i> is the PCI device itself, which must implement the <code>pci_device</code> interface. The object can also optionally implement either or both of: the <code>pci_express</code> interface, a port-object named 'port.pcie_message'  implementing the <code>transaction</code> interface. The tuple may also contain an additional integer that tells if the PCI device is enabled or not. As default the PCI device is enabled.</dd></dl><p></p><dl><dt id="dt:sec_bus_num"><b><i>sec_bus_num</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_sec_bus_num"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Secondary Bus Number</dd></dl><p></p><dl><dt id="dt:transparent_enabled"><b><i>transparent_enabled</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_transparent_enabled"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>boolean</code>.
+If TRUE, this bus operates in transparent mode, all ranges mapped by devices on this bus will be mapped in the upstream target of this bus. The sec_bus_num will be claimed in the upstream config and message space.</dd></dl><p></p><dl><dt id="dt:upstream_target"><b><i>upstream_target</i></b></dt><p><a name="__rm_attribute_pcie-downstream-port-legacy_upstream_target"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[os]</code>, <code>object</code>, or <code>nil</code>.
+Target receiving all upstream transactions</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface transaction</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_transaction_gt_.wait-for-get">wait-for-get</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_transaction_gt_.wait-for-read">wait-for-read</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_transaction_gt_.wait-for-set">wait-for-set</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_transaction_gt_.wait-for-write">wait-for-write</a></dd>
+<dt class="jdocu_descitem"><b>Commands defined by interface translator</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_translator_gt_.memory-map">memory-map</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_pcie-downstream-port-legacy_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_pcie-downstream-port-legacy_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_pcie-downstream-port.html" class="previous">pcie-downstream-port</a>
+<a href="__rm_class_pcie-switch.html" class="next">pcie-switch</a>
+</div>

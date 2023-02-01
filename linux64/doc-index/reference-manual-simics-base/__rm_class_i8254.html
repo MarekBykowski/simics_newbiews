@@ -1,0 +1,93 @@
+<!doctype html>
+<head>
+<meta charset=utf-8>
+<link rel="stylesheet" href="simics.css">
+<title>i8254</title>
+<script>function postUrl() {
+    window.parent.postMessage({ content_url: window.location.href }, "*");
+}
+if (window.parent != null && window.parent != window) {
+    postUrl();
+    window.addEventListener("hashchange", function () {
+        postUrl();
+    });
+} else {
+    // Check if we are part of a Simics doc site and redirect if we are
+    fetch("../simics-doc-site-marker", { method: "HEAD" }).then(response => {
+        if (response.ok) {
+            window.location = "..#" + window.location.href;
+        } else {
+            console.info("Not part of a Simics documentation site");
+        }
+    }).catch(error => {
+        console.warn("Failed to check if this is a Simics documentation site:",
+            error);
+    });
+}</script>
+</head><body>
+<div class=chain>
+<a href="__rm_class_i8237x2.html" class="previous">i8237x2</a>
+<a href="__rm_class_i82543.html" class="next">i82543</a>
+</div>
+<div class=path>
+<a href="index.html">Simics Reference Manual</a>&nbsp;/&nbsp;
+<a href="classes.html">5 Classes</a>&nbsp;/&nbsp;
+</div>
+<h1 class="jdocu"><a class="not-numbered" name="__rm_class_i8254">i8254</a></h1>
+<p>
+
+<a name="i8254"></a></p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Provided By</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="modules.html#__rm_module_8254">8254</a>
+</dd>
+<dt class="jdocu_descitem">Description</dt><dd class="jdocu_descitem">The i8254 device implements the functionality of the PIT (Programmable Interval Timer) counter device found in most PCs. In a real system it is used to generate interval signals for the TOD clock, DMA refresh, and the speaker. The simulated device is only connected to the interrupt device; it counts internally, and the value can be read and written from the processor. The Intel® 8254 device also implements <i>Port B</i> in the 8255 PPI (Programmable Peripheral Interface). This port is used to control the builtin PC speaker. Counting mode 1, and BCD counting is not implemented.
+</dd>
+<dt class="jdocu_descitem"><b>Interfaces Implemented</b></dt><dd class="jdocu_descitem">conf_object, io_memory, log_object</dd>
+<dt class="jdocu_descitem"><b>Port Objects</b></dt><dd class="jdocu_descitem"><b>port.Gate0</b> (signal) : GATE input for timer 0<br><b>port.Gate1</b> (signal) : GATE input for timer 1<br><b>port.Gate2</b> (signal) : GATE input for timer 2<br><b>port.RESET</b> (signal) : Device reset. The stand-alone version of this device does not have a reset pin, but the device as IP in larger ASICs typically do act on reset.</dd>
+<dt class="jdocu_descitem"><b>Port Interfaces</b></dt><dd class="jdocu_descitem">core_dev_access_count (probe) : Port for generic device access count</dd>
+</dl><p></p><h2 class="jdocu"><a class="not-numbered" name="Attributes">Attributes</a></h2>
+<p></p><dl><dt id="dt:bcd"><b><i>bcd</i></b></dt><p><a name="__rm_attribute_i8254_bcd"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+The counting format for each counter (0 or 1).</dd></dl><p></p><dl><dt id="dt:beep"><b><i>beep</i></b></dt><p><a name="__rm_attribute_i8254_beep"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to 1 if a beep is currently playing in the speaker. Only valid if the have_speaker attribute is 1.</dd></dl><p></p><dl><dt id="dt:clock_freq_hz"><b><i>clock_freq_hz</i></b></dt><p><a name="__rm_attribute_i8254_clock_freq_hz"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[fff]</code> or <code>[ffff]</code>.
+Clock input frequencies for the counters, in Hz. Defaults to 1193180.0 Hz for all counters. The frequency should be set before simulation starts.</dd></dl><p></p><dl><dt id="dt:cmd"><b><i>cmd</i></b></dt><p><a name="__rm_attribute_i8254_cmd"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+The RW command for each counter.</dd></dl><p></p><dl><dt id="dt:cmd_names"><b><i>cmd_names</i></b></dt><p><a name="__rm_attribute_i8254_cmd_names"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[ssss]</code>.
+List of all command names.</dd></dl><p></p><dl><dt id="dt:count"><b><i>count</i></b></dt><p><a name="__rm_attribute_i8254_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+A list of count values, one for each counter.</dd></dl><p></p><dl><dt id="dt:count_actual"><b><i>count_actual</i></b></dt><p><a name="__rm_attribute_i8254_count_actual"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+The calculated current count values.</dd></dl><p></p><dl><dt id="dt:counting"><b><i>counting</i></b></dt><p><a name="__rm_attribute_i8254_counting"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+For each of the counters, a flag indicating whether it is running.</dd></dl><p></p><dl><dt id="dt:expired_count"><b><i>expired_count</i></b></dt><p><a name="__rm_attribute_i8254_expired_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code>.
+For each counter the number of times a counter was reloaded since it was started.</dd></dl><p></p><dl><dt id="dt:gate"><b><i>gate</i></b></dt><p><a name="__rm_attribute_i8254_gate"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+Gate signals (1 or 0), one for each counter.</dd></dl><p></p><dl><dt id="dt:have_speaker"><b><i>have_speaker</i></b></dt><p><a name="__rm_attribute_i8254_have_speaker"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Set to 1 (default) if counter 2 is connected to a standard PC speaker.</dd></dl><p></p><dl><dt id="dt:initial_count"><b><i>initial_count</i></b></dt><p><a name="__rm_attribute_i8254_initial_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+A list of initial count values, one for each counter.</dd></dl><p></p><dl><dt id="dt:interrupt_pin"><b><i>interrupt_pin</i></b></dt><p><a name="__rm_attribute_i8254_interrupt_pin"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt request status.</dd></dl><p></p><dl><dt id="dt:irq_dev"><b><i>irq_dev</i></b></dt><p><a name="__rm_attribute_i8254_irq_dev"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>object</code> or <code>nil</code>.
+Device to send interrupts to, that implements the <code>simple_interrupt</code> or <code>signal</code> interface.</dd></dl><p></p><dl><dt id="dt:irq_level"><b><i>irq_level</i></b></dt><p><a name="__rm_attribute_i8254_irq_level"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Interrupt level for the interrupt device.</dd></dl><p></p><dl><dt id="dt:latched"><b><i>latched</i></b></dt><p><a name="__rm_attribute_i8254_latched"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+A list of flags, each set to 1 if the corresponding counter has a latched value.</dd></dl><p></p><dl><dt id="dt:latched_count"><b><i>latched_count</i></b></dt><p><a name="__rm_attribute_i8254_latched_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+A list of latched values, one for each counter.</dd></dl><p></p><dl><dt id="dt:latched_s"><b><i>latched_s</i></b></dt><p><a name="__rm_attribute_i8254_latched_s"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+A list of flags, each set to 1 if the corresponding counter has a latched status.</dd></dl><p></p><dl><dt id="dt:latched_status"><b><i>latched_status</i></b></dt><p><a name="__rm_attribute_i8254_latched_status"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+A list of latched status bytes, one for each counter.</dd></dl><p></p><dl><dt id="dt:mode"><b><i>mode</i></b></dt><p><a name="__rm_attribute_i8254_mode"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+The PIT counting mode for each counter (0 - 5).</dd></dl><p></p><dl><dt id="dt:mode_names"><b><i>mode_names</i></b></dt><p><a name="__rm_attribute_i8254_mode_names"></a></p><dd><b>Pseudo</b> attribute; <b>read-only</b> access; type: <code>[ssssss]</code>.
+List of all mode names.</dd></dl><p></p><dl><dt id="dt:next_read_high"><b><i>next_read_high</i></b></dt><p><a name="__rm_attribute_i8254_next_read_high"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+For each of the counters, a flag indicating if the next read access is for the high byte.</dd></dl><p></p><dl><dt id="dt:next_write_high"><b><i>next_write_high</i></b></dt><p><a name="__rm_attribute_i8254_next_write_high"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+For each of the counters, a flag indicating if the next write access is for the high byte.</dd></dl><p></p><dl><dt id="dt:null_count"><b><i>null_count</i></b></dt><p><a name="__rm_attribute_i8254_null_count"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+The 'null count' status bit.</dd></dl><p></p><dl><dt id="dt:out"><b><i>out</i></b></dt><p><a name="__rm_attribute_i8254_out"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>[iii]</code> or <code>[iiii]</code>.
+Output values (0 or 1), one for each counter.</dd></dl><p></p><dl><dt id="dt:refresh_clock"><b><i>refresh_clock</i></b></dt><p><a name="__rm_attribute_i8254_refresh_clock"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Bit 4 when reading from port B.</dd></dl><p></p><dl><dt id="dt:speaker"><b><i>speaker</i></b></dt><p><a name="__rm_attribute_i8254_speaker"></a></p><dd><b>Optional</b> attribute; <b>read/write</b> access; type: <code>integer</code>.
+Enable flag for speaker, only valid if the have_speaker attribute is 1.</dd></dl><p>
+</p><h2 class="jdocu"><a class="not-numbered" name="Command-List">Command List</a></h2>
+<p>
+
+</p><dl class="jdocu_di">
+<dt class="jdocu_descitem"><b>Commands defined by interface conf_object</b></dt><dd class="jdocu_descitem"><a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.break-hap">break-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-attribute-list">get-attribute-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-list">get-interface-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.get-interface-port-list">get-interface-port-list</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-attributes">list-attributes</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.list-interfaces">list-interfaces</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log">log</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-group">log-group</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-level">log-level</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-setup">log-setup</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-size">log-size</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.log-type">log-type</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.trace-hap">trace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.unbreak-hap">unbreak-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.untrace-hap">untrace-hap</a>, <a class="jdocu" href="namespace-commands-by-interface.html#__rm_command__lt_conf_object_gt_.wait-for-log">wait-for-log</a></dd>
+<dt class="jdocu_descitem"><b>Commands</b></dt><dd class="jdocu_descitem"><table>
+
+<tbody><tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8254_gt_.info">info</a></b></td><td class="jdocu_noborder">print information about the object</td></tr>
+
+<tr><td class="jdocu_noborder"><b><a class="jdocu" href="namespace-commands-by-class.html#__rm_command__lt_i8254_gt_.status">status</a></b></td><td class="jdocu_noborder">print status of the object</td></tr>
+
+</tbody></table>
+</dd>
+</dl><p>
+</p><div class=chain>
+<a href="__rm_class_i8237x2.html" class="previous">i8237x2</a>
+<a href="__rm_class_i82543.html" class="next">i82543</a>
+</div>
