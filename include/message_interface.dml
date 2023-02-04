@@ -1,0 +1,5 @@
+dml 1.2;
+
+typedef struct {
+    void (* hello)(conf_object_t *obj);
+} message_interface_t;

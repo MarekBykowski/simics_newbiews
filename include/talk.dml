@@ -1,5 +1,0 @@
-dml 1.2;
-
-typedef struct {
-    void (*hello)(conf_object_t *obj);
-} talk_interface_t;

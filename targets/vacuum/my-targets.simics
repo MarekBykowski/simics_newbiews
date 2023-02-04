@@ -1,0 +1,5 @@
+run-command-file "%script%/vacuum.simics"
+@SIM_create_object("callee", "ifc", [])		#-> create interface
+@SIM_create_object("callee", "callee_dev", [])	#-> create callee
+@SIM_create_object("caller", "caller_dev", [])	#-> create caller
+phys_mem.add-map caller_dev.bank.regs 0x1000 0x100

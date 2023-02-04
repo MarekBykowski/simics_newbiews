@@ -1,0 +1,24 @@
+// plugin_device.dml - Skeleton code to base new DML device modules on
+
+dml 1.2;
+
+device callee;
+
+parameter desc = "example callee";
+parameter documentation = "it is a device we call into implement.method";
+
+import "utility.dml";
+import "message_interface.dml";
+
+implement message {
+    method hello {
+        log "info": "Hi there!";
+    }
+}
+
+// USER-TODO: Add init() and post_init() methods here, if needed.
+// init() will be run to set the empty state of the model, before any
+// configuration or checkpointed attributes are set.  post_init() is run after
+// all configuration attributes have been set.  This happens both when the
+// initial configuration is set and when the configuration is loaded from a
+// checkpoint.

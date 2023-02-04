@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device name="callee" desc="example callee" documentation="it is a device we call into implement.method" bitorder="le">
+</device>

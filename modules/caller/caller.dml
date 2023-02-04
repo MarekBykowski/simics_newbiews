@@ -1,0 +1,49 @@
+/*
+  © 2010 Intel Corporation
+*/
+
+// caller.dml - Skeleton code to base new DML device modules on
+
+dml 1.2;
+
+device caller;
+
+parameter desc = "name of device";
+parameter documentation = "Longer description that will appear in the help";
+
+import "utility.dml";
+
+import "simics/simulator/conf-object.dml";
+//import "simics/devs/signal.dml";
+import "message_interface.dml";
+import "utility.dml";
+
+connect who_i_connect_to {
+    interface message {
+        parameter required = true;
+    }
+}
+
+// Basic bank declaration
+bank regs {
+     register counter size 4 @ 0x0000 {
+        method read() -> (value) {
+	    $who_i_connect_to.message.hello();
+            log "info": "read from counter";
+            value = 42;
+        }
+    }
+}
+
+// USER-TODO: Add init() and post_init() methods here, if needed.
+// init() will be run to set the empty state of the model, before any
+// configuration or checkpointed attributes are set.  post_init() is run after
+// all configuration attributes have been set.  This happens both when the
+// initial configuration is set and when the configuration is loaded from a
+// checkpoint.
+
+method post_init() {
+	local conf_object_t *obj = SIM_get_object("ifc");
+	local const message_interface_t *ifc = SIM_get_interface(obj, "message");
+	ifc->hello(obj);
+}

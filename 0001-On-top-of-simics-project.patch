@@ -1,0 +1,445 @@
+From 298b7f5f82c2a08c71db33ae9ad679a3b8f63d54 Mon Sep 17 00:00:00 2001
+From: Marek Bykowski <marek.bykowski@gmail.com>
+Date: Wed, 1 Feb 2023 20:00:45 +0000
+Subject: [PATCH] On top of simics project
+
+Just get this commit and apply on top of your simics project.
+
+Signed-off-by: Marek Bykowski <marek.bykowski@gmail.com>
+---
+ include/talk.dml                              |   5 ++
+ modules/plugin_device/Makefile                |  20 ++++++
+ modules/plugin_device/module_load.py          |  24 +++++++
+ modules/plugin_device/plugin_device.dml       |  39 +++++++++++
+ modules/plugin_device/test/README             |   4 ++
+ modules/plugin_device/test/SUITEINFO          |   0
+ .../plugin_device_common.cpython-37.pyc       | Bin 0 -> 405 bytes
+ .../test/plugin_device_common.py              |  10 +++
+ modules/plugin_device/test/s-info-status.py   |  21 ++++++
+ modules/plugin_device/test/s-plugin_device.py |   9 +++
+ modules/simple_device/Makefile                |  20 ++++++
+ modules/simple_device/module_load.py          |  24 +++++++
+ modules/simple_device/simple_device.dml       |  64 ++++++++++++++++++
+ modules/simple_device/test/README             |   4 ++
+ modules/simple_device/test/SUITEINFO          |   0
+ modules/simple_device/test/s-info-status.py   |  21 ++++++
+ modules/simple_device/test/s-simple_device.py |   9 +++
+ .../test/simple_device_common.py              |  10 +++
+ 18 files changed, 284 insertions(+)
+ create mode 100644 include/talk.dml
+ create mode 100644 modules/plugin_device/Makefile
+ create mode 100644 modules/plugin_device/module_load.py
+ create mode 100644 modules/plugin_device/plugin_device.dml
+ create mode 100644 modules/plugin_device/test/README
+ create mode 100644 modules/plugin_device/test/SUITEINFO
+ create mode 100644 modules/plugin_device/test/__pycache__/plugin_device_common.cpython-37.pyc
+ create mode 100644 modules/plugin_device/test/plugin_device_common.py
+ create mode 100644 modules/plugin_device/test/s-info-status.py
+ create mode 100644 modules/plugin_device/test/s-plugin_device.py
+ create mode 100644 modules/simple_device/Makefile
+ create mode 100644 modules/simple_device/module_load.py
+ create mode 100644 modules/simple_device/simple_device.dml
+ create mode 100644 modules/simple_device/test/README
+ create mode 100644 modules/simple_device/test/SUITEINFO
+ create mode 100644 modules/simple_device/test/s-info-status.py
+ create mode 100644 modules/simple_device/test/s-simple_device.py
+ create mode 100644 modules/simple_device/test/simple_device_common.py
+
+diff --git a/include/talk.dml b/include/talk.dml
+new file mode 100644
+index 0000000..38b3405
+--- /dev/null
++++ b/include/talk.dml
+@@ -0,0 +1,5 @@
++dml 1.2;
++
++typedef struct {
++    void (*hello)(conf_object_t *obj);
++} talk_interface_t;
+diff --git a/modules/plugin_device/Makefile b/modules/plugin_device/Makefile
+new file mode 100644
+index 0000000..bc515e3
+--- /dev/null
++++ b/modules/plugin_device/Makefile
+@@ -0,0 +1,20 @@
++# -*- makefile -*-
++#
++# Sample makefile for the DML device: "empty-dml-device"
++# See Simics Model Builder User's Guide for more details on what to put here.
++#
++
++MODULE_CLASSES = plugin_device
++SRC_FILES = plugin_device.dml
++PYTHON_FILES = module_load.py
++
++SIMICS_API := 6
++THREAD_SAFE := yes
++
++ifeq ($(MODULE_MAKEFILE),)
++$(error Make sure you compile your module from the project directory)
++else
++include $(MODULE_MAKEFILE)
++endif
++
++DMLC_FLAGS += -I$(SIMICS_PROJECT)/include
+diff --git a/modules/plugin_device/module_load.py b/modules/plugin_device/module_load.py
+new file mode 100644
+index 0000000..55876d6
+--- /dev/null
++++ b/modules/plugin_device/module_load.py
+@@ -0,0 +1,24 @@
++import cli
++
++class_name = 'plugin_device'
++
++#
++# ------------------------ info -----------------------
++#
++
++def get_info(obj):
++    # USER-TODO: Return something useful here
++    return []
++
++cli.new_info_command(class_name, get_info)
++
++#
++# ------------------------ status -----------------------
++#
++
++def get_status(obj):
++    # USER-TODO: Return something useful here
++    return [("Registers",
++             [("Counter", obj.regs_counter)])]
++
++cli.new_status_command(class_name, get_status)
+diff --git a/modules/plugin_device/plugin_device.dml b/modules/plugin_device/plugin_device.dml
+new file mode 100644
+index 0000000..69c8e0b
+--- /dev/null
++++ b/modules/plugin_device/plugin_device.dml
+@@ -0,0 +1,39 @@
++// plugin_device.dml - Skeleton code to base new DML device modules on
++
++dml 1.2;
++
++device plugin_device;
++
++parameter desc = "example plugin device";
++parameter documentation = "Plugin device example for Model Builder User's Guide";
++
++import "utility.dml";
++import "talk.dml";
++
++// USER-TODO: add connect definitions here, if needed
++
++// USER-TODO: add attribute definitions here, if needed
++
++// Basic bank declaration
++
++// USER-TODO: add implement and port declarations here, if needed
++implement talk {
++    method hello {
++        log "info": "Hi there!";
++    }
++}
++
++// USER-TODO: add event declarations here, if needed
++
++// USER-TODO: add common methods here, if needed
++
++// USER-TODO: add templates here, if needed
++
++// Implementation of registers
++
++// USER-TODO: Add init() and post_init() methods here, if needed.
++// init() will be run to set the empty state of the model, before any
++// configuration or checkpointed attributes are set.  post_init() is run after
++// all configuration attributes have been set.  This happens both when the
++// initial configuration is set and when the configuration is loaded from a
++// checkpoint.
+diff --git a/modules/plugin_device/test/README b/modules/plugin_device/test/README
+new file mode 100644
+index 0000000..34b136f
+--- /dev/null
++++ b/modules/plugin_device/test/README
+@@ -0,0 +1,4 @@
++Simics provides a simple way to create tests for devices developed in
++a project. This directory contains sample code that will help you
++understand how this test framework works. For a complete description
++of the framework's capabilities, refer to the Simics Reference Manual.
+diff --git a/modules/plugin_device/test/SUITEINFO b/modules/plugin_device/test/SUITEINFO
+new file mode 100644
+index 0000000..e69de29
+diff --git a/modules/plugin_device/test/__pycache__/plugin_device_common.cpython-37.pyc b/modules/plugin_device/test/__pycache__/plugin_device_common.cpython-37.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..e1014499e2fb3c1d36762770073fadb28d318c86
+GIT binary patch
+literal 405
+zcmY*Vu};J=42{$FD2N^lAhDGNsRPFkAcVMyfiAb5gsPH+DyKHBk`@FyHa>)o{0~!B
+zCiny<oQjjECBN8yw)5nxDB2-tr?(&M8wmMy$;LbkF44^)0w)|wvLxK+lzXqR1P%+5
+z1YgLJl;P}P6wybYqni_imb}3lXM6er7}GTrz-dpxG2R+he(&~p&&P8u@>axoti)s7
+zlwBcJ#>InVBChXNg0(gpRnsJ}6C*3hjNNOr$XKoJv%l7Z#q~{=b3PPh(doREwX#!J
+zE=0R&^HpAngz7C+s-5<CqC<Rsj%H`0&u~vw)oRu}*?l$$%|`qLhl~S4cVP<JT{VFe
+cSGy|?>9F`8Y$IXA^Qz`uDK6XrjZ+W?zs%@lNdN!<
+
+literal 0
+HcmV?d00001
+
+diff --git a/modules/plugin_device/test/plugin_device_common.py b/modules/plugin_device/test/plugin_device_common.py
+new file mode 100644
+index 0000000..689316c
+--- /dev/null
++++ b/modules/plugin_device/test/plugin_device_common.py
+@@ -0,0 +1,10 @@
++import simics
++
++# Extend this function if your device requires any additional attributes to be
++# set. It is often sensible to make additional arguments to this function
++# optional, and let the function create mock objects if needed.
++def create_plugin_device(name = None):
++    '''Create a new plugin_device object'''
++    plugin_device = simics.pre_conf_object(name, 'plugin_device')
++    simics.SIM_add_configuration([plugin_device], None)
++    return simics.SIM_get_object(plugin_device.name)
+diff --git a/modules/plugin_device/test/s-info-status.py b/modules/plugin_device/test/s-info-status.py
+new file mode 100644
+index 0000000..f11bac8
+--- /dev/null
++++ b/modules/plugin_device/test/s-info-status.py
+@@ -0,0 +1,21 @@
++import info_status
++import simics
++import stest
++import plugin_device_common
++
++# Verify that info/status commands have been registered for all
++# classes in this module.
++info_status.check_for_info_status(['plugin_device'])
++
++# Create an instance of each object defined in this module
++dev = plugin_device_common.create_plugin_device()
++
++# Run info and status on each object. It is difficult to test whether
++# the output is informative, so we just check that the commands
++# complete nicely.
++for obj in [dev]:
++    for cmd in ['info', 'status']:
++        try:
++            simics.SIM_run_command(obj.name + '.' + cmd)
++        except simics.SimExc_General as e:
++            stest.fail(cmd + ' command failed: ' + str(e))
+diff --git a/modules/plugin_device/test/s-plugin_device.py b/modules/plugin_device/test/s-plugin_device.py
+new file mode 100644
+index 0000000..a9373e1
+--- /dev/null
++++ b/modules/plugin_device/test/s-plugin_device.py
+@@ -0,0 +1,9 @@
++import dev_util
++import conf
++import stest
++import plugin_device_common
++
++# Create an instance of the device to test
++dev = plugin_device_common.create_plugin_device()
++
++# Write your tests here
+diff --git a/modules/simple_device/Makefile b/modules/simple_device/Makefile
+new file mode 100644
+index 0000000..6eeb0c2
+--- /dev/null
++++ b/modules/simple_device/Makefile
+@@ -0,0 +1,20 @@
++# -*- makefile -*-
++#
++# Sample makefile for the DML device: "empty-dml-device"
++# See Simics Model Builder User's Guide for more details on what to put here.
++#
++
++MODULE_CLASSES = simple_device
++SRC_FILES = simple_device.dml
++PYTHON_FILES = module_load.py
++
++SIMICS_API := 6
++THREAD_SAFE := yes
++
++ifeq ($(MODULE_MAKEFILE),)
++$(error Make sure you compile your module from the project directory)
++else
++include $(MODULE_MAKEFILE)
++endif
++
++DMLC_FLAGS += -I$(SIMICS_PROJECT)/include
+diff --git a/modules/simple_device/module_load.py b/modules/simple_device/module_load.py
+new file mode 100644
+index 0000000..019b9f9
+--- /dev/null
++++ b/modules/simple_device/module_load.py
+@@ -0,0 +1,24 @@
++import cli
++
++class_name = 'simple_device'
++
++#
++# ------------------------ info -----------------------
++#
++
++def get_info(obj):
++    # USER-TODO: Return something useful here
++    return []
++
++cli.new_info_command(class_name, get_info)
++
++#
++# ------------------------ status -----------------------
++#
++
++def get_status(obj):
++    # USER-TODO: Return something useful here
++    return [("Registers",
++             [("Counter", obj.regs_counter)])]
++
++cli.new_status_command(class_name, get_status)
+diff --git a/modules/simple_device/simple_device.dml b/modules/simple_device/simple_device.dml
+new file mode 100644
+index 0000000..41d37e1
+--- /dev/null
++++ b/modules/simple_device/simple_device.dml
+@@ -0,0 +1,64 @@
++// simple_device.dml - Skeleton code to base new DML device modules on
++
++dml 1.2;
++
++device simple_device;
++
++//import "simics/devs/signal.dml";
++import "talk.dml";
++
++parameter desc = "name of device";
++parameter documentation = "Longer description that will appear in the help";
++
++import "utility.dml";
++
++// USER-TODO: add connect definitions here, if needed
++connect connect2 {
++    interface talk {
++        parameter required = true;
++    }
++}
++
++// USER-TODO: add attribute definitions here, if needed
++
++// Basic bank declaration
++bank regs {
++     register counter size 4 @ 0x0000 {
++        method read() -> (value) {
++	    $connect2.talk.hello();
++            log "info": "read from counter";
++            value = 42;
++        }
++    }
++}
++
++// USER-TODO: add implement and port declarations here, if needed
++/*implement signal {
++    method signal_raise() {
++        $raised += 1;
++        log "info": "Signal raised to %u", $raised;
++        if ($raised == 0)
++            log "error": "Too many raises (counter wraparound)";
++    }
++    method signal_lower() {
++        if ($raised == 0)
++            log "error": "Too many lowers (counter wraparound)";
++        $raised -= 1;
++        if ($raised == 0)
++            log "info": "Signal cleared";
++        else
++            log "info": "Signal lowered to %u", $raised;
++    }
++}*/
++// USER-TODO: add event declarations here, if needed
++
++// USER-TODO: add common methods here, if needed
++
++// USER-TODO: add templates here, if needed
++
++// USER-TODO: Add init() and post_init() methods here, if needed.
++// init() will be run to set the empty state of the model, before any
++// configuration or checkpointed attributes are set.  post_init() is run after
++// all configuration attributes have been set.  This happens both when the
++// initial configuration is set and when the configuration is loaded from a
++// checkpoint.
+diff --git a/modules/simple_device/test/README b/modules/simple_device/test/README
+new file mode 100644
+index 0000000..34b136f
+--- /dev/null
++++ b/modules/simple_device/test/README
+@@ -0,0 +1,4 @@
++Simics provides a simple way to create tests for devices developed in
++a project. This directory contains sample code that will help you
++understand how this test framework works. For a complete description
++of the framework's capabilities, refer to the Simics Reference Manual.
+diff --git a/modules/simple_device/test/SUITEINFO b/modules/simple_device/test/SUITEINFO
+new file mode 100644
+index 0000000..e69de29
+diff --git a/modules/simple_device/test/s-info-status.py b/modules/simple_device/test/s-info-status.py
+new file mode 100644
+index 0000000..0dc1e9d
+--- /dev/null
++++ b/modules/simple_device/test/s-info-status.py
+@@ -0,0 +1,21 @@
++import info_status
++import simics
++import stest
++import simple_device_common
++
++# Verify that info/status commands have been registered for all
++# classes in this module.
++info_status.check_for_info_status(['simple_device'])
++
++# Create an instance of each object defined in this module
++dev = simple_device_common.create_simple_device()
++
++# Run info and status on each object. It is difficult to test whether
++# the output is informative, so we just check that the commands
++# complete nicely.
++for obj in [dev]:
++    for cmd in ['info', 'status']:
++        try:
++            simics.SIM_run_command(obj.name + '.' + cmd)
++        except simics.SimExc_General as e:
++            stest.fail(cmd + ' command failed: ' + str(e))
+diff --git a/modules/simple_device/test/s-simple_device.py b/modules/simple_device/test/s-simple_device.py
+new file mode 100644
+index 0000000..057c70e
+--- /dev/null
++++ b/modules/simple_device/test/s-simple_device.py
+@@ -0,0 +1,9 @@
++import dev_util
++import conf
++import stest
++import simple_device_common
++
++# Create an instance of the device to test
++dev = simple_device_common.create_simple_device()
++
++# Write your tests here
+diff --git a/modules/simple_device/test/simple_device_common.py b/modules/simple_device/test/simple_device_common.py
+new file mode 100644
+index 0000000..8701514
+--- /dev/null
++++ b/modules/simple_device/test/simple_device_common.py
+@@ -0,0 +1,10 @@
++import simics
++
++# Extend this function if your device requires any additional attributes to be
++# set. It is often sensible to make additional arguments to this function
++# optional, and let the function create mock objects if needed.
++def create_simple_device(name = None):
++    '''Create a new simple_device object'''
++    simple_device = simics.pre_conf_object(name, 'simple_device')
++    simics.SIM_add_configuration([simple_device], None)
++    return simics.SIM_get_object(simple_device.name)
+-- 
+2.34.1
+

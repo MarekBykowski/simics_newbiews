@@ -1,8 +1,10 @@
 version 6191
 dir /home/marek/simics-projects/my-simics-project-1
 dir /home/marek/simics-projects/my-simics-project-1/linux64/lib
-file 754752 1675266622 m-compute.so
-cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1675266619;MOD:m-compute;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:m_compute;MODULE_LOAD;THREADSAFE;
+file 33984 1675362550 callee.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1675361634;MOD:callee;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:callee;MODULE_LOAD;THREADSAFE;
+file 274120 1675447483 caller.so
+cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1675447483;MOD:caller;ABI:6191;API:6;PY_VERSION:0;PY_MINOR_VERSION:0;HOSTTYPE:linux64;CLS:caller;MODULE_LOAD;THREADSAFE;
 dir /home/marek/simics/simics-6.0.157/../simics-docea-base-6.0.23/linux64/lib
 file 462504 1669375973 docea-obs-interface.so
 cap VER:5000;BLD:0;BLD_NS:__simics_project__;BUILDDATE:1669375970;MOD:docea-obs-interface;ABI:6187;API:6;PY_VERSION:3;PY_MINOR_VERSION:9;HOSTTYPE:linux64;PYIFACE:docea_obs;PYIFACE:docea_model_obs;PYIFACE:docea_obs2;THREADSAFE;
