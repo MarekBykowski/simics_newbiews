@@ -1,3 +1,5 @@
+Below is an example with caller and callee connected thr interface.
+
 marek@marek-server:~/simics-projects/my-simics-project-1$ cat ./targets/vacuum/my-targets.simics  
 run-command-file "%script%/vacuum.simics"  
 @SIM_create_object("callee", "ifc", [])         #-> create interface  
